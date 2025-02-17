@@ -22,6 +22,7 @@
 			<acme:menu-suboption code="master.menu.anonymous.favourite-link" action="http://www.example.com/"/>
 			<acme:menu-suboption code="master.menu.anonymous.fran-favourite-link" action="https://www.reddit.com/"/>
 			<acme:menu-suboption code="master.menu.anonymous.trabuco-favourite-link" action="https://zonatmo.com/library/manga/8399/berserk"/>
+			<acme:menu-suboption code="master.menu.anonymous.bea-favourite-link" action="https://minecraft.fandom.com/wiki/Minecraft_Wiki"/>
 		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.administrator" access="hasRealm('Administrator')">
