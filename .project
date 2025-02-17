@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Hello-World-25.1.0</name>
+	<name>Acme-ANS-D01-25.1.0</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -39,11 +39,6 @@
 			<name>acme-framework</name>
 			<type>2</type>
 			<locationURI>WORKSPACE_LOC/Frameworks/Acme-Framework-25.1.0/target/classes</locationURI>
-		</link>
-		<link>
-			<name>target/classes</name>
-			<type>2</type>
-			<location>//C:/Users/franf/Desktop/Universidad/DP2/Workspace-25/Starters/Hello-World-25.1.0/target/classes/</location>
 		</link>
 	</linkedResources>
 </projectDescription>
