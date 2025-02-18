@@ -8,4 +8,8 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-- Rafael Corchuelo (corchu@us.es)
+- Manuel Jesús Benito Merchán (manbenmer1@alum.us.es)
+- Francisco Fernández Noguerol (frafernog@alum.us.es)
+- Esteban Gómez Navarro (estgomnav@alum.us.es)
+- Beatriz Gutiérrez Arazo (beagutara@alum.us.es)
+- Juan Varo Vera (juavarver@alum.us.es)
