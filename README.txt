@@ -20,4 +20,6 @@ the following resources:
 - **/fragments/**
 
 Link to the GitHub project job board: https://github.com/users/FranciscoFernandezN/projects/2/views/1
+
+Link to the Francisco Fernández Noguerol project board: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=FranciscoFernandezN
  
