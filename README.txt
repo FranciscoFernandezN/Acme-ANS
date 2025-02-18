@@ -18,4 +18,6 @@ taking into account that you must link the appropriate version of the Acme-Frame
 the following resources:
 
 - **/fragments/**
+
+Link to the GitHub project job board: https://github.com/users/FranciscoFernandezN/projects/2/views/1
  
