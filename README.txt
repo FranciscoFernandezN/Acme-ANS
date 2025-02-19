@@ -23,4 +23,5 @@ Link to the GitHub project job board: https://github.com/users/FranciscoFernande
 
 Link to the Francisco Fernández Noguerol project board: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=FranciscoFernandezN
 Link to the Esteban Gómez Navarro project board: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=Estegn10
+Link to the Beatriz Gutiérrez Arazo project board: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=BPP4634
 Link to the Juan Varo Vera project board: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=Juan-Varo
