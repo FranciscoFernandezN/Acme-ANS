@@ -8,7 +8,7 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-Este es el proyecto del grupo C1.022 sobre Acme AirNav Solutions, Inc. (Acme ANS, Inc. abreviado), la cual es una compañía
+Este es el proyecto del grupo C1.022 sobre Acme AirNav Solutions, S.A. (Acme ANS, S.A. abreviado), la cual es una compañía
 ficticia especializada en ayudar a aeropuertos a organizar y coordinar sus operaciones a partir de soluciones desarrolladas en software.
 La logística de los vuelos (la programación de los vuelos, la organización de reservas y de tripulación, etc.) se gestionan mediante el
 desarrollo de un WIS.
@@ -18,10 +18,10 @@ teniendo en cuenta que se debe vincular la versión adecuada de Acme-Framework, 
 
 - **/fragments/**
 
-Link to the GitHub project job board: https://github.com/users/FranciscoFernandezN/projects/2/views/1
+Enlace al tablero de GitHub del proyecto: https://github.com/users/FranciscoFernandezN/projects/2/views/1
 
-Link to the Francisco Fernández Noguerol project board: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=FranciscoFernandezN
-Link to the Esteban Gómez Navarro project board: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=Estegn10
-Link to the Beatriz Gutiérrez Arazo project board: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=BPP4634
-Link to the Juan Varo Vera project board: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=Juan-Varo
-Link to the Manuel Jesús Benito Merchán project board: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=ManuelJBM
+Enlace al tablero del proyecto de Francisco Fernández Noguerol: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=FranciscoFernandezN
+Enlace al tablero del proyecto de Esteban Gómez Navarro: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=Estegn10
+Enlace al tablero del proyecto de Beatriz Gutiérrez Arazo: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=BPP4634
+Enlace al tablero del proyecto de Juan Varo Vera: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=Juan-Varo
+Enlace al tablero del proyecto de Manuel Jesús Benito Merchán: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=ManuelJBM

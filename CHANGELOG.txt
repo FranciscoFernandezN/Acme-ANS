@@ -10,4 +10,4 @@
 
 ** Year 2025
 
-25.1.0	Acme-ANS-D01-25.1.0 has been created using Hello World project as a sample.
+25.1.0	Acme-ANS has been created using Hello World project as a sample.
