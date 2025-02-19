@@ -24,6 +24,7 @@
 			<acme:menu-suboption code="master.menu.anonymous.trabuco-favourite-link" action="https://zonatmo.com/library/manga/8399/berserk"/>
 			<acme:menu-suboption code="master.menu.anonymous.bea-favourite-link" action="https://minecraft.fandom.com/wiki/Minecraft_Wiki"/>
 			<acme:menu-suboption code="master.menu.anonymous.juavarver-favourite-link" action="https://www.marca.com/"/>
+			<acme:menu-suboption code="master.menu.anonymous.estegn10-favourite-link" action="https://aternos.org/"/>
 			
 		</acme:menu-option>
 
