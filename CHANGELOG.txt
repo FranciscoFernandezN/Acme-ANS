@@ -10,4 +10,5 @@
 
 ** Year 2025
 
-25.1.0	Acme-ANS has been created using Hello World project as a sample.
+25.1.0	This is the first version of Acme Ans.
+25.2.0	This is the second version of Acme Ans.
