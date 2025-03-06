@@ -5,7 +5,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PositiveOrZero;
 
 import org.checkerframework.common.aliasing.qual.Unique;
@@ -30,16 +29,15 @@ public class Aircraft extends AbstractEntity {
 
 	// Attributes -------------------------------------------------------------
 
-	@NotBlank
+	@Mandatory
 	@ValidString(max = 50)
 	@Automapped
 	private String				model;
 
 	@Unique
 	@Column(unique = true)
-	@NotBlank
+	@Mandatory
 	@ValidString(max = 50)
-	@Automapped
 	private String				registrationNumber;
 
 	@Mandatory
