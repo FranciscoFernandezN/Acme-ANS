@@ -3,6 +3,7 @@ package acme.entities.reviews;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -16,7 +17,12 @@ import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
 import acme.realms.Consumer;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+@Entity
 public class Review extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
@@ -59,7 +65,7 @@ public class Review extends AbstractEntity {
 
 	@Mandatory
 	@Valid
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private Consumer			user;
 
 }
