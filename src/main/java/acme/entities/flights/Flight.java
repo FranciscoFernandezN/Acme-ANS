@@ -78,12 +78,12 @@ public class Flight extends AbstractEntity {
 
 	@Transient
 	private String getOrigin() {
-		return this.getFirstLeg().getOrigin();
+		return this.getFirstLeg().getDepartureAirport().getCity();
 	}
 
 	@Transient
 	private String getDestiny() {
-		return this.getLastLeg().getDestiny();
+		return this.getLastLeg().getArrivalAirport().getCity();
 	}
 
 	@Transient
