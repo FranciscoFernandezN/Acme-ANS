@@ -5,9 +5,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PositiveOrZero;
 
 import org.checkerframework.common.aliasing.qual.Unique;
 
+import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
@@ -19,7 +22,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Aircraft {
+public class Aircraft extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
 
@@ -27,19 +30,20 @@ public class Aircraft {
 
 	// Attributes -------------------------------------------------------------
 
-	@Mandatory
+	@NotBlank
 	@ValidString(max = 50)
 	@Automapped
 	private String				model;
 
 	@Unique
 	@Column(unique = true)
+	@NotBlank
 	@ValidString(max = 50)
 	@Automapped
 	private String				registrationNumber;
 
 	@Mandatory
-	@ValidNumber
+	@PositiveOrZero
 	@Automapped
 	private Integer				capacity;
 
