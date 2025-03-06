@@ -1,8 +1,11 @@
 
 package acme.entities.airports;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.Valid;
 
 import org.checkerframework.common.aliasing.qual.Unique;
@@ -14,6 +17,7 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidEmail;
 import acme.client.components.validation.ValidString;
 import acme.client.components.validation.ValidUrl;
+import acme.entities.reviews.Review;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -68,6 +72,12 @@ public class Airport extends AbstractEntity {
 	@ValidString(pattern = " ^\\+?\\d{6,15}$")
 	@Automapped
 	private String				contactNumber;
+
 	// Derived attributes -----------------------------------------------------
 	// Relationships ----------------------------------------------------------
+
+	@Optional
+	@Valid
+	@OneToMany
+	private List<Review>		review;
 }
