@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 
@@ -45,6 +47,7 @@ public class Airport extends AbstractEntity {
 
 	@Mandatory
 	@Valid
+	@Enumerated(EnumType.STRING)
 	@Automapped
 	private OperationalScope	operationalScope;
 
