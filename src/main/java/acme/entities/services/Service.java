@@ -1,29 +1,24 @@
 
-package acme.entities.reviews;
+package acme.entities.services;
 
-import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.Column;
+import javax.persistence.OneToMany;
 import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractEntity;
+import acme.client.components.datatypes.Money;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
-import acme.client.components.validation.ValidMoment;
+import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
-import acme.realms.Consumer;
-import lombok.Getter;
-import lombok.Setter;
+import acme.client.components.validation.ValidUrl;
+import acme.entities.reviews.Review;
 
-@Getter
-@Setter
-@Entity
-public class Review extends AbstractEntity {
+public class Service extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
 
@@ -37,35 +32,33 @@ public class Review extends AbstractEntity {
 	private String				name;
 
 	@Mandatory
-	@ValidMoment(past = true)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date				postedAt;
+	@ValidUrl
+	@Automapped
+	private String				picture;
 
 	@Mandatory
-	@ValidString(max = 50)
+	@ValidNumber(min = 0., integer = 2, fraction = 1)
 	@Automapped
-	private String				subject;
-
-	@Mandatory
-	@ValidString
-	@Automapped
-	private String				body;
+	private Double				avgDwellTime;
 
 	@Optional
-	@ValidNumber(min = 0., max = 10., integer = 2, fraction = 1)
+	@ValidString(min = 6, max = 6, pattern = "^[A-Z]{4}-[0-9]{2}$")
 	@Automapped
-	private Double				score;
+	@Column(unique = true)
+	private String				promotionCode;
 
 	@Optional
+	@ValidMoney
 	@Automapped
-	private Boolean				isRecommended;
+	private Money				money;
 
 	// Derived attributes -----------------------------------------------------
+
 	// Relationships ----------------------------------------------------------
 
-	@Mandatory
+	@Optional
 	@Valid
-	@ManyToOne(optional = false)
-	private Consumer			user;
+	@OneToMany
+	private List<Review>		reviews;
 
 }
