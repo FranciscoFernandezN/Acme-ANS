@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 
 import org.checkerframework.common.aliasing.qual.Unique;
 
@@ -15,6 +17,7 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
+import acme.entities.airlines.Airline;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -54,4 +57,8 @@ public class Manager extends AbstractRole {
 
 	// Relationships ----------------------------------------------------------
 
+	@ManyToOne(optional = false)
+	@Valid
+	@Mandatory
+	private Airline				airlineManaging;
 }
