@@ -24,7 +24,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Fligth extends AbstractEntity {
+public class Flight extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
 
@@ -73,7 +73,7 @@ public class Fligth extends AbstractEntity {
 
 	@Transient
 	private Date getScheduledArrival() {
-		return this.getLastLeg().getScheduledDeparture();
+		return this.getLastLeg().getScheduledArrival();
 	}
 
 	@Transient
