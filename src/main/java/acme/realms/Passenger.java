@@ -5,6 +5,10 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.checkerframework.common.aliasing.qual.Unique;
 
 import acme.client.components.basis.AbstractRole;
 import acme.client.components.mappings.Automapped;
@@ -37,6 +41,7 @@ public class Passenger extends AbstractRole {
 	@Automapped
 	private String				email;
 
+	@Unique
 	@Mandatory
 	@ValidString(min = 6, max = 9, pattern = "^[A-Z0-9]{6,9}$")
 	@Column(unique = true)
@@ -44,6 +49,7 @@ public class Passenger extends AbstractRole {
 
 	@Mandatory
 	@ValidMoment(past = true)
+	@Temporal(TemporalType.DATE)
 	@Automapped
 	private Date				dateOfBirth;
 
