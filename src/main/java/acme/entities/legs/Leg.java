@@ -2,7 +2,6 @@
 package acme.entities.legs;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -94,5 +93,4 @@ public class Leg extends AbstractEntity {
 	@Valid
 	@ManyToOne(optional = false)
 	private Aircraft	aircraft;
-
 }
