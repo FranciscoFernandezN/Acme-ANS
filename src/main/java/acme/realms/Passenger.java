@@ -50,7 +50,6 @@ public class Passenger extends AbstractRole {
 	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.DATE)
-	@Automapped
 	private Date				dateOfBirth;
 
 	@Optional
