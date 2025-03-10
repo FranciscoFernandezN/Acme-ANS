@@ -25,7 +25,7 @@ public class FlightAssignment extends AbstractEntity {
 
 	private static final long	serialVersionUID	= 1L;
 
-	// Attributes -------------------------------------------------------------
+	// Attributes --------------------------------------------------------------
 
 	@Mandatory
 	@Enumerated(EnumType.STRING)
