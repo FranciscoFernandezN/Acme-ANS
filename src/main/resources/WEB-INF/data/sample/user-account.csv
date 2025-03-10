@@ -8,5 +8,3 @@ user-account-provider-03,true,"UserIdentity{name: 'Antonia', surname: 'אבטי�
 user-account-manager-01,true,"UserIdentity{name: 'Franciscano', surname: '貸んい建濯よ芝弾テソ', email: 'franciscano@acme.com'}",manager1,manager1
 user-account-manager-02,true,"UserIdentity{name: 'Pepe', surname: 'коза თხა', email: 'pepe@acme.com'}",manager2,manager2
 user-account-manager-03,true,"UserIdentity{name: 'Juan', surname: 'González', email: 'juan@acme.com'}",manager3,manager3
-user-account-administrator-01,true,"UserIdentity{name:'Francisco',surname:'Fernández',email:'frafernog@acme.com'}",administrator1,administrator1
-user-account-administrator-02,true,"UserIdentity{name:'Beatriz',surname:'Gutiérrez',email:'beagutara@acme.com'}",administrator2,administrator2
