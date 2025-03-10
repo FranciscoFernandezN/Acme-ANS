@@ -1,0 +1,4 @@
+key,key:userAccount,licenseNumber,phoneNumber,specialisation,annualHealthTestPassed,yearsOfExperience,certifications
+technician1,user-account-technician-01,AB123456,+1234567890,Engine Maintenance,true,5,Certified in Airbus A320 maintenance
+technician2,user-account-technician-02,CD789012,+1987654321,Avionics,true,8,FAA Certified Electrical Systems
+technician3,user-account-technician-03,BD808080,+3491191191,AutoPilot software,false,4,Certified in Software Engineer
