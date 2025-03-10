@@ -37,13 +37,13 @@ public class Manager extends AbstractRole {
 
 	//TODO: revisar que el patrón esté bien a la hora de inicializar datos
 	@Unique
-	@ValidString(min = 8, max = 9, pattern = "^[A-Z]{2-3}\\d{6}$")
+	@ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$")
 	@Mandatory
 	@Column(unique = true)
 	private String				identifierNumber;
 
 	@Mandatory
-	@ValidNumber(min = 0., max = 70., integer = 2, fraction = 0)
+	@ValidNumber(min = 0, max = 70)
 	@Automapped
 	private Integer				yearsOfExperience;
 
