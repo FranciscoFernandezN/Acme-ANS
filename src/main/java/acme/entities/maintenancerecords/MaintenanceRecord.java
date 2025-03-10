@@ -6,17 +6,19 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
+import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
+import acme.entities.aircrafts.Aircraft;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,7 +35,7 @@ public class MaintenanceRecord extends AbstractEntity {
 
 	@Mandatory
 	@ValidMoment(past = true)
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date				moment;
 
 	@Mandatory
@@ -43,14 +45,14 @@ public class MaintenanceRecord extends AbstractEntity {
 	private MaintenanceStatus	status;
 
 	@Mandatory
-	@ValidMoment(past = true)
-	@Temporal(TemporalType.DATE)
+	@ValidMoment(past = false)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date				nextInspectionDue;
 
 	@Mandatory
-	@Min(0)
+	@ValidNumber(min = 100., max = 500000.)
 	@Automapped
-	private double				estimatedCost;
+	private Double				estimatedCost;
 
 	@Optional
 	@ValidString(max = 255)
@@ -60,4 +62,10 @@ public class MaintenanceRecord extends AbstractEntity {
 	// Derived attributes -----------------------------------------------------
 
 	// Relationships ----------------------------------------------------------
+
+	@Mandatory
+	@Valid
+	@ManyToOne
+	@Automapped
+	private Aircraft			aircraft;
 }
