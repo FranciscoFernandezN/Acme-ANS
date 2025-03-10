@@ -1,3 +1,4 @@
+
 package acme.entities.airports;
 
 import java.util.List;
@@ -81,5 +82,5 @@ public class Airport extends AbstractEntity {
 	@Optional
 	@Valid
 	@OneToMany
-	private List<Review>		review;
+	private List<Review>		reviews;
 }
