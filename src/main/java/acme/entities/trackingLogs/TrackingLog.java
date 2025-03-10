@@ -1,30 +1,29 @@
 
-package acme.entities.claims;
+package acme.entities.trackingLogs;
 
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
-import acme.client.components.validation.ValidEmail;
 import acme.client.components.validation.ValidMoment;
+import acme.client.components.validation.ValidScore;
 import acme.client.components.validation.ValidString;
-import acme.realms.AssistanceAgent;
+import acme.entities.claims.Claim;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class Claim extends AbstractEntity {
+public class TrackingLog extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
 
@@ -35,34 +34,37 @@ public class Claim extends AbstractEntity {
 	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date				registrationMoment;
+	private Date				lastUpdateMoment;
 
 	@Mandatory
-	@ValidEmail
+	@ValidString(max = 50)
 	@Automapped
-	private String				passengerEmail;
+	private String				step;
+
+	@Mandatory
+	@ValidScore
+	@Automapped
+	private Double				resolutionPercentage;
 
 	@Mandatory
 	@ValidString
 	@Automapped
-	private String				description;
-
-	@Mandatory
-	@Valid
-	@Enumerated(EnumType.STRING)
-	@Automapped
-	private ClaimType			claimType;
-
-	@Mandatory
-	@Automapped
-	private Boolean				accepted;
+	private String				resolution;
 
 	// Derived attributes -----------------------------------------------------
+
+
+	@Transient
+	private Boolean getAcceptance() {
+		return this.claim.getAccepted() && this.resolutionPercentage.equals(100.);
+	}
+
 	// Relationships ----------------------------------------------------------
+
 
 	@Mandatory
 	@Valid
-	@ManyToOne(optional = false)
-	private AssistanceAgent		agent;
-  
+	@OneToOne
+	private Claim claim;
+
 }
