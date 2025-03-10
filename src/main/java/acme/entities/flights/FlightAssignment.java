@@ -1,63 +1,62 @@
 
-package acme.entities.reviews;
+package acme.entities.flights;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
-import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
-import lombok.Getter;
-import lombok.Setter;
+import acme.entities.legs.Leg;
+import acme.realms.FlightCrewMember;
 
-@Getter
-@Setter
-@Entity
-public class Review extends AbstractEntity {
+public class FlightAssignment extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
 
 	private static final long	serialVersionUID	= 1L;
 
-	// Attributes -------------------------------------------------------------
+	// Attributes --------------------------------------------------------------
 
 	@Mandatory
-	@ValidString(max = 50)
+	@Enumerated(EnumType.STRING)
 	@Automapped
-	private String				name;
+	private Duty				duty;
 
 	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date				postedAt;
+	private Date				lastUpDate;
 
 	@Mandatory
-	@ValidString(max = 50)
+	@Enumerated(EnumType.STRING)
 	@Automapped
-	private String				subject;
-
-	@Mandatory
-	@ValidString
-	@Automapped
-	private String				body;
+	private CurrentStatus		currentStatus;
 
 	@Optional
-	@ValidNumber(min = 0., max = 10., integer = 2, fraction = 1)
+	@ValidString(max = 255)
 	@Automapped
-	private Double				score;
-
-	@Optional
-	@Automapped
-	private Boolean				isRecommended;
+	private String				remarks;
 
 	// Derived attributes -----------------------------------------------------
 	// Relationships ----------------------------------------------------------
 
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private FlightCrewMember	flightCrewMember;
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Leg					leg;
 }

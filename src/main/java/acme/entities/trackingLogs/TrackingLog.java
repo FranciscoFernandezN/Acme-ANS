@@ -1,26 +1,29 @@
 
-package acme.entities.reviews;
+package acme.entities.trackingLogs;
 
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
-import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
-import acme.client.components.validation.ValidNumber;
+import acme.client.components.validation.ValidScore;
 import acme.client.components.validation.ValidString;
+import acme.entities.claims.Claim;
 import lombok.Getter;
 import lombok.Setter;
 
+@Entity
 @Getter
 @Setter
-@Entity
-public class Review extends AbstractEntity {
+public class TrackingLog extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
 
@@ -29,35 +32,39 @@ public class Review extends AbstractEntity {
 	// Attributes -------------------------------------------------------------
 
 	@Mandatory
-	@ValidString(max = 50)
-	@Automapped
-	private String				name;
-
-	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date				postedAt;
+	private Date				lastUpdateMoment;
 
 	@Mandatory
 	@ValidString(max = 50)
 	@Automapped
-	private String				subject;
+	private String				step;
+
+	@Mandatory
+	@ValidScore
+	@Automapped
+	private Double				resolutionPercentage;
 
 	@Mandatory
 	@ValidString
 	@Automapped
-	private String				body;
-
-	@Optional
-	@ValidNumber(min = 0., max = 10., integer = 2, fraction = 1)
-	@Automapped
-	private Double				score;
-
-	@Optional
-	@Automapped
-	private Boolean				isRecommended;
+	private String				resolution;
 
 	// Derived attributes -----------------------------------------------------
+
+
+	@Transient
+	private Boolean getAcceptance() {
+		return this.claim.getAccepted() && this.resolutionPercentage.equals(100.);
+	}
+
 	// Relationships ----------------------------------------------------------
+
+
+	@Mandatory
+	@Valid
+	@OneToOne
+	private Claim claim;
 
 }
