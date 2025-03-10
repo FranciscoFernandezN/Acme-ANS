@@ -1,26 +1,30 @@
 
-package acme.entities.reviews;
+package acme.entities.claims;
 
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
-import acme.client.components.validation.Optional;
+import acme.client.components.validation.ValidEmail;
 import acme.client.components.validation.ValidMoment;
-import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
+import acme.realms.AssistanceAgent;
 import lombok.Getter;
 import lombok.Setter;
 
+@Entity
 @Getter
 @Setter
-@Entity
-public class Review extends AbstractEntity {
+public class Claim extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
 
@@ -29,35 +33,36 @@ public class Review extends AbstractEntity {
 	// Attributes -------------------------------------------------------------
 
 	@Mandatory
-	@ValidString(max = 50)
-	@Automapped
-	private String				name;
-
-	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date				postedAt;
+	private Date				registrationMoment;
 
 	@Mandatory
-	@ValidString(max = 50)
+	@ValidEmail
 	@Automapped
-	private String				subject;
+	private String				passengerEmail;
 
 	@Mandatory
 	@ValidString
 	@Automapped
-	private String				body;
+	private String				description;
 
-	@Optional
-	@ValidNumber(min = 0., max = 10., integer = 2, fraction = 1)
+	@Mandatory
+	@Valid
+	@Enumerated(EnumType.STRING)
 	@Automapped
-	private Double				score;
+	private ClaimType			claimType;
 
-	@Optional
+	@Mandatory
 	@Automapped
-	private Boolean				isRecommended;
+	private Boolean				accepted;
 
 	// Derived attributes -----------------------------------------------------
 	// Relationships ----------------------------------------------------------
 
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private AssistanceAgent		agent;
+  
 }

@@ -1,4 +1,3 @@
-
 package acme.entities.aircrafts;
 
 import javax.persistence.Column;

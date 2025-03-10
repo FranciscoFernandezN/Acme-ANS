@@ -82,5 +82,5 @@ public class Airport extends AbstractEntity {
 	@Optional
 	@Valid
 	@OneToMany
-	private List<Review>		review;
+	private List<Review>		reviews;
 }

@@ -1,11 +1,13 @@
 
 package acme.realms;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 
 import org.checkerframework.common.aliasing.qual.Unique;
@@ -15,9 +17,10 @@ import acme.client.components.datatypes.Money;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
+import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidMoney;
-import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
+import acme.client.components.validation.ValidUrl;
 import acme.entities.airlines.Airline;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,7 +28,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class FlightCrewMember extends AbstractRole {
+public class AssistanceAgent extends AbstractRole {
 
 	// Serialisation version --------------------------------------------------
 
@@ -40,36 +43,37 @@ public class FlightCrewMember extends AbstractRole {
 	private String				employeeCode;
 
 	@Mandatory
-	@ValidString(min = 6, max = 15, pattern = "^\\+?\\d{6,15}$")
+	@ValidString
 	@Automapped
-	private String				phoneNumber;
+	private String				languajes;
 
 	@Mandatory
-	@ValidString(max = 255)
-	@Automapped
-	private String				languageSkills;
+	@ValidMoment(past = true)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				firstWorkingDate;
 
-	@Mandatory
-	@Enumerated(EnumType.STRING)
+	@Optional
+	@ValidString
 	@Automapped
-	private AvailabilityStatus	availabilityStatus;
+	private String				biography;
 
-	@Mandatory
-	@Automapped
+	@Optional
 	@ValidMoney(min = 0)
+	@Automapped
 	private Money				salary;
 
 	@Optional
-	@ValidNumber(min = 0., max = 70., integer = 2, fraction = 0)
+	@ValidUrl
 	@Automapped
-	private Integer				yearsOfExperience;
+	private String				photoLink;
+
 	// Derived attributes -----------------------------------------------------
 
 	// Relationships ----------------------------------------------------------
 
 	@Mandatory
 	@Valid
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private Airline				airline;
-
+  
 }
