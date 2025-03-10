@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 
 import org.checkerframework.common.aliasing.qual.Unique;
@@ -35,19 +37,19 @@ public class Manager extends AbstractRole {
 
 	//TODO: revisar que el patrón esté bien a la hora de inicializar datos
 	@Unique
-	@ValidString(min = 8, max = 9, pattern = "^[A-Z]{2-3}\\d{6}$")
+	@ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$")
 	@Mandatory
 	@Column(unique = true)
 	private String				identifierNumber;
 
 	@Mandatory
-	@ValidNumber(min = 0., max = 70., integer = 2, fraction = 0)
+	@ValidNumber(min = 0, max = 70)
 	@Automapped
 	private Integer				yearsOfExperience;
 
 	@Mandatory
 	@ValidMoment(past = true)
-	@Automapped
+	@Temporal(TemporalType.DATE)
 	private Date				birth;
 
 	@Optional
