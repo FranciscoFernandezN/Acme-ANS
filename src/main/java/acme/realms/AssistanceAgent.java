@@ -75,4 +75,5 @@ public class AssistanceAgent extends AbstractRole {
 	@Valid
 	@ManyToOne(optional = false)
 	private Airline				airline;
+  
 }
