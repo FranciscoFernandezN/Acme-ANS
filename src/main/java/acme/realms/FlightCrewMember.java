@@ -35,7 +35,7 @@ public class FlightCrewMember extends AbstractRole {
 
 	@Unique
 	@Mandatory
-	@ValidString(min = 8, max = 9, pattern = "^[A-Z]{2-3}\\d{6}$")
+	@ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$")
 	@Column(unique = true)
 	private String				employeeCode;
 
@@ -60,7 +60,7 @@ public class FlightCrewMember extends AbstractRole {
 	private Money				salary;
 
 	@Optional
-	@ValidNumber(min = 0., max = 70., integer = 2, fraction = 0)
+	@ValidNumber(min = 0, max = 70)
 	@Automapped
 	private Integer				yearsOfExperience;
 	// Derived attributes -----------------------------------------------------
@@ -69,7 +69,7 @@ public class FlightCrewMember extends AbstractRole {
 
 	@Mandatory
 	@Valid
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private Airline				airline;
 
 }
