@@ -69,7 +69,7 @@ public class FlightCrewMember extends AbstractRole {
 
 	@Mandatory
 	@Valid
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private Airline				airline;
 
 }
