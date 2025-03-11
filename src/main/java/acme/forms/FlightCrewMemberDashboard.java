@@ -26,7 +26,7 @@ public class FlightCrewMemberDashboard extends AbstractForm {
 	List<FlightCrewMember>					lastLegCrewMembers;
 	Map<CurrentStatus, FlightAssignment>	flightAssignmentByStatus;
 	Double									flightAssignmentsLastMonth;
-	Double									minFlightAssignmentsLastMonth;
-	Double									maxFlightAssignmentsLastMonth;
+	Integer									minFlightAssignmentsLastMonth;
+	Integer									maxFlightAssignmentsLastMonth;
 	Double									stdDesviationFlightAssignmentsLastMonth;
 }
