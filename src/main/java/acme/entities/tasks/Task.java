@@ -6,12 +6,12 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
+import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
 import acme.entities.maintenancerecords.MaintenanceRecord;
 import acme.realms.Technician;
@@ -41,15 +41,14 @@ public class Task extends AbstractEntity {
 	private String				description;
 
 	@Mandatory
-	@Min(0)
-	@Max(10)
+	@ValidNumber(min = 0, max = 100)
 	@Automapped
-	private int					priority;
+	private Integer				priority;
 
 	@Mandatory
 	@Min(0)
 	@Automapped
-	private double				estimatedDuration;
+	private Double				estimatedDuration;
 
 	// Derived attributes -----------------------------------------------------
 
@@ -63,8 +62,7 @@ public class Task extends AbstractEntity {
 
 	@Mandatory
 	@Valid
-	@ManyToOne
-	@Automapped
+	@ManyToOne(optional = false)
 	private MaintenanceRecord	relatedMaintenance;
 
 }
