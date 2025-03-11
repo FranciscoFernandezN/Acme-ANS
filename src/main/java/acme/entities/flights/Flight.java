@@ -32,41 +32,41 @@ public class Flight extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
 
-	private static final long		serialVersionUID	= 1L;
+	private static final long	serialVersionUID	= 1L;
 
 	// Attributes -------------------------------------------------------------
 
 	@Mandatory
 	@ValidString(max = 50)
 	@Automapped
-	private String					tag;
+	private String				tag;
 
 	@Mandatory
 	@Automapped
-	private Boolean					needsSelfTransfer;
+	private Boolean				needsSelfTransfer;
 
 	@Mandatory
 	@ValidMoney
 	@Automapped
-	private Money					cost;
+	private Money				cost;
 
 	@Optional
 	@ValidString
 	@Automapped
-	private String					description;
+	private String				description;
 
 	// Derived attributes -----------------------------------------------------
 
-	private final Comparator<Leg>	c					= Comparator.comparing((final Leg l) -> l.getScheduledDeparture());
-
 
 	private Leg getFirstLeg() {
-		List<Leg> listaOrdenada = this.legs.stream().sorted(this.c).toList();
+		Comparator<Leg> c = Comparator.comparing((final Leg l) -> l.getScheduledDeparture());
+		List<Leg> listaOrdenada = this.legs.stream().sorted(c).toList();
 		return listaOrdenada.getFirst();
 	}
 
 	private Leg getLastLeg() {
-		List<Leg> listaOrdenada = this.legs.stream().sorted(this.c).toList();
+		Comparator<Leg> c = Comparator.comparing((final Leg l) -> l.getScheduledDeparture());
+		List<Leg> listaOrdenada = this.legs.stream().sorted(c).toList();
 		return listaOrdenada.getLast();
 	}
 

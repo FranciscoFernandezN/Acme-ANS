@@ -1,31 +1,38 @@
 
-package acme.realms;
+package acme.entities.bookings;
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 
 import org.checkerframework.common.aliasing.qual.Unique;
 
-import acme.client.components.basis.AbstractRole;
+import acme.client.components.basis.AbstractEntity;
 import acme.client.components.datatypes.Money;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
+import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
-import acme.entities.airlines.Airline;
+import acme.entities.flights.Flight;
+import acme.realms.Customer;
+import acme.realms.Passenger;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class FlightCrewMember extends AbstractRole {
+public class Booking extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
 
@@ -35,41 +42,47 @@ public class FlightCrewMember extends AbstractRole {
 
 	@Unique
 	@Mandatory
-	@ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$")
+	@ValidString(min = 6, max = 8, pattern = "^[A-Z0-9]{6,8}$")
 	@Column(unique = true)
-	private String				employeeCode;
+	private String				locatorCode;
 
 	@Mandatory
-	@ValidString(min = 6, max = 15, pattern = "^\\+?\\d{6,15}$")
-	@Automapped
-	private String				phoneNumber;
-
-	@Mandatory
-	@ValidString(max = 255)
-	@Automapped
-	private String				languageSkills;
+	@ValidMoment(past = true)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				purchaseMoment;
 
 	@Mandatory
 	@Enumerated(EnumType.STRING)
 	@Automapped
-	private AvailabilityStatus	availabilityStatus;
+	private TravelClass			travelClass;
 
 	@Mandatory
-	@Automapped
 	@ValidMoney(min = 0)
-	private Money				salary;
+	@Automapped
+	private Money				price;
 
 	@Optional
-	@ValidNumber(min = 0, max = 70)
+	@ValidNumber(integer = 4, fraction = 0)
 	@Automapped
-	private Integer				yearsOfExperience;
+	private Integer				lastNibble;
+
 	// Derived attributes -----------------------------------------------------
 
 	// Relationships ----------------------------------------------------------
 
 	@Mandatory
 	@Valid
-	@ManyToOne
-	private Airline				airline;
+	@ManyToOne(optional = false)
+	private Flight				flight;
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Passenger			passenger;
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Customer			customer;
 
 }
