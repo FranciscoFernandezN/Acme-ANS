@@ -1,0 +1,5 @@
+key,key:employee-code,phone-number,language-skills,availability-status,salary,years-of-experience,key:airline
+flight-crew-member-01,AA123456,+447123456789,English,AVAILABLE,3000.00,10,Ryannair
+flight-crew-member-02,BB234567,+34623456789,Spanish,ON_VACATION,2500.50,5,Ryannair
+flight-crew-member-03,CC345678,+33123456789,French,ON_LEAVE,3200.75,8,Ryannair
+flight-crew-member-04,DD456789,+4915123456789,German,AVAILABLE,2800.25,6,Ryannair
