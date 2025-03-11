@@ -28,7 +28,7 @@ public class Customer extends AbstractRole {
 
 	@Unique
 	@Mandatory
-	@ValidString(min = 8, max = 9, pattern = "^[A-Z]{2-3}\\d{6}$")
+	@ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$")
 	@Column(unique = true)
 	private String				identifier;
 
@@ -53,7 +53,7 @@ public class Customer extends AbstractRole {
 	private String				country;
 
 	@Optional
-	@ValidNumber(min = 0., max = 500000., integer = 6, fraction = 0)
+	@ValidNumber(min = 0, max = 500001)
 	@Automapped
 	private Integer				earnedPoints;
 
