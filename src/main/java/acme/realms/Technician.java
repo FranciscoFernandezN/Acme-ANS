@@ -3,6 +3,7 @@ package acme.realms;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.validation.constraints.Min;
 
 import org.checkerframework.common.aliasing.qual.Unique;
 
@@ -18,7 +19,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Customer extends AbstractRole {
+public class Technician extends AbstractRole {
 
 	// Serialisation version --------------------------------------------------
 
@@ -28,37 +29,36 @@ public class Customer extends AbstractRole {
 
 	@Unique
 	@Mandatory
-	@ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$")
+	@ValidString(pattern = "^[A-Z]{2,3}\\d{6}$")
 	@Column(unique = true)
-	private String				identifier;
+	private String				licenseNumber;
 
 	@Mandatory
-	@ValidString(min = 6, max = 15, pattern = "^\\+?\\d{6,15}$")
+	@ValidString(pattern = "^\\+?\\d{6,15}$")
 	@Automapped
 	private String				phoneNumber;
 
 	@Mandatory
-	@ValidString
-	@Automapped
-	private String				physicalAddress;
-
-	@Mandatory
 	@ValidString(max = 50)
 	@Automapped
-	private String				city;
+	private String				specialisation;
 
 	@Mandatory
-	@ValidString(max = 50)
 	@Automapped
-	private String				country;
+	private boolean				annualHealthTestPassed;
+
+	@Mandatory
+	@Min(0)
+	@ValidNumber(min = 0., max = 70., integer = 2, fraction = 0)
+	@Automapped
+	private int					yearsOfExperience;
 
 	@Optional
-	@ValidNumber(min = 0, max = 500001)
+	@ValidString
 	@Automapped
-	private Integer				earnedPoints;
+	private String				certifications;
 
 	// Derived attributes -----------------------------------------------------
 
 	// Relationships ----------------------------------------------------------
-
 }

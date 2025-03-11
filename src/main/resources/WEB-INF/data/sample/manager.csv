@@ -1,0 +1,4 @@
+key,key:userAccount,identifier-number,years-of-experience,birth,link-picture,key:airlineManaging
+manager-01,user-account-manager-01,FCO123456,10,1980/09/01 00:00,https://i.imgur.com/8YcXhS0.png,airline-01
+manager-02,user-account-manager-02,PE123456,1,2000/02/07 00:00,https://i.imgur.com/MtBRoNP.png,airline-01
+manager-03,user-account-manager-03,JUN123456,30,1973/10/20 00:00,https://i.imgur.com/NGLSjk6.png,airline-01
