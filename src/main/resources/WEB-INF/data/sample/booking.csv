@@ -1,0 +1,4 @@
+key,locator-code,purchase-moment,travel-class,price,last-nibble,key:flight,key:passenger,key:customer
+booking-01,"R8GJ4NDI",2001/04/10 12:00,ECONOMY,EUR 20.00,"1234",flight-01,passenger-01,customer-01
+booking-02,"098765",2003/08/04 08:30,ECONOMY,EUR 50.00,"9535",flight-01,passenger-02,customer-03
+booking-03,"MFURBWK",2004/05/08 15:45,BUSINESS,EUR 200.00,"3435",flight-01,passenger-03,customer-02

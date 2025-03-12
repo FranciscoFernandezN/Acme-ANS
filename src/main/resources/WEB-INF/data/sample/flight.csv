@@ -1,0 +1,2 @@
+key,tag,needs-self-transfer,cost,description,key:airline,key:manager-of-flight
+flight-01,"LONG FLIGHT",true,EUR 1000.00,"This is a really long flight",airline-01,manager-01
