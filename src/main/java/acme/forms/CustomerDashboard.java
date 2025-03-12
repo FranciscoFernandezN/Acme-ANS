@@ -21,12 +21,12 @@ public class CustomerDashboard extends AbstractForm {
 	// Attributes -------------------------------------------------------------
 
 	List<String>				lastFiveDestinations;
-	Money						moneySpentLastYear;
+	Double						moneySpentLastYear;
 	Map<TravelClass, Integer>	numOfBookingsByTravelClass;
-	Money						avgCostOfBookingsLastFiveYears;
-	Money						minCostOfBookingsLastFiveYears;
-	Money						maxCostOfBookingsLastFiveYears;
-	Money						stdDeviationCostOfBookingsLastFiveYears;
+	Double						avgCostOfBookingsLastFiveYears;
+	Double						minCostOfBookingsLastFiveYears;
+	Double						maxCostOfBookingsLastFiveYears;
+	Double						stdDeviationCostOfBookingsLastFiveYears;
 	Double						avgNumOfPassengersInBookings;
 	Integer						minNumOfPassengersInBookings;
 	Integer						maxNumOfPassengersInBookings;
