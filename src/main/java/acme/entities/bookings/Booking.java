@@ -21,7 +21,6 @@ import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidMoney;
-import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
 import acme.entities.flights.Flight;
 import acme.realms.Customer;
@@ -62,9 +61,9 @@ public class Booking extends AbstractEntity {
 	private Money				price;
 
 	@Optional
-	@ValidNumber(integer = 4, fraction = 0)
+	@ValidString(min = 4, max = 4, pattern = "\\d{4}")
 	@Automapped
-	private Integer				lastNibble;
+	private String				lastNibble;
 
 	// Derived attributes -----------------------------------------------------
 

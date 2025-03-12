@@ -1,0 +1,6 @@
+key,model,registrationNumber,capacity,cargoWeight,status,details,key:airline
+aircraft-01,Boeing 737,ABC123,200,22000,ACTIVE,Large passenger aircraft,airline-01
+aircraft-02,A320,DEF456,180,15000,UNDER_MAINTENANCE,Short-haul aircraft,airline-01
+aircraft-03,Embraer E195,GHI789,130,8000,ACTIVE,Regional aircraft,airline-02
+aircraft-04,Boeing 747,JKL012,400,35000,ACTIVE,Wide-body long-haul aircraft,airline-02
+aircraft-05,Airbus A380,MNO345,500,40000,UNDER_MAINTENANCE,Largest commercial airliner,airline-03
