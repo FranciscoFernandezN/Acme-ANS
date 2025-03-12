@@ -2,6 +2,7 @@
 package acme.entities.legs;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -19,6 +20,7 @@ import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidNumber;
+import acme.client.components.validation.ValidString;
 import acme.entities.aircrafts.Aircraft;
 import acme.entities.airlines.Airline;
 import acme.entities.airports.Airport;
@@ -37,10 +39,10 @@ public class Leg extends AbstractEntity {
 	// Attributes -------------------------------------------------------------
 
 	@Unique
-	@ValidNumber(min = 4, max = 4, integer = 4, fraction = 0)
+	@ValidString(min = 4, max = 4, pattern = "\\d{4}")
 	@Mandatory
 	@Column(unique = true)
-	private Integer				uniqueIdentifier;
+	private String				uniqueIdentifier;
 
 	@Mandatory
 	@ValidMoment

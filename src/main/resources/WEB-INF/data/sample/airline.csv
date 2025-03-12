@@ -1,2 +1,11 @@
 key,name,iATACode,website,type,foundation-moment,email,contact-number
 airline-01,Ryanair,FRX,https://www.ryanair.com/,LOWCOST,1984/11/28 00:00,odr@ryanair.com,+34900999015
+airline-02,American Airlines,AMX,https://www.aa.com/,STANDARD,1930/04/15 00:00,contact@aa.com,+18001234567
+airline-03,Lufthansa,LHX,https://www.lufthansa.com/,LUXURY,1953/01/01 00:00,support@lufthansa.com,+493015546545
+airline-04,EasyJet,EZX,https://www.easyjet.com/,LOWCOST,1995/05/18 00:00,customer.services@easyjet.com,+443301233557
+airline-05,Delta Airlines,DLX,https://www.delta.com/,STANDARD,1924/05/30 00:00,help@delta.com,+18002345567
+airline-06,Air France,AFX,https://www.airfrance.com/,STANDARD,1933/10/07 00:00,contact@airfrance.com,+33170195060
+airline-07,JetBlue,JBX,https://www.jetblue.com/,LOWCOST,1998/02/11 00:00,customersupport@jetblue.com,+18005258775
+airline-08,Southwest Airlines,SWX,https://www.southwest.com/,LOWCOST,1967/03/10 00:00,customer.service@sw.com,+18004349347
+airline-09,United Airlines,UAX,https://www.united.com/,LUXURY,1926/04/06 00:00,help@united.com,+18002539473
+airline-10,Qatar Airways,QAX,https://www.qatarairways.com/,LUXURY,1993/11/22 00:00,support@qatarairways.com,+97440232000
