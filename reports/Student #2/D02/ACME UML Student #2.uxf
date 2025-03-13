@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>11</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>847</x>
+      <y>33</y>
+      <w>858</w>
+      <h>143</h>
+    </coordinates>
+    <panel_attributes>bg=green
+&lt;&lt;Entity&gt;&gt;
+Booking
+--
++ locatorCode: String {Unique, Mandatory, ValidString(min = 6, max = 8, pattern = "^[A-Z0-9]{6,8}$"), Column(unique = true)}
++ purchaseMoment: Date {Mandatory, ValidMoment(past = true), Temporal(TemporalType.TIMESTAMP)}
++ travelClass: TravelClass {Mandatory, Valid, Enumerated(EnumType.STRING), Automapped}
++ price: Money {Mandatory, ValidMoney(min = 0), Automapped}
++ lastNibble: {Optional, ValidString(min = 4, max = 4, pattern = "\\d{4}"), Automapped}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>583</x>
+      <y>220</y>
+      <w>121</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+TravelClass
+--
+ECONOMY
+BUSINESS
+bg=GRAY</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2123</x>
+      <y>22</y>
+      <w>891</w>
+      <h>165</h>
+    </coordinates>
+    <panel_attributes>bg=green
+&lt;&lt;Role&gt;&gt;
+Passenger
+--
++ fulName: String {Mandatory, ValidString, Automapped}
++ email: String {Mandatory, ValidEmail, Automapped}
++ passportNumber: String {Unique, Mandatory, ValidString(min = 6, max = 9, pattern = "^[A-Z0-9]{6,9}$"), Column(unique = true)}
++ dateOfBirth: Date {Mandatory, ValidMoment(past = true), Temporal(TemporalType.DATE)}
++ nationality: String {Mandatory, ValidString(max = 50), Automapped}
++ specialNeeds: String {Optional, ValidString(max = 50), Automapped}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>847</x>
+      <y>407</y>
+      <w>858</w>
+      <h>165</h>
+    </coordinates>
+    <panel_attributes>bg=green
+&lt;&lt;Role&gt;&gt;
+Customer
+--
++ identifier: String {Unique, Mandatory, ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$"), Column(unique = true)}
++ phoneNumber: String {Mandatory, ValidString(min = 6, max = 15, pattern = "^\\+?\\d{6,15}$"), Automapped}
++ physicalAddress: String {Mandatory, ValidString, Automapped}
++ city: String {Mandatory, ValidString(max = 50), Automapped}
++ country: String {Mandatory, ValidString(max = 50), Automapped} 
++ earnedPoints: Integer {Optional, ValidNumber(min = 0, max = 500000), Automapped}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>11</y>
+      <w>429</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+Flight
+--
++tag: String {Mandatory, ValidString(max = 50), Automapped}
++needsSelfTransfer: Boolean {Mandatory, Automapped}
++cost: Money {Mandatory, ValidMoney, Automapped}
++description: String {Optional, ValidString, Automapped}
+--
++getScheduledDeparture(): Date
++getScheduledArrival(): Date
++getOrigin(): String
++getDestiny(): String
++getNumberOfLayovers(): Integer
+
+bg=GREEN</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>418</x>
+      <y>88</y>
+      <w>451</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-x
+m1=1
+m2=*
+that have &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;390.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1694</x>
+      <y>88</y>
+      <w>451</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-x
+m1=1
+m2=*
+belongs to &gt;</panel_attributes>
+    <additional_attributes>390.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1265</x>
+      <y>165</y>
+      <w>121</w>
+      <h>264</h>
+    </coordinates>
+    <panel_attributes>lt=x-&gt;
+m1=*
+m2=1
+is done by &gt;</panel_attributes>
+    <additional_attributes>10.0;220.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

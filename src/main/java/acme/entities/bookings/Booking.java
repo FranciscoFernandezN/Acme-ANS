@@ -51,6 +51,7 @@ public class Booking extends AbstractEntity {
 	private Date				purchaseMoment;
 
 	@Mandatory
+	@Valid
 	@Enumerated(EnumType.STRING)
 	@Automapped
 	private TravelClass			travelClass;
