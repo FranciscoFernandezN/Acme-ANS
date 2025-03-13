@@ -22,7 +22,8 @@ public class AdministratorsDashboard extends AbstractForm {
 	Map<OperationalScope, Integer>	totalNumAirportsByOperationalScope;
 	Map<AirlineType, Integer>		numAirlinesByType;
 	Double							ratioAirlinesWithEmailAndPhone;
-	Double							ratioActiveInactiveAircrafts;
+	Double							ratioActiveAircrafts;
+	Double							ratioInactiveAircrafts;
 	Double							ratioReviewsWithScoreHigher5;
 	Integer							countReviewsPostedLast10Weeks;
 	Double							averageReviewsPostedLast10Weeks;
