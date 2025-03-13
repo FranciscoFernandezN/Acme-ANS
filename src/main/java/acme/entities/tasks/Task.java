@@ -45,6 +45,7 @@ public class Task extends AbstractEntity {
 	@Automapped
 	private Integer				priority;
 
+	//prueba 2
 	@Mandatory
 	@Min(0)
 	@Automapped
