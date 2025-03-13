@@ -3,12 +3,10 @@ package acme.realms;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.checkerframework.common.aliasing.qual.Unique;
+import javax.persistence.Transient;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
@@ -31,22 +29,6 @@ public class BannedPassenger extends AbstractEntity {
 	// Attributes -------------------------------------------------------------
 
 	@Mandatory
-	@ValidString
-	@Automapped
-	private String				fullName;
-
-	@Unique
-	@Mandatory
-	@ValidString(min = 6, max = 9, pattern = "^[A-Z0-9]{6,9}$")
-	@Column(unique = true)
-	private String				passportNumber;
-
-	@Mandatory
-	@ValidMoment(past = true)
-	@Temporal(TemporalType.DATE)
-	private Date				dateOfBirth;
-
-	@Mandatory
 	@ValidString(max = 50)
 	@Automapped
 	private String				nationality;
@@ -62,10 +44,16 @@ public class BannedPassenger extends AbstractEntity {
 	private Date				banIssuedDate;
 
 	@Optional
-	@ValidMoment(past = true)
+	@ValidMoment(past = false)
 	private Date				liftDate;
 
 	// Derived attributes -----------------------------------------------------
+
+
+	@Transient
+	public Boolean isStillBanned() {
+		return this.liftDate == null || this.liftDate.after(new Date());
+	}
 
 	// Relationships ----------------------------------------------------------
 
