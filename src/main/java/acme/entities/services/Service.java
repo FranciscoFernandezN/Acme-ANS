@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 
+import org.checkerframework.common.aliasing.qual.Unique;
+
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.datatypes.Money;
 import acme.client.components.mappings.Automapped;
@@ -41,9 +43,9 @@ public class Service extends AbstractEntity {
 	@Automapped
 	private Double				avgDwellTime;
 
+	@Unique
 	@Optional
 	@ValidString(min = 6, max = 6, pattern = "^[A-Z]{4}-[0-9]{2}$")
-	@Automapped
 	@Column(unique = true)
 	private String				promotionCode;
 
