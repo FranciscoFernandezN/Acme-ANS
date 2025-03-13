@@ -3,7 +3,6 @@ package acme.realms;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.validation.constraints.Min;
 
 import org.checkerframework.common.aliasing.qual.Unique;
 
@@ -45,13 +44,12 @@ public class Technician extends AbstractRole {
 
 	@Mandatory
 	@Automapped
-	private boolean				annualHealthTestPassed;
+	private Boolean				annualHealthTestPassed;
 
 	@Mandatory
-	@Min(0)
-	@ValidNumber(min = 0., max = 70., integer = 2, fraction = 0)
+	@ValidNumber(min = 0, max = 70)
 	@Automapped
-	private int					yearsOfExperience;
+	private Integer				yearsOfExperience;
 
 	@Optional
 	@ValidString
