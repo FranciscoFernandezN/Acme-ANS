@@ -6,7 +6,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
@@ -45,9 +44,8 @@ public class Task extends AbstractEntity {
 	@Automapped
 	private Integer				priority;
 
-	//prueba 2
 	@Mandatory
-	@Min(0)
+	@ValidNumber(min = 0)
 	@Automapped
 	private Double				estimatedDuration;
 
@@ -57,8 +55,7 @@ public class Task extends AbstractEntity {
 
 	@Mandatory
 	@Valid
-	@ManyToOne
-	@Automapped
+	@ManyToOne(optional = false)
 	private Technician			assignedTechnician;
 
 	@Mandatory
