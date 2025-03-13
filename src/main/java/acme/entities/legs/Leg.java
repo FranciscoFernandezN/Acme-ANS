@@ -1,33 +1,36 @@
 
-package acme.realms;
+package acme.entities.legs;
 
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 
 import org.checkerframework.common.aliasing.qual.Unique;
 
-import acme.client.components.basis.AbstractRole;
+import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
-import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
-import acme.client.components.validation.ValidUrl;
+import acme.entities.aircrafts.Aircraft;
 import acme.entities.airlines.Airline;
+import acme.entities.airports.Airport;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class Manager extends AbstractRole {
+public class Leg extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
 
@@ -35,34 +38,61 @@ public class Manager extends AbstractRole {
 
 	// Attributes -------------------------------------------------------------
 
-	//TODO: revisar que el patrón esté bien a la hora de inicializar datos
 	@Unique
-	@ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$")
+	@ValidString(min = 4, max = 4, pattern = "\\d{4}")
 	@Mandatory
 	@Column(unique = true)
-	private String				identifierNumber;
+	private String				uniqueIdentifier;
 
 	@Mandatory
-	@ValidNumber(min = 0, max = 70)
-	@Automapped
-	private Integer				yearsOfExperience;
+	@ValidMoment
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				scheduledDeparture;
 
 	@Mandatory
-	@ValidMoment(past = true)
-	@Temporal(TemporalType.DATE)
-	private Date				birth;
+	@ValidMoment
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				scheduledArrival;
 
-	@Optional
-	@ValidUrl
+	@Mandatory
+	@ValidNumber(min = 0, max = 24, fraction = 2)
 	@Automapped
-	private String				linkPicture;
+	private Double				duration;
+
+	@Mandatory
+	@Valid
+	@Enumerated(EnumType.STRING)
+	@Automapped
+	private LegStatus			status;
 
 	// Derived attributes -----------------------------------------------------
 
+
+	@Transient
+	private String getFlightNumber() {
+		return this.airline.getIATACode() + this.uniqueIdentifier;
+	}
+
 	// Relationships ----------------------------------------------------------
 
-	@ManyToOne(optional = false)
-	@Valid
+
 	@Mandatory
-	private Airline				airlineManaging;
+	@Valid
+	@ManyToOne(optional = false)
+	private Airline		airline;
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Airport		departureAirport;
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Airport		arrivalAirport;
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Aircraft	aircraft;
 }

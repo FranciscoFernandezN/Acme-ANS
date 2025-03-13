@@ -1,25 +1,22 @@
 
-package acme.realms;
-
-import java.util.Date;
+package acme.entities.aircrafts;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.PositiveOrZero;
 
 import org.checkerframework.common.aliasing.qual.Unique;
 
-import acme.client.components.basis.AbstractRole;
+import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
-import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
-import acme.client.components.validation.ValidUrl;
 import acme.entities.airlines.Airline;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +24,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Manager extends AbstractRole {
+public class Aircraft extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
 
@@ -35,34 +32,43 @@ public class Manager extends AbstractRole {
 
 	// Attributes -------------------------------------------------------------
 
-	//TODO: revisar que el patrón esté bien a la hora de inicializar datos
-	@Unique
-	@ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$")
 	@Mandatory
-	@Column(unique = true)
-	private String				identifierNumber;
-
-	@Mandatory
-	@ValidNumber(min = 0, max = 70)
+	@ValidString(max = 50)
 	@Automapped
-	private Integer				yearsOfExperience;
+	private String				model;
+
+	@Unique
+	@Column(unique = true)
+	@Mandatory
+	@ValidString(max = 50)
+	private String				registrationNumber;
 
 	@Mandatory
-	@ValidMoment(past = true)
-	@Temporal(TemporalType.DATE)
-	private Date				birth;
+	@PositiveOrZero
+	@Automapped
+	private Integer				capacity;
+
+	@Mandatory
+	@ValidNumber(min = 2000, max = 50000)
+	@Automapped
+	private Integer				cargoWeight;
+
+	@Mandatory
+	@Enumerated(EnumType.STRING)
+	@Automapped
+	private AircraftStatus		status;
 
 	@Optional
-	@ValidUrl
+	@ValidString(max = 255)
 	@Automapped
-	private String				linkPicture;
+	private String				details;
 
 	// Derived attributes -----------------------------------------------------
-
 	// Relationships ----------------------------------------------------------
 
-	@ManyToOne(optional = false)
-	@Valid
 	@Mandatory
-	private Airline				airlineManaging;
+	@Valid
+	@ManyToOne(optional = false)
+	private Airline				airline;
+
 }

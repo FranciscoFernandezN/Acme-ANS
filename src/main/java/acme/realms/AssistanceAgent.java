@@ -13,11 +13,12 @@ import javax.validation.Valid;
 import org.checkerframework.common.aliasing.qual.Unique;
 
 import acme.client.components.basis.AbstractRole;
+import acme.client.components.datatypes.Money;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
-import acme.client.components.validation.ValidNumber;
+import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
 import acme.client.components.validation.ValidUrl;
 import acme.entities.airlines.Airline;
@@ -27,7 +28,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Manager extends AbstractRole {
+public class AssistanceAgent extends AbstractRole {
 
 	// Serialisation version --------------------------------------------------
 
@@ -35,34 +36,44 @@ public class Manager extends AbstractRole {
 
 	// Attributes -------------------------------------------------------------
 
-	//TODO: revisar que el patrón esté bien a la hora de inicializar datos
 	@Unique
-	@ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$")
 	@Mandatory
+	@ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$")
 	@Column(unique = true)
-	private String				identifierNumber;
+	private String				employeeCode;
 
 	@Mandatory
-	@ValidNumber(min = 0, max = 70)
+	@ValidString
 	@Automapped
-	private Integer				yearsOfExperience;
+	private String				languages;
 
 	@Mandatory
 	@ValidMoment(past = true)
-	@Temporal(TemporalType.DATE)
-	private Date				birth;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				firstWorkingDate;
+
+	@Optional
+	@ValidString
+	@Automapped
+	private String				biography;
+
+	@Optional
+	@ValidMoney(min = 0)
+	@Automapped
+	private Money				salary;
 
 	@Optional
 	@ValidUrl
 	@Automapped
-	private String				linkPicture;
+	private String				photoLink;
 
 	// Derived attributes -----------------------------------------------------
 
 	// Relationships ----------------------------------------------------------
 
-	@ManyToOne(optional = false)
-	@Valid
 	@Mandatory
-	private Airline				airlineManaging;
+	@Valid
+	@ManyToOne(optional = false)
+	private Airline				airline;
+
 }

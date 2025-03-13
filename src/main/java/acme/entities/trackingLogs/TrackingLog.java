@@ -1,33 +1,29 @@
 
-package acme.realms;
+package acme.entities.trackingLogs;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 
-import org.checkerframework.common.aliasing.qual.Unique;
-
-import acme.client.components.basis.AbstractRole;
+import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
-import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
-import acme.client.components.validation.ValidNumber;
+import acme.client.components.validation.ValidScore;
 import acme.client.components.validation.ValidString;
-import acme.client.components.validation.ValidUrl;
-import acme.entities.airlines.Airline;
+import acme.entities.claims.Claim;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class Manager extends AbstractRole {
+public class TrackingLog extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
 
@@ -35,34 +31,40 @@ public class Manager extends AbstractRole {
 
 	// Attributes -------------------------------------------------------------
 
-	//TODO: revisar que el patrón esté bien a la hora de inicializar datos
-	@Unique
-	@ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$")
-	@Mandatory
-	@Column(unique = true)
-	private String				identifierNumber;
-
-	@Mandatory
-	@ValidNumber(min = 0, max = 70)
-	@Automapped
-	private Integer				yearsOfExperience;
-
 	@Mandatory
 	@ValidMoment(past = true)
-	@Temporal(TemporalType.DATE)
-	private Date				birth;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				lastUpdateMoment;
 
-	@Optional
-	@ValidUrl
+	@Mandatory
+	@ValidString(max = 50)
 	@Automapped
-	private String				linkPicture;
+	private String				step;
+
+	@Mandatory
+	@ValidScore
+	@Automapped
+	private Double				resolutionPercentage;
+
+	@Mandatory
+	@ValidString
+	@Automapped
+	private String				resolution;
 
 	// Derived attributes -----------------------------------------------------
 
+
+	@Transient
+	private Boolean getAcceptance() {
+		return this.claim.getAccepted() && this.resolutionPercentage.equals(100.);
+	}
+
 	// Relationships ----------------------------------------------------------
 
-	@ManyToOne(optional = false)
-	@Valid
+
 	@Mandatory
-	private Airline				airlineManaging;
+	@Valid
+	@ManyToOne(optional = false)
+	private Claim claim;
+
 }

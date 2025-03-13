@@ -1,68 +1,66 @@
 
-package acme.realms;
+package acme.entities.activityLogs;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 
-import org.checkerframework.common.aliasing.qual.Unique;
-
-import acme.client.components.basis.AbstractRole;
+import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
-import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
-import acme.client.components.validation.ValidUrl;
-import acme.entities.airlines.Airline;
+import acme.entities.legs.Leg;
+import acme.realms.FlightCrewMember;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class Manager extends AbstractRole {
+public class ActivityLog extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
-
 	private static final long	serialVersionUID	= 1L;
 
 	// Attributes -------------------------------------------------------------
-
-	//TODO: revisar que el patrón esté bien a la hora de inicializar datos
-	@Unique
-	@ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$")
-	@Mandatory
-	@Column(unique = true)
-	private String				identifierNumber;
-
-	@Mandatory
-	@ValidNumber(min = 0, max = 70)
-	@Automapped
-	private Integer				yearsOfExperience;
-
 	@Mandatory
 	@ValidMoment(past = true)
-	@Temporal(TemporalType.DATE)
-	private Date				birth;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				registrationMoment;
 
-	@Optional
-	@ValidUrl
+	@Mandatory
+	@ValidString(max = 50)
 	@Automapped
-	private String				linkPicture;
+	private String				typeOfIncident;
+
+	@Mandatory
+	@ValidString(max = 255)
+	@Automapped
+	private String				description;
+
+	@Mandatory
+	@ValidNumber(min = 0, max = 10)
+	@Automapped
+	private Integer				severityLevel;
 
 	// Derived attributes -----------------------------------------------------
 
 	// Relationships ----------------------------------------------------------
 
-	@ManyToOne(optional = false)
-	@Valid
 	@Mandatory
-	private Airline				airlineManaging;
+	@Valid
+	@ManyToOne(optional = false)
+	private FlightCrewMember	flightCrewMember;
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Leg					leg;
+
 }
