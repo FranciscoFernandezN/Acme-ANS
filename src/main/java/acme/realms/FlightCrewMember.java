@@ -50,6 +50,7 @@ public class FlightCrewMember extends AbstractRole {
 	private String				languageSkills;
 
 	@Mandatory
+	@Valid
 	@Enumerated(EnumType.STRING)
 	@Automapped
 	private AvailabilityStatus	availabilityStatus;
