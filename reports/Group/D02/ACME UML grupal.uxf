@@ -166,9 +166,9 @@ Aircraft
 --
 + model: String {Mandatory, ValidString(max = 50), Automapped}
 + registrationNumber: String {Unique, Column(unique = true), Mandatory, ValidString(max = 50)}
-+ capacity: Integer {Mandatory, PositiveOrZero, Automapped}
++ capacity: Integer {Mandatory, ValidNumber(min=0, max=750), Automapped}
 + cargoWeight: Integer {Mandatory, ValidNumber(min = 2000, max = 50000), Automapped}
-+ status: AircraftStatus {Mandatory, Enumerated(EnumType.STRING), Automapped}
++ status: AircraftStatus {Mandatory, Valid, Enumerated(EnumType.STRING), Automapped}
 + details: String {Optional, ValidString(max = 255), Automapped}
 
 bg=GREEN</panel_attributes>
