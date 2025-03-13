@@ -99,7 +99,7 @@ public class Flight extends AbstractEntity {
 	// Relationships ----------------------------------------------------------
 
 
-	@Mandatory
+	@Optional
 	@Valid
 	@OneToMany
 	private List<Leg>		legs;

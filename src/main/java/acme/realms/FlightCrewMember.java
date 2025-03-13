@@ -50,13 +50,14 @@ public class FlightCrewMember extends AbstractRole {
 	private String				languageSkills;
 
 	@Mandatory
+	@Valid
 	@Enumerated(EnumType.STRING)
 	@Automapped
 	private AvailabilityStatus	availabilityStatus;
 
 	@Mandatory
 	@Automapped
-	@ValidMoney(min = 0)
+	@ValidMoney(min = 0, max = 10000)
 	private Money				salary;
 
 	@Optional
