@@ -7,7 +7,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
-import javax.validation.constraints.PositiveOrZero;
 
 import org.checkerframework.common.aliasing.qual.Unique;
 
@@ -44,7 +43,7 @@ public class Aircraft extends AbstractEntity {
 	private String				registrationNumber;
 
 	@Mandatory
-	@PositiveOrZero
+	@ValidNumber(min = 0, max = 750)
 	@Automapped
 	private Integer				capacity;
 
@@ -54,6 +53,7 @@ public class Aircraft extends AbstractEntity {
 	private Integer				cargoWeight;
 
 	@Mandatory
+	@Valid
 	@Enumerated(EnumType.STRING)
 	@Automapped
 	private AircraftStatus		status;
