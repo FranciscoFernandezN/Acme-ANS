@@ -1,5 +1,5 @@
 
-package acme.entities.flights;
+package acme.entities.flightAssignments;
 
 import java.util.Date;
 
@@ -34,6 +34,7 @@ public class FlightAssignment extends AbstractEntity {
 	// Attributes --------------------------------------------------------------
 
 	@Mandatory
+	@Valid
 	@Enumerated(EnumType.STRING)
 	@Automapped
 	private Duty				duty;
