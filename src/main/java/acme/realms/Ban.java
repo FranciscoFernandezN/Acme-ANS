@@ -20,7 +20,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class BannedPassenger extends AbstractEntity {
+public class Ban extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
 
@@ -45,6 +45,7 @@ public class BannedPassenger extends AbstractEntity {
 
 	@Optional
 	@ValidMoment(past = false)
+	@Temporal(TemporalType.DATE)
 	private Date				liftDate;
 
 	// Derived attributes -----------------------------------------------------
