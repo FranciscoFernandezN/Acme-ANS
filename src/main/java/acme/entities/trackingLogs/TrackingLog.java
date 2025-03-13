@@ -56,7 +56,7 @@ public class TrackingLog extends AbstractEntity {
 
 	@Transient
 	private Boolean getAcceptance() {
-		return this.claim.getAccepted() && this.resolutionPercentage.equals(100.);
+		return this.claim.getAccepted();
 	}
 
 	// Relationships ----------------------------------------------------------
