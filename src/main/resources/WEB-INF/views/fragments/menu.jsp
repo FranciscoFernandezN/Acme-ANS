@@ -35,6 +35,11 @@
 			<acme:menu-suboption code="master.menu.administrator.populate-db-sample" action="/administrator/system/populate-sample"/>			
 			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.shut-system-down" action="/administrator/system/shut-down"/>
+			<acme:menu-separator/>
+			<acme:menu-suboption code="aircraft.menu.list" action="/administrator/aircraft/list"/>
+			<acme:menu-separator />
+			<acme:menu-suboption code="aircraft.menu.create" action="/administrator/aircraft/create"/>
+			<acme:menu-suboption code="aircraft.menu.update" action="/administrator/aircraft/update"/>
 		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.provider" access="hasRealm('Provider')">

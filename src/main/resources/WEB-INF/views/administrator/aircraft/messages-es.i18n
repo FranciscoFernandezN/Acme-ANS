@@ -1,0 +1,20 @@
+aircraft.form.title = Formulario de Aeronave
+
+aircraft.form.label.model = Modelo:
+aircraft.form.label.registrationNumber = Número de Registro:
+aircraft.form.label.capacity = Capacidad:
+aircraft.form.label.cargoWeight = Peso de Carga:
+aircraft.form.label.status = Estado:
+aircraft.form.label.details = Detalles:
+aircraft.form.label.confirmation = Confirma la creación/actualización de esta aeronave.
+
+aircraft.form.button.save = Guardar Aeronave
+
+aircraft.list.title = Listado de Aeronaves
+
+aircraft.list.label.model = Modelo
+aircraft.list.label.registrationNumber = Número de Registro
+aircraft.list.label.capacity = Capacidad
+aircraft.list.label.cargoWeight = Peso de Carga
+aircraft.list.label.status = Estado
+aircraft.list.label.details = Detalles
