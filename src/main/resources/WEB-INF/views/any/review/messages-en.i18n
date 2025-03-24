@@ -4,11 +4,15 @@ any.review.list.title = Listing of reviews
 any.review.form.label.name = Name:
 any.review.form.label.subject = Subject:
 any.review.form.label.body = Body:
-any.review.form.label.score = Score:
+any.review.form.label.score = Score (up to 10):
 any.review.form.label.isRecommended = Do you recommend it?
 any.review.form.label.confirmation = Do you confirm this operation?
 
 any.review.form.button.create = Create the review
+
+any.review.form.placeholder.name = Mr.Potato
+any.review.form.placeholder.subject = Ryanair is bullshit
+any.review.form.placeholder.score = 2.3
 
 any.review.list.label.name = Name
 any.review.list.label.postedAt = Posted At

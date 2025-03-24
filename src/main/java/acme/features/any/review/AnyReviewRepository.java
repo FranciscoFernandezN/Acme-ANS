@@ -13,7 +13,10 @@ import acme.entities.reviews.Review;
 @Repository
 public interface AnyReviewRepository extends AbstractRepository {
 
-	@Query("Select r FROM Review r WHERE r.postedAt > :minimumDate")
+	@Query("SELECT r FROM Review r WHERE r.postedAt > :minimumDate")
 	List<Review> findReviewsNewerThanDate(Date minimumDate);
+
+	@Query("SELECT r FROM Review r WHERE r.id = :id")
+	Review findReviewById(int id);
 
 }
