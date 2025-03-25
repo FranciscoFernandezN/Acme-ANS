@@ -8,6 +8,12 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
+# master.menu.reviews #######################################################
+
+master.menu.review = Reseñas
+master.menu.authenticated.list-reviews = Ver reseñas
+master.menu.authenticated.create-reviews = Crear reseña
+
 # master.menu.anonymous #######################################################
 
 master.menu.anonymous = Anónimo
