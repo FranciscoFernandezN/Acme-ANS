@@ -12,7 +12,7 @@ any.review.form.button.create = Create the review
 
 any.review.form.placeholder.name = Mr.Potato
 any.review.form.placeholder.subject = Ryanair is bullshit
-any.review.form.placeholder.score = 2.3
+any.review.form.placeholder.score = 2,3
 
 any.review.list.label.name = Name
 any.review.list.label.postedAt = Posted At
