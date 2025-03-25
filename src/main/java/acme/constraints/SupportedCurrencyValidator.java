@@ -36,7 +36,7 @@ public class SupportedCurrencyValidator extends AbstractValidator<ValidSupported
 		boolean result;
 
 		List<SupportedCurrency> supportedCurrencies = this.scr.findAllSuportedCurrencies();
-		if (supportedCurrencies.stream().map(SupportedCurrency::getCurrencyName).noneMatch(cn -> cn.equals(money.getCurrency())))
+		if (money != null && supportedCurrencies.stream().map(SupportedCurrency::getCurrencyName).noneMatch(cn -> cn.equals(money.getCurrency())))
 			super.state(context, false, "currency", "acme.validation.currency.message");
 		result = !super.hasErrors(context);
 		return result;
