@@ -1,0 +1,24 @@
+any.review.form.title = Formulario de reseña
+any.review.list.title = Listado de reseñas
+
+any.review.form.label.name = Nombre:
+any.review.form.label.subject = Asunto:
+any.review.form.label.body = Cuerpo:
+any.review.form.label.score = Calificación (hasta 10):
+any.review.form.label.isRecommended = ¿Lo recomendarías?
+any.review.form.label.confirmation = ¿Confirmas la operación?
+
+any.review.form.button.create = Crear la reseña
+
+any.review.form.placeholder.name = Don Potato
+any.review.form.placeholder.subject = Ryanair devuélveme el dinero
+any.review.form.placeholder.score = 2,3
+
+any.review.list.label.name = Nombre
+any.review.list.label.postedAt = Publicado a las
+any.review.list.label.subject = Asunto
+any.review.list.label.body = Cuerpo
+any.review.list.label.score = Calificación
+any.review.list.label.isRecommended = ¿Recomendado?
+
+any.review.list.button.create = Crear nueva reseña

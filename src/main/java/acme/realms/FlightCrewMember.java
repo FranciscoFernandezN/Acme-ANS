@@ -18,6 +18,7 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
+import acme.constraints.ValidSupportedCurrency;
 import acme.entities.airlines.Airline;
 import lombok.Getter;
 import lombok.Setter;
@@ -58,6 +59,7 @@ public class FlightCrewMember extends AbstractRole {
 	@Mandatory
 	@Automapped
 	@ValidMoney(min = 0, max = 10000)
+	@ValidSupportedCurrency
 	private Money				salary;
 
 	@Optional

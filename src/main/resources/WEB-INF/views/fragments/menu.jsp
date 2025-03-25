@@ -27,6 +27,11 @@
 			<acme:menu-suboption code="master.menu.anonymous.estegn10-favourite-link" action="https://aternos.org/"/>
 			
 		</acme:menu-option>
+		
+		<acme:menu-option code="master.menu.review">
+			<acme:menu-suboption code="master.menu.authenticated.list-reviews" action="/any/review/list" />
+			<acme:menu-suboption code="master.menu.authenticated.create-reviews" action="/any/review/create" />
+		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.administrator" access="hasRealm('Administrator')">
 			<acme:menu-suboption code="master.menu.administrator.list-aircrafts" action="/administrator/aircraft/list"/>
