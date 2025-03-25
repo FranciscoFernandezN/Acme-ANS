@@ -8,7 +8,7 @@
     <acme:input-textbox code="administrator.airline.form.label.iATACode" path="iATACode"/>
     <acme:input-url code="administrator.airline.form.label.website" path="website"/>
     
-    <acme:input-select code="administrator.airline.form.label.type" path="type">
+    <acme:input-select code="administrator.airline.form.label.type" path="type"/>
         <acme:option value="LUXURY" code="administrator.airline.type.luxury"/>
         <acme:option value="STANDARD" code="administrator.airline.type.standard"/>
         <acme:option value="LOW-COST" code="administrator.airline.type.lowcost"/>
