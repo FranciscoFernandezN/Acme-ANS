@@ -15,16 +15,16 @@ public class AdministratorAircraftController extends AbstractGuiController<Admin
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AdministratorAircraftListService	listService;
+	AdministratorAircraftListService	listService;
 
 	@Autowired
-	private AdministratorAircraftShowService	showService;
+	AdministratorAircraftShowService	showService;
 
 	@Autowired
-	private AdministratorAircraftUpdateService	updateService;
+	AdministratorAircraftUpdateService	updateService;
 
 	@Autowired
-	private AdministratorAircraftCreateService	createService;
+	AdministratorAircraftCreateService	createService;
 
 	// Constructors -----------------------------------------------------------
 

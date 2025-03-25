@@ -1,8 +1,7 @@
 
 package acme.features.administrator.aircraft;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.Collection;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -13,12 +12,12 @@ import acme.entities.aircrafts.Aircraft;
 @Repository
 public interface AdministratorAircraftRepository extends AbstractRepository {
 
-	@Query("SELECT a FROM Aircraft a")
-	List<Aircraft> findAllAircrafts();
+	@Query("select c from Aircraft c where c.id = :id")
+	Aircraft findAircraftById(int id);
 
-	@Query("SELECT a FROM Aircraft a WHERE a.id = :id")
-	Optional<Aircraft> findAircraftById(int id);
+	@Query("select c from Aircraft c")
+	Collection<Aircraft> findAllAircrafts();
 
 	@Query("SELECT COUNT(a) > 0 FROM Aircraft a WHERE a.registrationNumber = :registrationNumber")
-	Boolean existsByRegistrationNumber(String registrationNumber);
+	boolean existsByRegistrationNumber(String registrationNumber);
 }

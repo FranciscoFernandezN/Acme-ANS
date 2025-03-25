@@ -22,19 +22,26 @@ public class AdministratorAircraftShowService extends AbstractGuiService<Adminis
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true); // O ajustarlo según los permisos necesarios
+		super.getResponse().setAuthorised(true);
 	}
 
 	@Override
 	public void load() {
-		int id = super.getRequest().getData("id", int.class);
-		Aircraft aircraft = this.repository.findAircraftById(id).orElse(null);
+		int aircraftId;
+		Aircraft aircraft;
+
+		aircraftId = super.getRequest().getData("id", int.class);
+		aircraft = this.repository.findAircraftById(aircraftId);
+
 		super.getBuffer().addData(aircraft);
 	}
 
 	@Override
 	public void unbind(final Aircraft aircraft) {
-		Dataset dataset = super.unbindObject(aircraft, "model", "registrationNumber", "capacity", "cargoWeight", "status", "details", "airline");
+		Dataset dataset;
+
+		dataset = super.unbindObject(aircraft, "model", "registrationNumber", "capacity", "cargoWeigth", "status", "details");
+
 		super.getResponse().addData(dataset);
 	}
 }
