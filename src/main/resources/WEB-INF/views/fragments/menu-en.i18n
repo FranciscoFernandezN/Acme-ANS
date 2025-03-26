@@ -14,6 +14,11 @@ master.menu.review = Reviews
 master.menu.authenticated.list-reviews = List reviews
 master.menu.authenticated.create-reviews = Create reviews
 
+# master.menu.airport #######################################################
+
+master.menu.airport = Airports
+master.menu.authenticated.list-airport = List airports
+
 # master.menu.anonymous #######################################################
 
 master.menu.anonymous = Anonymous

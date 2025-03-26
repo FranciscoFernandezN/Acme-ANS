@@ -32,6 +32,10 @@
 			<acme:menu-suboption code="master.menu.authenticated.list-reviews" action="/any/review/list" />
 			<acme:menu-suboption code="master.menu.authenticated.create-reviews" action="/any/review/create" />
 		</acme:menu-option>
+		
+		<acme:menu-option code="master.menu.airport">
+			<acme:menu-suboption code="master.menu.authenticated.list-airport" action="/any/airport/list" />
+		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.administrator" access="hasRealm('Administrator')">
 			<acme:menu-suboption code="master.menu.administrator.list-user-accounts" action="/administrator/user-account/list"/>
