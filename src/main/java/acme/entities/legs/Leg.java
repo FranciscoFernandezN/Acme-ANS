@@ -2,6 +2,7 @@
 package acme.entities.legs;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,17 +14,15 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.Valid;
 
-import org.checkerframework.common.aliasing.qual.Unique;
-
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidMoment;
-import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
 import acme.entities.aircrafts.Aircraft;
 import acme.entities.airlines.Airline;
 import acme.entities.airports.Airport;
+import acme.realms.Manager;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -38,7 +37,6 @@ public class Leg extends AbstractEntity {
 
 	// Attributes -------------------------------------------------------------
 
-	@Unique
 	@ValidString(min = 4, max = 4, pattern = "\\d{4}")
 	@Mandatory
 	@Column(unique = true)
@@ -55,22 +53,27 @@ public class Leg extends AbstractEntity {
 	private Date				scheduledArrival;
 
 	@Mandatory
-	@ValidNumber(min = 0, max = 24, fraction = 2)
-	@Automapped
-	private Double				duration;
-
-	@Mandatory
 	@Valid
 	@Enumerated(EnumType.STRING)
 	@Automapped
 	private LegStatus			status;
 
+	@Mandatory
+	@Automapped
+	private Boolean				isDraftMode;
+
 	// Derived attributes -----------------------------------------------------
 
 
 	@Transient
-	private String getFlightNumber() {
+	public String getFlightNumber() {
 		return this.airline.getIATACode() + this.uniqueIdentifier;
+	}
+
+	@Transient
+	public Double getDuration() {
+		long milis = Math.abs(this.scheduledDeparture.getTime() - this.scheduledArrival.getTime());
+		return (double) TimeUnit.HOURS.convert(milis, TimeUnit.MILLISECONDS);
 	}
 
 	// Relationships ----------------------------------------------------------
@@ -95,4 +98,9 @@ public class Leg extends AbstractEntity {
 	@Valid
 	@ManyToOne(optional = false)
 	private Aircraft	aircraft;
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Manager		manager;
 }

@@ -1,0 +1,29 @@
+manager.leg.form.title = Formulario de tramos de vuelos
+manager.leg.list.title = Listado de tramos de vuelos
+
+manager.leg.form.label.uniqueIdentifier = Identificador único:
+manager.leg.form.label.scheduledDeparture = Salida programada:
+manager.leg.form.label.scheduledArrival = Llegada programada:
+manager.leg.form.label.status = Estado:
+manager.leg.form.label.departureAirport = Código IATA del Aeropuerto de Salida:
+manager.leg.form.label.arrivalAirport = Código IATA del Aeropuerto de Llegada:
+manager.leg.form.label.aircraft = Número de registro de la aeronave:
+manager.leg.form.label.isDraftMode = ¿Está en modo borrador?
+
+manager.leg.form.button.update = Actualizar este tramo
+manager.leg.form.button.delete = Borrar este tramo
+manager.leg.form.button.create = Crear este tramo
+
+manager.leg.list.label.flightNumber = Número de vuelo
+manager.leg.list.label.scheduledDeparture = Salida programada
+manager.leg.list.label.scheduledArrival = Llegada programada
+manager.leg.list.label.duration = Duración
+manager.leg.list.label.status = Estado
+manager.leg.list.label.isDraftMode = ¿Modo borrador?
+
+manager.leg.list.button.create = Crear un tramo
+
+manager.leg.create.not-unique-identifier = Este identificador ya está en uso
+manager.leg.create.not-after-arrival = La fecha llegada debe ser posterior a la de salida
+manager.leg.create.not-different-airport = El aeropuerto de destino debe ser distinto al aeropuerto de salida
+manager.leg.create.not-future-date = Esta fecha debe ser posterior a hoy
