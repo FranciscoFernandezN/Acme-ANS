@@ -9,6 +9,7 @@
 	<acme:list-column code="manager.leg.list.label.scheduledArrival" path="scheduledArrival" width="15%"/>
 	<acme:list-column code="manager.leg.list.label.duration" path="duration" width="10%"/>
 	<acme:list-column code="manager.leg.list.label.status" path="status" width="10%"/>
+	<acme:list-column code="manager.leg.list.label.flight" path="flight" width="10%"/>
 	<acme:list-column code="manager.leg.list.label.isDraftMode" path="isDraftMode" width="10%"/>
 </acme:list>
 

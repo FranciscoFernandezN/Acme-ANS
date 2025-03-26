@@ -21,6 +21,7 @@ import acme.client.components.validation.ValidString;
 import acme.entities.aircrafts.Aircraft;
 import acme.entities.airlines.Airline;
 import acme.entities.airports.Airport;
+import acme.entities.flights.Flight;
 import acme.realms.Manager;
 import lombok.Getter;
 import lombok.Setter;
@@ -102,4 +103,9 @@ public class Leg extends AbstractEntity {
 	@Valid
 	@ManyToOne(optional = false)
 	private Manager		manager;
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Flight		flight;
 }

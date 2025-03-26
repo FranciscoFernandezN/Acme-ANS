@@ -11,6 +11,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.aircrafts.Aircraft;
 import acme.entities.airports.Airport;
+import acme.entities.flights.Flight;
 import acme.entities.legs.Leg;
 import acme.entities.legs.LegStatus;
 import acme.realms.Manager;
@@ -34,7 +35,7 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 
 		legId = super.getRequest().getData("id", int.class);
 		leg = this.lr.findLegById(legId);
-		status = super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == leg.getManager().getId();
+		status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class) && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == leg.getManager().getId();
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -55,20 +56,27 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 		Dataset dataset;
 		List<Airport> airports;
 		List<Aircraft> aircrafts;
+		List<Flight> flights;
 
 		Manager manager = (Manager) super.getRequest().getPrincipal().getActiveRealm();
 
 		SelectChoices arrivalIATACodeChoices;
 		SelectChoices departureIATACodeChoices;
 		SelectChoices registrationNumberChoices;
+		SelectChoices flightIdChoices;
 		SelectChoices legStatuses;
 
 		airports = this.lr.findAllAirports();
 		aircrafts = this.lr.findAllAircraftsByAirlineId(manager.getAirlineManaging().getId());
+		if (leg.getIsDraftMode())
+			flights = this.lr.findAllFlightsEditableByManagerId(manager.getId());
+		else
+			flights = this.lr.findAllFlightsByManagerId(manager.getId());
 
 		arrivalIATACodeChoices = SelectChoices.from(airports, "iATACode", leg.getArrivalAirport());
 		departureIATACodeChoices = SelectChoices.from(airports, "iATACode", leg.getDepartureAirport());
 		registrationNumberChoices = SelectChoices.from(aircrafts, "registrationNumber", leg.getAircraft());
+		flightIdChoices = SelectChoices.from(flights, "id", leg.getFlight());
 
 		legStatuses = SelectChoices.from(LegStatus.class, leg.getStatus());
 
@@ -77,6 +85,7 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 		dataset.put("departureIATACodes", departureIATACodeChoices);
 		dataset.put("registrationNumbers", registrationNumberChoices);
 		dataset.put("statuses", legStatuses);
+		dataset.put("flightChoices", flightIdChoices);
 		super.getResponse().addData(dataset);
 	}
 
