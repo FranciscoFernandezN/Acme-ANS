@@ -124,9 +124,18 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 		aircraftId = super.getRequest().getData("aircraft", int.class);
 		List<Leg> legsOfAircraft = this.lr.findAllLegsOfAircraftByAircraftId(aircraftId);
 
-		Predicate<Leg> hasConcurrenLegsPredicate = (final Leg l) -> !(l.getScheduledArrival().before(leg.getScheduledArrival()) && l.getScheduledDeparture().before(leg.getScheduledDeparture())
-			|| l.getScheduledArrival().after(leg.getScheduledArrival()) && l.getScheduledDeparture().after(leg.getScheduledDeparture()));
-		super.state(legsOfAircraft.stream().filter(l -> l.getId() != leg.getId()).noneMatch(hasConcurrenLegsPredicate), "aircraft", "manager.leg.create.already-in-use-aircraft");
+		int flightId;
+		flightId = super.getRequest().getData("flight", int.class);
+		List<Leg> legsOfFlight = this.lr.findAllLegsByFlightId(flightId);
+
+		Predicate<Leg> legsAreBefore = (final Leg l) -> (leg.getScheduledArrival().before(l.getScheduledDeparture()) && leg.getScheduledDeparture().before(l.getScheduledDeparture()));
+		Predicate<Leg> legsAreAfter = (final Leg l) -> (leg.getScheduledArrival().after(l.getScheduledArrival()) && leg.getScheduledDeparture().after(l.getScheduledArrival()));
+
+		Predicate<Leg> hasNotConcurrentLegsPredicate = legsAreBefore.or(legsAreAfter);
+
+		super.state(legsOfAircraft.stream().filter(l -> l.getId() != leg.getId()).allMatch(hasNotConcurrentLegsPredicate), "aircraft", "manager.leg.create.already-in-use-aircraft");
+
+		super.state(legsOfFlight.stream().filter(l -> l.getId() != leg.getId()).allMatch(hasNotConcurrentLegsPredicate), "flight", "manager.leg.create.already-in-use-flight");
 
 	}
 

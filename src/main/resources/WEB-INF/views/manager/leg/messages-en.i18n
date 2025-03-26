@@ -8,7 +8,7 @@ manager.leg.form.label.status = Status:
 manager.leg.form.label.departureAirport = IATA code of Departure Airport: 
 manager.leg.form.label.arrivalAirport = IATA code of Arrival Airport:
 manager.leg.form.label.aircraft = Registration number of Aircraft:
-manager.leg.form.label.flight = Id of flight:
+manager.leg.form.label.flight = Id of associated flight:
 manager.leg.form.label.isDraftMode = Is it in draft mode?
 
 manager.leg.form.button.update = Update this leg
@@ -22,6 +22,7 @@ manager.leg.list.label.scheduledDeparture = Scheduled departure
 manager.leg.list.label.scheduledArrival = Scheduled arrival
 manager.leg.list.label.duration = Duration (hours)
 manager.leg.list.label.status = Status
+manager.leg.list.label.flight = Flight id
 manager.leg.list.label.isDraftMode = Draft mode?
 
 manager.leg.list.button.create = Create a leg
@@ -33,3 +34,4 @@ manager.leg.create.not-future-date = This date must be after today
 manager.leg.create.already-in-use-aircraft = This aircraft has already been planned before to fly at this time
 manager.leg.create.too-long-leg = You can't have a +24 hours duration leg 
 manager.leg.delete.is-published = You can't delete a published leg
+manager.leg.create.already-in-use-flight = This flight cannot accept this leg due to overlapping dates

@@ -46,6 +46,7 @@ public class ManagerLegListService extends AbstractGuiService<Manager, Leg> {
 		dataset.put("flightNumber", leg.getFlightNumber());
 		dataset.put("isDraftMode", leg.getIsDraftMode());
 		dataset.put("duration", leg.getDuration());
+		dataset.put("flight", leg.getFlight().getId());
 		super.getResponse().addData(dataset);
 	}
 
