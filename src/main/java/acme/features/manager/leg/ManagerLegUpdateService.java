@@ -14,6 +14,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.aircrafts.Aircraft;
 import acme.entities.airports.Airport;
+import acme.entities.flights.Flight;
 import acme.entities.legs.Leg;
 import acme.entities.legs.LegStatus;
 import acme.realms.Manager;
@@ -37,7 +38,7 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 
 		legId = super.getRequest().getData("id", int.class);
 		leg = this.lr.findLegById(legId);
-		status = super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == leg.getManager().getId();
+		status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class) && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == leg.getManager().getId();
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -79,10 +80,20 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 		aircraft = this.lr.findAircraftById(aircraftId);
 
 		leg.setAircraft(aircraft);
+
+		Flight flight;
+		int flightId;
+
+		flightId = super.getRequest().getData("flight", int.class);
+		flight = this.lr.findFlightById(flightId);
+
+		leg.setFlight(flight);
 	}
 
 	@Override
 	public void validate(final Leg leg) {
+
+		//Ver si haría falta validar cosas aunque sean con un SelectChoices
 
 		Date currentMoment = MomentHelper.getCurrentMoment();
 
@@ -126,23 +137,31 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void unbind(final Leg leg) {
+
+		if (super.getBuffer().getErrors().hasErrors())
+			leg.setIsDraftMode(true);
+
 		Dataset dataset;
 		List<Airport> airports;
 		List<Aircraft> aircrafts;
+		List<Flight> flights;
 
 		Manager manager = (Manager) super.getRequest().getPrincipal().getActiveRealm();
 
 		SelectChoices arrivalIATACodeChoices;
 		SelectChoices departureIATACodeChoices;
 		SelectChoices registrationNumberChoices;
+		SelectChoices flightIdChoices;
 		SelectChoices legStatuses;
 
 		airports = this.lr.findAllAirports();
 		aircrafts = this.lr.findAllAircraftsByAirlineId(manager.getAirlineManaging().getId());
+		flights = this.lr.findAllFlightsEditableByManagerId(manager.getId());
 
 		arrivalIATACodeChoices = SelectChoices.from(airports, "iATACode", leg.getArrivalAirport());
 		departureIATACodeChoices = SelectChoices.from(airports, "iATACode", leg.getDepartureAirport());
 		registrationNumberChoices = SelectChoices.from(aircrafts, "registrationNumber", leg.getAircraft());
+		flightIdChoices = SelectChoices.from(flights, "id", leg.getFlight());
 
 		legStatuses = SelectChoices.from(LegStatus.class, leg.getStatus());
 
@@ -151,6 +170,7 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 		dataset.put("departureIATACodes", departureIATACodeChoices);
 		dataset.put("registrationNumbers", registrationNumberChoices);
 		dataset.put("statuses", legStatuses);
+		dataset.put("flightChoices", flightIdChoices);
 		super.getResponse().addData(dataset);
 	}
 

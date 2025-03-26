@@ -8,6 +8,7 @@ manager.leg.form.label.status = Status:
 manager.leg.form.label.departureAirport = IATA code of Departure Airport: 
 manager.leg.form.label.arrivalAirport = IATA code of Arrival Airport:
 manager.leg.form.label.aircraft = Registration number of Aircraft:
+manager.leg.form.label.flight = Id of flight:
 manager.leg.form.label.isDraftMode = Is it in draft mode?
 
 manager.leg.form.button.update = Update this leg
@@ -31,3 +32,4 @@ manager.leg.create.not-different-airport = Arrival airport should be different f
 manager.leg.create.not-future-date = This date must be after today
 manager.leg.create.already-in-use-aircraft = This aircraft has already been planned before to fly at this time
 manager.leg.create.too-long-leg = You can't have a +24 hours duration leg 
+manager.leg.delete.is-published = You can't delete a published leg

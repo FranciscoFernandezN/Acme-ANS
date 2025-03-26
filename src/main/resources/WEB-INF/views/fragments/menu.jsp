@@ -53,6 +53,9 @@
 		<acme:menu-option code="master.menu.manager" access="hasRealm('Manager')">
 			<acme:menu-suboption code="master.menu.manager.list-legs" action="/manager/leg/list"/>
 			<acme:menu-suboption code="master.menu.manager.create-legs" action="/manager/leg/create"/>
+			<acme:menu-separator/>
+			<acme:menu-suboption code="master.menu.manager.list-flights" action="/manager/flight/list"/>
+			<acme:menu-suboption code="master.menu.manager.create-flights" action="/manager/flight/create"/>
 		</acme:menu-option>
 	</acme:menu-left>
 

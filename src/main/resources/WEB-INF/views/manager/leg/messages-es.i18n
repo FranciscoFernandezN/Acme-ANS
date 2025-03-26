@@ -8,6 +8,7 @@ manager.leg.form.label.status = Estado:
 manager.leg.form.label.departureAirport = Código IATA del Aeropuerto de Salida:
 manager.leg.form.label.arrivalAirport = Código IATA del Aeropuerto de Llegada:
 manager.leg.form.label.aircraft = Número de registro de la aeronave:
+manager.leg.form.label.flight = Id del vuelo:
 manager.leg.form.label.isDraftMode = ¿Está en modo borrador?
 
 manager.leg.form.button.update = Actualizar este tramo
@@ -31,3 +32,4 @@ manager.leg.create.not-different-airport = El aeropuerto de destino debe ser dis
 manager.leg.create.not-future-date = Esta fecha debe ser posterior a hoy
 manager.leg.create.already-in-use-aircraft = Esta aeronave ya ha sido planeada para que vuele en esta fecha
 manager.leg.create.too-long-leg = No puedes tener un tramo de +24 horas de duración
+manager.leg.delete.is-published = No puedes borrar un vuelo publicado

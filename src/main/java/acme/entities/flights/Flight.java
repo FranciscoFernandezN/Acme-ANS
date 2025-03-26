@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.Valid;
 
@@ -18,10 +17,10 @@ import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
+import acme.client.helpers.SpringHelper;
 import acme.constraints.ValidSupportedCurrency;
 import acme.entities.airlines.Airline;
 import acme.entities.legs.Leg;
-import acme.entities.reviews.Review;
 import acme.realms.Manager;
 import lombok.Getter;
 import lombok.Setter;
@@ -57,68 +56,71 @@ public class Flight extends AbstractEntity {
 	@Automapped
 	private String				description;
 
+	@Mandatory
+	@Automapped
+	private Boolean				isDraftMode;
+
 	// Derived attributes -----------------------------------------------------
 
 
+	//TODO: no me gusta esto de aquí
+	private List<Leg> getSortedLegs() {
+		FlightRepository repository = SpringHelper.getBean(FlightRepository.class);
+		List<Leg> legs = repository.findAllLegsByFlightId(this.getId());
+		Comparator<Leg> c = Comparator.comparing(Leg::getScheduledDeparture);
+		return legs.stream().sorted(c).toList();
+	}
+
 	private Leg getFirstLeg() {
-		Comparator<Leg> c = Comparator.comparing((final Leg l) -> l.getScheduledDeparture());
-		List<Leg> listaOrdenada = this.legs.stream().sorted(c).toList();
-		return listaOrdenada.getFirst();
+		List<Leg> sortedLegs = this.getSortedLegs();
+		return sortedLegs.isEmpty() ? null : sortedLegs.getFirst();
 	}
 
 	private Leg getLastLeg() {
-		Comparator<Leg> c = Comparator.comparing((final Leg l) -> l.getScheduledDeparture());
-		List<Leg> listaOrdenada = this.legs.stream().sorted(c).toList();
-		return listaOrdenada.getLast();
+		List<Leg> sortedLegs = this.getSortedLegs();
+		return sortedLegs.isEmpty() ? null : sortedLegs.getLast();
 	}
 
 	@Transient
-	private Date getScheduledDeparture() {
-		return this.getFirstLeg().getScheduledDeparture();
+	public Date getScheduledDeparture() {
+		Leg firstLeg = this.getFirstLeg();
+		return firstLeg == null ? null : firstLeg.getScheduledDeparture();
 	}
 
 	@Transient
-	private Date getScheduledArrival() {
-		return this.getLastLeg().getScheduledArrival();
+	public Date getScheduledArrival() {
+		Leg lastLeg = this.getLastLeg();
+		return lastLeg == null ? null : lastLeg.getScheduledArrival();
 	}
 
 	@Transient
-	private String getOrigin() {
-		return this.getFirstLeg().getDepartureAirport().getCity();
+	public String getOrigin() {
+		Leg firstLeg = this.getFirstLeg();
+		return firstLeg == null ? null : firstLeg.getDepartureAirport().getCity();
 	}
 
 	@Transient
-	private String getDestiny() {
-		return this.getLastLeg().getArrivalAirport().getCity();
+	public String getDestiny() {
+		Leg lastLeg = this.getLastLeg();
+		return lastLeg == null ? null : lastLeg.getArrivalAirport().getCity();
 	}
 
 	@Transient
-	private Integer getNumberOfLayovers() {
-		Integer size = this.legs.size();
+	public Integer getNumberOfLayovers() {
+		Integer size = this.getSortedLegs().size();
 		return size <= 0 ? 0 : size - 1;
+	}
+
+	@Transient
+	public Airline getAirline() {
+		return this.getManager().getAirlineManaging();
 	}
 
 	// Relationships ----------------------------------------------------------
 
 
-	@Optional
-	@Valid
-	@OneToMany
-	private List<Leg>		legs;
-
 	@Mandatory
 	@Valid
 	@ManyToOne(optional = false)
-	private Airline			airline;
-
-	@Mandatory
-	@Valid
-	@ManyToOne(optional = false)
-	private Manager			managerOfFlight;
-
-	@Optional
-	@Valid
-	@OneToMany
-	private List<Review>	reviews;
-
+	private Manager manager;
 }
