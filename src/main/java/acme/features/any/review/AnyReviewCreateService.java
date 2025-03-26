@@ -38,17 +38,15 @@ public class AnyReviewCreateService extends AbstractGuiService<Any, Review> {
 
 	@Override
 	public void bind(final Review review) {
-		Date currentMoment;
-
-		currentMoment = MomentHelper.getCurrentMoment();
 		super.bindObject(review, "name", "subject", "body", "score", "isRecommended");
+		Date currentMoment;
+		currentMoment = MomentHelper.getCurrentMoment();
 		review.setPostedAt(currentMoment);
 	}
 
 	@Override
 	public void validate(final Review review) {
 		boolean confirmation;
-
 		confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
 	}
@@ -62,7 +60,7 @@ public class AnyReviewCreateService extends AbstractGuiService<Any, Review> {
 	public void unbind(final Review review) {
 		Dataset dataset;
 
-		dataset = super.unbindObject(review, "name", "subject", "body", "score", "isRecommended");
+		dataset = super.unbindObject(review, "name", "subject", "body", "score", "isRecommended", "postedAt");
 		super.getResponse().addData(dataset);
 	}
 

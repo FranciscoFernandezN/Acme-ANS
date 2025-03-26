@@ -1,0 +1,33 @@
+manager.leg.form.title = Leg form
+manager.leg.list.title = Listing of legs
+
+manager.leg.form.label.uniqueIdentifier = Unique identifier:
+manager.leg.form.label.scheduledDeparture = Scheduled departure:
+manager.leg.form.label.scheduledArrival = Scheduled arrival:
+manager.leg.form.label.status = Status:
+manager.leg.form.label.departureAirport = IATA code of Departure Airport: 
+manager.leg.form.label.arrivalAirport = IATA code of Arrival Airport:
+manager.leg.form.label.aircraft = Registration number of Aircraft:
+manager.leg.form.label.isDraftMode = Is it in draft mode?
+
+manager.leg.form.button.update = Update this leg
+manager.leg.form.button.delete = Delete this leg
+manager.leg.form.button.create = Create this leg
+
+manager.leg.form.placeholder.uniqueIdentifier = 1234
+
+manager.leg.list.label.flightNumber = Flight number
+manager.leg.list.label.scheduledDeparture = Scheduled departure
+manager.leg.list.label.scheduledArrival = Scheduled arrival
+manager.leg.list.label.duration = Duration (hours)
+manager.leg.list.label.status = Status
+manager.leg.list.label.isDraftMode = Draft mode?
+
+manager.leg.list.button.create = Create a leg
+
+manager.leg.create.not-unique-identifier = This identifier is already in use
+manager.leg.create.not-after-arrival = Arrival should be after departure
+manager.leg.create.not-different-airport = Arrival airport should be different from departure
+manager.leg.create.not-future-date = This date must be after today
+manager.leg.create.already-in-use-aircraft = This aircraft has already been planned before to fly at this time
+manager.leg.create.too-long-leg = You can't have a +24 hours duration leg 
