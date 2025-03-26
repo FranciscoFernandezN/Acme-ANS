@@ -3,6 +3,7 @@ package acme.features.manager.leg;
 
 import java.util.Date;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -40,7 +41,6 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 
 		manager = (Manager) super.getRequest().getPrincipal().getRealmOfType(Manager.class);
 		leg.setManager(manager);
-		leg.setAirline(manager.getAirlineManaging());
 		leg.setStatus(LegStatus.ON_TIME);
 		leg.setIsDraftMode(true);
 
@@ -78,8 +78,8 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 	@Override
 	public void validate(final Leg leg) {
 
-		List<String> legIds;
-		legIds = this.lr.findAllLegUniqueIds();
+		List<Leg> legs = this.lr.findAllLegs();
+		List<String> legIds = legs.stream().map(Leg::getUniqueIdentifier).toList();
 
 		if (leg.getUniqueIdentifier() != null)
 			super.state(!legIds.contains(leg.getUniqueIdentifier()), "uniqueIdentifier", "manager.leg.create.not-unique-identifier");
@@ -100,6 +100,16 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 
 		if (arrivalAirportId != 0 && departureAirportId != 0)
 			super.state(arrivalAirportId != departureAirportId, "arrivalAirport", "manager.leg.create.not-different-airport");
+
+		super.state(leg.getDuration() <= 24, "scheduledArrival", "manager.leg.create.too-long-leg");
+
+		int aircraftId;
+		aircraftId = super.getRequest().getData("aircraft", int.class);
+		List<Leg> legsOfAircraft = this.lr.findAllLegsOfAircraftByAircraftId(aircraftId);
+
+		Predicate<Leg> hasConcurrenLegsPredicate = (final Leg l) -> !(l.getScheduledArrival().before(leg.getScheduledArrival()) && l.getScheduledDeparture().before(leg.getScheduledDeparture())
+			|| l.getScheduledArrival().after(leg.getScheduledArrival()) && l.getScheduledDeparture().after(leg.getScheduledDeparture()));
+		super.state(legsOfAircraft.stream().noneMatch(hasConcurrenLegsPredicate), "aircraft", "manager.leg.create.already-in-use-aircraft");
 
 	}
 

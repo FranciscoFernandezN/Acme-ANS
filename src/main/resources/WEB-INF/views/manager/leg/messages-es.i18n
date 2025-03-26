@@ -14,10 +14,12 @@ manager.leg.form.button.update = Actualizar este tramo
 manager.leg.form.button.delete = Borrar este tramo
 manager.leg.form.button.create = Crear este tramo
 
+manager.leg.form.placeholder.uniqueIdentifier = 1234
+
 manager.leg.list.label.flightNumber = Número de vuelo
 manager.leg.list.label.scheduledDeparture = Salida programada
 manager.leg.list.label.scheduledArrival = Llegada programada
-manager.leg.list.label.duration = Duración
+manager.leg.list.label.duration = Duración (horas)
 manager.leg.list.label.status = Estado
 manager.leg.list.label.isDraftMode = ¿Modo borrador?
 
@@ -27,3 +29,5 @@ manager.leg.create.not-unique-identifier = Este identificador ya está en uso
 manager.leg.create.not-after-arrival = La fecha llegada debe ser posterior a la de salida
 manager.leg.create.not-different-airport = El aeropuerto de destino debe ser distinto al aeropuerto de salida
 manager.leg.create.not-future-date = Esta fecha debe ser posterior a hoy
+manager.leg.create.already-in-use-aircraft = Esta aeronave ya ha sido planeada para que vuele en esta fecha
+manager.leg.create.too-long-leg = No puedes tener un tramo de +24 horas de duración

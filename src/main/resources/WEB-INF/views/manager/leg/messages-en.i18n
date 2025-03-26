@@ -14,10 +14,12 @@ manager.leg.form.button.update = Update this leg
 manager.leg.form.button.delete = Delete this leg
 manager.leg.form.button.create = Create this leg
 
+manager.leg.form.placeholder.uniqueIdentifier = 1234
+
 manager.leg.list.label.flightNumber = Flight number
 manager.leg.list.label.scheduledDeparture = Scheduled departure
 manager.leg.list.label.scheduledArrival = Scheduled arrival
-manager.leg.list.label.duration = Duration
+manager.leg.list.label.duration = Duration (hours)
 manager.leg.list.label.status = Status
 manager.leg.list.label.isDraftMode = Draft mode?
 
@@ -27,3 +29,5 @@ manager.leg.create.not-unique-identifier = This identifier is already in use
 manager.leg.create.not-after-arrival = Arrival should be after departure
 manager.leg.create.not-different-airport = Arrival airport should be different from departure
 manager.leg.create.not-future-date = This date must be after today
+manager.leg.create.already-in-use-aircraft = This aircraft has already been planned before to fly at this time
+manager.leg.create.too-long-leg = You can't have a +24 hours duration leg 

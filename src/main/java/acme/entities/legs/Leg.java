@@ -2,7 +2,6 @@
 package acme.entities.legs;
 
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -67,22 +66,22 @@ public class Leg extends AbstractEntity {
 
 	@Transient
 	public String getFlightNumber() {
-		return this.airline.getIATACode() + this.uniqueIdentifier;
+		return this.getAirline().getIATACode() + this.uniqueIdentifier;
 	}
 
 	@Transient
 	public Double getDuration() {
-		long milis = Math.abs(this.scheduledDeparture.getTime() - this.scheduledArrival.getTime());
-		return (double) TimeUnit.HOURS.convert(milis, TimeUnit.MILLISECONDS);
+		double milis = Math.abs(this.scheduledDeparture.getTime() - this.scheduledArrival.getTime());
+		return milis / (1000 * 60 * 60);
+	}
+
+	@Transient
+	public Airline getAirline() {
+		return this.aircraft.getAirline();
 	}
 
 	// Relationships ----------------------------------------------------------
 
-
-	@Mandatory
-	@Valid
-	@ManyToOne(optional = false)
-	private Airline		airline;
 
 	@Mandatory
 	@Valid

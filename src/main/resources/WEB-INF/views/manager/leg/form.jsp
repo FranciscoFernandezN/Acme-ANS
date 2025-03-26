@@ -4,7 +4,8 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form>
-	<acme:input-textbox code="manager.leg.form.label.uniqueIdentifier" path="uniqueIdentifier" readonly="${acme:anyOf(_command, 'show|update|delete')}"/>
+	<!-- Utilizo en uniqueIdentifier un textbox ya que el framework tiene un bug visual con el integer -->
+	<acme:input-textbox code="manager.leg.form.label.uniqueIdentifier" path="uniqueIdentifier" placeholder="manager.leg.form.placeholder.uniqueIdentifier"/>
 	<acme:input-moment code="manager.leg.form.label.scheduledDeparture" path="scheduledDeparture"/>
 	<acme:input-moment code="manager.leg.form.label.scheduledArrival" path="scheduledArrival"/>
 	<acme:input-select code="manager.leg.form.label.status" path="status" choices="${statuses}"/>
