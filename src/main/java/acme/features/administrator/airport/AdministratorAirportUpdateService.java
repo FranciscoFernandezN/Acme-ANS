@@ -45,17 +45,14 @@ public class AdministratorAirportUpdateService extends AbstractGuiService<Admini
 
 	@Override
 	public void validate(final Airport airport) {
-		Boolean existsThisCode = this.aar.findAllAirports().stream().anyMatch(a -> a.getIATACode().equals(airport.getIATACode()));
+		Boolean existsThisCode = this.aar.findAllAirports().stream().anyMatch(a -> airport.getIATACode().equals(a.getIATACode()));
 
 		if (existsThisCode == false) {
 			boolean confirmation;
 			confirmation = super.getRequest().getData("confirmation", boolean.class);
 			super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
-		} else {
-			boolean alreadyExists;
-			alreadyExists = super.getRequest().getData("alreadyExists", boolean.class);
-			super.state(alreadyExists, "alreadyExists", "administrator.airport.already-exists.message");
-		}
+		} else
+			super.state(!existsThisCode, "iATACode", "administrator.airport.create.already-exists");
 	}
 
 	@Override

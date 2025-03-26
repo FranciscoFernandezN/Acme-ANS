@@ -3,7 +3,7 @@
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
-<acme:list navigable="false">
+<acme:list>
 	<acme:list-column code="administrator.airport.list.label.name" path="name" width="10%"/>
 	<acme:list-column code="administrator.airport.list.label.iATACode" path="iATACode" width="10%"/>
 	<acme:list-column code="administrator.airport.list.label.operationalScope" path="operationalScope" width="10%"/>

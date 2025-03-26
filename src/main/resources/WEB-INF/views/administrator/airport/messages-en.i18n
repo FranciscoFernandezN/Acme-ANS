@@ -9,8 +9,10 @@ administrator.airport.form.label.country = Country:
 administrator.airport.form.label.website = Website:
 administrator.airport.form.label.email = Contact email:
 administrator.airport.form.label.contactNumber = Contact number:
+administrator.airport.form.label.confirmation = Do you confirm this operation?
 
-administrator.airport.form.button.create = Create the airport
+administrator.airport.form.button.create = Create airport
+administrator.airport.form.button.update = Update airport
 
 administrator.airport.list.label.name = Name
 administrator.airport.list.label.iATACode = IATA Code
@@ -23,4 +25,4 @@ administrator.airport.list.label.contactNumber = Contact number
 
 administrator.airport.list.button.create = Create new airport
 
-administrator.airport.already-exists.message = This IATA code already exists
+administrator.airport.create.already-exists = This IATA code already exists
