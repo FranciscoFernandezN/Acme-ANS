@@ -1,21 +1,23 @@
-administrator.aircraft.form.title = Aircraft Form
-administrator.aircraft.form.list.title = Listing of aircrafts
+administrator.aircraft.form.title = Aircraft Form  
+administrator.aircraft.list.title = Aircraft Listing  
 
-administrator.aircraft.form.label.model = Model:
-administrator.aircraft.form.label.registrationNumber = Registration Number:
-administrator.aircraft.form.label.capacity = Capacity:
-administrator.aircraft.form.label.cargoWeight = Cargo Weight:
-administrator.aircraft.form.label.status = Status:
-administrator.aircraft.form.label.details = Details:
-administrator.aircraft.form.label.confirmation = Do you confirm this operation?
+administrator.aircraft.form.label.model = Model:  
+administrator.aircraft.form.label.registrationNumber = Registration Number:  
+administrator.aircraft.form.label.capacity = Capacity:  
+administrator.aircraft.form.label.cargoWeight = Cargo Weight:  
+administrator.aircraft.form.label.status = Status:  
+administrator.aircraft.form.label.details = Details:  
+administrator.aircraft.form.label.confirmation = Do you confirm this operation?  
 
-administrator.aircraft.form.button.create = Create aircraft
+administrator.aircraft.form.button.create = Create aircraft  
 
-administrator.aircraft.list.label.model = Model
-administrator.aircraft.list.label.registrationNumber = Registration Number
-administrator.aircraft.list.label.capacity = Capacity
-administrator.aircraft.list.label.cargoWeight = Cargo Weight
-administrator.aircraft.list.label.status = Status
-administrator.aircraft.list.label.details = Details
+administrator.aircraft.list.label.model = Model  
+administrator.aircraft.list.label.registrationNumber = Registration Number  
+administrator.aircraft.list.label.capacity = Capacity  
+administrator.aircraft.list.label.cargoWeight = Cargo Weight  
+administrator.aircraft.list.label.status = Status  
+administrator.aircraft.list.label.details = Details  
 
-administrator.aircraft.list.title = Create new aircraft
+administrator.aircraft.list.button.create = Create new aircraft  
+
+administrator.aircraft.already-exists.message = This registration number already exists  

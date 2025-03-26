@@ -43,10 +43,17 @@ public class AdministratorAircraftCreateService extends AbstractGuiService<Admin
 
 	@Override
 	public void validate(final Aircraft aircraft) {
-		boolean confirmation;
+		Boolean existsThisCode = this.repository.findAllAircrafts().stream().anyMatch(a -> a.getRegistrationNumber().equals(aircraft.getRegistrationNumber()));
 
-		confirmation = super.getRequest().getData("confirmation", boolean.class);
-		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
+		if (existsThisCode == false) {
+			boolean confirmation;
+			confirmation = super.getRequest().getData("confirmation", boolean.class);
+			super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
+		} else {
+			boolean alreadyExists;
+			alreadyExists = super.getRequest().getData("alreadyExists", boolean.class);
+			super.state(alreadyExists, "alreadyExists", "administrator.aircraft.already-exists.message");
+		}
 	}
 
 	@Override
@@ -62,8 +69,7 @@ public class AdministratorAircraftCreateService extends AbstractGuiService<Admin
 		choices = SelectChoices.from(AircraftStatus.class, aircraft.getStatus());
 
 		dataset = super.unbindObject(aircraft, "model", "registrationNumber", "capacity", "cargoWeight", "status", "details");
-		dataset.put("readonly", false);
-		dataset.put("statuses", choices);
+		dataset.put("status", choices);
 
 		super.getResponse().addData(dataset);
 	}

@@ -33,7 +33,6 @@ master.menu.administrator.populate-db-sample = Poblar BD (ejemplos)
 master.menu.administrator.shut-system-down = Parar el sistema
 master.menu.administrator.list-aircrafts = Listar aeronaves
 master.menu.administrator.create-aircrafts = Crear aeronaves
-master.menu.administrator.update-aircrafts = Actualizar aeronaves
 
 # master.menu.provider ########################################################
 

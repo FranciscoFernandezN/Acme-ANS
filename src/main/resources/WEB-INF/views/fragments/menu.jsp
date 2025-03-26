@@ -36,8 +36,6 @@
 		<acme:menu-option code="master.menu.administrator" access="hasRealm('Administrator')">
 			<acme:menu-suboption code="master.menu.administrator.list-aircrafts" action="/administrator/aircraft/list"/>
 			<acme:menu-suboption code="master.menu.administrator.create-aircrafts" action="/administrator/aircraft/create"/>
-			<acme:menu-suboption code="master.menu.administrator.update-aircrafts" action="/administrator/aircraft/update"/>
-			<acme:menu-suboption code="master.menu.administrator.show-aircrafts" action="/administrator/aircraft/show"/>
 			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.list-user-accounts" action="/administrator/user-account/list"/>
 			<acme:menu-separator/>

@@ -4,12 +4,12 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form>
-	<acme:input-textbox code="administrator.aircraft.form.label.model" path="model" placeholder="administrator.aircraft.form.placeholder.model"/>
-	<acme:input-textbox code="administrator.aircraft.form.label.registrationNumber" path="registrationNumber" placeholder="administrator.aircraft.form.placeholder.registrationNumber"/>
-	<acme:input-integer code="administrator.aircraft.form.label.capacity" path="capacity" placeholder="administrator.aircraft.form.placeholder.capacity"/>
-	<acme:input-integer code="administrator.aircraft.form.label.cargoWeight" path="cargoWeight" placeholder="administrator.aircraft.form.placeholder.cargoWeight"/>
-	<acme:input-select code="administrator.aircraft.form.label.status" path="status" choices="${statuses}"/>
-	<acme:input-textbox code="administrator.aircraft.form.label.details" path="details" placeholder="administrator.aircraft.form.placeholder.details"/>
+	<acme:input-textbox code="administrator.aircraft.form.label.model" path="model" />
+	<acme:input-textbox code="administrator.aircraft.form.label.registrationNumber" path="registrationNumber" />
+	<acme:input-integer code="administrator.aircraft.form.label.capacity" path="capacity" />
+	<acme:input-integer code="administrator.aircraft.form.label.cargoWeight" path="cargoWeight" />
+	<acme:input-select code="administrator.aircraft.form.label.status" path="status" choices="${status}"/>
+	<acme:input-textbox code="administrator.aircraft.form.label.details" path="details" />
 	<acme:input-checkbox code="administrator.aircraft.form.label.confirmation" path="confirmation"/>
 
 	<jstl:choose>
