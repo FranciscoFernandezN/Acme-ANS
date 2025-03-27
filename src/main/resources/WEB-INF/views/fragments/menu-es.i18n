@@ -45,6 +45,7 @@ master.menu.consumer.favourite-link = Enlace favorito
 # master.menu.manager ##########################################################
 
 master.menu.manager = Mánager
+master.menu.manager.dashboard = Panel de indicadores
 master.menu.manager.list-legs = Ver tramos de vuelo
 master.menu.manager.create-legs = Crear tramos de vuelo
 master.menu.manager.list-flights = Ver vuelos

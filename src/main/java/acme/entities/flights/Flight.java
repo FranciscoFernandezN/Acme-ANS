@@ -20,6 +20,7 @@ import acme.client.components.validation.ValidString;
 import acme.client.helpers.SpringHelper;
 import acme.constraints.ValidSupportedCurrency;
 import acme.entities.airlines.Airline;
+import acme.entities.airports.Airport;
 import acme.entities.legs.Leg;
 import acme.realms.Manager;
 import lombok.Getter;
@@ -94,9 +95,21 @@ public class Flight extends AbstractEntity {
 	}
 
 	@Transient
+	public Airport getOriginAirport() {
+		Leg firstLeg = this.getFirstLeg();
+		return firstLeg == null ? null : firstLeg.getDepartureAirport();
+	}
+
+	@Transient
 	public String getOrigin() {
 		Leg firstLeg = this.getFirstLeg();
 		return firstLeg == null ? null : firstLeg.getDepartureAirport().getCity();
+	}
+
+	@Transient
+	public Airport getDestinyAirport() {
+		Leg lastLeg = this.getLastLeg();
+		return lastLeg == null ? null : lastLeg.getArrivalAirport();
 	}
 
 	@Transient
