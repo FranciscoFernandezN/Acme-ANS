@@ -1,5 +1,4 @@
-
-package acme.features.manager.flight;
+package acme.features.any.flight;
 
 import java.util.Date;
 import java.util.List;
@@ -7,34 +6,35 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
+import acme.client.components.principals.Any;
 import acme.client.services.AbstractGuiService;
+import acme.client.services.AbstractService;
 import acme.client.services.GuiService;
 import acme.entities.flights.Flight;
+import acme.features.manager.flight.ManagerFlightRepository;
 import acme.realms.Manager;
 
 @GuiService
-public class ManagerFlightListService extends AbstractGuiService<Manager, Flight> {
-
+public class AnyFlightListService extends AbstractGuiService<Any, Flight> {
+	
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private ManagerFlightRepository fr;
+	private AnyFlightRepository fr;
 
 	// AbstractGuiService interface -------------------------------------------
 
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Manager.class));
+		super.getResponse().setAuthorised(true);
 	}
 
 	@Override
 	public void load() {
 		List<Flight> flights;
-		int managerId;
 
-		managerId = super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId();
-		flights = this.fr.findAllFlightsByManagerId(managerId);
+		flights = this.fr.findAllFlightsPosted();
 
 		super.getBuffer().addData(flights);
 	}
@@ -49,14 +49,14 @@ public class ManagerFlightListService extends AbstractGuiService<Manager, Flight
 		Date scheduledDeparture = flight.getScheduledDeparture();
 		Date scheduledArrival = flight.getScheduledArrival();
 
-		dataset = super.unbindObject(flight, "id", "tag", "cost", "isDraftMode", "needsSelfTransfer");
+		dataset = super.unbindObject(flight, "tag", "cost", "needsSelfTransfer");
 
-		dataset.put("origin", origin == null ? "N/A" : origin);
-		dataset.put("destiny", destiny == null ? "N/A" : destiny);
-		dataset.put("scheduledDeparture", scheduledDeparture == null ? "N/A" : scheduledDeparture);
-		dataset.put("scheduledArrival", scheduledArrival == null ? "N/A" : scheduledArrival);
+		dataset.put("origin", origin);
+		dataset.put("destiny", destiny);
+		dataset.put("scheduledDeparture", scheduledDeparture);
+		dataset.put("scheduledArrival", scheduledArrival);
 
 		super.getResponse().addData(dataset);
 	}
-
+	
 }
