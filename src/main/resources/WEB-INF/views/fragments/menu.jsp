@@ -51,6 +51,8 @@
 		</acme:menu-option>
 		
 		<acme:menu-option code="master.menu.manager" access="hasRealm('Manager')">
+			<acme:menu-suboption code="master.menu.manager.dashboard" action="/manager/manager-dashboard/show"/>
+			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.manager.list-legs" action="/manager/leg/list"/>
 			<acme:menu-suboption code="master.menu.manager.create-legs" action="/manager/leg/create"/>
 			<acme:menu-separator/>
