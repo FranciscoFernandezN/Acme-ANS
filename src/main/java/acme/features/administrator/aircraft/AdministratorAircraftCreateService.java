@@ -1,6 +1,8 @@
 
 package acme.features.administrator.aircraft;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -10,6 +12,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.aircrafts.Aircraft;
 import acme.entities.aircrafts.AircraftStatus;
+import acme.entities.airlines.Airline;
 
 @GuiService
 public class AdministratorAircraftCreateService extends AbstractGuiService<Administrator, Aircraft> {
@@ -38,21 +41,27 @@ public class AdministratorAircraftCreateService extends AbstractGuiService<Admin
 
 	@Override
 	public void bind(final Aircraft aircraft) {
-		super.bindObject(aircraft, "model", "registrationNumber", "capacity", "cargoWeight", "status", "details");
+		super.bindObject(aircraft, "model", "registrationNumber", "capacity", "cargoWeight", "status", "details", "airline");
 	}
 
 	@Override
 	public void validate(final Aircraft aircraft) {
-		Boolean existsThisCode = this.repository.findAllAircrafts().stream().anyMatch(a -> a.getRegistrationNumber().equals(aircraft.getRegistrationNumber()));
+		// Validar que el número de matrícula no esté repetido
+		boolean existsThisCode = this.repository.findAllAircrafts().stream().anyMatch(a -> aircraft.getRegistrationNumber().equals(a.getRegistrationNumber()));
 
-		if (existsThisCode == false) {
-			boolean confirmation;
-			confirmation = super.getRequest().getData("confirmation", boolean.class);
-			super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
-		} else {
-			boolean alreadyExists;
-			alreadyExists = super.getRequest().getData("alreadyExists", boolean.class);
-			super.state(alreadyExists, "alreadyExists", "administrator.aircraft.already-exists.message");
+		// Si la matrícula ya existe, se genera un mensaje de error
+		super.state(!existsThisCode, "registrationNumber", "administrator.aircraft.create.already-exists");
+
+		// Validar la confirmación solo si la matrícula es válida (no duplicada)
+		//if (!existsThisCode) {
+		boolean confirmation = super.getRequest().getData("confirmation", boolean.class);
+		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
+		//}
+
+		// Verificar que la aerolínea seleccionada existe
+		if (aircraft.getAirline() != null) {
+			Airline airline = this.repository.findAirlineById(aircraft.getAirline().getId());
+			super.state(airline != null, "airline", "administrator.aircraft.error.invalid-airline");
 		}
 	}
 
@@ -64,13 +73,19 @@ public class AdministratorAircraftCreateService extends AbstractGuiService<Admin
 	@Override
 	public void unbind(final Aircraft aircraft) {
 		Dataset dataset;
-		SelectChoices choices;
+		SelectChoices statusChoices, airlineChoices;
 
-		choices = SelectChoices.from(AircraftStatus.class, aircraft.getStatus());
+		statusChoices = SelectChoices.from(AircraftStatus.class, aircraft.getStatus());
 
-		dataset = super.unbindObject(aircraft, "model", "registrationNumber", "capacity", "cargoWeight", "status", "details");
-		dataset.put("status", choices);
+		// Obtener aerolíneas existentes
+		Collection<Airline> airlines = this.repository.findAllAirlines();
+		airlineChoices = SelectChoices.from(airlines, "name", aircraft.getAirline());
+
+		dataset = super.unbindObject(aircraft, "model", "registrationNumber", "capacity", "cargoWeight", "status", "details", "airline");
+		dataset.put("statuses", statusChoices);
+		dataset.put("airlines", airlineChoices);
 
 		super.getResponse().addData(dataset);
 	}
+
 }

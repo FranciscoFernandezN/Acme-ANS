@@ -1,6 +1,8 @@
 
 package acme.features.administrator.aircraft;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -10,6 +12,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.aircrafts.Aircraft;
 import acme.entities.aircrafts.AircraftStatus;
+import acme.entities.airlines.Airline;
 
 @GuiService
 public class AdministratorAircraftUpdateService extends AbstractGuiService<Administrator, Aircraft> {
@@ -30,7 +33,7 @@ public class AdministratorAircraftUpdateService extends AbstractGuiService<Admin
 	@Override
 	public void load() {
 		Aircraft aircraft;
-		Integer id;
+		int id;
 
 		// Aseguramos que el id no sea null al obtenerlo de la request
 		id = super.getRequest().getData("id", Integer.class);
@@ -41,23 +44,28 @@ public class AdministratorAircraftUpdateService extends AbstractGuiService<Admin
 
 	@Override
 	public void bind(final Aircraft aircraft) {
-		super.bindObject(aircraft, "model", "registrationNumber", "capacity", "cargoWeight", "status", "details");
+		super.bindObject(aircraft, "model", "registrationNumber", "capacity", "cargoWeight", "status", "details", "airline");
 	}
 
 	@Override
 	public void validate(final Aircraft aircraft) {
-		Boolean confirmation = super.getRequest().getData("confirmation", Boolean.class);
+		// Validar que el número de matrícula no esté repetido
+		//boolean existsThisCode = this.repository.findAllAircrafts().stream().anyMatch(a -> aircraft.getRegistrationNumber().equals(a.getRegistrationNumber()));
 
-		// Verificamos si la confirmación fue marcada como "true"
-		super.state(confirmation != null && confirmation, "confirmation", "acme.validation.confirmation.message");
+		// Si la matrícula ya existe, se genera un mensaje de error
+		//super.state(!existsThisCode, "registrationNumber", "administrator.aircraft.create.already-exists");
 
-		// Validaciones de campos obligatorios
-		super.state(aircraft.getModel() != null && !aircraft.getModel().isEmpty(), "model", "acme.validation.model.required");
-		super.state(aircraft.getRegistrationNumber() != null && !aircraft.getRegistrationNumber().isEmpty(), "registrationNumber", "acme.validation.registrationNumber.required");
-		super.state(aircraft.getCapacity() != null, "capacity", "acme.validation.capacity.required");
-		super.state(aircraft.getCargoWeight() != null, "cargoWeight", "acme.validation.cargoWeight.required");
-		super.state(aircraft.getStatus() != null, "status", "acme.validation.status.required");
-		super.state(aircraft.getDetails() != null && !aircraft.getDetails().isEmpty(), "details", "acme.validation.details.required");
+		// Validar la confirmación solo si la matrícula es válida (no duplicada)
+		//if (!existsThisCode) {
+		boolean confirmation = super.getRequest().getData("confirmation", boolean.class);
+		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
+		//}
+
+		// Verificar que la aerolínea seleccionada existe
+		if (aircraft.getAirline() != null) {
+			Airline airline = this.repository.findAirlineById(aircraft.getAirline().getId());
+			super.state(airline != null, "airline", "administrator.aircraft.error.invalid-airline");
+		}
 	}
 
 	@Override
@@ -68,14 +76,22 @@ public class AdministratorAircraftUpdateService extends AbstractGuiService<Admin
 	@Override
 	public void unbind(final Aircraft aircraft) {
 		Dataset dataset;
-		SelectChoices choices;
+		SelectChoices statusChoices;
+		SelectChoices airlinesChoices;
 
-		choices = SelectChoices.from(AircraftStatus.class, aircraft.getStatus());
+		Collection<Airline> airlines = this.repository.findAllAirlines();
+		statusChoices = SelectChoices.from(AircraftStatus.class, aircraft.getStatus());
 
-		// Unbind de todos los campos necesarios
+		// Verificar si la aerolínea no es nula antes de pasarla a SelectChoices
+		Airline selectedAirline = aircraft.getAirline() != null ? aircraft.getAirline() : new Airline();
+		airlinesChoices = SelectChoices.from(airlines, "name", selectedAirline);
+
 		dataset = super.unbindObject(aircraft, "model", "registrationNumber", "capacity", "cargoWeight", "status", "details");
-		dataset.put("readonly", false);
-		dataset.put("statuses", choices);
+		dataset.put("statuses", statusChoices);
+		dataset.put("airlines", airlinesChoices);
+
+		// Si necesitas enviar explícitamente la aerolínea seleccionada en el dataset:
+		dataset.put("airline", aircraft.getAirline() != null ? aircraft.getAirline().getId() : null);
 
 		super.getResponse().addData(dataset);
 	}

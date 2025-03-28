@@ -7,17 +7,28 @@ administrator.aircraft.form.label.capacity = Capacity:
 administrator.aircraft.form.label.cargoWeight = Cargo Weight:  
 administrator.aircraft.form.label.status = Status:  
 administrator.aircraft.form.label.details = Details:  
+administrator.aircraft.form.label.airline = Airline:
 administrator.aircraft.form.label.confirmation = Do you confirm this operation?  
 
-administrator.aircraft.form.button.create = Create aircraft  
+administrator.aircraft.form.button.create = Create aircraft
+administrator.aircraft.form.button.update = Update aircraft
+
+administrator.aircraft.form.placeholder.model = B2008
+administrator.aircraft.form.placeholder.registrationNumber = JKL998
+administrator.aircraft.form.placeholder.capacity = 300
+administrator.aircraft.form.placeholder.cargoWeight = 5000
+administrator.aircraft.form.placeholder.details = Ryanair, what a disaster
 
 administrator.aircraft.list.label.model = Model  
 administrator.aircraft.list.label.registrationNumber = Registration Number  
 administrator.aircraft.list.label.capacity = Capacity  
 administrator.aircraft.list.label.cargoWeight = Cargo Weight  
 administrator.aircraft.list.label.status = Status  
-administrator.aircraft.list.label.details = Details  
+administrator.aircraft.list.label.details = Details 
+administrator.aircraft.list.label.airline = Airline: 
+administrator.aircraft.list.label.confirmation = Do you confirm this operation? 
 
 administrator.aircraft.list.button.create = Create new aircraft  
 
-administrator.aircraft.already-exists.message = This registration number already exists  
+administrator.aircraft.error.invalid-airline = The airline is null  
+administrator.aircraft.create.already-exists = The registration number exists yet 
