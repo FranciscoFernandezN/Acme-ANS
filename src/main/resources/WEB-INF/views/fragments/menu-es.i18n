@@ -11,8 +11,13 @@
 # master.menu.reviews #######################################################
 
 master.menu.review = Reseñas
-master.menu.authenticated.list-reviews = Ver reseñas
-master.menu.authenticated.create-reviews = Crear reseña
+master.menu.any.list-reviews = Ver reseñas
+master.menu.any.create-reviews = Crear reseña
+
+# master.menu.flight #######################################################
+
+master.menu.flight = Vuelos
+master.menu.any.list-flights = Ver vuelos
 
 # master.menu.anonymous #######################################################
 
