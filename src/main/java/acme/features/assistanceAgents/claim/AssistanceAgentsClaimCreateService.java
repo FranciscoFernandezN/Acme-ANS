@@ -45,13 +45,14 @@ public class AssistanceAgentsClaimCreateService extends AbstractGuiService<Assis
 		Date registrationMoment;
 		registrationMoment = MomentHelper.getCurrentMoment();
 		claim.setRegistrationMoment(registrationMoment);
+		claim.setIndicator(ClaimState.IN_PROGRESS);
 
 		super.getBuffer().addData(claim);
 	}
 
 	@Override
 	public void bind(final Claim claim) {
-		super.bindObject(claim, "passengerEmail", "description", "claimType", "indicator", "isPublished", "leg");
+		super.bindObject(claim, "passengerEmail", "description", "claimType", "isPublished", "leg");
 	}
 
 	@Override
@@ -85,7 +86,7 @@ public class AssistanceAgentsClaimCreateService extends AbstractGuiService<Assis
 		typeChoices = SelectChoices.from(ClaimType.class, claim.getClaimType());
 		indicatorChoices = SelectChoices.from(ClaimState.class, claim.getIndicator());
 
-		dataset = super.unbindObject(claim, "passengerEmail", "description", "claimType", "indicator", "isPublished", "leg");
+		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "indicator", "claimType", "isPublished", "leg");
 		dataset.put("claimType", typeChoices);
 		dataset.put("indicator", indicatorChoices);
 		dataset.put("leg", legChoices);

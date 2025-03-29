@@ -19,7 +19,7 @@ public interface AssistanceAgentsClaimRepository extends AbstractRepository {
 	@Query("select c from Claim c where (c.indicator like 'IN_PROGRESS') and c.agent.id = :id")
 	List<Claim> findAllInProgressClaimsByAgentId(int id);
 
-	@Query("select l from Leg l where l.aircraft.airline.id = :id")
+	@Query("select l from Leg l where l.aircraft.airline.id = :id and l.isDraftMode = false")
 	List<Leg> findAllLegsByAirlineId(int id);
 
 	@Query("select l from Leg l where l.id = :id")

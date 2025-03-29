@@ -82,7 +82,7 @@ public class AssistanceAgentsClaimUpdateService extends AbstractGuiService<Assis
 
 		legs = this.aacr.findAllLegsByAirlineId(agent.getAirline().getId());
 
-		legChoices = SelectChoices.from(legs, "leg", claim.getLeg());
+		legChoices = SelectChoices.from(legs, "uniqueIdentifier", claim.getLeg());
 		typeChoices = SelectChoices.from(ClaimType.class, claim.getClaimType());
 		indicatorChoices = SelectChoices.from(ClaimState.class, claim.getIndicator());
 

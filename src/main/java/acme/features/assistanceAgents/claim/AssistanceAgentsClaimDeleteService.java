@@ -62,7 +62,7 @@ public class AssistanceAgentsClaimDeleteService extends AbstractGuiService<Assis
 
 	@Override
 	public void perform(final Claim claim) {
-		this.aacr.save(claim);
+		this.aacr.delete(claim);
 	}
 
 	@Override

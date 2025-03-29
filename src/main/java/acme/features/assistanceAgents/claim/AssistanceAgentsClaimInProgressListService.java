@@ -43,6 +43,7 @@ public class AssistanceAgentsClaimInProgressListService extends AbstractGuiServi
 		Dataset dataset;
 
 		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "claimType", "indicator", "isPublished", "leg");
+		dataset.put("leg", claim.getLeg().getUniqueIdentifier());
 		super.getResponse().addData(dataset);
 	}
 }
