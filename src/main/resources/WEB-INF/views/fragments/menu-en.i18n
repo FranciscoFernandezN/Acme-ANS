@@ -56,6 +56,12 @@ master.menu.manager.create-legs = Create legs
 master.menu.manager.list-flights = List flights
 master.menu.manager.create-flights = Create flights
 
+# master.menu.customer ##########################################################
+
+master.menu.customer = Customer
+master.menu.customer.list-booking = List bookings
+master.menu.customer.create-booking = Create bookings
+
 # master.menu.user-account ####################################################
 
 master.menu.user-account = Account
