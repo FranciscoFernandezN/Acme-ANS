@@ -8,10 +8,13 @@ administrator.aircraft.form.label.cargoWeight = Cargo Weight:
 administrator.aircraft.form.label.status = Status:  
 administrator.aircraft.form.label.details = Details:  
 administrator.aircraft.form.label.airline = Airline:
+administrator.aircraft.form.label.enabled = Do you enable the aircraft?
 administrator.aircraft.form.label.confirmation = Do you confirm this operation?  
 
 administrator.aircraft.form.button.create = Create aircraft
 administrator.aircraft.form.button.update = Update aircraft
+administrator.aircraft.form.button.enable = Enable aircraft
+administrator.aircraft.form.button.disable = Disable aircraft
 
 administrator.aircraft.form.placeholder.model = B2008
 administrator.aircraft.form.placeholder.registrationNumber = JKL998
@@ -26,6 +29,7 @@ administrator.aircraft.list.label.cargoWeight = Cargo Weight
 administrator.aircraft.list.label.status = Status  
 administrator.aircraft.list.label.details = Details 
 administrator.aircraft.list.label.airline = Airline: 
+administrator.aircraft.list.label.enabled = Do you enable the aircraft?
 administrator.aircraft.list.label.confirmation = Do you confirm this operation? 
 
 administrator.aircraft.list.button.create = Create new aircraft  

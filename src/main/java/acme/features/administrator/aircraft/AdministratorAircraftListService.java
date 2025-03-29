@@ -43,10 +43,13 @@ public class AdministratorAircraftListService extends AbstractGuiService<Adminis
 		dataset = super.unbindObject(aircraft, "model", "registrationNumber", "capacity", "cargoWeight", "status", "details");
 
 		// Agregar manualmente el iATACode de la aerolínea al dataset
-		if (aircraft.getAirline() != null)
+		if (aircraft.getAirline() != null) {
 			dataset.put("airline", aircraft.getAirline().getIATACode());
-		else
+			dataset.put("enabled", aircraft.getEnabled());
+		} else {
 			dataset.put("airline", "N/A"); // O deja null si prefieres
+			dataset.put("enabled", "N/A");
+		}
 
 		super.getResponse().addData(dataset);
 	}
