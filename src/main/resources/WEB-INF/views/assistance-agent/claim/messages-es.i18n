@@ -1,0 +1,27 @@
+assistance-agent.claim.form.title = Formulario de reclamaciones
+assistance-agent.claim.list.title = Listado de reclamaciones
+
+assistance-agent.claim.form.label.registrationMoment = Momento de registro:
+assistance-agent.claim.form.label.passengerEmail = Email de los pasajeros:
+assistance-agent.claim.form.label.description = Descripción:
+assistance-agent.claim.form.label.claimType = Tipo de reclamación:
+assistance-agent.claim.form.label.indicator = Estado de la reclamación: 
+assistance-agent.claim.form.label.leg = Tramo de vuelo en el que ocurrió:
+assistance-agent.claim.form.label.isPublished = Esta publicado?
+
+assistance-agent.claim.form.button.update = Actualizar esta reclamación
+assistance-agent.claim.form.button.delete = Borrar esta reclamación
+assistance-agent.claim.form.button.create = Crear esta reclamación
+
+assistance-agent.claim.list.label.registrationMoment = Momento de registro
+assistance-agent.claim.list.label.passengerEmail = Email de los pasajeros
+assistance-agent.claim.list.label.description = Descripción
+assistance-agent.claim.list.label.claimType = Tipo de reclamación
+assistance-agent.claim.list.label.indicator = Estado de la reclamación
+assistance-agent.claim.list.label.leg = Tramo de vuelo en el que ocurrió
+assistance-agent.claim.list.label.isPublished = Esta publicado?
+
+assistance-agent.claim.list.button.create = Crear una reclamación
+
+assistance-agent.claim.create.cant-be-published = Esta reclamación no se puede publicar porque su tramo de vuelo no está publicado
+assistance-agent.claim.delete.is-published = Esta reclamación no se puede borrar porque ya ha sido publicada
