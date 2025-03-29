@@ -19,6 +19,9 @@ public class AuthenticatedManagerController extends AbstractGuiController<Authen
 
 	@Autowired
 	private AuthenticatedManagerUpdateService	updateService;
+	
+	@Autowired
+	private AuthenticatedManagerCreateService	createService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -27,6 +30,7 @@ public class AuthenticatedManagerController extends AbstractGuiController<Authen
 	@PostConstruct
 	protected void initialise() {
 		super.addBasicCommand("update", this.updateService);
+		super.addBasicCommand("create", this.createService);
 	}
 	
 }

@@ -1,6 +1,6 @@
 authenticated.manager.form.title = Manager form
 
-authenticated.manager.form.label.identifierNumber = Company: 
+authenticated.manager.form.label.identifierNumber = Identifier number: 
 authenticated.manager.form.label.yearsOfExperience = Years of experience:
 authenticated.manager.form.label.birth = Birth:
 authenticated.manager.form.label.linkPicture = Link of your profile picture:
