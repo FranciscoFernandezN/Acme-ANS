@@ -1,0 +1,33 @@
+manager.flight.form.title = Flight form
+manager.flight.list.title = Listing of flights
+
+manager.flight.list.label.id = Flight id
+manager.flight.list.label.tag = Tag
+manager.flight.list.label.cost = Cost
+manager.flight.list.label.origin = Origin city
+manager.flight.list.label.destiny = Destiny city
+manager.flight.list.label.scheduledDeparture = Scheduled departure
+manager.flight.list.label.scheduledArrival = Scheduled arrival
+manager.flight.list.label.isDraftMode = Is it in draft mode?
+
+manager.flight.list.button.create = Create new flight
+
+manager.flight.form.label.tag = Tag:
+manager.flight.form.label.needsSelfTransfer = Does it need self transfer?
+manager.flight.form.label.cost = Cost:
+manager.flight.form.label.description = Description:
+manager.flight.form.label.origin = Origin city:
+manager.flight.form.label.destiny = Destiny city:
+manager.flight.form.label.scheduledDeparture = Scheduled departure:
+manager.flight.form.label.scheduledArrival = Scheduled arrival:
+manager.flight.form.label.numberOfLayovers = Number of layovers:
+manager.flight.form.label.isDraftMode = Draft mode?
+
+manager.flight.form.button.update = Update this flight
+manager.flight.form.button.delete = Delete this flight
+manager.flight.form.button.create = Create this flight
+
+manager.flight.create.cant-be-published = You can't publish this flight because its legs are not published yet
+manager.flight.delete.is-published = You can't delete a published leg
+
+

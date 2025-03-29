@@ -11,8 +11,13 @@
 # master.menu.reviews #######################################################
 
 master.menu.review = Reseñas
-master.menu.authenticated.list-reviews = Ver reseñas
-master.menu.authenticated.create-reviews = Crear reseña
+master.menu.any.list-reviews = Ver reseñas
+master.menu.any.create-reviews = Crear reseña
+
+# master.menu.flight #######################################################
+
+master.menu.flight = Vuelos
+master.menu.any.list-flights = Ver vuelos
 
 # master.menu.anonymous #######################################################
 
@@ -44,6 +49,15 @@ master.menu.provider.favourite-link = Enlace favorito
 master.menu.consumer = Consumidor
 master.menu.consumer.favourite-link = Enlace favorito
 
+# master.menu.manager ##########################################################
+
+master.menu.manager = Mánager
+master.menu.manager.dashboard = Panel de indicadores
+master.menu.manager.list-legs = Ver tramos de vuelo
+master.menu.manager.create-legs = Crear tramos de vuelo
+master.menu.manager.list-flights = Ver vuelos
+master.menu.manager.create-flights = Crear vuelos
+
 # master.menu.user-account ####################################################
 
 master.menu.user-account = Cuenta
@@ -52,3 +66,5 @@ master.menu.user-account.become-provider = Hacerse proveedor
 master.menu.user-account.provider-profile = Perfil de proveedor
 master.menu.user-account.become-consumer = Hazte consumidor
 master.menu.user-account.consumer-profile = Perfil de consumidor
+master.menu.user-account.become-manager = Hazte manager (no implementado)
+master.menu.user-account.manager-profile =  Perfil de manager

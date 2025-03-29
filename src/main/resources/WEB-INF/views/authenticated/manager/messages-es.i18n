@@ -1,0 +1,15 @@
+authenticated.manager.form.title = Detalles de manager
+
+authenticated.manager.form.label.identifierNumber = Número identificativo: 
+authenticated.manager.form.label.yearsOfExperience = Años de experiencia:
+authenticated.manager.form.label.birth = Fecha de nacimiento:
+authenticated.manager.form.label.linkPicture = Link de la foto de perfil:
+authenticated.manager.form.label.airlineManaging = Código IATA de tu Aerolínea:
+
+authenticated.manager.form.placeholder.identifierNumber = ABC123456
+authenticated.manager.form.placeholder.yearsOfExperience = 23
+
+authenticated.manager.form.button.create = Registrar
+authenticated.manager.form.button.update = Actualizar
+
+authenticated.manager.create.not-unique-identifier = Este identificador ya está en uso

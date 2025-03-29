@@ -78,9 +78,4 @@ public class Airport extends AbstractEntity {
 
 	// Derived attributes -----------------------------------------------------
 	// Relationships ----------------------------------------------------------
-
-	@Optional
-	@Valid
-	@OneToMany
-	private List<Review>		reviews;
 }
