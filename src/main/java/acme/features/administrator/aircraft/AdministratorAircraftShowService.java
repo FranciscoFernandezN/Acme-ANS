@@ -27,7 +27,7 @@ public class AdministratorAircraftShowService extends AbstractGuiService<Adminis
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Administrator.class));
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class AdministratorAircraftShowService extends AbstractGuiService<Adminis
 
 		// Verificar si la aerolínea no es nula antes de pasarla a SelectChoices
 		Airline selectedAirline = aircraft.getAirline() != null ? aircraft.getAirline() : new Airline();
-		airlinesChoices = SelectChoices.from(airlines, "name", selectedAirline);
+		airlinesChoices = SelectChoices.from(airlines, "iATACode", selectedAirline);
 
 		dataset = super.unbindObject(aircraft, "model", "registrationNumber", "capacity", "cargoWeight", "status", "details");
 		dataset.put("statuses", statusChoices);

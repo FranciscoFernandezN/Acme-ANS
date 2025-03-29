@@ -27,7 +27,7 @@ public class AdministratorAircraftCreateService extends AbstractGuiService<Admin
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Administrator.class));
 	}
 
 	@Override
@@ -41,7 +41,17 @@ public class AdministratorAircraftCreateService extends AbstractGuiService<Admin
 
 	@Override
 	public void bind(final Aircraft aircraft) {
-		super.bindObject(aircraft, "model", "registrationNumber", "capacity", "cargoWeight", "status", "details", "airline");
+		super.bindObject(aircraft, "model", "registrationNumber", "capacity", "cargoWeight", "status", "details");
+
+		// Obtener el ID de la aerolínea desde el request
+		int airlineId = super.getRequest().getData("airline", int.class);
+
+		// Buscar la aerolínea en el repositorio
+		Airline airline = this.repository.findAirlineById(airlineId);
+
+		// Asignar la aerolínea al avión
+		aircraft.setAirline(airline);
+
 	}
 
 	@Override
@@ -61,7 +71,7 @@ public class AdministratorAircraftCreateService extends AbstractGuiService<Admin
 		// Verificar que la aerolínea seleccionada existe
 		if (aircraft.getAirline() != null) {
 			Airline airline = this.repository.findAirlineById(aircraft.getAirline().getId());
-			super.state(airline != null, "airline", "administrator.aircraft.error.invalid-airline");
+			super.state(airline != null, "iATACode", "administrator.aircraft.error.invalid-airline");
 		}
 	}
 
@@ -79,9 +89,9 @@ public class AdministratorAircraftCreateService extends AbstractGuiService<Admin
 
 		// Obtener aerolíneas existentes
 		Collection<Airline> airlines = this.repository.findAllAirlines();
-		airlineChoices = SelectChoices.from(airlines, "name", aircraft.getAirline());
+		airlineChoices = SelectChoices.from(airlines, "iATACode", aircraft.getAirline());
 
-		dataset = super.unbindObject(aircraft, "model", "registrationNumber", "capacity", "cargoWeight", "status", "details", "airline");
+		dataset = super.unbindObject(aircraft, "model", "registrationNumber", "capacity", "cargoWeight", "status", "details");
 		dataset.put("statuses", statusChoices);
 		dataset.put("airlines", airlineChoices);
 

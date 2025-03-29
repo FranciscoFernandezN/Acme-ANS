@@ -24,7 +24,7 @@ public class AdministratorAircraftListService extends AbstractGuiService<Adminis
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Administrator.class));
 	}
 
 	@Override
@@ -41,6 +41,14 @@ public class AdministratorAircraftListService extends AbstractGuiService<Adminis
 		Dataset dataset;
 
 		dataset = super.unbindObject(aircraft, "model", "registrationNumber", "capacity", "cargoWeight", "status", "details");
+
+		// Agregar manualmente el iATACode de la aerolínea al dataset
+		if (aircraft.getAirline() != null)
+			dataset.put("airline", aircraft.getAirline().getIATACode());
+		else
+			dataset.put("airline", "N/A"); // O deja null si prefieres
+
 		super.getResponse().addData(dataset);
 	}
+
 }
