@@ -1,0 +1,15 @@
+authenticated.manager.form.title = Manager form
+
+authenticated.manager.form.label.identifierNumber = Company: 
+authenticated.manager.form.label.yearsOfExperience = Years of experience:
+authenticated.manager.form.label.birth = Birth:
+authenticated.manager.form.label.linkPicture = Link of your profile picture:
+authenticated.manager.form.label.airlineManaging = IATA Code of your Airline:
+
+authenticated.manager.form.placeholder.identifierNumber = ABC123456
+authenticated.manager.form.placeholder.yearsOfExperience = 23
+
+authenticated.manager.form.button.create = Register
+authenticated.manager.form.button.update = Update
+
+authenticated.manager.create.not-unique-identifier = This identifier is already in use
