@@ -8,8 +8,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 
-import org.checkerframework.common.aliasing.qual.Unique;
-
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
@@ -36,7 +34,6 @@ public class Aircraft extends AbstractEntity {
 	@Automapped
 	private String				model;
 
-	@Unique
 	@Column(unique = true)
 	@Mandatory
 	@ValidString(max = 50)
