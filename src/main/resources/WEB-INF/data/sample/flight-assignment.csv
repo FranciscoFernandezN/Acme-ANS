@@ -1,5 +1,5 @@
-key,duty,last-up-date,current-status,remarks,key:flight-crew-member,key:leg
-flight-assignment-01,PILOT,2001/03/10 12:00,CONFIRMED,Assigned to Flight 101,flight-crew-member-01,leg-01
-flight-assignment-02,COPILOT,2003/07/04 08:30,CONFIRMED,Assigned to Flight 202,flight-crew-member-02,leg-02
-flight-assignment-03,LEAD_ATTENDANT,2004/04/08 15:45,PENDING,Assigned to Flight 303,flight-crew-member-03,leg-03
-flight-assignment-04,CABIN_ATTENDANT,2017/08/07 18:15,CANCELLED,Assigned to Flight 404,flight-crew-member-04,leg-04
+key,duty,last-up-date,current-status,remarks,is-draft-mode,key:flight-crew-member,key:leg
+flight-assignment-01,PILOT,2001/03/10 12:00,CONFIRMED,Assigned to Flight 101,true,flight-crew-member-01,leg-01
+flight-assignment-02,COPILOT,2003/07/04 08:30,CONFIRMED,Assigned to Flight 202,false,flight-crew-member-02,leg-02
+flight-assignment-03,LEAD_ATTENDANT,2004/04/08 15:45,PENDING,Assigned to Flight 303,false,flight-crew-member-03,leg-03
+flight-assignment-04,CABIN_ATTENDANT,2017/08/07 18:15,CANCELLED,Assigned to Flight 404,true,flight-crew-member-04,leg-04
