@@ -14,7 +14,7 @@ import acme.entities.airports.Airport;
 import acme.entities.services.Service;
 
 @GuiService
-public class AdministratorServiceUpdateService extends AbstractGuiService<Administrator, Service> {
+public class AdministratorServiceDeleteService extends AbstractGuiService<Administrator, Service> {
 
 	// Internal state ---------------------------------------------------------
 
@@ -42,39 +42,17 @@ public class AdministratorServiceUpdateService extends AbstractGuiService<Admini
 
 	@Override
 	public void bind(final Service service) {
-		int airportId;
-		Airport airport;
-
 		super.bindObject(service, "name", "picture", "avgDwellTime", "promotionCode", "money");
-
-		airportId = super.getRequest().getData("airport", int.class);
-		airport = this.repository.findAirportById(airportId);
-
-		service.setAirport(airport);
-
 	}
 
 	@Override
 	public void validate(final Service service) {
-		int airportId;
-		Airport airport;
-		Service oldService;
-		Boolean promoAlreadyUsed;
-
-		airportId = super.getRequest().getData("airport", int.class);
-		airport = this.repository.findAirportById(airportId);
-		oldService = this.repository.findServiceById(service.getId());
-		promoAlreadyUsed = !this.repository.findPromotionCodes().contains(service.getPromotionCode()) || oldService.getPromotionCode().equals(service.getPromotionCode());
-
-		super.state(service.getPromotionCode().isBlank() || promoAlreadyUsed, "promotionCode", "administrator.service.create.promotion-code-must-be-unique");
-
-		super.state(airport != null, "airport", "administrator.service.create.airport-does-not-exist");
 
 	}
 
 	@Override
 	public void perform(final Service service) {
-		this.repository.save(service);
+		this.repository.delete(service);
 	}
 
 	@Override

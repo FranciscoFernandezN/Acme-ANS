@@ -20,3 +20,10 @@ administrator.service.form.label.airport = Airport
 administrator.service.form.button.update = Update this service
 administrator.service.form.button.delete = Delete this service
 administrator.service.form.button.create = Create this service
+
+administrator.service.create.promotion-code-must-be-unique = This promotion code already exists
+administrator.service.create.airport-does-not-exist = Choose an airport
+
+administrator.service.update.promotion-code-must-be-unique = This promotion code already exists
+administrator.service.update.airport-does-not-exist = Choose an airport
+

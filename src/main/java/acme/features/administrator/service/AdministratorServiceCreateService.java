@@ -54,9 +54,9 @@ public class AdministratorServiceCreateService extends AbstractGuiService<Admini
 		airportId = super.getRequest().getData("airport", int.class);
 		Airport airport = this.repository.findAirportById(airportId);
 
-		super.state(this.repository.findPromotionCodes().contains(service.getPromotionCode()), "promotionCode", "administrator.service.create.promotion-code-must-be-unique");
+		super.state(service.getPromotionCode().isBlank() || !this.repository.findPromotionCodes().contains(service.getPromotionCode()), "promotionCode", "administrator.service.update.promotion-code-must-be-unique");
 
-		super.state(airport != null, "airport", "administrator.service.create.airport-does-not-exist");
+		super.state(airport != null, "airport", "administrator.service.update.airport-does-not-exist");
 
 	}
 
