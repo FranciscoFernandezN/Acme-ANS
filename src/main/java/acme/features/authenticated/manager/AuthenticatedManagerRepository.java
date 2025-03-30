@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 
+import acme.client.components.principals.UserAccount;
 import acme.client.repositories.AbstractRepository;
 import acme.entities.airlines.Airline;
 import acme.realms.Manager;
@@ -21,5 +22,8 @@ public interface AuthenticatedManagerRepository extends AbstractRepository{
 	
 	@Query("SELECT m FROM Manager m")
 	List<Manager> findAllManagers();
+	
+	@Query("SELECT ua FROM UserAccount ua WHERE ua.id = :id")
+	UserAccount findUserAccountById(int id);
 	
 }
