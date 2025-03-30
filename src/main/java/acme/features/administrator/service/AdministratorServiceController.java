@@ -16,31 +16,27 @@ public class AdministratorServiceController extends AbstractGuiController<Admini
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	AdministratorServiceListService listService;
+	AdministratorServiceListService		listService;
 
-	/*
-	 * 
-	 * 
-	 * @Autowired
-	 * AdministratorAirportShowService showService;
-	 * 
-	 * @Autowired
-	 * AdministratorAirportUpdateService updateService;
-	 * 
-	 * @Autowired
-	 * AdministratorAirportCreateService createService;
-	 **/
+	@Autowired
+	AdministratorServiceShowService		showService;
+
+	@Autowired
+	AdministratorServiceUpdateService	updateService;
+
+	@Autowired
+	AdministratorServiceCreateService	createService;
+
 	// Constructors -----------------------------------------------------------
 
 
 	@PostConstruct
 	protected void initialise() {
 		super.addBasicCommand("list", this.listService);
-		/*
-		 * super.addBasicCommand("show", this.showService);
-		 * super.addBasicCommand("update", this.updateService);
-		 * super.addBasicCommand("create", this.createService);
-		 */
+		super.addBasicCommand("show", this.showService);
+		super.addBasicCommand("update", this.updateService);
+		super.addBasicCommand("create", this.createService);
+
 	}
 
 }

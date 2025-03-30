@@ -5,14 +5,14 @@
 
 <acme:form>
 	<acme:input-textbox code="administrator.service.form.label.name" path="name"/>
-	<acme:input-textbox code="administrator.service.form.label.picture" path="picture"/>
-	<acme:input-textbox code="administrator.service.form.label.avgDwellTime" path="avgDwellTime"/>
+	<acme:input-url code="administrator.service.form.label.picture" path="picture"/>
+	<acme:input-double code="administrator.service.form.label.avgDwellTime" path="avgDwellTime"/>
 	<acme:input-textbox code="administrator.service.form.label.promotionCode" path="promotionCode"/>
 	<acme:input-money code="administrator.service.form.label.money" path="money"/>
-	<acme:input-select code="administrator.service.form.label.iATACode" path="iATACode" choices="${airportChoices}"/>
+	<acme:input-select code="administrator.service.form.label.airport" path="airport" choices="${airportChoices}"/>
 	
 	<jstl:choose>
-		<jstl:when test="${acme:anyOf(_command, 'show|update|delete') && isDraftMode == true}">
+		<jstl:when test="${acme:anyOf(_command, 'show|update|delete')}">
 			<acme:submit code="administrator.service.form.button.update" action="/administrator/service/update"/>
 			<acme:submit code="administrator.service.form.button.delete" action="/administrator/service/delete"/>
 		</jstl:when>
