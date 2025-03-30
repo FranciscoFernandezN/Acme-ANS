@@ -11,8 +11,13 @@
 # master.menu.reviews #######################################################
 
 master.menu.review = Reviews
-master.menu.authenticated.list-reviews = List reviews
-master.menu.authenticated.create-reviews = Create reviews
+master.menu.any.list-reviews = List reviews
+master.menu.any.create-reviews = Create reviews
+
+# master.menu.flight #######################################################
+
+master.menu.flight = Flights
+master.menu.any.list-flights = List flights
 
 # master.menu.anonymous #######################################################
 
@@ -42,6 +47,15 @@ master.menu.provider.favourite-link = Favourite link
 master.menu.consumer = Consumer
 master.menu.consumer.favourite-link = Favourite link
 
+# master.menu.manager ##########################################################
+
+master.menu.manager = Manager
+master.menu.manager.dashboard = Dashboard
+master.menu.manager.list-legs = List legs
+master.menu.manager.create-legs = Create legs
+master.menu.manager.list-flights = List flights
+master.menu.manager.create-flights = Create flights
+
 # master.menu.user-account ####################################################
 
 master.menu.user-account = Account
@@ -50,3 +64,5 @@ master.menu.user-account.become-provider = Become a provider
 master.menu.user-account.provider-profile = Provider profile
 master.menu.user-account.become-consumer = Become a consumer
 master.menu.user-account.consumer-profile = Consumer profile
+master.menu.user-account.become-manager = Become a manager (not implemented yet)
+master.menu.user-account.manager-profile =  Manager profile

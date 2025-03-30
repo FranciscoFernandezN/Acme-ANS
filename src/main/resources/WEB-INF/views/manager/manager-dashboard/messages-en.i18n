@@ -1,0 +1,16 @@
+manager.manager-dashboard.form.title = Manager dashboard
+
+manager.manager-dashboard.form.label.rankingByYearsOfExperience = Ranking by years of experience:
+manager.manager-dashboard.form.label.yearsToRetire = Years to retire:
+manager.manager-dashboard.form.label.ratioOfOnTimeLegs = Ratio of your on-time legs:
+manager.manager-dashboard.form.label.ratioOfDelayedLegs = Ratio of your delayed legs:
+manager.manager-dashboard.form.label.mostPopularAirportOfFlights = IATA Code of the most popular Airport:
+manager.manager-dashboard.form.label.lessPopularAirportOfFlights = IATA Code of the less popular Airport:
+manager.manager-dashboard.form.label.numberOfOnTimeLegs = Number of your on-time legs:
+manager.manager-dashboard.form.label.numberOfCancelledLegs = Number of your cancelled legs:
+manager.manager-dashboard.form.label.numberOfDelayedLegs = Number of your delayed legs:
+manager.manager-dashboard.form.label.numberOfLandedLegs = Number of your landed legs:
+manager.manager-dashboard.form.label.averageCostOfFlights = Average cost of your flights:
+manager.manager-dashboard.form.label.minCostOfFlights = Minimum cost of your flights:
+manager.manager-dashboard.form.label.maxCostOfFlights = Maximum cost of your flights:
+manager.manager-dashboard.form.label.stdDeviationCostOfFlights = Standard deviation of the costs of the flights:

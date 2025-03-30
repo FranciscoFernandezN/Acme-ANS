@@ -45,7 +45,7 @@ public class AnyReviewListService extends AbstractGuiService<Any, Review> {
 	public void unbind(final Review review) {
 		Dataset dataset;
 
-		dataset = super.unbindObject(review, "name", "subject", "body", "score", "isRecommended");
+		dataset = super.unbindObject(review, "name", "postedAt", "subject", "body", "score", "isRecommended");
 		super.getResponse().addData(dataset);
 	}
 
