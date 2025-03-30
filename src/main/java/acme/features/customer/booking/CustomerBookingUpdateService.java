@@ -62,8 +62,6 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 
 		booking.setFlight(flight);
 
-		booking.setPrice(flight.getCost());
-
 		String passportNumber = super.getRequest().getData("passportNumber", String.class);
 
 		booking.setPassenger(this.repository.findPassengerByPassportNumber(passportNumber));
@@ -92,6 +90,8 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void perform(final Booking booking) {
+		booking.setPrice(booking.getFlight().getCost());
+
 		this.repository.save(booking);
 	}
 

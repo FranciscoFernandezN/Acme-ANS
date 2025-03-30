@@ -66,7 +66,7 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 		auxMon.setAmount(0.0);
 		auxMon.setCurrency("EUR");
 
-		booking.setPrice(flight != null ? flight.getCost() : auxMon);
+		booking.setPrice(auxMon);
 
 		String passportNumber = super.getRequest().getData("passportNumber", String.class);
 
@@ -99,6 +99,8 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void perform(final Booking booking) {
+		booking.setPrice(booking.getFlight().getCost());
+
 		this.repository.save(booking);
 	}
 
