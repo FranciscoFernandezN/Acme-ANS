@@ -1,0 +1,22 @@
+administrator.service.form.title = Formulario de servicios
+administrator.service.list.title = Listado de servicios
+
+administrator.service.list.label.name = Nombre
+administrator.service.list.label.picture = Imagen
+administrator.service.list.label.avgDwellTime = Tiempo de permanencia
+administrator.service.list.label.promotionCode = Código de promo
+administrator.service.list.label.money = Descuento
+administrator.service.list.label.iATACode = Código IATA
+
+administrator.service.list.button.create = Crear nuevo servicio
+
+administrator.service.form.label.name = Nombre
+administrator.service.form.label.picture = Imagen
+administrator.service.form.label.avgDwellTime = Tiempo medio de permanencia
+administrator.service.form.label.promotionCode = Código de promoción
+administrator.service.form.label.money = Descuento
+administrator.service.form.label.iATACode = Código IATA
+
+administrator.service.form.button.update = Actualizar este servicio
+administrator.service.form.button.delete = Borrar este servicio
+administrator.service.form.button.create = Crear este servicio
