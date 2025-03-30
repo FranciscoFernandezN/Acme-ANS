@@ -1,5 +1,5 @@
 
-package acme.features.administrator.airlines;
+package acme.features.administrator.airline;
 
 import java.util.Collection;
 

@@ -5,17 +5,19 @@ administrator.airline.form.label.name = Name:
 administrator.airline.form.label.iATACode = IATA Code:
 administrator.airline.form.label.website = Website:
 administrator.airline.form.label.type = Airline Type:
-administrator.airline.form.label.foundationMoment = Foundation Date:
 administrator.airline.form.label.email = Email:
 administrator.airline.form.label.contactNumber = Contact Number:
+administrator.airline.form.label.confirmation = Do you confirm this operation?
 
-administrator.airline.form.button.create = Create Airline
+administrator.airline.form.button.create = Create airline
+administrator.airline.form.button.update = Update airline
 
 administrator.airline.list.label.name = Name
 administrator.airline.list.label.iATACode = IATA Code
 administrator.airline.list.label.website = Website
 administrator.airline.list.label.type = Type
-administrator.airline.list.label.foundationMoment = Foundation Date
 administrator.airline.list.label.contactNumber = Contact Number
 
 administrator.airline.list.button.create = Create new Airline
+
+administrator.airline.create.already-exists = This IATA code already exists

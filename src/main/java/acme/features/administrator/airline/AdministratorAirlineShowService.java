@@ -1,12 +1,14 @@
 
-package acme.features.administrator.airlines;
+package acme.features.administrator.airline;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.principals.Administrator;
+import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.entities.airlines.Airline;
+import acme.entities.airlines.AirlineType;
 
 public class AdministratorAirlineShowService extends AbstractGuiService<Administrator, Airline> {
 	// Internal state ---------------------------------------------------------
@@ -35,9 +37,13 @@ public class AdministratorAirlineShowService extends AbstractGuiService<Administ
 
 	@Override
 	public void unbind(final Airline airline) {
+		SelectChoices choices;
 		Dataset dataset;
 
-		dataset = super.unbindObject(airline, "name", "iATACode", "website", "type", "foundationMoment", "email", "contactNumber");
+		choices = SelectChoices.from(AirlineType.class, airline.getType());
+
+		dataset = super.unbindObject(airline, "name", "IATACode", "website", "type", "email", "contactNumber");
+		dataset.put("operationalScope", choices);
 
 		super.getResponse().addData(dataset);
 	}

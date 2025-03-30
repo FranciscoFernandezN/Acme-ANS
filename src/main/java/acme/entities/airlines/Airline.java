@@ -13,8 +13,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 
-import org.checkerframework.common.aliasing.qual.Unique;
-
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
@@ -42,7 +40,6 @@ public class Airline extends AbstractEntity {
 	@Automapped
 	private String				name;
 
-	@Unique
 	@Mandatory
 	@ValidString(min = 3, max = 3, pattern = "[A-Z]{2}X")
 	@Column(unique = true)
