@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.components.models.Dataset;
 import acme.client.components.principals.Administrator;
 import acme.client.services.AbstractGuiService;
+import acme.client.services.GuiService;
 import acme.entities.airlines.Airline;
 
+@GuiService
 public class AdministratorAirlineListService extends AbstractGuiService<Administrator, Airline> {
 	// Internal state ---------------------------------------------------------
 
