@@ -57,7 +57,7 @@ public class AssistanceAgentsClaimDeleteService extends AbstractGuiService<Assis
 
 	@Override
 	public void validate(final Claim claim) {
-		super.state(!claim.getIsPublished(), "isPublished", "assistanceAgent.claim.delete.is-published");
+		super.state(!claim.getIsPublished(), "isPublished", "assistance-agent.claim.delete.is-published");
 	}
 
 	@Override

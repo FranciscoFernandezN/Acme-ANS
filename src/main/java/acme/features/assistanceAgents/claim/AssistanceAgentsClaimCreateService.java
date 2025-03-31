@@ -57,8 +57,11 @@ public class AssistanceAgentsClaimCreateService extends AbstractGuiService<Assis
 
 	@Override
 	public void validate(final Claim claim) {
-		Leg leg = this.aacr.findLegByClaimId(claim.getId());
-		super.state(!claim.getIsPublished() || claim.getIsPublished() && leg != null && !leg.getIsDraftMode(), "isPublished", "assistanceAgent.claim.create.cant-be-published");
+		int legId;
+		legId = super.getRequest().getData("leg", int.class);
+
+		Leg leg = this.aacr.findLegById(legId);
+		super.state(!claim.getIsPublished() || claim.getIsPublished() && leg != null && !leg.getIsDraftMode(), "isPublished", "assistance-agent.claim.create.cant-be-published");
 	}
 
 	@Override
