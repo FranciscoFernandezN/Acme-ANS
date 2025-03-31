@@ -8,9 +8,13 @@ administrator.airline.form.label.type = Tipo de aerolínea:
 administrator.airline.form.label.foundationMoment = Dia de fundación:
 administrator.airline.form.label.email = Correo electrónico:
 administrator.airline.form.label.contactNumber = Número de contacto:
-administrator.airline.form.label.confirmation = Deseas confirmar la operación?
+administrator.airline.form.placeholder.name = Juan Alberto
+administrator.airline.form.placeholder.confirmation = Confirmar?
+administrator.airline.form.placeholder.iATACode = XXX
+administrator.airline.form.placeholder.website = ejemplo.com
+administrator.airline.form.placeholder.email = holamuwenas@ejemplo.com
+administrator.airline.form.placeholder.contactNumber = +34000000000
 
-administrator.airline.form.button.create = Crear aerolinea
 administrator.airline.form.button.create = Crear aerolinea
 administrator.airline.form.button.update = Actualizar aerolinea
 
@@ -18,9 +22,8 @@ administrator.airline.list.label.name = Nombre
 administrator.airline.list.label.iATACode = Código IATA
 administrator.airline.list.label.website = Página web
 administrator.airline.list.label.type = Tipo
-administrator.airline.form.label.foundationMoment = Fundación
+administrator.airline.list.label.foundationMoment = Fundación
 administrator.airline.list.label.contactNumber = Número de contacto
-administrator.airline.form.placeholder.confirmation = Confirmar?
 
 administrator.airline.list.button.create = Crear nueva aerolinea
 

@@ -5,7 +5,7 @@
 
 <acme:form>
     <acme:input-textbox code="administrator.airline.form.label.name" path="name"  placeholder="administrator.airline.form.placeholder.name"/>
-    <acme:input-textbox code="administrator.airline.form.label.iATACode" path="iATACode" placeholder="administrator.airline.form.placeholder.iATACode"/>
+    <acme:input-textbox code="administrator.airline.form.label.iATACode" path="IATACode" placeholder="administrator.airline.form.placeholder.iATACode"/>
     <acme:input-url code="administrator.airline.form.label.website" path="website" placeholder="administrator.airline.form.placeholder.website"/>
     <acme:input-select code="administrator.airline.form.label.type" path="airlineType" choices="${airlineType}"/>
     <acme:input-moment code="administrator.airline.form.label.foundationMoment" path="foundationMoment"/>

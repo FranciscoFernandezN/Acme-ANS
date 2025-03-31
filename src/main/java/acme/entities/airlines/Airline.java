@@ -9,7 +9,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
@@ -48,7 +47,6 @@ public class Airline extends AbstractEntity {
 	private String				website;
 
 	@Mandatory
-	@Valid
 	@Enumerated(EnumType.STRING)
 	@Automapped
 	private AirlineType			airlineType;
