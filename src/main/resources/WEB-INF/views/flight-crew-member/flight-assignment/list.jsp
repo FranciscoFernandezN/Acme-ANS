@@ -11,4 +11,6 @@
 		
 </acme:list>
 
-<acme:button code="flight-crew-member.flight-assignment.form.button.create" action="/flight-crew-member/flight-assignment/create"/>
+<jstl:if test="${_command == 'list-after-current'}">
+	<acme:button code="flight-crew-member.flight-assignment.form.button.create" action="/flight-crew-member/flight-assignment/create"/>
+</jstl:if>

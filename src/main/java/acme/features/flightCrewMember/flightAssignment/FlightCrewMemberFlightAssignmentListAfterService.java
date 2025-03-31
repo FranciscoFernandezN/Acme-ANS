@@ -12,7 +12,7 @@ import acme.entities.flightAssignments.FlightAssignment;
 import acme.realms.FlightCrewMember;
 
 @GuiService
-public class FlightCrewMemberFlightAssignmentListService extends AbstractGuiService<FlightCrewMember, FlightAssignment> {
+public class FlightCrewMemberFlightAssignmentListAfterService extends AbstractGuiService<FlightCrewMember, FlightAssignment> {
 
 	// Internal state ---------------------------------------------------------
 
@@ -31,7 +31,7 @@ public class FlightCrewMemberFlightAssignmentListService extends AbstractGuiServ
 	public void load() {
 		List<FlightAssignment> flightAssignments;
 
-		flightAssignments = this.repository.findFlightAssignmentBeforeCurrent();
+		flightAssignments = this.repository.findFlightAssignmentAfterCurrent();
 
 		super.getBuffer().addData(flightAssignments);
 	}
@@ -44,5 +44,4 @@ public class FlightCrewMemberFlightAssignmentListService extends AbstractGuiServ
 
 		super.getResponse().addData(dataset);
 	}
-
 }

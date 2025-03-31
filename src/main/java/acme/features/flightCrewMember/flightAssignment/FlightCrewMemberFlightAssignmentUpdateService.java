@@ -66,37 +66,60 @@ public class FlightCrewMemberFlightAssignmentUpdateService extends AbstractGuiSe
 
 	@Override
 	public void validate(final FlightAssignment flightAssignment) {
-		// Verificar si el tripulante está disponible
-		if (flightAssignment.getFlightCrewMember() == null)
-			super.state(false, "flightCrewMember", "flight-crew-member.flight-assignment.error.not-available");
-		else {
-			if (flightAssignment.getFlightCrewMember().getAvailabilityStatus() != AvailabilityStatus.AVAILABLE)
-				super.state(false, "flightCrewMember", "flight-crew-member.flight-assignment.error.not-available");
+		FlightAssignment original = this.repository.findFlightAssignmentById(flightAssignment.getId());
 
-			// Verificar que no esté asignado a otro Leg
-			List<Leg> assignedLegs = this.repository.findLegsByFlightCrewMemberId(flightAssignment.getFlightCrewMember().getId());
-			boolean isAssignedToAnotherLeg = assignedLegs.contains(flightAssignment.getLeg());
-			super.state(!isAssignedToAnotherLeg, "flightCrewMember", "flight-crew-member.flight-assignment.error.already-assigned");
+		// Verificar si el FlightAssignment está en modo borrador
+		if (original != null && !original.getIsDraftMode()) {
+			super.state(false, "*", "flight-crew-member.flight-assignment.error.cannot-modify-published");
+			return;
 		}
+
+		// Verificar si el FlightCrewMember ha cambiado
+		boolean hasChangedCrewMember = original == null || !original.getFlightCrewMember().equals(flightAssignment.getFlightCrewMember());
+
+		if (hasChangedCrewMember)
+			if (flightAssignment.getFlightCrewMember() == null)
+				super.state(false, "flightCrewMember", "flight-crew-member.flight-assignment.error.not-available");
+			else {
+				if (flightAssignment.getFlightCrewMember().getAvailabilityStatus() != AvailabilityStatus.AVAILABLE)
+					super.state(false, "flightCrewMember", "flight-crew-member.flight-assignment.error.not-available");
+
+				// Verificar que no esté asignado a otro Leg
+				List<Leg> assignedLegs = this.repository.findLegsByFlightCrewMemberId(flightAssignment.getFlightCrewMember().getId());
+				boolean isAssignedToAnotherLeg = assignedLegs.contains(flightAssignment.getLeg());
+				super.state(!isAssignedToAnotherLeg, "flightCrewMember", "flight-crew-member.flight-assignment.error.already-assigned");
+			}
+
+		// Verificar si el Duty ha cambiado
+		boolean hasChangedDuty = original == null || !original.getDuty().equals(flightAssignment.getDuty());
+		if (hasChangedDuty)
+			if (flightAssignment.getDuty() == null)
+				super.state(false, "duty", "flight-crew-member.flight-assignment.error.invalid-duty");
+			else {
+				// Validar restricciones de cantidad de pilotos y copilotos en el Leg
+				long pilotCount = this.repository.findFlightAssignmentBeforeCurrent().stream().filter(fa -> fa.getLeg().equals(flightAssignment.getLeg()) && fa.getDuty() == Duty.PILOT).count();
+				long copilotCount = this.repository.findFlightAssignmentBeforeCurrent().stream().filter(fa -> fa.getLeg().equals(flightAssignment.getLeg()) && fa.getDuty() == Duty.COPILOT).count();
+
+				if (flightAssignment.getDuty() == Duty.PILOT)
+					super.state(pilotCount < 1, "duty", "flight-crew-member.flight-assignment.error.pilot-limit-exceeded");
+				if (flightAssignment.getDuty() == Duty.COPILOT)
+					super.state(copilotCount < 1, "duty", "flight-crew-member.flight-assignment.error.copilot-limit-exceeded");
+			}
+
+		// Verificar si el CurrentStatus ha cambiado
+		boolean hasChangedStatus = original == null || !original.getCurrentStatus().equals(flightAssignment.getCurrentStatus());
+		if (hasChangedStatus)
+			if (flightAssignment.getCurrentStatus() == null)
+				super.state(false, "currentStatus", "flight-crew-member.flight-assignment.error.invalid-status");
+			else if (flightAssignment.getCurrentStatus() == CurrentStatus.CONFIRMED && (flightAssignment.getLeg() == null || flightAssignment.getLeg().getStatus() != LegStatus.LANDED))
+				super.state(false, "currentStatus", "flight-crew-member.flight-assignment.error.invalid-completion-status");
 
 		// Verificar que el Leg no sea null antes de acceder a su status
 		if (flightAssignment.getLeg() != null) {
-			// Verificar que el Leg no haya ocurrido
 			if (flightAssignment.getLeg().getStatus() == LegStatus.LANDED || flightAssignment.getLeg().getStatus() == LegStatus.CANCELLED)
 				super.state(false, "leg", "flight-crew-member.flight-assignment.error.already-occurred");
 		} else
 			super.state(false, "leg", "flight-crew-member.flight-assignment.error.leg-null");
-
-		// Limitar el número de pilotos y copilotos en el Leg
-		if (flightAssignment.getDuty() == Duty.PILOT) {
-			long pilotCount = this.repository.findFlightAssignmentBeforeCurrent().stream().filter(fa -> fa.getLeg().equals(flightAssignment.getLeg()) && fa.getDuty() == Duty.PILOT).count();
-			super.state(pilotCount < 1, "duty", "flight-crew-member.flight-assignment.error.pilot-limit-exceeded");
-		}
-
-		if (flightAssignment.getDuty() == Duty.COPILOT) {
-			long copilotCount = this.repository.findFlightAssignmentBeforeCurrent().stream().filter(fa -> fa.getLeg().equals(flightAssignment.getLeg()) && fa.getDuty() == Duty.COPILOT).count();
-			super.state(copilotCount < 1, "duty", "flight-crew-member.flight-assignment.error.copilot-limit-exceeded");
-		}
 
 		boolean confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");

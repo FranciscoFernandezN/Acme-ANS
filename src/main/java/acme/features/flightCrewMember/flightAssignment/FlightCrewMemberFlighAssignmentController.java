@@ -16,30 +16,38 @@ public class FlightCrewMemberFlighAssignmentController extends AbstractGuiContro
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private FlightCrewMemberFlightAssignmentListService		listService;
+	private FlightCrewMemberFlightAssignmentShowService			showService;
 
 	@Autowired
-	private FlightCrewMemberFlightAssignmentShowService		showService;
+	private FlightCrewMemberFlightAssignmentCreateService		createService;
 
 	@Autowired
-	private FlightCrewMemberFlightAssignmentCreateService	createService;
+	private FlightCrewMemberFlightAssignmentDeleteService		deleteService;
 
 	@Autowired
-	private FlightCrewMemberFlightAssignmentUpdateService	updateService;
+	private FlightCrewMemberFlightAssignmentUpdateService		updateService;
 
 	@Autowired
-	private FlightCrewMemberFlightAssignmentPublishService	publishService;
+	private FlightCrewMemberFlightAssignmentPublishService		publishService;
+
+	@Autowired
+	private FlightCrewMemberFlightAssignmentListBeforeService	listBeforeCurrentService;
+
+	@Autowired
+	private FlightCrewMemberFlightAssignmentListAfterService	listAfterCurrentService;
 
 	// Constructors -----------------------------------------------------------
 
 
 	@PostConstruct
 	protected void initialise() {
-		super.addBasicCommand("list", this.listService);
 		super.addBasicCommand("show", this.showService);
 		super.addBasicCommand("create", this.createService);
+		super.addBasicCommand("delete", this.deleteService);
 		super.addBasicCommand("update", this.updateService);
 		super.addCustomCommand("publish", "update", this.publishService);
+		super.addCustomCommand("list-before-current", "list", this.listBeforeCurrentService);
+		super.addCustomCommand("list-after-current", "list", this.listAfterCurrentService);
 	}
 
 }
