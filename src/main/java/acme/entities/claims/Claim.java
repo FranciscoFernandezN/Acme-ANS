@@ -57,6 +57,10 @@ public class Claim extends AbstractEntity {
 	@Automapped
 	private Boolean				accepted;
 
+	@Mandatory
+	@Automapped
+	private Boolean				isPublished;
+
 	// Derived attributes -----------------------------------------------------
 	// Relationships ----------------------------------------------------------
 
@@ -64,5 +68,5 @@ public class Claim extends AbstractEntity {
 	@Valid
 	@ManyToOne(optional = false)
 	private AssistanceAgent		agent;
-  
+
 }
