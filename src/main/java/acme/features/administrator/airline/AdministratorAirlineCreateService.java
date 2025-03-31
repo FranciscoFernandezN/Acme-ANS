@@ -44,7 +44,7 @@ public class AdministratorAirlineCreateService extends AbstractGuiService<Admini
 		Date now;
 
 		now = MomentHelper.getCurrentMoment();
-		super.bindObject(airline, "name", "IATACode", "website", "type", "email", "contactNumber");
+		super.bindObject(airline, "name", "iATACode", "website", "type", "email", "contactNumber");
 		airline.setFoundationMoment(now);
 	}
 
@@ -70,10 +70,10 @@ public class AdministratorAirlineCreateService extends AbstractGuiService<Admini
 		SelectChoices choices;
 		Dataset dataset;
 
-		choices = SelectChoices.from(AirlineType.class, airline.getType());
+		choices = SelectChoices.from(AirlineType.class, airline.getAirlineType());
 
-		dataset = super.unbindObject(airline, "name", "IATACode", "website", "type", "email", "contactNumber");
-		dataset.put("operationalScope", choices);
+		dataset = super.unbindObject(airline, "name", "iATACode", "website", "airlineType", "email", "contactNumber");
+		dataset.put("airlineType", choices);
 
 		super.getResponse().addData(dataset);
 	}

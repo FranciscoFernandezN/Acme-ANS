@@ -28,11 +28,11 @@ public class AdministratorAirlineShowService extends AbstractGuiService<Administ
 
 	@Override
 	public void load() {
-		int airlineId;
 		Airline airline;
+		int id;
 
-		airlineId = super.getRequest().getData("id", int.class);
-		airline = this.repository.findAirlineById(airlineId);
+		id = super.getRequest().getData("id", int.class);
+		airline = this.repository.findAirlineById(id);
 
 		super.getBuffer().addData(airline);
 	}
@@ -42,10 +42,10 @@ public class AdministratorAirlineShowService extends AbstractGuiService<Administ
 		SelectChoices choices;
 		Dataset dataset;
 
-		choices = SelectChoices.from(AirlineType.class, airline.getType());
+		choices = SelectChoices.from(AirlineType.class, airline.getAirlineType());
 
-		dataset = super.unbindObject(airline, "name", "IATACode", "website", "type", "email", "contactNumber");
-		dataset.put("operationalScope", choices);
+		dataset = super.unbindObject(airline, "name", "iATACode", "website", "airlineType", "foundationMoment", "email", "contactNumber");
+		dataset.put("airlineType", choices);
 
 		super.getResponse().addData(dataset);
 	}
