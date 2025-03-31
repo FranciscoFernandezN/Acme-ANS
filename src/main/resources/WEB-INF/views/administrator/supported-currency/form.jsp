@@ -12,7 +12,7 @@
 	
 	
 	<jstl:choose>
-		<jstl:when test="${acme:anyOf(_command, 'show|update') && isDraftMode == true && isDefaultCurrency == false}">
+		<jstl:when test="${acme:anyOf(_command, 'show|update') && isDefaultCurrency == false}">
 			<acme:submit code="administrator.supported-currency.form.button.update" action="/administrator/supported-currency/update"/>
 		</jstl:when>
 		<jstl:when test="${_command == 'create'}">
