@@ -1,0 +1,16 @@
+authenticated.assistance-agent.form.title = Assistance agent form
+
+authenticated.assistance-agent.form.label.employeeCode = Employee code:
+authenticated.assistance-agent.form.label.languages = Languages:
+authenticated.assistance-agent.form.label.firstWorkingDate = First working date:
+authenticated.assistance-agent.form.label.biography = Biography:
+authenticated.assistance-agent.form.label.salary = Salary:
+authenticated.assistance-agent.form.label.photoLink = Link of your profile picture:
+authenticated.assistance-agent.form.label.airline = Airline working for:
+
+authenticated.assistance-agent.form.button.create = Register
+authenticated.assistance-agent.form.button.update = Update
+
+authenticated.assistance-agent.form.placeholder.salary = EUR 1234.00
+
+authenticated.assistance-agent.create.not-unique-identifier = This identifier is already in use

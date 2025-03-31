@@ -1,0 +1,16 @@
+authenticated.assistance-agent.form.title = Detalles de agente de asistencia
+
+authenticated.assistance-agent.form.label.employeeCode = Código de empleado:
+authenticated.assistance-agent.form.label.languages = Idiomas:
+authenticated.assistance-agent.form.label.firstWorkingDate = Fecha de contratación:
+authenticated.assistance-agent.form.label.biography = Biografía:
+authenticated.assistance-agent.form.label.salary = Salario:
+authenticated.assistance-agent.form.label.photoLink = Link de tu foto de perfil:
+authenticated.assistance-agent.form.label.airline = Aerolínea para la que trabajas:
+
+authenticated.assistance-agent.form.button.create = Registrarte
+authenticated.assistance-agent.form.button.update = Actualizar
+
+authenticated.assistance-agent.form.placeholder.salary = 1234.00 EUR
+
+authenticated.assistance-agent.create.not-unique-identifier = Este identificador ya está en uso
