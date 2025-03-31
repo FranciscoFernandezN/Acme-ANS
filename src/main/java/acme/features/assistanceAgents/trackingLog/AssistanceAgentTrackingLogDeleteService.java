@@ -70,9 +70,9 @@ public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<
 
 		agent = (AssistanceAgent) super.getRequest().getPrincipal().getRealmOfType(AssistanceAgent.class);
 
-		claims = this.aatlr.findAllClaimsByAirlineId(agent.getAirline().getId());
+		claims = this.aatlr.findAllClaimsByAgentId(agent.getId());
 
-		claimChoices = SelectChoices.from(claims, "id", trackingLog.getClaim());
+		claimChoices = SelectChoices.from(claims, "passengerEmail", trackingLog.getClaim());
 
 		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "step", "resolutionPercentage", "resolution", "claim", "isPublished");
 		dataset.put("claim", claimChoices);

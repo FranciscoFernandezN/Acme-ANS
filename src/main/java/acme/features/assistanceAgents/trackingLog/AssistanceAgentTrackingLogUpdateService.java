@@ -1,14 +1,12 @@
 
 package acme.features.assistanceAgents.trackingLog;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
-import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claims.Claim;
@@ -35,12 +33,9 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 	public void load() {
 		TrackingLog trackingLog;
 		int trackingLogId;
-		Date lastUpdateMoment;
 
 		trackingLogId = super.getRequest().getData("id", int.class);
 		trackingLog = this.aatlr.findTrackingLogById(trackingLogId);
-		lastUpdateMoment = MomentHelper.getCurrentMoment();
-		trackingLog.setLastUpdateMoment(lastUpdateMoment);
 
 		super.getBuffer().addData(trackingLog);
 	}
@@ -52,7 +47,7 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 		Claim claim;
 		int claimId;
 
-		claimId = super.getRequest().getData("leg", int.class);
+		claimId = super.getRequest().getData("claim", int.class);
 		claim = this.aatlr.findClaimById(claimId);
 
 		trackingLog.setClaim(claim);
@@ -81,9 +76,9 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 
 		agent = (AssistanceAgent) super.getRequest().getPrincipal().getRealmOfType(AssistanceAgent.class);
 
-		claims = this.aatlr.findAllClaimsByAirlineId(agent.getAirline().getId());
+		claims = this.aatlr.findAllClaimsByAgentId(agent.getId());
 
-		claimChoices = SelectChoices.from(claims, "id", trackingLog.getClaim());
+		claimChoices = SelectChoices.from(claims, "passengerEmail", trackingLog.getClaim());
 
 		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "step", "resolutionPercentage", "resolution", "claim", "isPublished");
 		dataset.put("claim", claimChoices);

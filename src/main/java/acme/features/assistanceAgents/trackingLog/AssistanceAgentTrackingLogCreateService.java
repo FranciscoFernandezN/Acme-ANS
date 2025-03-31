@@ -54,7 +54,10 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 
 	@Override
 	public void validate(final TrackingLog trackingLog) {
-		Claim claim = this.aatlr.findClaimByTrackingLogId(trackingLog.getId());
+		int claimId;
+		claimId = super.getRequest().getData("claim", int.class);
+
+		Claim claim = this.aatlr.findClaimById(claimId);
 		super.state(!trackingLog.getIsPublished() || trackingLog.getIsPublished() && claim != null && claim.getIsPublished(), "isPublished", "assistance-agent.tracking-log.create.cant-be-published");
 	}
 
@@ -75,9 +78,9 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 
 		agent = (AssistanceAgent) super.getRequest().getPrincipal().getRealmOfType(AssistanceAgent.class);
 
-		claims = this.aatlr.findAllClaimsByAirlineId(agent.getAirline().getId());
+		claims = this.aatlr.findAllClaimsByAgentId(agent.getId());
 
-		claimChoices = SelectChoices.from(claims, "id", trackingLog.getClaim());
+		claimChoices = SelectChoices.from(claims, "passengerEmail", trackingLog.getClaim());
 
 		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "step", "resolutionPercentage", "resolution", "claim", "isPublished");
 		dataset.put("claim", claimChoices);
