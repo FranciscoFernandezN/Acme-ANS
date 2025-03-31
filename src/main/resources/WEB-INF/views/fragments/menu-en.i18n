@@ -60,7 +60,9 @@ master.menu.manager.create-flights = Create flights
 
 master.menu.customer = Customer
 master.menu.customer.list-booking = List bookings
-master.menu.customer.create-booking = Create bookings
+master.menu.customer.create-booking = Create booking
+master.menu.customer.list-passenger = List passengers
+master.menu.customer.create-passenger = Create passenger
 
 # master.menu.user-account ####################################################
 
