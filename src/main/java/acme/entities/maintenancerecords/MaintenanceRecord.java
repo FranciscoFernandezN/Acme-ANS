@@ -9,7 +9,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.datatypes.Money;
@@ -41,7 +40,6 @@ public class MaintenanceRecord extends AbstractEntity {
 	private Date				moment;
 
 	@Mandatory
-	@Valid
 	@Enumerated(EnumType.STRING)
 	@Automapped
 	private MaintenanceStatus	status;
@@ -67,7 +65,6 @@ public class MaintenanceRecord extends AbstractEntity {
 	// Relationships ----------------------------------------------------------
 
 	@Mandatory
-	@Valid
 	@ManyToOne
 	private Aircraft			aircraft;
 }
