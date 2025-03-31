@@ -34,7 +34,7 @@ public class FlightCrewMemberFlightAssignmentCreateService extends AbstractGuiSe
 	@Override
 	public void load() {
 		FlightAssignment flightAssignment = new FlightAssignment();
-		flightAssignment.setDraftMode(true);
+		flightAssignment.setIsDraftMode(true);
 		super.getBuffer().addData(flightAssignment);
 	}
 
@@ -112,7 +112,7 @@ public class FlightCrewMemberFlightAssignmentCreateService extends AbstractGuiSe
 		legChoices = SelectChoices.from(legs, "uniqueIdentifier", flightAssignment.getLeg());
 
 		// Desvincular los datos, sin incluir 'isDraftMode'
-		dataset = super.unbindObject(flightAssignment, "duty", "lastUpDate", "currentStatus", "remarks");
+		dataset = super.unbindObject(flightAssignment, "duty", "lastUpDate", "currentStatus", "remarks", "isDraftMode");
 
 		// Colocar los valores de las selecciones
 		dataset.put("duties", dutyChoices);
@@ -121,7 +121,6 @@ public class FlightCrewMemberFlightAssignmentCreateService extends AbstractGuiSe
 		dataset.put("leg", legChoices.getSelected().getKey());
 		dataset.put("flightCrewMembers", flightCrewMemberChoices);
 		dataset.put("flightCrewMember", flightCrewMemberChoices.getSelected().getKey());
-		dataset.put("isDraftMode", flightAssignment.isDraftMode());
 
 		super.getResponse().addData(dataset);
 	}

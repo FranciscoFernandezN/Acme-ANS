@@ -12,7 +12,7 @@
 	<acme:input-textbox code="flight-crew-member.flight-assignment.form.label.remarks" path="remarks" />
 	<acme:input-checkbox code="flight-crew-member.flight-assignment.form.label.confirmation" path="confirmation"/>
 	<jstl:choose>
-		<jstl:when test="${acme:anyOf(_command,'show|update|publish')}">
+		<jstl:when test="${acme:anyOf(_command,'show|update|publish') && isDraftMode == true}">
 			<acme:submit code="flight-crew-member.flight-assignment.form.button.update" action="/flight-crew-member/flight-assignment/update"/>
 			<acme:submit code="flight-crew-member.flight-assignment.form.button.publish" action="/flight-crew-member/flight-assignment/publish"/>
 		</jstl:when>

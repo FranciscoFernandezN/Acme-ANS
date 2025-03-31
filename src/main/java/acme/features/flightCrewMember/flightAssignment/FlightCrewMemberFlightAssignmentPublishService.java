@@ -62,16 +62,13 @@ public class FlightCrewMemberFlightAssignmentPublishService extends AbstractGuiS
 
 	@Override
 	public void validate(final FlightAssignment flightAssignment) {
-
-		boolean status;
-
-		status = flightAssignment.isDraftMode();
-
-		super.getResponse().setAuthorised(status);
+		boolean confirmation = super.getRequest().getData("confirmation", boolean.class);
+		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
 	}
 
 	@Override
 	public void perform(final FlightAssignment flightAssignment) {
+		flightAssignment.setIsDraftMode(true);
 		this.repository.save(flightAssignment);
 	}
 
