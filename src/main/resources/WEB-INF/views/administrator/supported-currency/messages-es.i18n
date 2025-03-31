@@ -1,0 +1,17 @@
+administrator.supported-currency.form.title = Formulario de monedas aceptadas
+administrator.supported-currency.list.title = Listado de monedas aceptadas
+
+administrator.supported-currency.list.label.currencyName = Moneda
+administrator.supported-currency.list.label.isDefaultCurrency = ¿Es la moneda por defecto?
+
+administrator.supported-currency.list.button.create = Crear una nueva moneda aceptada
+
+administrator.supported-currency.form.label.currencyName = Moneda:
+administrator.supported-currency.form.placeholder.currencyName = EUR
+administrator.supported-currency.form.label.isDefaultCurrency = ¿Es la moneda por defecto?
+
+administrator.supported-currency.form.button.update = Actualizar esta moneda aceptada
+administrator.supported-currency.form.button.create = Crear esta moneda aceptada
+
+administrator.supported-currency.create.is-default-currency = Esta moneda es la moneda por defecto, no debes modificarla.
+administrator.supported-currency.create.already-exists-currency = Esta moneda ya existe.
