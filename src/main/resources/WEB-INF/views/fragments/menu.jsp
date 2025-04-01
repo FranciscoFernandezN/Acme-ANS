@@ -47,6 +47,7 @@
 			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.shut-system-down" action="/administrator/system/shut-down"/>
 			<acme:menu-separator/>
+			<acme:menu-suboption code="master.menu.administrator.list-supported-currencies" action="/administrator/supported-currency/list"/>
 		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.provider" access="hasRealm('Provider')">
@@ -65,6 +66,10 @@
 			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.manager.list-flights" action="/manager/flight/list"/>
 			<acme:menu-suboption code="master.menu.manager.create-flights" action="/manager/flight/create"/>
+		</acme:menu-option>
+		<acme:menu-option code="master.menu.customer" access="hasRealm('Customer')">
+			<acme:menu-suboption code="master.menu.customer.list-booking" action="/customer/booking/list"/>
+			<acme:menu-suboption code="master.menu.customer.create-booking" action="/customer/booking/create"/>
 		</acme:menu-option>
 	</acme:menu-left>
 

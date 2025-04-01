@@ -103,16 +103,17 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 		if (leg.getScheduledDeparture() != null)
 			super.state(leg.getScheduledDeparture().after(currentMoment), "scheduledDeparture", "manager.leg.create.not-future-date");
 
-		if (leg.getScheduledArrival() != null && leg.getScheduledDeparture() != null)
+		if (leg.getScheduledArrival() != null && leg.getScheduledDeparture() != null) {
+			super.state(leg.getDuration() <= 24, "scheduledArrival", "manager.leg.create.too-long-leg");
 			super.state(leg.getScheduledArrival().after(leg.getScheduledDeparture()), "scheduledArrival", "manager.leg.create.not-after-arrival");
-
+		}
 		int arrivalAirportId = super.getRequest().getData("arrivalAirport", int.class);
 		int departureAirportId = super.getRequest().getData("departureAirport", int.class);
 
 		if (arrivalAirportId != 0 && departureAirportId != 0)
 			super.state(arrivalAirportId != departureAirportId, "arrivalAirport", "manager.leg.create.not-different-airport");
 
-		super.state(leg.getDuration() <= 24, "scheduledArrival", "manager.leg.create.too-long-leg");
+		
 
 		int aircraftId;
 		aircraftId = super.getRequest().getData("aircraft", int.class);
