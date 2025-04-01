@@ -11,10 +11,9 @@ administrator.aircraft.form.label.airline = Airline:
 administrator.aircraft.form.label.enabled = Do you enable the aircraft?
 administrator.aircraft.form.label.confirmation = Do you confirm this operation?  
 
-administrator.aircraft.form.button.create = Create aircraft
-administrator.aircraft.form.button.update = Update aircraft
-administrator.aircraft.form.button.enable = Enable aircraft
-administrator.aircraft.form.button.disable = Disable aircraft
+administrator.aircraft.form.button.create = Create
+administrator.aircraft.form.button.update = Update
+administrator.aircraft.form.button.disable = Disable
 
 administrator.aircraft.form.placeholder.model = B2008
 administrator.aircraft.form.placeholder.registrationNumber = JKL998
@@ -36,3 +35,4 @@ administrator.aircraft.list.button.create = Create new aircraft
 
 administrator.aircraft.error.invalid-airline = The airline is null  
 administrator.aircraft.create.already-exists = The registration number exists yet 
+administrator.aircraft.cannot-modify-disabled = The aircraft has been disabled

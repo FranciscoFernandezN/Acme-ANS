@@ -35,7 +35,6 @@ public class AdministratorAircraftUpdateService extends AbstractGuiService<Admin
 		Aircraft aircraft;
 		int id;
 
-		// Aseguramos que el id no sea null al obtenerlo de la request
 		id = super.getRequest().getData("id", Integer.class);
 		aircraft = this.repository.findAircraftById(id);
 
@@ -46,34 +45,40 @@ public class AdministratorAircraftUpdateService extends AbstractGuiService<Admin
 	public void bind(final Aircraft aircraft) {
 		super.bindObject(aircraft, "model", "registrationNumber", "capacity", "cargoWeight", "status", "details");
 
-		// Obtener el ID de la aerolínea desde el request
 		int airlineId = super.getRequest().getData("airline", int.class);
 
-		// Buscar la aerolínea en el repositorio
 		Airline airline = this.repository.findAirlineById(airlineId);
 
-		// Asignar la aerolínea al avión
 		aircraft.setAirline(airline);
 	}
 
 	@Override
 	public void validate(final Aircraft aircraft) {
-		// Validar que el número de matrícula no esté repetido
-		boolean existsThisCode = this.repository.findAllAircrafts().stream().anyMatch(a -> aircraft.getRegistrationNumber().equals(a.getRegistrationNumber()));
 
-		// Si la matrícula ya existe, se genera un mensaje de error
-		super.state(!existsThisCode, "registrationNumber", "administrator.aircraft.create.already-exists");
+		// Obtener el avión original antes de la actualización
+		Aircraft original = this.repository.findAircraftById(aircraft.getId());
 
-		// Validar la confirmación solo si la matrícula es válida (no duplicada)
-		//if (!existsThisCode) {
+		// Validar que no se intente modificar un avión deshabilitado
+		if (original != null && !original.getIsEnabled()) {
+			super.state(false, "*", "administrator.aircraft.cannot-modify-disabled");
+			return;
+		}
+
+		// Validar si el registrationNumber ha cambiado antes de verificar duplicados
+		if (original == null || !original.getRegistrationNumber().equals(aircraft.getRegistrationNumber())) {
+			boolean existsThisCode = this.repository.findAllAircrafts().stream().anyMatch(a -> aircraft.getRegistrationNumber().equals(a.getRegistrationNumber()));
+
+			super.state(!existsThisCode, "registrationNumber", "administrator.aircraft.create.already-exists");
+		}
+
+		// Verificar la confirmación del usuario
 		boolean confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
-		//}
 
-		// Verificar que la aerolínea seleccionada existe
+		// Validar que la aerolínea existe
 		if (aircraft.getAirline() != null) {
 			Airline airline = this.repository.findAirlineById(aircraft.getAirline().getId());
-			super.state(airline != null, "iATACode", "administrator.aircraft.error.invalid-airline");
+			super.state(airline != null, "name", "administrator.aircraft.error.invalid-airline");
 		}
 	}
 
@@ -91,15 +96,13 @@ public class AdministratorAircraftUpdateService extends AbstractGuiService<Admin
 		Collection<Airline> airlines = this.repository.findAllAirlines();
 		statusChoices = SelectChoices.from(AircraftStatus.class, aircraft.getStatus());
 
-		// Verificar si la aerolínea no es nula antes de pasarla a SelectChoices
-		Airline selectedAirline = aircraft.getAirline(); // No crear un objeto vacío
-		airlinesChoices = SelectChoices.from(airlines, "iATACode", selectedAirline); // Esto ya maneja null correctamente
+		Airline selectedAirline = aircraft.getAirline();
+		airlinesChoices = SelectChoices.from(airlines, "name", selectedAirline);
 
-		dataset = super.unbindObject(aircraft, "model", "registrationNumber", "capacity", "cargoWeight", "status", "details");
+		dataset = super.unbindObject(aircraft, "model", "registrationNumber", "capacity", "cargoWeight", "status", "details", "isEnabled");
 		dataset.put("statuses", statusChoices);
 		dataset.put("airlines", airlinesChoices);
 
-		// Enviar explícitamente la aerolínea seleccionada en el dataset:
 		dataset.put("airline", selectedAirline != null ? selectedAirline.getId() : null);
 
 		super.getResponse().addData(dataset);

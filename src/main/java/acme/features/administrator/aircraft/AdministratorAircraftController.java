@@ -27,9 +27,6 @@ public class AdministratorAircraftController extends AbstractGuiController<Admin
 	AdministratorAircraftCreateService	createService;
 
 	@Autowired
-	AdministratorAircraftEnableService	enableService;
-
-	@Autowired
 	AdministratorAircraftDisableService	disableService;
 
 	// Constructors -----------------------------------------------------------
@@ -41,7 +38,6 @@ public class AdministratorAircraftController extends AbstractGuiController<Admin
 		super.addBasicCommand("show", this.showService);
 		super.addBasicCommand("update", this.updateService);
 		super.addBasicCommand("create", this.createService);
-		super.addBasicCommand("enable", this.enableService);
-		super.addBasicCommand("disable", this.disableService);
+		super.addCustomCommand("disable", "update", this.disableService);
 	}
 }

@@ -1,4 +1,4 @@
-key,model,registrationNumber,capacity,cargoWeight,status,details,enabled,key:airline
+key,model,registrationNumber,capacity,cargo-weight,status,details,is-enabled,key:airline
 aircraft-01,Boeing 737,ABC123,200,22000,ACTIVE,Large passenger aircraft,true,airline-01
 aircraft-02,A320,DEF456,180,15000,UNDER_MAINTENANCE,Short-haul aircraft,true,airline-01
 aircraft-03,Embraer E195,GHI789,130,8000,ACTIVE,Regional aircraft,true,airline-02

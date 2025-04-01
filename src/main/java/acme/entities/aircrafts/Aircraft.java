@@ -62,7 +62,7 @@ public class Aircraft extends AbstractEntity {
 
 	@Mandatory
 	@Automapped
-	private Boolean				enabled;
+	private Boolean				isEnabled;
 
 	// Derived attributes -----------------------------------------------------
 	// Relationships ----------------------------------------------------------

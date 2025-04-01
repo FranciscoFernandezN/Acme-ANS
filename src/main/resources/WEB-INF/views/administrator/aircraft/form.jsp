@@ -13,17 +13,9 @@
     <acme:input-checkbox code="administrator.aircraft.form.label.confirmation" path="confirmation"/>
 
     <jstl:choose>
-        <jstl:when test="${acme:anyOf(_command, 'show|update')}">
+        <jstl:when test="${acme:anyOf(_command, 'show|update|disable') && isEnabled == true}">
             <acme:submit code="administrator.aircraft.form.button.update" action="/administrator/aircraft/update"/>
-            
-            <jstl:choose>
-                <jstl:when test="${enabled == true}">
-                    <acme:submit code="administrator.aircraft.form.button.disable" action="/administrator/aircraft/disable"/>
-                </jstl:when>
-                <jstl:otherwise>
-                    <acme:submit code="administrator.aircraft.form.button.enable" action="/administrator/aircraft/enable"/>
-                </jstl:otherwise>
-            </jstl:choose>
+            <acme:submit code="administrator.aircraft.form.button.disable" action="/administrator/aircraft/disable"/>
             
         </jstl:when>
         <jstl:when test="${_command == 'create'}">
