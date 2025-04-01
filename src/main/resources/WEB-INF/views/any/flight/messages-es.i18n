@@ -20,4 +20,4 @@ any.flight.form.label.scheduledDeparture = Salida programada:
 any.flight.form.label.scheduledArrival = Llegada programada:
 any.flight.form.label.numberOfLayovers = Número de escalas:
 
-
+any.flight.form.button.legs = Ver tramos del vuelo
