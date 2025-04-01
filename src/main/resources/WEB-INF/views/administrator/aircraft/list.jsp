@@ -11,7 +11,6 @@
 	<acme:list-column code="administrator.aircraft.list.label.status" path="status" width="10%"/>
 	<acme:list-column code="administrator.aircraft.list.label.details" path="details" width="10%"/>
 	<acme:list-column code="administrator.aircraft.list.label.airline" path="airline" width="10%"/>
-	<acme:list-column code="administrator.aircraft.list.label.enabled" path="enabled" width="10%"/>
 </acme:list>
 
 <acme:button code="administrator.aircraft.list.button.create" action="/administrator/aircraft/create"/>

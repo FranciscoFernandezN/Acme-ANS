@@ -27,7 +27,23 @@ public class AdministratorAircraftDisableService extends AbstractGuiService<Admi
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Administrator.class));
+
+		boolean status;
+		int aircraftId;
+		Aircraft aircraft;
+
+		// Obtener el ID del Aircraft desde la petición
+		aircraftId = super.getRequest().getData("id", int.class);
+		aircraft = this.repository.findAircraftById(aircraftId);
+
+		// Comprobar si la aeronave existe y si el usuario es un administrador
+		boolean isAdmin = super.getRequest().getPrincipal().hasRealmOfType(Administrator.class);
+		boolean isAircraftEnabled = aircraft != null && aircraft.getIsEnabled();
+
+		status = isAdmin && isAircraftEnabled;
+
+		// Autorizar o denegar la operación
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
