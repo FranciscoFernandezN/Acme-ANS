@@ -1,0 +1,32 @@
+customer.booking.form.title = Formulario de reservas
+customer.booking.list.title = Listado de reservas
+
+customer.booking.list.label.locatorCode = Localizador
+customer.booking.list.label.purchaseMoment = Fecha de compra
+customer.booking.list.label.travelClass = Clase
+customer.booking.list.label.price = Precio
+customer.booking.list.label.isDraftMode = ¿Borrador?
+customer.booking.list.label.fullName = Pasajero
+customer.booking.list.label.email = Email del pasajero
+
+customer.booking.list.button.create = Crear nueva reserva
+
+customer.booking.form.label.locatorCode = Localizador
+customer.booking.form.label.flight = Vuelo
+customer.booking.form.label.travelClass = Clase
+customer.booking.form.label.isDraftMode = ¿Modo borrador?
+customer.booking.form.label.passportNumber = Pasaporte del pasajero
+customer.booking.form.label.lastNibble = Últimos dígitos de la tarjeta de crédito
+
+customer.booking.form.button.create = Crear nueva reserva
+customer.booking.form.button.update = Actualizar reserva
+
+customer.booking.create.flight-does-not-exist = Escoge un vuelo
+customer.booking.create.passenger-does-not-exist = No hay ningún pasajero registrado con ese pasaporte
+customer.booking.create.travel-class-does-not-exist = Escoge una clase
+customer.booking.create.cant-be-published = No se puede publicar sin los último dígitos de la tarjeta
+
+customer.booking.update.flight-does-not-exist = Escoge un vuelo
+customer.booking.update.passenger-does-not-exist = No hay ningún pasajero registrado con ese pasaporte
+customer.booking.update.travel-class-does-not-exist = Escoge una clase
+customer.booking.update.cant-be-published = No se puede publicar sin los último dígitos de la tarjeta
