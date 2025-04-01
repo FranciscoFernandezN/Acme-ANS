@@ -19,6 +19,7 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
+import acme.constraints.ValidSupportedCurrency;
 import acme.entities.aircrafts.Aircraft;
 import lombok.Getter;
 import lombok.Setter;
@@ -52,6 +53,7 @@ public class MaintenanceRecord extends AbstractEntity {
 
 	@Mandatory
 	@ValidMoney(min = 0)
+	@ValidSupportedCurrency
 	@Automapped
 	private Money				estimatedCost;
 

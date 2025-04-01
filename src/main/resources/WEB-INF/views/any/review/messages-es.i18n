@@ -12,7 +12,7 @@ any.review.form.button.create = Crear la reseña
 
 any.review.form.placeholder.name = Don Potato
 any.review.form.placeholder.subject = Ryanair devuélveme el dinero
-any.review.form.placeholder.score = 2.3
+any.review.form.placeholder.score = 2,3
 
 any.review.list.label.name = Nombre
 any.review.list.label.postedAt = Publicado a las
