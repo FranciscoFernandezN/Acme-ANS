@@ -1,12 +1,14 @@
 
 package acme.features.flightCrewMember.flightAssignment;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flightAssignments.CurrentStatus;
@@ -53,6 +55,8 @@ public class FlightCrewMemberFlightAssignmentCreateService extends AbstractGuiSe
 
 	@Override
 	public void validate(final FlightAssignment flightAssignment) {
+		Date date;
+		date = MomentHelper.getCurrentMoment();
 		// Verificar si el tripulante está disponible
 		if (flightAssignment.getFlightCrewMember() == null)
 			super.state(false, "flightCrewMember", "flight-crew-member.flight-assignment.error.not-available");
@@ -76,12 +80,12 @@ public class FlightCrewMemberFlightAssignmentCreateService extends AbstractGuiSe
 
 		// Limitar el número de pilotos y copilotos en el Leg
 		if (flightAssignment.getDuty() == Duty.PILOT) {
-			long pilotCount = this.repository.findFlightAssignmentBeforeCurrent().stream().filter(fa -> fa.getLeg().equals(flightAssignment.getLeg()) && fa.getDuty() == Duty.PILOT).count();
+			long pilotCount = this.repository.findFlightAssignmentBeforeCurrent(date).stream().filter(fa -> fa.getLeg().equals(flightAssignment.getLeg()) && fa.getDuty() == Duty.PILOT).count();
 			super.state(pilotCount < 1, "duty", "flight-crew-member.flight-assignment.error.pilot-limit-exceeded");
 		}
 
 		if (flightAssignment.getDuty() == Duty.COPILOT) {
-			long copilotCount = this.repository.findFlightAssignmentBeforeCurrent().stream().filter(fa -> fa.getLeg().equals(flightAssignment.getLeg()) && fa.getDuty() == Duty.COPILOT).count();
+			long copilotCount = this.repository.findFlightAssignmentBeforeCurrent(date).stream().filter(fa -> fa.getLeg().equals(flightAssignment.getLeg()) && fa.getDuty() == Duty.COPILOT).count();
 			super.state(copilotCount < 1, "duty", "flight-crew-member.flight-assignment.error.copilot-limit-exceeded");
 		}
 

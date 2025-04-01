@@ -1,12 +1,14 @@
 
 package acme.features.flightCrewMember.flightAssignment;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flightAssignments.CurrentStatus;
@@ -66,6 +68,8 @@ public class FlightCrewMemberFlightAssignmentUpdateService extends AbstractGuiSe
 
 	@Override
 	public void validate(final FlightAssignment flightAssignment) {
+		Date date;
+		date = MomentHelper.getCurrentMoment();
 		FlightAssignment original = this.repository.findFlightAssignmentById(flightAssignment.getId());
 
 		// Verificar si el FlightAssignment está en modo borrador
@@ -97,8 +101,8 @@ public class FlightCrewMemberFlightAssignmentUpdateService extends AbstractGuiSe
 				super.state(false, "duty", "flight-crew-member.flight-assignment.error.invalid-duty");
 			else {
 				// Validar restricciones de cantidad de pilotos y copilotos en el Leg
-				long pilotCount = this.repository.findFlightAssignmentBeforeCurrent().stream().filter(fa -> fa.getLeg().equals(flightAssignment.getLeg()) && fa.getDuty() == Duty.PILOT).count();
-				long copilotCount = this.repository.findFlightAssignmentBeforeCurrent().stream().filter(fa -> fa.getLeg().equals(flightAssignment.getLeg()) && fa.getDuty() == Duty.COPILOT).count();
+				long pilotCount = this.repository.findFlightAssignmentBeforeCurrent(date).stream().filter(fa -> fa.getLeg().equals(flightAssignment.getLeg()) && fa.getDuty() == Duty.PILOT).count();
+				long copilotCount = this.repository.findFlightAssignmentBeforeCurrent(date).stream().filter(fa -> fa.getLeg().equals(flightAssignment.getLeg()) && fa.getDuty() == Duty.COPILOT).count();
 
 				if (flightAssignment.getDuty() == Duty.PILOT)
 					super.state(pilotCount < 1, "duty", "flight-crew-member.flight-assignment.error.pilot-limit-exceeded");
