@@ -41,7 +41,6 @@ public class AdministratorAircraftDisableService extends AbstractGuiService<Admi
 		status = isAdmin && isAircraftEnabled;
 
 		super.getResponse().setAuthorised(status);
-
 	}
 
 	@Override
@@ -70,27 +69,22 @@ public class AdministratorAircraftDisableService extends AbstractGuiService<Admi
 	@Override
 	public void validate(final Aircraft aircraft) {
 
-		// Obtener el avión original antes de la actualización
 		Aircraft original = this.repository.findAircraftById(aircraft.getId());
 
-		// Validar que no se intente modificar un avión deshabilitado
 		if (original != null && !original.getIsEnabled()) {
 			super.state(false, "*", "administrator.aircraft.cannot-modify-disabled");
 			return;
 		}
 
-		// Validar si el registrationNumber ha cambiado antes de verificar duplicados
 		if (original == null || !original.getRegistrationNumber().equals(aircraft.getRegistrationNumber())) {
 			boolean existsThisCode = this.repository.findAllAircrafts().stream().anyMatch(a -> aircraft.getRegistrationNumber().equals(a.getRegistrationNumber()));
 
 			super.state(!existsThisCode, "registrationNumber", "administrator.aircraft.create.already-exists");
 		}
 
-		// Verificar la confirmación del usuario
 		boolean confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
 
-		// Validar que la aerolínea existe
 		if (aircraft.getAirline() != null) {
 			Airline airline = this.repository.findAirlineById(aircraft.getAirline().getId());
 			super.state(airline != null, "name", "administrator.aircraft.error.invalid-airline");

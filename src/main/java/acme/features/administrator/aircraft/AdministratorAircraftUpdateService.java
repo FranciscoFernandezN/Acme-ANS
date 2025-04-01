@@ -41,7 +41,6 @@ public class AdministratorAircraftUpdateService extends AbstractGuiService<Admin
 		status = isAdmin && isAircraftEnabled;
 
 		super.getResponse().setAuthorised(status);
-
 	}
 
 	@Override
