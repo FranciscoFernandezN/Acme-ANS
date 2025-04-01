@@ -4,6 +4,6 @@ leg-02,1002,2024/03/11 06:00,2024/03/11 09:00,DELAYED,true,airport-02,airport-03
 leg-03,1003,2024/03/12 06:00,2024/03/12 09:00,CANCELLED,false,airport-01,airport-03,aircraft-01,manager-01,flight-01
 leg-04,1004,2024/03/13 06:00,2024/03/13 09:00,DELAYED,true,airport-01,airport-02,aircraft-02,manager-02,flight-03
 leg-05,1005,2024/03/14 06:00,2024/03/14 09:00,DELAYED,true,airport-02,airport-03,aircraft-03,manager-01,flight-02
-leg-06,1006,2027/03/15 06:00,2027/03/15 09:00,DELAYED,true,airport-02,airport-03,aircraft-02,manager-02,flight-01
-leg-07,1007,2026/03/16 06:00,2026/03/16 09:00,DELAYED,true,airport-01,airport-02,aircraft-01,manager-01,flight-01
+leg-06,1006,2027/03/15 06:00,2027/03/15 09:00,DELAYED,false,airport-02,airport-03,aircraft-02,manager-02,flight-01
+leg-07,1007,2026/03/16 06:00,2026/03/16 09:00,DELAYED,false,airport-01,airport-02,aircraft-01,manager-01,flight-01
 leg-08,1008,2026/03/17 06:00,2026/03/17 09:00,DELAYED,true,airport-01,airport-02,aircraft-03,manager-02,flight-02

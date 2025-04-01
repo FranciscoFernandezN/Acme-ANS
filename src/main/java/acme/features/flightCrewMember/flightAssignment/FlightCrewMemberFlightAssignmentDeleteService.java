@@ -52,14 +52,14 @@ public class FlightCrewMemberFlightAssignmentDeleteService extends AbstractGuiSe
 
 	@Override
 	public void perform(final FlightAssignment flightAssignment) {
-	    boolean confirmation = super.getRequest().getData("confirmation", boolean.class);
+		boolean confirmation = super.getRequest().getData("confirmation", boolean.class);
 
-	    if (confirmation) {
-	        this.repository.delete(flightAssignment);
-	    } else {
-	        flightAssignment.setIsDraftMode(true);
-	        this.repository.save(flightAssignment); // Guardamos para asegurar que sigue en borrador
-	    }
+		if (confirmation)
+			this.repository.delete(flightAssignment);
+		else {
+			flightAssignment.setIsDraftMode(true);
+			this.repository.save(flightAssignment); // Guardamos para asegurar que sigue en borrador
+		}
 	}
 
 	@Override
@@ -77,7 +77,10 @@ public class FlightCrewMemberFlightAssignmentDeleteService extends AbstractGuiSe
 		dutyChoices = SelectChoices.from(Duty.class, flightAssignment.getDuty());
 		currentStatuses = SelectChoices.from(CurrentStatus.class, flightAssignment.getCurrentStatus());
 		flightCrewMemberChoices = SelectChoices.from(flightCrewMembers, "employeeCode", flightAssignment.getFlightCrewMember());
-		legChoices = SelectChoices.from(legs, "uniqueIdentifier", flightAssignment.getLeg());
+		legChoices = new SelectChoices();
+		for (Leg leg : legs)
+			legChoices.add(String.valueOf(leg.getId()), leg.getFlightNumber(), flightAssignment.getLeg() != null && leg.equals(flightAssignment.getLeg()));
+		legChoices.add("0", "----", flightAssignment.getLeg() == null); // Opción por defecto
 
 		// Desvincular los datos
 		dataset = super.unbindObject(flightAssignment, "duty", "lastUpDate", "currentStatus", "remarks", "isDraftMode");

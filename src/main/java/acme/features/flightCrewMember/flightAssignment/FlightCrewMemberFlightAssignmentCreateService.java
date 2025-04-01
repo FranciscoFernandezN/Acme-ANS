@@ -113,7 +113,10 @@ public class FlightCrewMemberFlightAssignmentCreateService extends AbstractGuiSe
 		dutyChoices = SelectChoices.from(Duty.class, flightAssignment.getDuty());
 		currentStatuses = SelectChoices.from(CurrentStatus.class, flightAssignment.getCurrentStatus());
 		flightCrewMemberChoices = SelectChoices.from(flightCrewMembers, "employeeCode", flightAssignment.getFlightCrewMember());
-		legChoices = SelectChoices.from(legs, "uniqueIdentifier", flightAssignment.getLeg());
+		legChoices = new SelectChoices();
+		for (Leg leg : legs)
+			legChoices.add(String.valueOf(leg.getId()), leg.getFlightNumber(), flightAssignment.getLeg() != null && leg.equals(flightAssignment.getLeg()));
+		legChoices.add("0", "----", flightAssignment.getLeg() == null); // Opción por defecto
 
 		// Desvincular los datos, sin incluir 'isDraftMode'
 		dataset = super.unbindObject(flightAssignment, "duty", "lastUpDate", "currentStatus", "remarks", "isDraftMode");
