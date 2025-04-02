@@ -46,6 +46,12 @@ master.menu.assistance-agent.list-complete-claims = Ver reclamaciones completada
 master.menu.assistance-agent.list-in-progress-claims = Ver reclamaciones en progreso
 master.menu.assistance-agent.create-claims = Crear reclamaciones
 
+# master.menu.assistance-agent ###################################################
+
+master.menu.assistance-agent = Assistance agent
+master.menu.assistance-agent.list-tracking-logs = Ver registros de seguimiento
+master.menu.assistance-agent.create-tracking-logs = Crear registros de seguimiento
+
 # master.menu.provider ########################################################
 
 master.menu.provider = Proveedor
