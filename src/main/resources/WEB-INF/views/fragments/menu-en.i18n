@@ -46,6 +46,8 @@ master.menu.administrator.shut-system-down = Shut system down
 master.menu.administrator.list-aircrafts = List aircrafts
 master.menu.administrator.list-supported-currencies = List system configuration
 
+master.menu.administrator.populate-weather = Populate weather (actual)
+
 # master.menu.provider ########################################################
 
 master.menu.provider = Provider

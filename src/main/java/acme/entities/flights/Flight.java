@@ -137,21 +137,21 @@ public class Flight extends AbstractEntity {
 		Boolean result = null;
 		List<Leg> legs = getSortedLegs();
 		if(!legs.isEmpty()) {
+			result = false;
 			FlightRepository repository = SpringHelper.getBean(FlightRepository.class);
 			for(Leg l: legs) {
 				List<Weather> listOriginWeather = repository.findWeatherByCity(l.getDepartureAirport().getCity());
 				List<Weather> listDestinyWeather = repository.findWeatherByCity(l.getArrivalAirport().getCity());
-				Date currentMoment = MomentHelper.getCurrentMoment();
-				Comparator<Weather> timeComparator = Comparator.comparing((Weather w) -> (currentMoment.getTime() - w.getForecastDate().getTime()));
-				Weather originWeather = listOriginWeather.stream().min(timeComparator).orElse(null);
-				Weather destinyWeather = listDestinyWeather.stream().min(timeComparator).orElse(null);
-				if(originWeather != null && destinyWeather != null) {
-					if(originWeather.getStatus().equals(WeatherStatus.BAD_WEATHER) || destinyWeather.getStatus().equals(WeatherStatus.BAD_WEATHER)) {
-						result = true;
-					} else {
-						result = false;
-					}
+				Comparator<Weather> timeComparatorOrigin = Comparator.comparing((Weather w) -> (w.getForecastDate().getTime() - l.getScheduledDeparture().getTime()));
+				Comparator<Weather> timeComparatorDestiny = Comparator.comparing((Weather w) -> (w.getForecastDate().getTime() - l.getScheduledArrival().getTime()));
+				Weather originWeather = listOriginWeather.stream().min(timeComparatorOrigin).orElse(null);
+				Weather destinyWeather = listDestinyWeather.stream().min(timeComparatorDestiny).orElse(null);
+				if((originWeather != null && (originWeather.getStatus().equals(WeatherStatus.BAD_WEATHER))) 
+					|| (destinyWeather != null && (destinyWeather.getStatus().equals(WeatherStatus.BAD_WEATHER)))) {
+					result = true;
+					break;
 				}
+				
 			}
 		}
 		return result;

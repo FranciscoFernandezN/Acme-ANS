@@ -1,0 +1,4 @@
+key,forecastDate,temperature,visibility,rain-per-hour,snow-per-hour,wind,city
+weather-01,"2024/02/02 00:00",22,5000,"0",0,12,London
+weather-02,2022/02/02 00:00,18,500,0,0,10,London
+weather-03,2024/02/02 00:00,10,1000,0,0.5,40,Los Angeles

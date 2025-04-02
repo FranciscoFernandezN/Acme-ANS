@@ -43,7 +43,7 @@ public class AnyFlightListBadWeatherService extends AbstractGuiService<Any, Flig
 		}
 		
 		flights = this.fr.findAllFlightsPosted();
-
+		
 		super.getBuffer().addData(flights.stream().filter(f -> f.getScheduledArrival().after(currentMoment)).filter(f -> f.getFlownWithBadWeather() != null && f.getFlownWithBadWeather()).toList());
 	}
 
