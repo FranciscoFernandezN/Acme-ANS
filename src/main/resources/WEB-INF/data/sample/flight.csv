@@ -1,2 +1,4 @@
-key,tag,needs-self-transfer,cost,description,key:airline,key:manager-of-flight
-flight-01,"LONG FLIGHT",true,EUR 1000.00,"This is a really long flight",airline-01,manager-01
+key,tag,needs-self-transfer,cost,description,isDraftMode,key:manager
+flight-01,"LONG FLIGHT",true,EUR 1000.00,"This is a really long flight",false,manager-01
+flight-02,CHEAPEST FLIGHT,false,GBP 10.00,This might be the cheapest you can fly,true,manager-02
+flight-03,SOME RANDOM FLIGHT,false,USD 500.00,,true,manager-01

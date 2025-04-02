@@ -1,0 +1,17 @@
+manager.manager-dashboard.form.title = Panel de indicadores para managers
+
+manager.manager-dashboard.form.label.rankingByYearsOfExperience = Ranking por años de experiencia:
+manager.manager-dashboard.form.label.yearsToRetire = Años para retirarse:
+manager.manager-dashboard.form.label.ratioOfOnTimeLegs = Ratio de tus tramos de vuelo a tiempo:
+manager.manager-dashboard.form.label.ratioOfDelayedLegs = Ratio de tus tramos de vuelo retrasados:
+manager.manager-dashboard.form.label.mostPopularAirportOfFlights = Código IATA del Aeropuerto más popular:
+manager.manager-dashboard.form.label.lessPopularAirportOfFlights = Código IATA del Aeropuerto menos popular:
+manager.manager-dashboard.form.label.numberOfOnTimeLegs = Número de tus tramos de vuelo a tiempo:
+manager.manager-dashboard.form.label.numberOfCancelledLegs = Número de tus tramos de vuelo cancelados:
+manager.manager-dashboard.form.label.numberOfDelayedLegs = Número de tus tramos de vuelo retrasados:
+manager.manager-dashboard.form.label.numberOfLandedLegs = Número de tus tramos de vuelo aterrizados:
+manager.manager-dashboard.form.label.averageCostOfFlights = Coste medio de tus vuelos:
+manager.manager-dashboard.form.label.minCostOfFlights = Coste mínimo de tus vuelos:
+manager.manager-dashboard.form.label.maxCostOfFlights = Coste máximo de tus vuelos:
+manager.manager-dashboard.form.label.stdDeviationCostOfFlights = Desviación estándar del coste de tus vuelos:
+

@@ -71,5 +71,5 @@ public class Airport extends AbstractEntity {
 
 	// Derived attributes -----------------------------------------------------
 	// Relationships ----------------------------------------------------------
-
+  
 }

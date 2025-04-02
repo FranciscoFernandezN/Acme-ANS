@@ -12,8 +12,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 
-import org.checkerframework.common.aliasing.qual.Unique;
-
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.datatypes.Money;
 import acme.client.components.mappings.Automapped;
@@ -22,9 +20,10 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
+import acme.constraints.ValidSupportedCurrency;
 import acme.entities.flights.Flight;
+import acme.entities.passengers.Passenger;
 import acme.realms.Customer;
-import acme.realms.Passenger;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -39,7 +38,6 @@ public class Booking extends AbstractEntity {
 
 	// Attributes -------------------------------------------------------------
 
-	@Unique
 	@Mandatory
 	@ValidString(min = 6, max = 8, pattern = "^[A-Z0-9]{6,8}$")
 	@Column(unique = true)
@@ -51,13 +49,13 @@ public class Booking extends AbstractEntity {
 	private Date				purchaseMoment;
 
 	@Mandatory
-	@Valid
 	@Enumerated(EnumType.STRING)
 	@Automapped
 	private TravelClass			travelClass;
 
 	@Mandatory
-	@ValidMoney(min = 0)
+	@ValidMoney(min = 0, max = 1000000)
+	@ValidSupportedCurrency
 	@Automapped
 	private Money				price;
 
@@ -65,6 +63,10 @@ public class Booking extends AbstractEntity {
 	@ValidString(min = 4, max = 4, pattern = "\\d{4}")
 	@Automapped
 	private String				lastNibble;
+
+	@Mandatory
+	@Automapped
+	private Boolean				isDraftMode;
 
 	// Derived attributes -----------------------------------------------------
 
