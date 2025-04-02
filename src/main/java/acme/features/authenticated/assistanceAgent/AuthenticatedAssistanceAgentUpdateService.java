@@ -68,7 +68,7 @@ public class AuthenticatedAssistanceAgentUpdateService extends AbstractGuiServic
 		List<String> AssistanceAgentIds = AssistanceAgents.stream().filter(m -> m.getId() != object.getId()).map(AssistanceAgent::getEmployeeCode).toList();
 
 		if (object.getEmployeeCode() != null)
-			super.state(!AssistanceAgentIds.contains(object.getEmployeeCode()), "identifierNumber", "authenticated.assistance-agent.create.not-unique-identifier");
+			super.state(!AssistanceAgentIds.contains(object.getEmployeeCode()), "employeeCode", "authenticated.assistance-agent.create.not-unique-identifier");
 	}
 
 	@Override

@@ -11,6 +11,6 @@ authenticated.assistance-agent.form.label.airline = Aerolínea para la que traba
 authenticated.assistance-agent.form.button.create = Registrarte
 authenticated.assistance-agent.form.button.update = Actualizar
 
-authenticated.assistance-agent.form.placeholder.salary = 1234.00 EUR
+authenticated.assistance-agent.form.placeholder.salary = 1234,00 EUR
 
 authenticated.assistance-agent.create.not-unique-identifier = Este identificador ya está en uso
