@@ -48,6 +48,19 @@
 			<acme:menu-suboption code="master.menu.administrator.shut-system-down" action="/administrator/system/shut-down"/>
 			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.list-supported-currencies" action="/administrator/supported-currency/list"/>
+			<acme:menu-separator/>
+			<acme:menu-suboption code="master.menu.administrator.list-claims" action="/administrator/claim/list"/>
+		</acme:menu-option>
+		
+		<acme:menu-option code="master.menu.assistance-agent" access="hasRealm('AssistanceAgent')">
+			<acme:menu-suboption code="master.menu.assistance-agent.list-complete-claims" action="/assistance-agent/claim/list-complete" />
+			<acme:menu-suboption code="master.menu.assistance-agent.list-in-progress-claims" action="/assistance-agent/claim/list-in-progress" />
+			<acme:menu-suboption code="master.menu.assistance-agent.create-claims" action="/assistance-agent/claim/create" />
+		</acme:menu-option>
+		
+		<acme:menu-option code="master.menu.assistance-agent" access="hasRealm('AssistanceAgent')">
+			<acme:menu-suboption code="master.menu.assistance-agent.list-tracking-logs" action="/assistance-agent/tracking-log/list" />
+			<acme:menu-suboption code="master.menu.assistance-agent.create-tracking-logs" action="/assistance-agent/tracking-log/create" />
 		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.provider" access="hasRealm('Provider')">
