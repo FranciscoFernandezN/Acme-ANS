@@ -5,6 +5,6 @@ flight-assignment-03,LEAD_ATTENDANT,2004/04/08 15:45,PENDING,Assigned to Flight 
 flight-assignment-04,CABIN_ATTENDANT,2017/08/07 18:15,CANCELLED,Assigned to Flight 404,true,flight-crew-member-04,leg-04
 flight-assignment-05,CABIN_ATTENDANT,2022/06/17 18:15,CANCELLED,Assigned to Flight 101,false,flight-crew-member-01,leg-04
 flight-assignment-06,CABIN_ATTENDANT,2020/08/27 18:15,CANCELLED,Assigned to Flight 202,true,flight-crew-member-02,leg-05
-flight-assignment-07,CABIN_ATTENDANT,2018/04/05 18:15,CANCELLED,Assigned to Flight 303,true,flight-crew-member-04,leg-06
-flight-assignment-08,CABIN_ATTENDANT,2019/09/09 18:15,CANCELLED,Assigned to Flight 404,true,flight-crew-member-03,leg-07
+flight-assignment-07,CABIN_ATTENDANT,2018/04/05 18:15,PENDING,Assigned to Flight 303,true,flight-crew-member-04,leg-06
+flight-assignment-08,CABIN_ATTENDANT,2019/09/09 18:15,CONFIRMED,Assigned to Flight 404,true,flight-crew-member-03,leg-07
 flight-assignment-09,CABIN_ATTENDANT,2020/08/11 18:15,CANCELLED,Assigned to Flight 303,false,flight-crew-member-03,leg-08

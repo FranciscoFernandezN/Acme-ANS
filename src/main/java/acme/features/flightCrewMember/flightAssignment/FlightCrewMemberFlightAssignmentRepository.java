@@ -38,4 +38,7 @@ public interface FlightCrewMemberFlightAssignmentRepository extends AbstractRepo
 
 	@Query("Select fa from FlightAssignment fa where fa.leg.scheduledArrival > :date")
 	List<FlightAssignment> findFlightAssignmentAfterCurrent(Date date);
+
+	@Query("Select fa from FlightAssignment fa")
+	List<FlightAssignment> findAllFlightAssignments();
 }
