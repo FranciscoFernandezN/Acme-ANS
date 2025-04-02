@@ -35,6 +35,11 @@
 		
 		<acme:menu-option code="master.menu.flight">
 			<acme:menu-suboption code="master.menu.any.list-flights" action="/any/flight/list" />
+			<acme:menu-suboption code="master.menu.any.list-bad-weather-flights" action="/any/flight/list-bad-weather"/>
+		</acme:menu-option>
+		
+		<acme:menu-option code="master.menu.weather">
+			<acme:menu-suboption code="master.menu.any.list-weather" action="/any/weather/list" />
 		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.administrator" access="hasRealm('Administrator')">

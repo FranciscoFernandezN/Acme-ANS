@@ -84,12 +84,11 @@ public class Weather extends AbstractEntity {
 		WeatherStatus result;
 		
 		if(wind >= BAD_WIND || rainPerHour >= BAD_RAIN || snowPerHour >= BAD_SNOW || temperature <= BAD_TEMP_LOW) {
-			result = WeatherStatus.valueOf("BAD_WEATHER");
-		}else if((wind <= BAD_WIND && wind >= MID_WIND) || (snowPerHour <= BAD_SNOW && snowPerHour >= MID_SNOW) ||
-			(rainPerHour <= BAD_RAIN && rainPerHour >= MID_RAIN) || (temperature >= BAD_TEMP_LOW && temperature <= MID_TEMP_LOW)) {
-			result = WeatherStatus.valueOf("MID_WEATHER");
+			result = WeatherStatus.BAD_WEATHER;
+		}else if(wind >= MID_WIND || snowPerHour >= MID_SNOW || rainPerHour >= MID_RAIN || temperature <= MID_TEMP_LOW) {
+			result = WeatherStatus.MID_WEATHER;
 		}else {
-			result = WeatherStatus.valueOf("GOOD_WEATHER");
+			result = WeatherStatus.GOOD_WEATHER;
 		}
 		
 		return result;

@@ -1,0 +1,16 @@
+any.weather.form.title = Formulario de predicciones del tiempo
+any.weather.list.title = Listado de predicciones del tiempo
+
+any.weather.form.label.forecastDate = Fecha de la predicción:
+any.weather.form.label.city = Ciudad:
+any.weather.form.label.status = Estado:
+any.weather.form.label.temperature = Temperatura (°C):
+any.weather.form.label.visibility = Visibilidad (km):
+any.weather.form.label.rainPerHour = Lluvia por hora (mm/h):
+any.weather.form.label.snowPerHour = Nieve por hora (mm/h):
+any.weather.form.label.wind = Viento (km/h):
+
+any.weather.list.label.forecastDate = Fecha de la predicción
+any.weather.list.label.city = Ciudad
+any.weather.list.label.status = Estado
+any.weather.list.label.temperature = Temperatura (°C)

@@ -1,30 +1,29 @@
-package acme.features.any.flight;
+package acme.features.any.weather;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.principals.Any;
-import acme.client.controllers.AbstractController;
 import acme.client.controllers.AbstractGuiController;
 import acme.client.controllers.GuiController;
-import acme.entities.flights.Flight;
-import acme.features.any.review.AnyReviewCreateService;
-import acme.features.any.review.AnyReviewListService;
+import acme.entities.weather.Weather;
+import acme.features.manager.leg.ManagerLegCreateService;
+import acme.features.manager.leg.ManagerLegDeleteService;
+import acme.features.manager.leg.ManagerLegListService;
+import acme.features.manager.leg.ManagerLegShowService;
+import acme.features.manager.leg.ManagerLegUpdateService;
 
 @GuiController
-public class AnyFlightController extends AbstractGuiController<Any, Flight> {
-	
+public class AnyWeatherController extends AbstractGuiController<Any, Weather> {
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	AnyFlightListService	listService;
+	private AnyWeatherListService	listService;
 
 	@Autowired
-	AnyFlightShowService	showService;
-	
-	@Autowired
-	AnyFlightListBadWeatherService listBadWeatherService;
+	private AnyWeatherShowService	showService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -33,7 +32,5 @@ public class AnyFlightController extends AbstractGuiController<Any, Flight> {
 	protected void initialise() {
 		super.addBasicCommand("list", this.listService);
 		super.addBasicCommand("show", this.showService);
-		super.addCustomCommand("list-bad-weather", "list", listBadWeatherService);
 	}
-	
 }
