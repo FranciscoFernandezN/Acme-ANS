@@ -139,8 +139,8 @@ public class Flight extends AbstractEntity {
 		if(!legs.isEmpty()) {
 			FlightRepository repository = SpringHelper.getBean(FlightRepository.class);
 			for(Leg l: legs) {
-				List<Weather> listOriginWeather = repository.findWeatherByAirportId(l.getDepartureAirport().getId());
-				List<Weather> listDestinyWeather = repository.findWeatherByAirportId(l.getArrivalAirport().getId());
+				List<Weather> listOriginWeather = repository.findWeatherByCity(l.getDepartureAirport().getCity());
+				List<Weather> listDestinyWeather = repository.findWeatherByCity(l.getArrivalAirport().getCity());
 				Date currentMoment = MomentHelper.getCurrentMoment();
 				Comparator<Weather> timeComparator = Comparator.comparing((Weather w) -> (currentMoment.getTime() - w.getForecastDate().getTime()));
 				Weather originWeather = listOriginWeather.stream().min(timeComparator).orElse(null);

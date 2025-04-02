@@ -12,8 +12,11 @@ import javax.validation.Valid;
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
+import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidNumber;
+import acme.client.components.validation.ValidString;
+import acme.components.weather.WeatherPOJO;
 import acme.entities.airports.Airport;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,44 +32,44 @@ public class Weather extends AbstractEntity {
 
 	// Attributes -------------------------------------------------------------
 	
-	@Mandatory
+	@Optional
 	@ValidMoment
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date forecastDate;
 	
-	@Mandatory
+	@Optional
 	@ValidNumber(min = -40., max = 60.)
 	@Automapped
 	private Double temperature;
 	
-	@Mandatory
-	@ValidNumber(min = 0., max = 10.)
+	@Optional
+	@ValidNumber(min = 0, max = 10000)
 	@Automapped
-	private Double visibility;
+	private Integer visibility;
 	
-	@Mandatory
+	@Optional
 	@ValidNumber(min = 0., max = 70.)
 	@Automapped
 	private Double rainPerHour;
 	
 
-	@Mandatory
+	@Optional
 	@ValidNumber(min = 0., max = 10.)
 	@Automapped
 	private Double snowPerHour;
 	
-	@Mandatory
+	@Optional
 	@ValidNumber(min = 0., max = 100.)
 	@Automapped
 	private Double wind;
 	
+	@Optional
+	@ValidString
+	@Automapped
+	private String city;
+	
 	// Derived attributes -----------------------------------------------------
-	
-	@Transient
-	public String getCity() {
-		return airport.getCity();
-	}
-	
+		
 	@Transient
 	public WeatherStatus getStatus() {
 		final Double BAD_WIND = 35.;
@@ -80,12 +83,15 @@ public class Weather extends AbstractEntity {
 		
 		final Double BAD_TEMP_LOW = -5.;
 		final Double MID_TEMP_LOW = 0.;
+		
+		final Integer BAD_VISIBILITY = 550;
+		final Integer MID_VISIBILITY = 1000;
 				
 		WeatherStatus result;
 		
-		if(wind >= BAD_WIND || rainPerHour >= BAD_RAIN || snowPerHour >= BAD_SNOW || temperature <= BAD_TEMP_LOW) {
+		if(wind >= BAD_WIND || rainPerHour >= BAD_RAIN || snowPerHour >= BAD_SNOW || temperature <= BAD_TEMP_LOW || visibility <= BAD_VISIBILITY) {
 			result = WeatherStatus.BAD_WEATHER;
-		}else if(wind >= MID_WIND || snowPerHour >= MID_SNOW || rainPerHour >= MID_RAIN || temperature <= MID_TEMP_LOW) {
+		}else if(wind >= MID_WIND || snowPerHour >= MID_SNOW || rainPerHour >= MID_RAIN || temperature <= MID_TEMP_LOW || visibility <= MID_VISIBILITY) {
 			result = WeatherStatus.MID_WEATHER;
 		}else {
 			result = WeatherStatus.GOOD_WEATHER;
@@ -95,9 +101,19 @@ public class Weather extends AbstractEntity {
 	}
 	
 	// Relationships ----------------------------------------------------------
+
+	// Ancillary methods ------------------------------------------------------
 	
-	@Mandatory
-	@Valid
-	@ManyToOne(optional = false)
-	private Airport airport;
+	public static Weather of(WeatherPOJO w, Date date, String city) {
+		Weather weather = new Weather();
+		weather.setCity(city);
+		weather.setForecastDate(date);
+		weather.setTemperature(w.getMain() != null ? w.getMain().getTemp() : 20);
+		weather.setVisibility(w.getVisibility() != null ? w.getVisibility() : 10000);
+		weather.setWind(w.getWind() != null ? w.getWind().getSpeed() : 0.);
+		weather.setRainPerHour(w.getRain() != null ? w.getRain().getValue() : 0.);
+		weather.setSnowPerHour(w.getSnow() != null ? w.getSnow().getValue() : 0.);
+		
+		return weather;
+	}
 }

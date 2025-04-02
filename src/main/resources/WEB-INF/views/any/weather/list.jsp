@@ -5,9 +5,9 @@
 
 <acme:list >
 
-	<acme:list-column code="any.weather.list.label.city" path="name" width="25%"/>
-	<acme:list-column code="any.weather.list.label.forecastDate" path="postedAt" width="25%"/>
-	<acme:list-column code="any.weather.list.label.status" path="subject" width="25%"/>
-	<acme:list-column code="any.weather.list.label.temperature" path="body" width="25%"/>
+	<acme:list-column code="any.weather.list.label.city" path="city" width="25%"/>
+	<acme:list-column code="any.weather.list.label.forecastDate" path="forecastDate" width="25%"/>
+	<acme:list-column code="any.weather.list.label.status" path="status" width="25%"/>
+	<acme:list-column code="any.weather.list.label.temperature" path="temperature" width="25%"/>
 		
 </acme:list>
