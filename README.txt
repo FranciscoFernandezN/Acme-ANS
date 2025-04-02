@@ -20,7 +20,7 @@ teniendo en cuenta que se debe vincular la versión adecuada de Acme-Framework, 
 
 Enlace al tablero de GitHub del proyecto: https://github.com/users/FranciscoFernandezN/projects/2/views/1
 
-Enlace al tablero del proyecto de Francisco Fernández Noguerol: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=FranciscoFernandezN
+Enlace al tablero del proyecto de Francisco Fernández Noguerol: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=assignee%3AFranciscoFernandezN
 Enlace al tablero del proyecto de Esteban Gómez Navarro: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=Estegn10
 Enlace al tablero del proyecto de Beatriz Gutiérrez Arazo: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=BPP4634
 Enlace al tablero del proyecto de Juan Varo Vera: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=Juan-Varo
