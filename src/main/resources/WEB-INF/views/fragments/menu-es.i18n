@@ -38,6 +38,7 @@ master.menu.administrator.populate-db-sample = Poblar BD (ejemplos)
 master.menu.administrator.shut-system-down = Parar el sistema
 master.menu.administrator.list-aircrafts = Listar aeronaves
 master.menu.administrator.list-supported-currencies = Listar la configuración del sistema
+master.menu.administrator.list-claims = Ver las reclamaciones
 
 # master.menu.assistance-agent ###################################################
 

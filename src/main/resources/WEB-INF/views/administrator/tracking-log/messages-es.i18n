@@ -1,0 +1,7 @@
+administrator.tracking-log.form.title = Fromulario de registro de seguimiento
+
+administrator.tracking-log.form.label.lastUpdateMoment = Momento de última actualización:
+administrator.tracking-log.form.label.step = Paso del trámite:
+administrator.tracking-log.form.label.resolutionPercentage = Porcentaje de resolución:
+administrator.tracking-log.form.label.resolution = Resolución:
+administrator.tracking-log.form.label.isPublished = ¿Está publicado?

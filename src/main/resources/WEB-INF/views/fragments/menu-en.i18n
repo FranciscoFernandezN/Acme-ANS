@@ -38,6 +38,7 @@ master.menu.administrator.populate-db-sample = Populate DB (samples)
 master.menu.administrator.shut-system-down = Shut system down
 master.menu.administrator.list-aircrafts = List aircrafts
 master.menu.administrator.list-supported-currencies = List system configuration
+master.menu.administrator.list-claims = List of claims
 
 # master.menu.assistance-agent ###################################################
 
