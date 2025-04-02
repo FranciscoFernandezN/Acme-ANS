@@ -16,7 +16,7 @@ master.menu.authenticated.create-reviews = Crear reseña
 
 # master.menu.airport #######################################################
 
-master.menu.airport = Aeropuerto
+master.menu.airport = Aeropuertos
 master.menu.authenticated.list-airport = Ver aeropuertos
 
 # master.menu.anonymous #######################################################

@@ -1,4 +1,5 @@
 any.airport.list.title = Listing of airports
+any.airport.form.title = Airport form
 
 any.airport.form.label.name = Name:
 any.airport.form.label.iATACode = IATA Code:

@@ -1,4 +1,5 @@
 any.airport.list.title = Listado de aeropuertos
+any.airport.form.title = Formulario de aeropuertos
 
 any.airport.form.label.name = Nombre:
 any.airport.form.label.iATACode = Código IATA:
@@ -10,7 +11,7 @@ any.airport.form.label.email = Email de contacto:
 any.airport.form.label.contactNumber = Número de contacto:
 
 any.airport.list.label.name = Nombre
-any.airport.list.label..iATACode = Código IATA
+any.airport.list.label.iATACode = Código IATA
 any.airport.list.label.operationalScope = Ámbito
 any.airport.list.label.city = Ciudad
 any.airport.list.label.country = País
