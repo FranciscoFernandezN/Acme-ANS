@@ -58,7 +58,7 @@ public class AdministratorAirportUpdateService extends AbstractGuiService<Admini
 			super.state(!airportIds.contains(object.getIATACode()), "iATACode", "administrator.airport.create.already-exists");
 
 		if (!confirmation)
-			super.state(confirmation, "confirmation", "administrator.airport.create.confirm-operation");
+			super.state(!confirmation, "confirmation", "administrator.airport.create.confirm-operation");
 	}
 
 	@Override
