@@ -15,7 +15,7 @@ administrator.airport.form.button.create = Crear aeropuerto
 administrator.airport.form.button.update = Actualizar aeropuerto
 
 administrator.airport.list.label.name = Nombre
-administrator.airport.list.label..iATACode = Código IATA
+administrator.airport.list.label.iATACode = Código IATA
 administrator.airport.list.label.operationalScope = Ámbito
 administrator.airport.list.label.city = Ciudad
 administrator.airport.list.label.country = País

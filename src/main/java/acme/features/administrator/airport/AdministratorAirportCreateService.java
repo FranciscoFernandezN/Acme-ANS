@@ -1,6 +1,8 @@
 
 package acme.features.administrator.airport;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -24,7 +26,7 @@ public class AdministratorAirportCreateService extends AbstractGuiService<Admini
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Administrator.class));
 	}
 
 	@Override
@@ -42,15 +44,14 @@ public class AdministratorAirportCreateService extends AbstractGuiService<Admini
 	}
 
 	@Override
-	public void validate(final Airport airport) {
-		Boolean existsThisCode = this.aar.findAllAirports().stream().anyMatch(a -> airport.getIATACode().equals(a.getIATACode()));
+	public void validate(final Airport object) {
+		assert object != null;
 
-		if (existsThisCode == false) {
-			boolean confirmation;
-			confirmation = super.getRequest().getData("confirmation", boolean.class);
-			super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
-		} else
-			super.state(!existsThisCode, "iATACode", "administrator.airport.create.already-exists");
+		List<Airport> airports = this.aar.findAllAirports();
+		List<String> airportIds = airports.stream().map(Airport::getIATACode).toList();
+
+		if (object.getIATACode() != null)
+			super.state(!airportIds.contains(object.getIATACode()), "iATACode", "administrator.airport.create.already-exists");
 	}
 
 	@Override
