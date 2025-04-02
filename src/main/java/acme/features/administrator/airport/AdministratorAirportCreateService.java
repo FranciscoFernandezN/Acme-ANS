@@ -46,12 +46,17 @@ public class AdministratorAirportCreateService extends AbstractGuiService<Admini
 	@Override
 	public void validate(final Airport object) {
 		assert object != null;
+		boolean confirmation;
+		confirmation = super.getRequest().getData("confirmation", boolean.class);
 
 		List<Airport> airports = this.aar.findAllAirports();
 		List<String> airportIds = airports.stream().map(Airport::getIATACode).toList();
 
 		if (object.getIATACode() != null)
 			super.state(!airportIds.contains(object.getIATACode()), "iATACode", "administrator.airport.create.already-exists");
+
+		if (!confirmation)
+			super.state(confirmation, "confirmation", "administrator.airport.create.confirm-operation");
 	}
 
 	@Override

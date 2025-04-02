@@ -26,3 +26,4 @@ administrator.airport.list.label.contactNumber = Número de contacto
 administrator.airport.list.button.create = Crear un nuevo aeropuerto
 
 administrator.airport.create.already-exists = Este código IATA ya existe
+administrator.airport.create.confirm-operation = Debes confirmar la operación
