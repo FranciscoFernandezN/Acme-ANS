@@ -61,6 +61,7 @@ master.menu.manager.create-flights = Crear vuelos
 # master.menu.customer ##########################################################
 
 master.menu.customer = Cliente
+master.menu.customer.dashboard = Panel de indicadores
 master.menu.customer.list-booking = Ver reservas
 master.menu.customer.create-booking = Crear reserva
 master.menu.customer.list-passenger = Ver pasajeros

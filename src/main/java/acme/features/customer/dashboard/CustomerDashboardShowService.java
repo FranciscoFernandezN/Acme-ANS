@@ -49,18 +49,32 @@ public class CustomerDashboardShowService extends AbstractGuiService<Customer, C
 		Collection<Booking> bookings = this.repository.findAllBookings(customerId);
 
 		Comparator<Booking> cmp = Comparator.comparing(Booking::getPurchaseMoment);
-		List<String> lastDestinies = bookings.stream().sorted(cmp.thenComparing(Booking::getId)).map(b -> b.getFlight().getDestiny()).limit(5L).toList();
+		List<String> lastDestiniesList = bookings.stream().sorted(cmp.thenComparing(Booking::getId)).map(b -> b.getFlight().getDestiny()).distinct().limit(5L).toList();
+		String lastDestinies = "";
+		for (String d : lastDestiniesList) {
+			int pos = lastDestiniesList.indexOf(d) + 1;
+			lastDestinies += pos + ": " + d + ", ";
+		}
+		if (!lastDestinies.isEmpty())
+			lastDestinies = lastDestinies.substring(0, lastDestinies.length() - 2);
+
 		dashboard.setLastFiveDestinations(lastDestinies);
 
 		Date lastYear = MomentHelper.getCurrentMoment();
 		lastYear.setYear(lastYear.getYear() - 1);
 		dashboard.setMoneySpentLastYear(this.repository.moneySpentLastYear(lastYear, customerId));
 
-		Map<TravelClass, Integer> numOfBookingsByTravelClass = bookings.stream().collect(Collectors.groupingBy(Booking::getTravelClass, Collectors.summingInt(e -> 1)));
+		Map<TravelClass, Integer> numOfBookingsByTravelClassMap = bookings.stream().collect(Collectors.groupingBy(Booking::getTravelClass, Collectors.summingInt(e -> 1)));
+		String numOfBookingsByTravelClass = "";
+		for (TravelClass k : numOfBookingsByTravelClassMap.keySet())
+			numOfBookingsByTravelClass += k + ": " + numOfBookingsByTravelClassMap.get(k) + ", ";
+		if (!numOfBookingsByTravelClass.isEmpty())
+			numOfBookingsByTravelClass = numOfBookingsByTravelClass.substring(0, numOfBookingsByTravelClass.length() - 2);
+
 		dashboard.setNumOfBookingsByTravelClass(numOfBookingsByTravelClass);
 
 		Date lastFiveYears = MomentHelper.getCurrentMoment();
-		lastYear.setYear(lastYear.getYear() - 5);
+		lastFiveYears.setYear(lastYear.getYear() - 5);
 		dashboard.setMoneySpentLastYear(this.repository.moneySpentLastYear(lastYear, customerId));
 		DoubleSummaryStatistics moneyStats = bookings.stream().filter(e -> e.getPurchaseMoment().after(lastFiveYears)).mapToDouble(e -> e.getPrice().getAmount()).summaryStatistics();
 		String defaultCurrency = PropertyHelper.getRequiredProperty("acme.currency.default", String.class);
@@ -85,7 +99,7 @@ public class CustomerDashboardShowService extends AbstractGuiService<Customer, C
 		for (Booking b : bookings)
 			standardDeviation += Math.pow(b.getPrice().getAmount() - avgMon.getAmount(), 2);
 		standardDeviation = Math.sqrt(standardDeviation / bookings.size());
-		dashboard.setStdDeviationCostOfBookingsLastFiveYears(avgMon);
+		dashboard.setStdDeviationCostOfBookingsLastFiveYears(standardDeviation);
 
 		dashboard.setMinNumOfPassengersInBookings(1);
 		dashboard.setMaxNumOfPassengersInBookings(1);
