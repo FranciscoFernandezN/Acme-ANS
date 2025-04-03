@@ -36,8 +36,17 @@
 		<acme:menu-option code="master.menu.flight">
 			<acme:menu-suboption code="master.menu.any.list-flights" action="/any/flight/list" />
 		</acme:menu-option>
+		
+		<acme:menu-option code="master.menu.airport">
+			<acme:menu-suboption code="master.menu.authenticated.list-airport" action="/any/airport/list" />
+		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.administrator" access="hasRealm('Administrator')">
+			<acme:menu-suboption code="master.menu.administrator.list-airlines"  action="/administrator/airline/list" />
+			<acme:menu-suboption code="master.menu.administrator.create-airlines"  action="/administrator/airline/create" />
+      <acme:menu-separator/>
+			<acme:menu-suboption code="master.menu.administrator.list-aircrafts" action="/administrator/aircraft/list"/>
+			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.list-user-accounts" action="/administrator/user-account/list"/>
 			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.list-services" action="/administrator/service/list"/>
@@ -47,6 +56,13 @@
 			<acme:menu-suboption code="master.menu.administrator.populate-db-sample" action="/administrator/system/populate-sample"/>			
 			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.shut-system-down" action="/administrator/system/shut-down"/>
+			<acme:menu-separator/>
+			<acme:menu-suboption code="master.menu.administrator.list-supported-currencies" action="/administrator/supported-currency/list"/>
+		</acme:menu-option>
+		
+		<acme:menu-option code="master.menu.assistance-agent" access="hasRealm('AssistanceAgent')">
+			<acme:menu-suboption code="master.menu.assistance-agent.list-tracking-logs" action="/assistance-agent/tracking-log/list" />
+			<acme:menu-suboption code="master.menu.assistance-agent.create-tracking-logs" action="/assistance-agent/tracking-log/create" />
 		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.provider" access="hasRealm('Provider')">
@@ -66,6 +82,13 @@
 			<acme:menu-suboption code="master.menu.manager.list-flights" action="/manager/flight/list"/>
 			<acme:menu-suboption code="master.menu.manager.create-flights" action="/manager/flight/create"/>
 		</acme:menu-option>
+		<acme:menu-option code="master.menu.customer" access="hasRealm('Customer')">
+			<acme:menu-suboption code="master.menu.customer.list-booking" action="/customer/booking/list"/>
+			<acme:menu-suboption code="master.menu.customer.create-booking" action="/customer/booking/create"/>
+			<acme:menu-separator/>
+			<acme:menu-suboption code="master.menu.customer.list-passenger" action="/customer/passenger/list"/>
+			<acme:menu-suboption code="master.menu.customer.create-passenger" action="/customer/passenger/create"/>
+		</acme:menu-option>
 	</acme:menu-left>
 
 	<acme:menu-right>		
@@ -77,6 +100,8 @@
 			<acme:menu-suboption code="master.menu.user-account.consumer-profile" action="/authenticated/consumer/update" access="hasRealm('Consumer')"/>
 			<acme:menu-suboption code="master.menu.user-account.become-manager" action="/authenticated/manager/create" access="!hasRealm('Manager')"/>
 			<acme:menu-suboption code="master.menu.user-account.manager-profile" action="/authenticated/manager/update" access="hasRealm('Manager')"/>
+			<acme:menu-suboption code="master.menu.user-account.become-agent" action="/authenticated/assistance-agent/create" access="!hasRealm('AssistanceAgent')"/>
+			<acme:menu-suboption code="master.menu.user-account.agent-profile" action="/authenticated/assistance-agent/update" access="hasRealm('AssistanceAgent')"/>
 		</acme:menu-option>
 	</acme:menu-right>
 </acme:menu-bar>

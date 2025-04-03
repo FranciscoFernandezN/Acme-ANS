@@ -17,6 +17,8 @@ import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidScore;
 import acme.client.components.validation.ValidString;
 import acme.entities.claims.Claim;
+import acme.entities.claims.ClaimState;
+import acme.realms.AssistanceAgent;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -51,12 +53,16 @@ public class TrackingLog extends AbstractEntity {
 	@Automapped
 	private String				resolution;
 
+	@Mandatory
+	@Automapped
+	private Boolean				isPublished;
+
 	// Derived attributes -----------------------------------------------------
 
 
 	@Transient
-	private Boolean getAcceptance() {
-		return this.claim.getAccepted();
+	private ClaimState getAcceptance() {
+		return this.claim.getIndicator();
 	}
 
 	// Relationships ----------------------------------------------------------
@@ -65,6 +71,11 @@ public class TrackingLog extends AbstractEntity {
 	@Mandatory
 	@Valid
 	@ManyToOne(optional = false)
-	private Claim claim;
+	private Claim			claim;
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private AssistanceAgent	agent;
 
 }
