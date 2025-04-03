@@ -25,3 +25,5 @@ Enlace al tablero del proyecto de Esteban Gómez Navarro: https://github.com/use
 Enlace al tablero del proyecto de Beatriz Gutiérrez Arazo: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=BPP4634
 Enlace al tablero del proyecto de Juan Varo Vera: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=Juan-Varo
 Enlace al tablero del proyecto de Manuel Jesús Benito Merchán: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=ManuelJBM
+
+Enlace al testeo del requisito 14 grupal de la aplicación: https://uses0-my.sharepoint.com/:v:/g/personal/beagutara_alum_us_es/Eec8I5YLmKNJhqI-qkrZ8woB77mB2AFDcOC6ubZyMpKkig?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=jPfU4B

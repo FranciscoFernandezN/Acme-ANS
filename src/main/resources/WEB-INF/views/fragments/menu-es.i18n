@@ -19,6 +19,11 @@ master.menu.any.create-reviews = Crear reseña
 master.menu.flight = Vuelos
 master.menu.any.list-flights = Ver vuelos
 
+# master.menu.airport #######################################################
+
+master.menu.airport = Aeropuertos
+master.menu.authenticated.list-airport = Ver aeropuertos
+
 # master.menu.anonymous #######################################################
 
 master.menu.anonymous = Anónimo
@@ -36,7 +41,10 @@ master.menu.administrator.list-user-accounts = Ver cuentas de usuario
 master.menu.administrator.populate-db-initial = Poblar BD (inicial)
 master.menu.administrator.populate-db-sample = Poblar BD (ejemplos)
 master.menu.administrator.shut-system-down = Parar el sistema
+master.menu.administrator.list-airlines = Listar aerolíneas
+master.menu.administrator.create-airlines = Crear aerolíneas
 master.menu.administrator.list-aircrafts = Listar aeronaves
+master.menu.administrator.list-bookings = Listar reservas
 master.menu.administrator.list-supported-currencies = Listar la configuración del sistema
 master.menu.administrator.list-claims = Ver las reclamaciones
 
@@ -50,6 +58,12 @@ master.menu.assistance-agent.create-claims = Crear reclamaciones
 # master.menu.assistance-agent ###################################################
 
 master.menu.assistance-agent = Assistance agent
+master.menu.assistance-agent.list-tracking-logs = Ver registros de seguimiento
+master.menu.assistance-agent.create-tracking-logs = Crear registros de seguimiento
+
+# master.menu.assistance-agent ###################################################
+
+master.menu.assistance-agent = Agente de asistencia
 master.menu.assistance-agent.list-tracking-logs = Ver registros de seguimiento
 master.menu.assistance-agent.create-tracking-logs = Crear registros de seguimiento
 
@@ -75,8 +89,11 @@ master.menu.manager.create-flights = Crear vuelos
 # master.menu.customer ##########################################################
 
 master.menu.customer = Cliente
+master.menu.customer.dashboard = Panel de indicadores
 master.menu.customer.list-booking = Ver reservas
-master.menu.customer.create-booking = Crear reservas
+master.menu.customer.create-booking = Crear reserva
+master.menu.customer.list-passenger = Ver pasajeros
+master.menu.customer.create-passenger = Crear pasajero
 
 # master.menu.user-account ####################################################
 
@@ -88,3 +105,7 @@ master.menu.user-account.become-consumer = Hazte consumidor
 master.menu.user-account.consumer-profile = Perfil de consumidor
 master.menu.user-account.become-manager = Hazte manager
 master.menu.user-account.manager-profile =  Perfil de manager
+master.menu.user-account.become-customer = Hazte cliente
+master.menu.user-account.customer-profile =  Perfil de cliente
+master.menu.user-account.become-agent = Hazte asistente
+master.menu.user-account.agent-profile = Perfil de asistente
