@@ -1,4 +1,4 @@
-key,full-name,email,passport-number,date-of-birth,special-needs
-passenger-01,Rosa Martinez,eltioraperas@gmail.com,R8GJ4NDI3,1980/10/01 00:00,""
-passenger-02,Pipo Moralea,estonoesunacuentafalsa@hotmail.com,098765,2000/03/07 00:00,""
-passenger-03,Rei Fujisaki,uwu@gmail.com,MFURBWKGN,1973/11/20 00:00,Peanut allergy
+key,full-name,email,passport-number,date-of-birth,special-needs,is-draft-mode,key:customer
+passenger-01,Rosa Martinez,eltioraperas@gmail.com,R8GJ4NDI3,1980/10/01 00:00,"",false,customer-01
+passenger-02,Pipo Moralea,estonoesunacuentafalsa@hotmail.com,098765,2000/03/07 00:00,"",false,customer-02
+passenger-03,Rei Fujisaki,uwu@gmail.com,MFURBWKGN,1973/11/20 00:00,Peanut allergy,false,customer-02
