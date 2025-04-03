@@ -89,7 +89,7 @@ public class AssistanceAgentsClaimUpdateService extends AbstractGuiService<Assis
 		typeChoices = SelectChoices.from(ClaimType.class, claim.getClaimType());
 		indicatorChoices = SelectChoices.from(ClaimState.class, claim.getIndicator());
 
-		dataset = super.unbindObject(claim, "passengerEmail", "description", "claimType", "indicator", "isPublished", "leg");
+		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "claimType", "indicator", "isPublished", "leg");
 		dataset.put("claimType", typeChoices);
 		dataset.put("indicator", indicatorChoices);
 		dataset.put("leg", legChoices);
