@@ -44,6 +44,7 @@ master.menu.administrator.shut-system-down = Parar el sistema
 master.menu.administrator.list-airlines = Listar aerolíneas
 master.menu.administrator.create-airlines = Crear aerolíneas
 master.menu.administrator.list-aircrafts = Listar aeronaves
+master.menu.administrator.list-bookings = Listar reservas
 master.menu.administrator.list-supported-currencies = Listar la configuración del sistema
 
 # master.menu.assistance-agent ###################################################
