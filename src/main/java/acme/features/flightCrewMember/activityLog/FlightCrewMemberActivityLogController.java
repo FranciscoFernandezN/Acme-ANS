@@ -8,10 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.controllers.AbstractGuiController;
 import acme.client.controllers.GuiController;
 import acme.entities.activityLogs.ActivityLog;
-import acme.features.administrator.aircraft.AdministratorAircraftDisableService;
-import acme.features.administrator.aircraft.AdministratorAircraftListService;
-import acme.features.administrator.aircraft.AdministratorAircraftShowService;
-import acme.features.administrator.aircraft.AdministratorAircraftUpdateService;
 import acme.realms.FlightCrewMember;
 
 @GuiController
@@ -19,19 +15,22 @@ public class FlightCrewMemberActivityLogController extends AbstractGuiController
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	AdministratorAircraftListService	listService;
+	FlightCrewMemberActivityLogListService		listService;
 
 	@Autowired
-	AdministratorAircraftShowService	showService;
+	FlightCrewMemberActivityLogShowService		showService;
 
 	@Autowired
-	AdministratorAircraftUpdateService	updateService;
+	FlightCrewMemberActivityLogUpdateService	updateService;
 
 	@Autowired
-	FlightCrewMemberCreateService		createService;
+	FlightCrewMemberActivityLogCreateService	createService;
 
 	@Autowired
-	AdministratorAircraftDisableService	disableService;
+	FlightCrewMemberActivityLogDeleteService	deleteService;
+
+	@Autowired
+	FlightCrewMemberActivityLogPublishService	publishService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -42,6 +41,7 @@ public class FlightCrewMemberActivityLogController extends AbstractGuiController
 		super.addBasicCommand("show", this.showService);
 		super.addBasicCommand("update", this.updateService);
 		super.addBasicCommand("create", this.createService);
+		super.addBasicCommand("delete", this.deleteService);
 		super.addCustomCommand("publish", "update", this.publishService);
 	}
 }

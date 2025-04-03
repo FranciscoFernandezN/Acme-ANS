@@ -39,6 +39,11 @@ master.menu.administrator.shut-system-down = Parar el sistema
 master.menu.administrator.list-aircrafts = Listar aeronaves
 master.menu.administrator.list-supported-currencies = Listar la configuración del sistema
 
+# master.menu.flight-crew-member ###################################################
+
+master.menu.flight-crew-member = Miembro de la tripulación
+master.menu.flight-crew-member.list-activity-log = Listar registro de actividad
+
 # master.menu.provider ########################################################
 
 master.menu.provider = Proveedor
