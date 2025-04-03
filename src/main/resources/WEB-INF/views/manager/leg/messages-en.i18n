@@ -35,3 +35,5 @@ manager.leg.create.already-in-use-aircraft = This aircraft has already been plan
 manager.leg.create.too-long-leg = You can't have a +24 hours duration leg 
 manager.leg.delete.is-published = You can't delete a published leg
 manager.leg.create.already-in-use-flight = This flight cannot accept this leg due to overlapping dates
+manager.leg.create.not-your-flight = This flight is not yours
+manager.leg.create.not-your-aircraft = This aircraft is not yours

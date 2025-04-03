@@ -22,6 +22,9 @@ public class AnyFlightController extends AbstractGuiController<Any, Flight> {
 
 	@Autowired
 	AnyFlightShowService	showService;
+	
+	@Autowired
+	AnyFlightListBadWeatherService listBadWeatherService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -30,6 +33,7 @@ public class AnyFlightController extends AbstractGuiController<Any, Flight> {
 	protected void initialise() {
 		super.addBasicCommand("list", this.listService);
 		super.addBasicCommand("show", this.showService);
+		super.addCustomCommand("list-bad-weather", "list", listBadWeatherService);
 	}
 	
 }

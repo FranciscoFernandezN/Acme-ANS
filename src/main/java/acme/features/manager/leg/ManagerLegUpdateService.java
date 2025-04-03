@@ -94,7 +94,11 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 	public void validate(final Leg leg) {
 
 		//Ver si haría falta validar cosas aunque sean con un SelectChoices
+		
+		Manager manager;
 
+		manager = (Manager) super.getRequest().getPrincipal().getRealmOfType(Manager.class);
+		
 		Date currentMoment = MomentHelper.getCurrentMoment();
 
 		List<Leg> legs = this.lr.findAllLegs();
@@ -123,13 +127,25 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 		
 
 		int aircraftId;
+		Aircraft aircraft;
 		aircraftId = super.getRequest().getData("aircraft", int.class);
 		List<Leg> legsOfAircraft = this.lr.findAllLegsOfAircraftByAircraftId(aircraftId);
-
+		aircraft = this.lr.findAircraftById(aircraftId);
+		
+		if (aircraftId != 0) {
+			super.state(aircraft.getAirline().getId() == manager.getAirlineManaging().getId(), "aircraft", "manager.leg.create.not-your-aircraft");
+		}
+		
 		int flightId;
 		flightId = super.getRequest().getData("flight", int.class);
 		List<Leg> legsOfFlight = this.lr.findAllLegsByFlightId(flightId);
-
+		List<Flight> flights;
+		flights = this.lr.findAllFlightsEditableByManagerId(manager.getId());
+		if(flightId != 0) {
+			super.state(flights.stream().map(f -> f.getId()).anyMatch(f -> f == flightId), "flight", "manager.leg.create.not-your-flight");
+		}
+		
+		
 		Predicate<Leg> legsAreBefore = (final Leg l) -> (leg.getScheduledArrival().before(l.getScheduledDeparture()) && leg.getScheduledDeparture().before(l.getScheduledDeparture()));
 		Predicate<Leg> legsAreAfter = (final Leg l) -> (leg.getScheduledArrival().after(l.getScheduledArrival()) && leg.getScheduledDeparture().after(l.getScheduledArrival()));
 

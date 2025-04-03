@@ -30,7 +30,7 @@ public interface ManagerLegRepository extends AbstractRepository {
 	@Query("SELECT a FROM Airport a")
 	List<Airport> findAllAirports();
 
-	@Query("SELECT a FROM Aircraft a WHERE a.airline.id = :id")
+	@Query("SELECT a FROM Aircraft a WHERE a.airline.id = :id AND a.isEnabled = true")
 	List<Aircraft> findAllAircraftsByAirlineId(int id);
 
 	@Query("SELECT a FROM Aircraft a WHERE a.id = :id")
