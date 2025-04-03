@@ -10,6 +10,11 @@
 
 # master.menu.reviews #######################################################
 
+master.menu.weather = Weather
+master.menu.any.list-weather = List weather
+
+# master.menu.reviews #######################################################
+
 master.menu.review = Reseñas
 master.menu.any.list-reviews = Ver reseñas
 master.menu.any.create-reviews = Crear reseña
@@ -18,6 +23,7 @@ master.menu.any.create-reviews = Crear reseña
 
 master.menu.flight = Vuelos
 master.menu.any.list-flights = Ver vuelos
+master.menu.any.list-bad-weather-flights = Ver vuelos con mal tiempo
 
 # master.menu.airport #######################################################
 
@@ -52,6 +58,7 @@ master.menu.administrator.list-bookings = Listar reservas
 
 master.menu.administrator.list-supported-currencies = Listar la configuración del sistema
 master.menu.administrator.list-claims = Ver las reclamaciones
+master.menu.administrator.populate-weather = Poblar tiempo (actual)
 
 # master.menu.assistance-agent ###################################################
 
@@ -60,6 +67,12 @@ master.menu.assistance-agent.dashboard = Panel de indicadores
 master.menu.assistance-agent.list-complete-claims = Ver reclamaciones completadas
 master.menu.assistance-agent.list-in-progress-claims = Ver reclamaciones en progreso
 master.menu.assistance-agent.create-claims = Crear reclamaciones
+
+# master.menu.assistance-agent ###################################################
+
+master.menu.assistance-agent = Agente de asistencia
+master.menu.assistance-agent.list-tracking-logs = Ver registros de seguimiento
+master.menu.assistance-agent.create-tracking-logs = Crear registros de seguimiento
 
 # master.menu.provider ########################################################
 

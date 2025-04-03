@@ -35,3 +35,5 @@ manager.leg.create.already-in-use-aircraft = Esta aeronave ya ha sido planeada p
 manager.leg.create.too-long-leg = No puedes tener un tramo de +24 horas de duración
 manager.leg.delete.is-published = No puedes borrar un vuelo publicado
 manager.leg.create.already-in-use-flight = Este vuelo no puede aceptar este tramo debido a que se solapan las fechas
+manager.leg.create.not-your-flight = Este vuelo no es tuyo
+manager.leg.create.not-your-aircraft = Esta aeronave no es tuya

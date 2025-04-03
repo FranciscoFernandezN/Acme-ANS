@@ -7,16 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.principals.Any;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
-import acme.client.services.AbstractService;
 import acme.client.services.GuiService;
 import acme.entities.flights.Flight;
-import acme.entities.legs.Leg;
-import acme.features.manager.flight.ManagerFlightRepository;
-import acme.realms.Manager;
 
 @GuiService
-public class AnyFlightShowService extends AbstractGuiService<Any, Flight> {
+public class AnyFlightListBadWeatherService extends AbstractGuiService<Any, Flight> {
 	
 	// Internal state ---------------------------------------------------------
 
@@ -28,24 +25,26 @@ public class AnyFlightShowService extends AbstractGuiService<Any, Flight> {
 
 	@Override
 	public void authorise() {
-		int flightId;
-		Flight flight;
-
-		flightId = super.getRequest().getData("id", int.class);
-		flight = this.fr.findFlightById(flightId);
-
-		super.getResponse().setAuthorised(!flight.getIsDraftMode());
+		super.getResponse().setAuthorised(true);
 	}
 
 	@Override
 	public void load() {
-		Flight flight;
-		int flightId;
-
-		flightId = super.getRequest().getData("id", int.class);
-		flight = this.fr.findFlightById(flightId);
-
-		super.getBuffer().addData(flight);
+		List<Flight> flights;
+		Date currentMoment;
+		
+		currentMoment = MomentHelper.getCurrentMoment();
+		Integer newMonth = currentMoment.getMonth() - 1;
+		if(newMonth < 0) {
+			currentMoment.setMonth(11);
+			currentMoment.setYear(currentMoment.getYear() - 1);
+		} else {
+			currentMoment.setMonth(newMonth);
+		}
+		
+		flights = this.fr.findAllFlightsPosted();
+		
+		super.getBuffer().addData(flights.stream().filter(f -> f.getScheduledArrival().after(currentMoment)).filter(f -> f.getFlownWithBadWeather() != null && f.getFlownWithBadWeather()).toList());
 	}
 
 	@Override
@@ -58,14 +57,13 @@ public class AnyFlightShowService extends AbstractGuiService<Any, Flight> {
 		Date scheduledDeparture = flight.getScheduledDeparture();
 		Date scheduledArrival = flight.getScheduledArrival();
 
-		dataset = super.unbindObject(flight, "id", "tag", "cost", "description", "needsSelfTransfer");
+		dataset = super.unbindObject(flight, "tag", "cost", "needsSelfTransfer");
 
 		dataset.put("origin", origin);
 		dataset.put("destiny", destiny);
 		dataset.put("scheduledDeparture", scheduledDeparture);
 		dataset.put("scheduledArrival", scheduledArrival);
-		dataset.put("numberOfLayovers", flight.getNumberOfLayovers());
-		
+
 		super.getResponse().addData(dataset);
 	}
 	

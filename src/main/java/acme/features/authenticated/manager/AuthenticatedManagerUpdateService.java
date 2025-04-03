@@ -53,14 +53,6 @@ public class AuthenticatedManagerUpdateService extends AbstractGuiService<Authen
 		assert object != null;
 
 		super.bindObject(object, "identifierNumber", "yearsOfExperience", "birth", "linkPicture");
-		
-		Airline airline;
-		int airlineId;
-
-		airlineId = super.getRequest().getData("airlineManaging", int.class);
-		airline = this.mr.findAirlineById(airlineId);
-		
-		object.setAirlineManaging(airline);
 	}
 
 	@Override
