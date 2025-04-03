@@ -1,4 +1,4 @@
-key,name,iATACode,website,type,foundation-moment,email,contact-number
+key,name,iATACode,website,airlineType,foundation-moment,email,contact-number
 airline-01,Ryanair,FRX,https://www.ryanair.com/,LOWCOST,1984/11/28 00:00,odr@ryanair.com,+34900999015
 airline-02,American Airlines,AMX,https://www.aa.com/,STANDARD,1930/04/15 00:00,contact@aa.com,+18001234567
 airline-03,Lufthansa,LHX,https://www.lufthansa.com/,LUXURY,1953/01/01 00:00,support@lufthansa.com,+493015546545

@@ -2,6 +2,7 @@
 package acme.features.administrator.airline;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -16,6 +17,6 @@ public interface AdministratorAirlineRepository extends AbstractRepository {
 	Airline findAirlineById(final int id);
 
 	@Query("select a from Airline a")
-	Collection<Airline> findAllAirlines();
+	List<Airline> findAllAirlines();
 
 }

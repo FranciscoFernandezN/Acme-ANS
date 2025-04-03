@@ -2,6 +2,7 @@
 package acme.features.administrator.airline;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,6 +14,8 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airlines.Airline;
 import acme.entities.airlines.AirlineType;
+import acme.entities.legs.Leg;
+import acme.realms.Manager;
 
 @GuiService
 public class AdministratorAirlineCreateService extends AbstractGuiService<Administrator, Airline> {
@@ -20,14 +23,14 @@ public class AdministratorAirlineCreateService extends AbstractGuiService<Admini
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AdministratorAirlineRepository repository;
+	private AdministratorAirlineRepository ar;
 
 	// AbstractGuiService interface -------------------------------------------
 
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Administrator.class));
 	}
 
 	@Override
@@ -41,28 +44,26 @@ public class AdministratorAirlineCreateService extends AbstractGuiService<Admini
 
 	@Override
 	public void bind(final Airline airline) {
-		Date now;
-
-		now = MomentHelper.getCurrentMoment();
-		super.bindObject(airline, "name", "iATACode", "website", "type", "email", "contactNumber");
-		airline.setFoundationMoment(now);
+		super.bindObject(airline, "name", "iATACode", "website", "airlineType", "foundationMoment", "email", "contactNumber");
 	}
 
 	@Override
 	public void validate(final Airline airline) {
-		Boolean existsThisCode = this.repository.findAllAirlines().stream().anyMatch(a -> airline.getIATACode().equals(a.getIATACode()));
+		List<Airline> airlines = this.ar.findAllAirlines();
+		List<String> airlineIds = airlines.stream().map(Airline::getIATACode).toList();
 
-		if (existsThisCode == false) {
-			boolean confirmation;
-			confirmation = super.getRequest().getData("confirmation", boolean.class);
-			super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
-		} else
-			super.state(!existsThisCode, "iATACode", "administrator.airline.create.already-exists");
+		if (airline.getIATACode() != null)
+			super.state(!airlineIds.contains(airline.getIATACode()), "iATACode", "administrator.airline.create.not-unique-iata");
+		
+		boolean confirmation;
+		confirmation = super.getRequest().getData("confirmation", boolean.class);
+		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
+		
 	}
 
 	@Override
 	public void perform(final Airline airline) {
-		this.repository.save(airline);
+		this.ar.save(airline);
 	}
 
 	@Override
@@ -72,8 +73,8 @@ public class AdministratorAirlineCreateService extends AbstractGuiService<Admini
 
 		choices = SelectChoices.from(AirlineType.class, airline.getAirlineType());
 
-		dataset = super.unbindObject(airline, "name", "iATACode", "website", "airlineType", "email", "contactNumber");
-		dataset.put("airlineType", choices);
+		dataset = super.unbindObject(airline, "name", "iATACode", "website", "foundationMoment", "email", "contactNumber");
+		dataset.put("airlineTypes", choices);
 
 		super.getResponse().addData(dataset);
 	}

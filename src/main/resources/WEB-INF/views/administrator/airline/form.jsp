@@ -4,12 +4,12 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form>
-    <acme:input-textbox code="administrator.airline.form.label.name" path="name"  placeholder="administrator.airline.form.placeholder.name"/>
-    <acme:input-textbox code="administrator.airline.form.label.iATACode" path="IATACode" placeholder="administrator.airline.form.placeholder.iATACode"/>
-    <acme:input-url code="administrator.airline.form.label.website" path="website" placeholder="administrator.airline.form.placeholder.website"/>
-    <acme:input-select code="administrator.airline.form.label.type" path="airlineType" choices="${airlineType}"/>
+    <acme:input-textbox code="administrator.airline.form.label.name" path="name" />
+    <acme:input-textbox code="administrator.airline.form.label.iATACode" path="iATACode" placeholder="administrator.airline.form.placeholder.iATACode"/>
+    <acme:input-url code="administrator.airline.form.label.website" path="website" />
+    <acme:input-select code="administrator.airline.form.label.airlineType" path="airlineType" choices="${airlineTypes}"/>
     <acme:input-moment code="administrator.airline.form.label.foundationMoment" path="foundationMoment"/>
-    <acme:input-textbox code="administrator.airline.form.label.email" path="email" placeholder="administrator.airline.form.placeholder.email"/>
+    <acme:input-email code="administrator.airline.form.label.email" path="email"/>
     <acme:input-textbox code="administrator.airline.form.label.contactNumber" path="contactNumber" placeholder="administrator.airline.form.placeholder.contactNumber"/>
 	<acme:input-checkbox code="administrator.airline.form.label.confirmation" path="confirmation"/>
 
