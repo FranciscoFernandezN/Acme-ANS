@@ -82,6 +82,8 @@
 			<acme:menu-suboption code="master.menu.manager.create-flights" action="/manager/flight/create"/>
 		</acme:menu-option>
 		<acme:menu-option code="master.menu.customer" access="hasRealm('Customer')">
+			<acme:menu-suboption code="master.menu.customer.dashboard" action="/customer/customer-dashboard/show"/>
+			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.customer.list-booking" action="/customer/booking/list"/>
 			<acme:menu-suboption code="master.menu.customer.create-booking" action="/customer/booking/create"/>
 			<acme:menu-separator/>
