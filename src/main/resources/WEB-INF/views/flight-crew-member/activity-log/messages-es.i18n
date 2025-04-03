@@ -1,0 +1,28 @@
+flight-crew-member.activity-log.form.title = Formulario de Registro de Actividad
+flight-crew-member.activity-log.list.title = Listado de Registros de Actividad
+
+flight-crew-member.activity-log.form.label.registrationMoment = Momento de registro:
+flight-crew-member.activity-log.form.label.leg = Trayecto:
+flight-crew-member.activity-log.form.label.flightCrewMember = Miembro de la tripulación de vuelo:
+flight-crew-member.activity-log.form.label.typeOfIncident = Tipo de incidente:
+flight-crew-member.activity-log.form.label.description = Descripción:
+flight-crew-member.activity-log.form.label.severityLevel = Nivel de gravedad:
+flight-crew-member.activity-log.form.label.confirmation = ¿Confirma esta operación?
+
+flight-crew-member.activity-log.form.button.create = Crear
+flight-crew-member.activity-log.form.button.update = Actualizar
+flight-crew-member.activity-log.form.button.delete = Eliminar
+flight-crew-member.activity-log.form.button.publish = Publicar
+
+flight-crew-member.activity-log.list.label.registrationMoment = Momento de registro
+flight-crew-member.activity-log.list.label.leg = Trayecto:
+flight-crew-member.activity-log.list.label.flightCrewMember = Miembro de la tripulación de vuelo:
+flight-crew-member.activity-log.list.label.typeOfIncident = Tipo de incidente
+flight-crew-member.activity-log.list.label.description = Descripción
+flight-crew-member.activity-log.list.label.severityLevel = Nivel de gravedad
+flight-crew-member.activity-log.list.label.confirmation = ¿Confirma esta operación?
+
+flight-crew-member.activity-log.list.button.create = Crear nuevo registro de actividad
+
+flight-crew-member.activity-log.error.invalid-flight-crew-member = El miembro de la tripulación de vuelo es nulo
+flight-crew-member.activity-log.error.invalid-leg = El trayecto es nulo

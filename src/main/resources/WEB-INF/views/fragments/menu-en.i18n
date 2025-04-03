@@ -73,9 +73,15 @@ master.menu.assistance-agent.dashboard = Dashboard
 master.menu.assistance-agent.list-tracking-logs = List tracking logs
 master.menu.assistance-agent.create-tracking-logs = Create tracking logs
 
+
+# master.menu.flight-crew-member ###################################################
+
+master.menu.flight-crew-member = Flight crew member
+master.menu.flight-crew-member.list-activity-log = List of activity logs
 master.menu.assistance-agent.list-complete-claims = List completed claims
 master.menu.assistance-agent.list-in-progress-claims = List in progress claims
 master.menu.assistance-agent.create-claims = Create claims
+
 
 # master.menu.provider ########################################################
 
