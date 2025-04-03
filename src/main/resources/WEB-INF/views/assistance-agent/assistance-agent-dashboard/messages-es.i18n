@@ -1,0 +1,10 @@
+assistance-agent.assistance-agent-dashboard.form.title = Panel de indicadores para los agentes de asistencia
+
+assistance-agent.assistance-agent-dashboard.form.label.ratioOfClaimsResolved = Ratio de reclamaciones resueltas:
+assistance-agent.assistance-agent-dashboard.form.label.ratioOfClaimsRejected = Ratio de reclamaciones rechazadas:
+assistance-agent.assistance-agent-dashboard.form.label.monthHigherNumClaims = Mes con el mayor número de reclamaciones:
+assistance-agent.assistance-agent-dashboard.form.label.averageLogsOfClaims = Media de registros por reclamación:
+assistance-agent.assistance-agent-dashboard.form.label.minLogsOfClaims = Número mínimo de registros por reclamación:
+assistance-agent.assistance-agent-dashboard.form.label.maxLogsOfClaims = Número máximo de registros por reclamación:
+assistance-agent.assistance-agent-dashboard.form.label.stdDeviationLogsOfClaims = Desviación típica del número de registros por reclamación:
+assistance-agent.assistance-agent-dashboard.form.label.numberOfClaimsLastMonth = Número de reclamaciones del último mes:

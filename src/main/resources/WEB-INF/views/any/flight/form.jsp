@@ -16,4 +16,6 @@
 	<acme:input-textbox code="any.flight.form.label.scheduledArrival" path="scheduledArrival" readonly="true"/>
 	<acme:input-textbox code="any.flight.form.label.numberOfLayovers" path="numberOfLayovers" readonly="true"/>
 	
+	<acme:button code="any.flight.form.button.legs" action="/any/leg/list?masterId=${id}"/>
+	
 </acme:form>
