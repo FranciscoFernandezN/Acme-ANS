@@ -80,7 +80,7 @@ public class FlightCrewMemberFlightAssignmentListAfterService extends AbstractGu
 		dataset.put("leg", legChoices.getSelected().getKey()); // Validación segura
 		dataset.put("flightCrewMembers", flightCrewMemberChoices);
 		dataset.put("flightCrewMember", flightCrewMemberChoices.getSelected().getKey());
-		dataset.put("isAvailable", isAvailable);
+		super.getResponse().addGlobal("isAvailable", isAvailable);
 
 		// Enviar los datos a la respuesta
 		super.getResponse().addData(dataset);
