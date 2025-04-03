@@ -51,6 +51,7 @@ master.menu.administrator.list-claims = Ver las reclamaciones
 # master.menu.assistance-agent ###################################################
 
 master.menu.assistance-agent = Agente de asistencia
+master.menu.assistance-agent.dashboard = Panel de indicadores
 master.menu.assistance-agent.list-complete-claims = Ver reclamaciones completadas
 master.menu.assistance-agent.list-in-progress-claims = Ver reclamaciones en progreso
 master.menu.assistance-agent.create-claims = Crear reclamaciones

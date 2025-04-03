@@ -1,5 +1,5 @@
 
-package acme.features.assistanceAgents.claim;
+package acme.features.assistanceAgent.claim;
 
 import java.util.List;
 
@@ -16,12 +16,12 @@ import acme.entities.legs.Leg;
 import acme.realms.AssistanceAgent;
 
 @GuiService
-public class AssistanceAgentsClaimDeleteService extends AbstractGuiService<AssistanceAgent, Claim> {
+public class AssistanceAgentClaimShowService extends AbstractGuiService<AssistanceAgent, Claim> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AssistanceAgentsClaimRepository aacr;
+	private AssistanceAgentClaimRepository aacr;
 
 	// AbstractGuiService interface -------------------------------------------
 
@@ -39,35 +39,11 @@ public class AssistanceAgentsClaimDeleteService extends AbstractGuiService<Assis
 		claimId = super.getRequest().getData("id", int.class);
 		claim = this.aacr.findClaimById(claimId);
 
-		Leg leg;
-		int legId;
-
-		legId = super.getRequest().getData("leg", int.class);
-		leg = this.aacr.findLegById(legId);
-
-		claim.setLeg(leg);
-
 		super.getBuffer().addData(claim);
 	}
 
 	@Override
-	public void bind(final Claim claim) {
-		super.bindObject(claim, "registrationMoment", "passengerEmail", "description", "claimType", "indicator", "isPublished");
-	}
-
-	@Override
-	public void validate(final Claim claim) {
-		super.state(!claim.getIsPublished(), "isPublished", "assistance-agent.claim.delete.is-published");
-	}
-
-	@Override
-	public void perform(final Claim claim) {
-		this.aacr.delete(claim);
-	}
-
-	@Override
 	public void unbind(final Claim claim) {
-
 		Dataset dataset;
 		SelectChoices typeChoices;
 		SelectChoices indicatorChoices;
@@ -79,11 +55,11 @@ public class AssistanceAgentsClaimDeleteService extends AbstractGuiService<Assis
 
 		legs = this.aacr.findAllLegsByAirlineId(agent.getAirline().getId());
 
-		legChoices = SelectChoices.from(legs, "leg", claim.getLeg());
+		legChoices = SelectChoices.from(legs, "uniqueIdentifier", claim.getLeg());
 		typeChoices = SelectChoices.from(ClaimType.class, claim.getClaimType());
 		indicatorChoices = SelectChoices.from(ClaimState.class, claim.getIndicator());
 
-		dataset = super.unbindObject(claim, "passengerEmail", "description", "claimType", "indicator", "isPublished", "leg");
+		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "claimType", "indicator", "isPublished", "leg");
 		dataset.put("claimType", typeChoices);
 		dataset.put("indicator", indicatorChoices);
 		dataset.put("leg", legChoices);

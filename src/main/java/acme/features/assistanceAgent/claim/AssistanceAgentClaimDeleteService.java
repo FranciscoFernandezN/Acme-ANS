@@ -1,14 +1,12 @@
 
-package acme.features.assistanceAgents.claim;
+package acme.features.assistanceAgent.claim;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
-import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claims.Claim;
@@ -18,12 +16,12 @@ import acme.entities.legs.Leg;
 import acme.realms.AssistanceAgent;
 
 @GuiService
-public class AssistanceAgentsClaimCreateService extends AbstractGuiService<AssistanceAgent, Claim> {
+public class AssistanceAgentClaimDeleteService extends AbstractGuiService<AssistanceAgent, Claim> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AssistanceAgentsClaimRepository aacr;
+	private AssistanceAgentClaimRepository aacr;
 
 	// AbstractGuiService interface -------------------------------------------
 
@@ -35,44 +33,40 @@ public class AssistanceAgentsClaimCreateService extends AbstractGuiService<Assis
 
 	@Override
 	public void load() {
-		Claim claim = new Claim();
-		AssistanceAgent agent;
+		Claim claim;
+		int claimId;
 
-		agent = (AssistanceAgent) super.getRequest().getPrincipal().getRealmOfType(AssistanceAgent.class);
-		claim.setAgent(agent);
-		claim.setIsPublished(false);
+		claimId = super.getRequest().getData("id", int.class);
+		claim = this.aacr.findClaimById(claimId);
 
-		Date registrationMoment;
-		registrationMoment = MomentHelper.getCurrentMoment();
-		claim.setRegistrationMoment(registrationMoment);
-		claim.setIndicator(ClaimState.IN_PROGRESS);
+		Leg leg;
+		int legId;
+
+		legId = super.getRequest().getData("leg", int.class);
+		leg = this.aacr.findLegById(legId);
+
+		claim.setLeg(leg);
 
 		super.getBuffer().addData(claim);
 	}
 
 	@Override
 	public void bind(final Claim claim) {
-		super.bindObject(claim, "passengerEmail", "description", "claimType", "isPublished", "leg");
+		super.bindObject(claim, "registrationMoment", "passengerEmail", "description", "claimType", "indicator", "isPublished");
 	}
 
 	@Override
 	public void validate(final Claim claim) {
-		int legId;
-		legId = super.getRequest().getData("leg", int.class);
-
-		Leg leg = this.aacr.findLegById(legId);
-		super.state(!claim.getIsPublished() || claim.getIsPublished() && leg != null && !leg.getIsDraftMode(), "isPublished", "assistance-agent.claim.create.cant-be-published");
+		super.state(!claim.getIsPublished(), "isPublished", "assistance-agent.claim.delete.is-published");
 	}
 
 	@Override
 	public void perform(final Claim claim) {
-		this.aacr.save(claim);
+		this.aacr.delete(claim);
 	}
 
 	@Override
 	public void unbind(final Claim claim) {
-		if (super.getBuffer().getErrors().hasErrors())
-			claim.setIsPublished(false);
 
 		Dataset dataset;
 		SelectChoices typeChoices;
@@ -85,11 +79,11 @@ public class AssistanceAgentsClaimCreateService extends AbstractGuiService<Assis
 
 		legs = this.aacr.findAllLegsByAirlineId(agent.getAirline().getId());
 
-		legChoices = SelectChoices.from(legs, "uniqueIdentifier", claim.getLeg());
+		legChoices = SelectChoices.from(legs, "leg", claim.getLeg());
 		typeChoices = SelectChoices.from(ClaimType.class, claim.getClaimType());
 		indicatorChoices = SelectChoices.from(ClaimState.class, claim.getIndicator());
 
-		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "indicator", "claimType", "isPublished", "leg");
+		dataset = super.unbindObject(claim, "passengerEmail", "description", "claimType", "indicator", "isPublished", "leg");
 		dataset.put("claimType", typeChoices);
 		dataset.put("indicator", indicatorChoices);
 		dataset.put("leg", legChoices);

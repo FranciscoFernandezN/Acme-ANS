@@ -1,5 +1,5 @@
 
-package acme.features.assistanceAgents.claim;
+package acme.features.assistanceAgent.claim;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import acme.entities.claims.Claim;
 import acme.entities.legs.Leg;
 
 @Repository
-public interface AssistanceAgentsClaimRepository extends AbstractRepository {
+public interface AssistanceAgentClaimRepository extends AbstractRepository {
 
 	@Query("select c from Claim c where (c.indicator like 'ACCEPTED' or c.indicator like 'REJECTED') and c.agent.id = :id")
 	List<Claim> findAllCompletedClaimsByAgentId(int id);

@@ -1,5 +1,5 @@
 
-package acme.features.assistanceAgents.claim;
+package acme.features.assistanceAgent.trackingLog;
 
 import java.util.List;
 
@@ -8,16 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.entities.claims.Claim;
+import acme.entities.trackingLogs.TrackingLog;
 import acme.realms.AssistanceAgent;
 
 @GuiService
-public class AssistanceAgentsClaimInProgressListService extends AbstractGuiService<AssistanceAgent, Claim> {
+public class AssistanceAgentTrackingLogListService extends AbstractGuiService<AssistanceAgent, TrackingLog> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AssistanceAgentsClaimRepository aacr;
+	private AssistanceAgentTrackingLogRepository aatlr;
 
 	// AbstractGuiService interface -------------------------------------------
 
@@ -29,21 +29,21 @@ public class AssistanceAgentsClaimInProgressListService extends AbstractGuiServi
 
 	@Override
 	public void load() {
-		List<Claim> claims;
+		List<TrackingLog> trackingLog;
 		int agentId;
 
 		agentId = super.getRequest().getPrincipal().getRealmOfType(AssistanceAgent.class).getId();
-		claims = this.aacr.findAllInProgressClaimsByAgentId(agentId);
+		trackingLog = this.aatlr.findAllTrackingLogsByAgentId(agentId);
 
-		super.getBuffer().addData(claims);
+		super.getBuffer().addData(trackingLog);
 	}
 
 	@Override
-	public void unbind(final Claim claim) {
+	public void unbind(final TrackingLog trackingLog) {
 		Dataset dataset;
 
-		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "claimType", "indicator", "isPublished", "leg");
-		dataset.put("leg", claim.getLeg().getUniqueIdentifier());
+		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "step", "resolutionPercentage", "resolution", "claim", "isPublished");
+		dataset.put("claim", trackingLog.getClaim().getPassengerEmail());
 		super.getResponse().addData(dataset);
 	}
 }
