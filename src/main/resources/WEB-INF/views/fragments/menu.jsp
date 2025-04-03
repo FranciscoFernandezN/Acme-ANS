@@ -53,6 +53,11 @@
 			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.list-supported-currencies" action="/administrator/supported-currency/list"/>
 		</acme:menu-option>
+		
+		<acme:menu-option code="master.menu.assistance-agent" access="hasRealm('AssistanceAgent')">
+			<acme:menu-suboption code="master.menu.assistance-agent.list-tracking-logs" action="/assistance-agent/tracking-log/list" />
+			<acme:menu-suboption code="master.menu.assistance-agent.create-tracking-logs" action="/assistance-agent/tracking-log/create" />
+		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.provider" access="hasRealm('Provider')">
 			<acme:menu-suboption code="master.menu.provider.favourite-link" action="http://www.example.com/"/>

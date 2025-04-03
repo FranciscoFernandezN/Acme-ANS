@@ -44,6 +44,12 @@ master.menu.administrator.shut-system-down = Parar el sistema
 master.menu.administrator.list-aircrafts = Listar aeronaves
 master.menu.administrator.list-supported-currencies = Listar la configuración del sistema
 
+# master.menu.assistance-agent ###################################################
+
+master.menu.assistance-agent = Agente de asistencia
+master.menu.assistance-agent.list-tracking-logs = Ver registros de seguimiento
+master.menu.assistance-agent.create-tracking-logs = Crear registros de seguimiento
+
 # master.menu.provider ########################################################
 
 master.menu.provider = Proveedor
