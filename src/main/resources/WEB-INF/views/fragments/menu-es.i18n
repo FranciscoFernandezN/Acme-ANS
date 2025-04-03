@@ -30,6 +30,11 @@ master.menu.any.list-bad-weather-flights = Ver vuelos con mal tiempo
 master.menu.airport = Aeropuertos
 master.menu.authenticated.list-airport = Ver aeropuertos
 
+# master.menu.service #######################################################
+
+master.menu.service = Servicios
+master.menu.any.list-services = Ver servicios
+
 # master.menu.anonymous #######################################################
 
 master.menu.anonymous = Anónimo

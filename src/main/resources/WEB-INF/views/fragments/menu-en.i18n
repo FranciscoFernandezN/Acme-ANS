@@ -30,6 +30,11 @@ master.menu.any.list-bad-weather-flights = List bad weather flights
 master.menu.airport = Airports
 master.menu.authenticated.list-airport = List airports
 
+# master.menu.service #######################################################
+
+master.menu.service = Services
+master.menu.any.list-services = List services
+
 # master.menu.anonymous #######################################################
 
 master.menu.anonymous = Anonymous
