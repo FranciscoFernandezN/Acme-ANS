@@ -12,7 +12,7 @@ public interface AnyServiceRepository extends AbstractRepository{
 	@Query("SELECT s FROM Service s")
 	List<Service> findAllServices();
 	
-	@Query("SELECT s FROM Service s WHERE s.id = ;id")
+	@Query("SELECT s FROM Service s WHERE s.id = :id")
 	Service findServiceById(int id);
 	
 }
