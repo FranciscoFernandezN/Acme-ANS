@@ -69,6 +69,9 @@
 			<acme:menu-suboption code="master.menu.administrator.populate-weather" action="/administrator/weather/populate"/>
       <acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.list-claims" action="/administrator/claim/list"/>
+			<acme:menu-separator/>
+			<acme:menu-suboption code="master.menu.administrator.list-airports" action="/administrator/airport/list"/>
+			<acme:menu-suboption code="master.menu.administrator.create-airports" action="/administrator/airport/create"/>
 		</acme:menu-option>
 		
 		<acme:menu-option code="master.menu.assistance-agent" access="hasRealm('AssistanceAgent')">

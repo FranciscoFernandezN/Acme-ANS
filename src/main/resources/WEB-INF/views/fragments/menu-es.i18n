@@ -52,9 +52,13 @@ master.menu.administrator.shut-system-down = Parar el sistema
 master.menu.administrator.list-airlines = Listar aerolíneas
 master.menu.administrator.create-airlines = Crear aerolíneas
 master.menu.administrator.list-aircrafts = Listar aeronaves
+master.menu.administrator.list-airports = Listar aeropuertos
+master.menu.administrator.create-airports = Crear aeropuertos
 master.menu.administrator.list-bookings = Listar reservas
+
 master.menu.administrator.list-supported-currencies = Listar la configuración del sistema
 master.menu.administrator.list-claims = Ver las reclamaciones
+master.menu.administrator.populate-weather = Poblar tiempo (actual)
 
 # master.menu.assistance-agent ###################################################
 
@@ -66,17 +70,9 @@ master.menu.assistance-agent.create-claims = Crear reclamaciones
 
 # master.menu.assistance-agent ###################################################
 
-master.menu.assistance-agent = Assistance agent
-master.menu.assistance-agent.list-tracking-logs = Ver registros de seguimiento
-master.menu.assistance-agent.create-tracking-logs = Crear registros de seguimiento
-
-# master.menu.assistance-agent ###################################################
-
 master.menu.assistance-agent = Agente de asistencia
 master.menu.assistance-agent.list-tracking-logs = Ver registros de seguimiento
 master.menu.assistance-agent.create-tracking-logs = Crear registros de seguimiento
-
-master.menu.administrator.populate-weather = Poblar tiempo (actual)
 
 # master.menu.provider ########################################################
 
