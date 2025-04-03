@@ -1,0 +1,25 @@
+assistance-agent.tracking-log.form.title = Formulario de registro de seguimiento
+assistance-agent.tracking-log.list.title = Listado de registros de seguimiento
+
+assistance-agent.tracking-log.form.label.lastUpdateMoment = Momento de última actualización:
+assistance-agent.tracking-log.form.label.step = Paso del trámite:
+assistance-agent.tracking-log.form.label.resolutionPercentage = Porcentaje de resolución:
+assistance-agent.tracking-log.form.label.resolution = Resolución:
+assistance-agent.tracking-log.form.label.claim = Reclamación referenciada:
+assistance-agent.tracking-log.form.label.isPublished = ¿Está publicado?
+
+assistance-agent.tracking-log.form.button.update = Actualizar este registro
+assistance-agent.tracking-log.form.button.delete = Borrar este registro
+assistance-agent.tracking-log.form.button.create = Crear este registro
+
+assistance-agent.tracking-log.list.label.lastUpdateMoment = Momento de última actualización
+assistance-agent.tracking-log.list.label.step = Paso del trámite
+assistance-agent.tracking-log.list.label.resolutionPercentage = Porcentaje de resolución
+assistance-agent.tracking-log.list.label.resolution = Resolución
+assistance-agent.tracking-log.list.label.claim = Reclamación referenciada
+assistance-agent.tracking-log.list.label.isPublished = ¿Está publicado?
+
+assistance-agent.tracking-log.list.button.create = Crear un registro de seguimiento
+
+assistance-agent.tracking-log.create.cant-be-published = Este registro no se puede publicar ya que su reclamación no está publicada 
+assistance-agent.tracking-log.delete.is-published = Este registro no se puede borrar ya que está publicado

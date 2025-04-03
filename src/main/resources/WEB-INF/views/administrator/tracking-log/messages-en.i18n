@@ -1,0 +1,7 @@
+administrator.tracking-log.form.title = Tracking-log form
+
+administrator.tracking-log.form.label.lastUpdateMoment = Last update moment:
+administrator.tracking-log.form.label.step = Step undergoing:
+administrator.tracking-log.form.label.resolutionPercentage = Resolution percentage:
+administrator.tracking-log.form.label.resolution = Resolution:
+administrator.tracking-log.form.label.isPublished = Is it published?

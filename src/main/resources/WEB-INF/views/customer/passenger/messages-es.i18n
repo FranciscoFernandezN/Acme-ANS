@@ -1,0 +1,24 @@
+customer.passenger.form.title = Formulario de pasajeros
+customer.passenger.list.title = Listado de pasajeros
+
+customer.passenger.list.label.fullName = Nombre del pasajero
+customer.passenger.list.label.email = Email
+customer.passenger.list.label.passportNumber = Número de pasaporte
+customer.passenger.list.label.dateOfBirth = Fecha de nacimiento
+customer.passenger.list.label.specialNeeds = Necesidades espaciales
+customer.passenger.list.label.isDraftMode = ¿Modo borrador?
+
+customer.passenger.list.button.create = Crear nuevo pasajero
+
+customer.passenger.form.label.fullName = Nombre del pasajero
+customer.passenger.form.label.email = Email
+customer.passenger.form.label.passportNumber = Número de pasaporte
+customer.passenger.form.label.dateOfBirth = Fecha de nacimiento
+customer.passenger.form.label.specialNeeds = Necesidades espaciales
+customer.passenger.form.label.isDraftMode = ¿Modo borrador?
+
+customer.passenger.form.button.create = Crear nuevo pasajero
+customer.passenger.form.button.update = Actualizar pasajero
+
+customer.passenger.create.passport-number-must-be-unique = Ya existe en el sistema un pasajero con el mismo pasaporte
+customer.passenger.update.passport-number-must-be-unique = Ya existe en el sistema un pasajero con el mismo pasaporte

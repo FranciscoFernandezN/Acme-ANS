@@ -1,0 +1,10 @@
+assistance-agent.assistance-agent-dashboard.form.title = Assistance agent dashboard
+
+assistance-agent.assistance-agent-dashboard.form.label.ratioOfClaimsResolved = Ratio of claims resolved:
+assistance-agent.assistance-agent-dashboard.form.label.ratioOfClaimsRejected = Ratio of claims rejected:
+assistance-agent.assistance-agent-dashboard.form.label.monthHigherNumClaims = Month with the highest number of claims:
+assistance-agent.assistance-agent-dashboard.form.label.averageLogsOfClaims = Average number of logs per claim:
+assistance-agent.assistance-agent-dashboard.form.label.minLogsOfClaims = Minimun number of logs per claim:
+assistance-agent.assistance-agent-dashboard.form.label.maxLogsOfClaims = Maximun number of logs per claim:
+assistance-agent.assistance-agent-dashboard.form.label.stdDeviationLogsOfClaims = Standard deviation of the number of logs per claim:
+assistance-agent.assistance-agent-dashboard.form.label.numberOfClaimsLastMonth = Number of claims assisted last month:

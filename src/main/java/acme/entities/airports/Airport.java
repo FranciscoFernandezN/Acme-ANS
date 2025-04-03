@@ -1,16 +1,11 @@
 
 package acme.entities.airports;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.OneToMany;
 import javax.validation.Valid;
-
-import org.checkerframework.common.aliasing.qual.Unique;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
@@ -19,7 +14,6 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidEmail;
 import acme.client.components.validation.ValidString;
 import acme.client.components.validation.ValidUrl;
-import acme.entities.reviews.Review;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -39,7 +33,6 @@ public class Airport extends AbstractEntity {
 	@Automapped
 	private String				name;
 
-	@Unique
 	@Mandatory
 	@ValidString(min = 3, max = 3, pattern = "[A-Z]{3}")
 	@Column(unique = true)
@@ -78,4 +71,5 @@ public class Airport extends AbstractEntity {
 
 	// Derived attributes -----------------------------------------------------
 	// Relationships ----------------------------------------------------------
+
 }

@@ -1,0 +1,20 @@
+administrator.claim.form.title = Formulario de reclamaciones
+administrator.claim.list.title = Listado de reclamaciones
+
+administrator.claim.form.label.registrationMoment = Momento de registro:
+administrator.claim.form.label.passengerEmail = Email de los pasajeros:
+administrator.claim.form.label.description = Descripción:
+administrator.claim.form.label.claimType = Tipo de reclamación:
+administrator.claim.form.label.indicator = Estado de la reclamación: 
+administrator.claim.form.label.leg = Tramo de vuelo en el que ocurrió:
+administrator.claim.form.label.isPublished = Esta publicado?
+
+administrator.claim.form.button.log = Registro asociado
+
+administrator.claim.list.label.registrationMoment = Momento de registro
+administrator.claim.list.label.passengerEmail = Email de los pasajeros
+administrator.claim.list.label.description = Descripción
+administrator.claim.list.label.claimType = Tipo de reclamación
+administrator.claim.list.label.indicator = Estado de la reclamación
+administrator.claim.list.label.leg = Tramo de vuelo en el que ocurrió
+administrator.claim.list.label.isPublished = Esta publicado?

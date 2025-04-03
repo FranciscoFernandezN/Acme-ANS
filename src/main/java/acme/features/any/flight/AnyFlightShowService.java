@@ -66,18 +66,6 @@ public class AnyFlightShowService extends AbstractGuiService<Any, Flight> {
 		dataset.put("scheduledArrival", scheduledArrival);
 		dataset.put("numberOfLayovers", flight.getNumberOfLayovers());
 		
-		
-		List<Leg> legsOfFlight = this.fr.findAllLegsByFlightId(flight.getId());
-		
-		Leg firstLeg = legsOfFlight.remove(0);
-		String legsInfo = firstLeg.getFlightNumber();
-		
-		for(Leg l: legsOfFlight) {
-			legsInfo = legsInfo + " -> " + l.getFlightNumber();
-		}
-		
-		dataset.put("legs", legsInfo);
-		
 		super.getResponse().addData(dataset);
 	}
 	

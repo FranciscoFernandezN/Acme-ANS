@@ -1,0 +1,17 @@
+authenticated.customer.form.title = Detalles de cliente
+
+authenticated.customer.form.label.identifier = Identificador: 
+authenticated.customer.form.label.phoneNumber = Número de teléfono:
+authenticated.customer.form.label.physicalAddress = Dirección física:
+authenticated.customer.form.label.city = Ciudad:
+authenticated.customer.form.label.country = País:
+authenticated.customer.form.label.earnedPoints = Puntos obtenidos:
+
+authenticated.customer.form.placeholder.identifier = ABC123456
+authenticated.customer.form.placeholder.earnedPoints = 300
+authenticated.customer.form.placeholder.phoneNumber = 643647352
+
+authenticated.customer.form.button.create = Registrar
+authenticated.customer.form.button.update = Actualizar
+
+authenticated.customer.create.not-unique-identifier = Este identificador ya está en uso

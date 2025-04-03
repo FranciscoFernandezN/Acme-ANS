@@ -1,0 +1,28 @@
+administrator.service.form.title = Formulario de servicios
+administrator.service.list.title = Listado de servicios
+
+administrator.service.list.label.name = Nombre
+administrator.service.list.label.picture = Imagen
+administrator.service.list.label.avgDwellTime = Tiempo de permanencia
+administrator.service.list.label.promotionCode = Código de promo
+administrator.service.list.label.money = Descuento
+administrator.service.list.label.iATACode = Aeropuerto
+
+administrator.service.list.button.create = Crear nuevo servicio
+
+administrator.service.form.label.name = Nombre
+administrator.service.form.label.picture = Imagen
+administrator.service.form.label.avgDwellTime = Tiempo medio de permanencia
+administrator.service.form.label.promotionCode = Código de promoción
+administrator.service.form.label.money = Descuento
+administrator.service.form.label.airport = Aeropuerto
+
+administrator.service.form.button.update = Actualizar este servicio
+administrator.service.form.button.delete = Borrar este servicio
+administrator.service.form.button.create = Crear este servicio
+
+administrator.service.create.promotion-code-must-be-unique = Este código de promoción ya ha sido registrado
+administrator.service.create.airport-does-not-exist = Escoge un aeropuerto
+
+administrator.service.update.promotion-code-must-be-unique = Este código de promoción ya ha sido registrado
+administrator.service.update.airport-does-not-exist = Escoge un aeropuerto

@@ -1,0 +1,17 @@
+
+any.leg.list.title = Listing of legs
+
+any.leg.list.label.flightNumber = Flight number
+any.leg.list.label.scheduledDeparture = Scheduled departure
+any.leg.list.label.scheduledArrival = Scheduled arrival
+any.leg.list.label.duration = Duration (hours)
+any.leg.list.label.status = Status
+
+any.leg.form.label.flightNumber = Flight number:
+any.leg.form.label.scheduledDeparture = Scheduled departure:
+any.leg.form.label.scheduledArrival = Scheduled arrival:
+any.leg.form.label.status = Status:
+any.leg.form.label.departureAirport = IATA code of Departure Airport: 
+any.leg.form.label.arrivalAirport = IATA code of Arrival Airport:
+any.leg.form.label.aircraft = Registration number of Aircraft:
+any.leg.form.label.airline = Name of the airline:

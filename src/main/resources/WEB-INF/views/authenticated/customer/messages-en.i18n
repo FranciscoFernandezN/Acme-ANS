@@ -1,0 +1,17 @@
+authenticated.customer.form.title = Customer form
+
+authenticated.customer.form.label.identifier = Identifier: 
+authenticated.customer.form.label.phoneNumber = Phone number:
+authenticated.customer.form.label.physicalAddress = Physical address:
+authenticated.customer.form.label.city = City:
+authenticated.customer.form.label.country = Country:
+authenticated.customer.form.label.earnedPoints = Earned points:
+
+authenticated.customer.form.placeholder.identifier = ABC123456
+authenticated.customer.form.placeholder.earnedPoints = 300
+authenticated.customer.form.placeholder.phoneNumber = 643647352
+
+authenticated.customer.form.button.create = Register
+authenticated.customer.form.button.update = Update
+
+authenticated.customer.create.not-unique-identifier = This identifier is already in use
