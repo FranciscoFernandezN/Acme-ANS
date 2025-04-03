@@ -19,6 +19,11 @@ master.menu.any.create-reviews = Create reviews
 master.menu.flight = Flights
 master.menu.any.list-flights = List flights
 
+# master.menu.service #######################################################
+
+master.menu.service = Services
+master.menu.any.list-services = List services
+
 # master.menu.anonymous #######################################################
 
 master.menu.anonymous = Anonymous
