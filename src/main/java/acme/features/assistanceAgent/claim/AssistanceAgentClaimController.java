@@ -1,5 +1,5 @@
 
-package acme.features.assistanceAgents.trackingLog;
+package acme.features.assistanceAgent.claim;
 
 import javax.annotation.PostConstruct;
 
@@ -7,35 +7,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.controllers.AbstractGuiController;
 import acme.client.controllers.GuiController;
-import acme.entities.trackingLogs.TrackingLog;
+import acme.entities.claims.Claim;
 import acme.realms.AssistanceAgent;
 
 @GuiController
-public class AssistanceAgentTrackingLogController extends AbstractGuiController<AssistanceAgent, TrackingLog> {
+public class AssistanceAgentClaimController extends AbstractGuiController<AssistanceAgent, Claim> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AssistanceAgentTrackingLogListService	listService;
+	private AssistanceAgentClaimCompleteListService	completeListService;
 
 	@Autowired
-	private AssistanceAgentTrackingLogShowService	showService;
+	private AssistanceAgentClaimInProgressListService	inProgressListService;
 
 	@Autowired
-	private AssistanceAgentTrackingLogUpdateService	updateService;
+	private AssistanceAgentClaimShowService			showService;
 
 	@Autowired
-	private AssistanceAgentTrackingLogCreateService	createService;
+	private AssistanceAgentClaimUpdateService			updateService;
 
 	@Autowired
-	private AssistanceAgentTrackingLogDeleteService	deleteService;
+	private AssistanceAgentClaimCreateService			createService;
+
+	@Autowired
+	private AssistanceAgentClaimDeleteService			deleteService;
 
 	// Constructors -----------------------------------------------------------
 
 
 	@PostConstruct
 	protected void initialise() {
-		super.addBasicCommand("list", this.listService);
+		super.addCustomCommand("list-complete", "list", this.completeListService);
+		super.addCustomCommand("list-in-progress", "list", this.inProgressListService);
 		super.addBasicCommand("show", this.showService);
 		super.addBasicCommand("create", this.createService);
 		super.addBasicCommand("update", this.updateService);

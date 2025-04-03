@@ -1,5 +1,5 @@
 
-package acme.features.assistanceAgents.trackingLog;
+package acme.features.assistanceAgent.trackingLog;
 
 import java.util.List;
 

@@ -1,5 +1,5 @@
 
-package acme.features.assistanceAgents.trackingLog;
+package acme.features.assistanceAgent.claim;
 
 import java.util.List;
 
@@ -8,16 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.entities.trackingLogs.TrackingLog;
+import acme.entities.claims.Claim;
 import acme.realms.AssistanceAgent;
 
 @GuiService
-public class AssistanceAgentTrackingLogListService extends AbstractGuiService<AssistanceAgent, TrackingLog> {
+public class AssistanceAgentClaimCompleteListService extends AbstractGuiService<AssistanceAgent, Claim> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AssistanceAgentTrackingLogRepository aatlr;
+	private AssistanceAgentClaimRepository aacr;
 
 	// AbstractGuiService interface -------------------------------------------
 
@@ -29,21 +29,21 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 
 	@Override
 	public void load() {
-		List<TrackingLog> trackingLog;
+		List<Claim> claims;
 		int agentId;
 
 		agentId = super.getRequest().getPrincipal().getRealmOfType(AssistanceAgent.class).getId();
-		trackingLog = this.aatlr.findAllTrackingLogsByAgentId(agentId);
+		claims = this.aacr.findAllCompletedClaimsByAgentId(agentId);
 
-		super.getBuffer().addData(trackingLog);
+		super.getBuffer().addData(claims);
 	}
 
 	@Override
-	public void unbind(final TrackingLog trackingLog) {
+	public void unbind(final Claim claim) {
 		Dataset dataset;
 
-		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "step", "resolutionPercentage", "resolution", "claim", "isPublished");
-		dataset.put("claim", trackingLog.getClaim().getPassengerEmail());
+		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "claimType", "indicator", "isPublished", "leg");
+		dataset.put("leg", claim.getLeg().getUniqueIdentifier());
 		super.getResponse().addData(dataset);
 	}
 }
