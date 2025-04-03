@@ -1,6 +1,7 @@
 
 package acme.entities.supportedCurrency;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import acme.client.components.basis.AbstractEntity;
@@ -23,7 +24,7 @@ public class SupportedCurrency extends AbstractEntity {
 
 	@Mandatory
 	@ValidCurrency
-	@Automapped
+	@Column(unique = true)
 	private String				currencyName;
 
 	// Derived attributes -----------------------------------------------------
