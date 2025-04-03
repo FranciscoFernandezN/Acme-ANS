@@ -49,7 +49,7 @@ public class CustomerDashboardShowService extends AbstractGuiService<Customer, C
 		Collection<Booking> bookings = this.repository.findAllBookings(customerId);
 
 		Comparator<Booking> cmp = Comparator.comparing(Booking::getPurchaseMoment);
-		List<String> lastDestinies = bookings.stream().sorted(cmp.thenComparing(Booking::getId)).map(b -> b.getFlight().getDestiny()).toList();
+		List<String> lastDestinies = bookings.stream().sorted(cmp.thenComparing(Booking::getId)).map(b -> b.getFlight().getDestiny()).limit(5L).toList();
 		dashboard.setLastFiveDestinations(lastDestinies);
 
 		Date lastYear = MomentHelper.getCurrentMoment();
@@ -100,8 +100,8 @@ public class CustomerDashboardShowService extends AbstractGuiService<Customer, C
 	public void unbind(final CustomerDashboard dashboard) {
 		Dataset dataset;
 
-		dataset = super.unbindObject(dashboard, "rankingByYearsOfExperience", "yearsToRetire", "ratioOfOnTimeLegs", "ratioOfDelayedLegs", "mostPopularAirportOfFlights", "lessPopularAirportOfFlights", "numberOfOnTimeLegs", "numberOfCancelledLegs",
-			"numberOfDelayedLegs", "numberOfLandedLegs", "averageCostOfFlights", "minCostOfFlights", "maxCostOfFlights", "stdDeviationCostOfFlights");
+		dataset = super.unbindObject(dashboard, "lastFiveDestinations", "moneySpentLastYear", "numOfBookingsByTravelClass", "avgCostOfBookingsLastFiveYears", "minCostOfBookingsLastFiveYears", "maxCostOfBookingsLastFiveYears",
+			"stdDeviationCostOfBookingsLastFiveYears", "avgNumOfPassengersInBookings", "minNumOfPassengersInBookings", "maxNumOfPassengersInBookings", "stdDeviationNumOfPassengersInBookings");
 
 		super.getResponse().addData(dataset);
 	}
