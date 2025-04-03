@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flightAssignments.CurrentStatus;
@@ -32,8 +33,8 @@ public class FlightCrewMemberFlightAssignmentDeleteService extends AbstractGuiSe
 
 		// Verificar si el principal es de tipo FlightCrewMember
 		if (super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class)) {
-			int flightCrewMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
-			FlightCrewMember flightCrewMember = this.repository.findFlightCrewMemberById(flightCrewMemberId);
+			int id = super.getRequest().getPrincipal().getRealmOfType(FlightCrewMember.class).getId();
+			FlightCrewMember flightCrewMember = this.repository.findFlightCrewMemberById(id);
 
 			int flightAssignmentId = super.getRequest().getData("id", int.class);
 			FlightAssignment flightAssignment = this.repository.findFlightAssignmentById(flightAssignmentId);
@@ -55,7 +56,9 @@ public class FlightCrewMemberFlightAssignmentDeleteService extends AbstractGuiSe
 			}
 		} else
 			super.state(false, "flightCrewMember", "flight-crew-member.flight-assignment.error.not-available");
-		super.getResponse().setAuthorised(isAuthorised);
+		int id = super.getRequest().getPrincipal().getRealmOfType(FlightCrewMember.class).getId();
+		Boolean isAvailable = this.repository.findFlightCrewMemberById(id).getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
+		super.getResponse().setAuthorised(isAuthorised && isAvailable);
 	}
 
 	@Override
@@ -115,9 +118,14 @@ public class FlightCrewMemberFlightAssignmentDeleteService extends AbstractGuiSe
 		List<Leg> legs;
 		List<FlightCrewMember> flightCrewMembers;
 		Dataset dataset;
+		Date date;
+		date = MomentHelper.getCurrentMoment();
+
+		int id = super.getRequest().getPrincipal().getRealmOfType(FlightCrewMember.class).getId();
+		Boolean isAvailable = this.repository.findFlightCrewMemberById(id).getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
 
 		// Obtener los Legs que estén publicados, no sean Landed/Canceled y tengan un scheduledDeparture futuro
-		legs = this.repository.findAllLegs().stream().filter(leg -> !leg.getIsDraftMode() && leg.getStatus() != LegStatus.LANDED && leg.getStatus() != LegStatus.CANCELLED && leg.getScheduledDeparture().after(new Date())).toList();
+		legs = this.repository.findAllLegs().stream().filter(leg -> !leg.getIsDraftMode() && leg.getStatus() != LegStatus.LANDED && leg.getStatus() != LegStatus.CANCELLED && leg.getScheduledDeparture().after(date)).toList();
 
 		// Obtener todos los FlightCrewMembers disponibles
 		flightCrewMembers = this.repository.findAllFlightCrewMembers();
@@ -132,9 +140,6 @@ public class FlightCrewMemberFlightAssignmentDeleteService extends AbstractGuiSe
 			legChoices.add(String.valueOf(leg.getId()), leg.getFlightNumber(), flightAssignment.getLeg() != null && leg.equals(flightAssignment.getLeg()));
 		legChoices.add("0", "----", flightAssignment.getLeg() == null); // Opción por defecto
 
-		// Crear opciones para availabilityStatus
-		availabilityChoices = SelectChoices.from(AvailabilityStatus.class, flightAssignment.getFlightCrewMember().getAvailabilityStatus());
-
 		// Desvincular los datos
 		dataset = super.unbindObject(flightAssignment, "duty", "lastUpDate", "currentStatus", "remarks", "isDraftMode");
 
@@ -145,7 +150,7 @@ public class FlightCrewMemberFlightAssignmentDeleteService extends AbstractGuiSe
 		dataset.put("leg", legChoices.getSelected().getKey());
 		dataset.put("flightCrewMembers", flightCrewMemberChoices);
 		dataset.put("flightCrewMember", flightCrewMemberChoices.getSelected().getKey());
-		dataset.put("availabilityStatuses", availabilityChoices);
+		dataset.put("isAvailable", isAvailable);
 
 		super.getResponse().addData(dataset);
 	}

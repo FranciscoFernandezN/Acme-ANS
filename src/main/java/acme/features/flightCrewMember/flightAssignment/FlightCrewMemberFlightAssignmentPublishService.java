@@ -36,33 +36,32 @@ public class FlightCrewMemberFlightAssignmentPublishService extends AbstractGuiS
 
 		// Verificar si el principal es de tipo FlightCrewMember
 		if (super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class)) {
-			int flightCrewMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
-			FlightCrewMember flightCrewMember = this.repository.findFlightCrewMemberById(flightCrewMemberId);
+			int id = super.getRequest().getPrincipal().getRealmOfType(FlightCrewMember.class).getId();
+			FlightCrewMember flightCrewMember = this.repository.findFlightCrewMemberById(id);
 
-			if (flightCrewMember != null && flightCrewMember.getAvailabilityStatus() == AvailabilityStatus.AVAILABLE) {
-				int flightAssignmentId = super.getRequest().getData("id", int.class);
-				FlightAssignment flightAssignment = this.repository.findFlightAssignmentById(flightAssignmentId);
+			int flightAssignmentId = super.getRequest().getData("id", int.class);
+			FlightAssignment flightAssignment = this.repository.findFlightAssignmentById(flightAssignmentId);
 
-				if (flightAssignment != null) {
-					// Verificar que el Leg no sea null antes de acceder a su status
-					Leg leg = flightAssignment.getLeg();
-					if (leg != null) {
-						// Verificar que el Leg no haya ocurrido y que su scheduledDeparture sea futura
-						boolean legHasOccurred = leg.getStatus() == LegStatus.LANDED || leg.getStatus() == LegStatus.CANCELLED;
-						boolean legIsInFuture = leg.getScheduledDeparture().after(new Date());
+			if (flightAssignment != null) {
+				// Verificar que el Leg no sea null antes de acceder a su status
+				Leg leg = flightAssignment.getLeg();
+				if (leg != null) {
+					// Verificar que el Leg no haya ocurrido y que su scheduledDeparture sea futura
+					boolean legHasOccurred = leg.getStatus() == LegStatus.LANDED || leg.getStatus() == LegStatus.CANCELLED;
+					boolean legIsInFuture = leg.getScheduledDeparture().after(new Date());
 
-						if (legHasOccurred || !legIsInFuture)
-							super.state(false, "leg", "flight-crew-member.flight-assignment.error.already-occurred-or-future");
-						else
-							isAuthorised = true; // La autorización es válida si las condiciones anteriores no fallan
-					} else
-						super.state(false, "leg", "flight-crew-member.flight-assignment.error.leg-null");
-				}
-			} else
-				super.state(false, "flightCrewMember", "flight-crew-member.flight-assignment.error.not-available");
-		}
-
-		super.getResponse().setAuthorised(isAuthorised);
+					if (legHasOccurred || !legIsInFuture)
+						super.state(false, "leg", "flight-crew-member.flight-assignment.error.already-occurred-or-future");
+					else
+						isAuthorised = true; // La autorización es válida si las condiciones anteriores no fallan
+				} else
+					super.state(false, "leg", "flight-crew-member.flight-assignment.error.leg-null");
+			}
+		} else
+			super.state(false, "flightCrewMember", "flight-crew-member.flight-assignment.error.not-available");
+		int id = super.getRequest().getPrincipal().getRealmOfType(FlightCrewMember.class).getId();
+		Boolean isAvailable = this.repository.findFlightCrewMemberById(id).getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
+		super.getResponse().setAuthorised(isAuthorised && isAvailable);
 	}
 
 	@Override
@@ -133,15 +132,17 @@ public class FlightCrewMemberFlightAssignmentPublishService extends AbstractGuiS
 		} else
 			super.state(false, "leg", "flight-crew-member.flight-assignment.error.leg-null");
 
-		// Limitar el número de pilotos y copilotos en el Leg
-		if (flightAssignment.getDuty() == Duty.PILOT) {
-			long pilotCount = this.repository.findAllFlightAssignments().stream().filter(fa -> fa.getLeg().equals(flightAssignment.getLeg()) && fa.getDuty() == Duty.PILOT).count();
-			super.state(pilotCount < 1, "duty", "flight-crew-member.flight-assignment.error.pilot-limit-exceeded");
-		}
+		// Validar Duty si se ha cambiado
+		if (flightAssignment.getDuty() != null && !flightAssignment.getDuty().equals(originalFlightAssignment.getDuty())) {
+			if (flightAssignment.getDuty() == Duty.PILOT) {
+				long pilotCount = this.repository.findAllFlightAssignments().stream().filter(fa -> fa.getLeg().equals(flightAssignment.getLeg()) && fa.getDuty() == Duty.PILOT).count();
+				super.state(pilotCount < 1, "duty", "flight-crew-member.flight-assignment.error.pilot-limit-exceeded");
+			}
 
-		if (flightAssignment.getDuty() == Duty.COPILOT) {
-			long copilotCount = this.repository.findAllFlightAssignments().stream().filter(fa -> fa.getLeg().equals(flightAssignment.getLeg()) && fa.getDuty() == Duty.COPILOT).count();
-			super.state(copilotCount < 1, "duty", "flight-crew-member.flight-assignment.error.copilot-limit-exceeded");
+			if (flightAssignment.getDuty() == Duty.COPILOT) {
+				long copilotCount = this.repository.findAllFlightAssignments().stream().filter(fa -> fa.getLeg().equals(flightAssignment.getLeg()) && fa.getDuty() == Duty.COPILOT).count();
+				super.state(copilotCount < 1, "duty", "flight-crew-member.flight-assignment.error.copilot-limit-exceeded");
+			}
 		}
 
 		boolean confirmation = super.getRequest().getData("confirmation", boolean.class);
@@ -156,34 +157,36 @@ public class FlightCrewMemberFlightAssignmentPublishService extends AbstractGuiS
 
 	@Override
 	public void unbind(final FlightAssignment flightAssignment) {
-		Dataset dataset;
-
-		SelectChoices dutyChoices, currentStatuses, flightCrewMemberChoices, legChoices;
+		SelectChoices dutyChoices, currentStatuses, flightCrewMemberChoices, legChoices, availabilityChoices;
 		List<Leg> legs;
 		List<FlightCrewMember> flightCrewMembers;
+		Dataset dataset;
+		Date date;
+		date = MomentHelper.getCurrentMoment();
+
+		int id = super.getRequest().getPrincipal().getRealmOfType(FlightCrewMember.class).getId();
+		Boolean isAvailable = this.repository.findFlightCrewMemberById(id).getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
 
 		legs = this.repository.findAllLegs();
-		flightCrewMembers = this.repository.findAllFlightCrewMembers();
 
+		flightCrewMembers = this.repository.findAllFlightCrewMembers();
 		dutyChoices = SelectChoices.from(Duty.class, flightAssignment.getDuty());
 		currentStatuses = SelectChoices.from(CurrentStatus.class, flightAssignment.getCurrentStatus());
 		flightCrewMemberChoices = SelectChoices.from(flightCrewMembers, "employeeCode", flightAssignment.getFlightCrewMember());
-		legChoices = new SelectChoices();
-		for (Leg leg : legs)
-			legChoices.add(String.valueOf(leg.getId()), leg.getFlightNumber(), flightAssignment.getLeg() != null && leg.equals(flightAssignment.getLeg()));
-		legChoices.add("0", "----", flightAssignment.getLeg() == null); // Opción por defecto
 
+		legChoices = SelectChoices.from(legs, "flightNumber", flightAssignment.getLeg());
+
+		// Desvincular los datos
 		dataset = super.unbindObject(flightAssignment, "duty", "lastUpDate", "currentStatus", "remarks", "isDraftMode");
 
+		// Colocar los valores de las selecciones
 		dataset.put("duties", dutyChoices);
 		dataset.put("currentStatus", currentStatuses);
 		dataset.put("legs", legChoices);
 		dataset.put("leg", legChoices.getSelected().getKey());
 		dataset.put("flightCrewMembers", flightCrewMemberChoices);
 		dataset.put("flightCrewMember", flightCrewMemberChoices.getSelected().getKey());
-
-		if (!flightAssignment.getIsDraftMode())
-			dataset.put("disabled", true);
+		dataset.put("isAvailable", isAvailable);
 
 		super.getResponse().addData(dataset);
 	}

@@ -11,6 +11,7 @@ import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flightAssignments.FlightAssignment;
+import acme.realms.AvailabilityStatus;
 import acme.realms.FlightCrewMember;
 
 @GuiService
@@ -43,8 +44,11 @@ public class FlightCrewMemberFlightAssignmentListBeforeService extends AbstractG
 	@Override
 	public void unbind(final FlightAssignment flightAssignment) {
 		Dataset dataset;
+		int id = super.getRequest().getPrincipal().getRealmOfType(FlightCrewMember.class).getId();
+		Boolean isAvailable = this.repository.findFlightCrewMemberById(id).getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
 
 		dataset = super.unbindObject(flightAssignment, "duty", "lastUpDate", "currentStatus", "remarks");
+		dataset.put("isAvailable", isAvailable);
 
 		super.getResponse().addData(dataset);
 	}
