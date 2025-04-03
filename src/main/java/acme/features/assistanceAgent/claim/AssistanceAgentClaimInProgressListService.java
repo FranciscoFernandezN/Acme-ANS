@@ -1,5 +1,5 @@
 
-package acme.features.assistanceAgents.claim;
+package acme.features.assistanceAgent.claim;
 
 import java.util.List;
 
@@ -12,12 +12,12 @@ import acme.entities.claims.Claim;
 import acme.realms.AssistanceAgent;
 
 @GuiService
-public class AssistanceAgentsClaimCompleteListService extends AbstractGuiService<AssistanceAgent, Claim> {
+public class AssistanceAgentClaimInProgressListService extends AbstractGuiService<AssistanceAgent, Claim> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AssistanceAgentsClaimRepository aacr;
+	private AssistanceAgentClaimRepository aacr;
 
 	// AbstractGuiService interface -------------------------------------------
 
@@ -33,7 +33,7 @@ public class AssistanceAgentsClaimCompleteListService extends AbstractGuiService
 		int agentId;
 
 		agentId = super.getRequest().getPrincipal().getRealmOfType(AssistanceAgent.class).getId();
-		claims = this.aacr.findAllCompletedClaimsByAgentId(agentId);
+		claims = this.aacr.findAllInProgressClaimsByAgentId(agentId);
 
 		super.getBuffer().addData(claims);
 	}

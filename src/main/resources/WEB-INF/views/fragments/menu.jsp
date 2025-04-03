@@ -53,12 +53,10 @@
 		</acme:menu-option>
 		
 		<acme:menu-option code="master.menu.assistance-agent" access="hasRealm('AssistanceAgent')">
+			<acme:menu-suboption code="master.menu.assistance-agent.dashboard" action="/assistance-agent/assistance-agent-dashboard/show" />
 			<acme:menu-suboption code="master.menu.assistance-agent.list-complete-claims" action="/assistance-agent/claim/list-complete" />
 			<acme:menu-suboption code="master.menu.assistance-agent.list-in-progress-claims" action="/assistance-agent/claim/list-in-progress" />
 			<acme:menu-suboption code="master.menu.assistance-agent.create-claims" action="/assistance-agent/claim/create" />
-		</acme:menu-option>
-		
-		<acme:menu-option code="master.menu.assistance-agent" access="hasRealm('AssistanceAgent')">
 			<acme:menu-suboption code="master.menu.assistance-agent.list-tracking-logs" action="/assistance-agent/tracking-log/list" />
 			<acme:menu-suboption code="master.menu.assistance-agent.create-tracking-logs" action="/assistance-agent/tracking-log/create" />
 		</acme:menu-option>

@@ -1,7 +1,6 @@
 
 package acme.forms;
 
-import java.util.List;
 import java.time.Month;
 
 import acme.client.components.basis.AbstractForm;
@@ -10,7 +9,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AssistAgentsDashboard extends AbstractForm {
+public class AssistanceAgentDashboard extends AbstractForm {
 
 	// Serialisation version --------------------------------------------------
 
@@ -20,15 +19,19 @@ public class AssistAgentsDashboard extends AbstractForm {
 
 	Double						ratioOfClaimsResolved;
 	Double						ratioOfClaimsRejected;
-	List<Month>					top3MonthsHigherNumClaims;
+	Month						monthHigherNumClaims;
 	Double						averageLogsOfClaims;
-	Integer						minLogsOfClaims;
-	Integer						maxLogsOfClaims;
+	Double						minLogsOfClaims;
+	Double						maxLogsOfClaims;
 	Double						stdDeviationLogsOfClaims;
-	Double						averageClaimsAssistedLastMonth;
-	Integer						minClaimsAssistedLastMonth;
-	Integer						maxClaimsAssistedLastMonth;
-	Double						stdDeviationClaimsAssistedLastMonth;
+	Long						numberOfClaimsLastMonth;
+	/*
+	 * Double averageClaimsAssistedLastMonth;
+	 * Integer minClaimsAssistedLastMonth;
+	 * Integer maxClaimsAssistedLastMonth;
+	 * Double stdDeviationClaimsAssistedLastMonth;
+	 */
+
 	// Derived attributes -----------------------------------------------------
 
 	// Relationships ----------------------------------------------------------

@@ -1,5 +1,5 @@
 
-package acme.features.assistanceAgents.claim;
+package acme.features.assistanceAgent.trackingLog;
 
 import javax.annotation.PostConstruct;
 
@@ -7,39 +7,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.controllers.AbstractGuiController;
 import acme.client.controllers.GuiController;
-import acme.entities.claims.Claim;
+import acme.entities.trackingLogs.TrackingLog;
 import acme.realms.AssistanceAgent;
 
 @GuiController
-public class AssistanceAgentsClaimController extends AbstractGuiController<AssistanceAgent, Claim> {
+public class AssistanceAgentTrackingLogController extends AbstractGuiController<AssistanceAgent, TrackingLog> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AssistanceAgentsClaimCompleteListService	completeListService;
+	private AssistanceAgentTrackingLogListService	listService;
 
 	@Autowired
-	private AssistanceAgentsClaimInProgressListService	inProgressListService;
+	private AssistanceAgentTrackingLogShowService	showService;
 
 	@Autowired
-	private AssistanceAgentsClaimShowService			showService;
+	private AssistanceAgentTrackingLogUpdateService	updateService;
 
 	@Autowired
-	private AssistanceAgentsClaimUpdateService			updateService;
+	private AssistanceAgentTrackingLogCreateService	createService;
 
 	@Autowired
-	private AssistanceAgentsClaimCreateService			createService;
-
-	@Autowired
-	private AssistanceAgentsClaimDeleteService			deleteService;
+	private AssistanceAgentTrackingLogDeleteService	deleteService;
 
 	// Constructors -----------------------------------------------------------
 
 
 	@PostConstruct
 	protected void initialise() {
-		super.addCustomCommand("list-complete", "list", this.completeListService);
-		super.addCustomCommand("list-in-progress", "list", this.inProgressListService);
+		super.addBasicCommand("list", this.listService);
 		super.addBasicCommand("show", this.showService);
 		super.addBasicCommand("create", this.createService);
 		super.addBasicCommand("update", this.updateService);
