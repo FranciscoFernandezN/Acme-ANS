@@ -19,3 +19,5 @@ any.flight.form.label.destiny = Destiny city:
 any.flight.form.label.scheduledDeparture = Scheduled departure:
 any.flight.form.label.scheduledArrival = Scheduled arrival:
 any.flight.form.label.numberOfLayovers = Number of layovers:
+
+any.flight.form.button.legs = View legs
