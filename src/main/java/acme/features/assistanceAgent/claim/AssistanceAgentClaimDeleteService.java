@@ -52,7 +52,7 @@ public class AssistanceAgentClaimDeleteService extends AbstractGuiService<Assist
 
 	@Override
 	public void bind(final Claim claim) {
-		super.bindObject(claim, "registrationMoment", "passengerEmail", "description", "claimType", "indicator", "isPublished");
+		super.bindObject(claim, "registrationMoment", "passengerEmail", "description", "claimType", "indicator");
 	}
 
 	@Override
@@ -79,11 +79,11 @@ public class AssistanceAgentClaimDeleteService extends AbstractGuiService<Assist
 
 		legs = this.aacr.findAllLegsByAirlineId(agent.getAirline().getId());
 
-		legChoices = SelectChoices.from(legs, "leg", claim.getLeg());
+		legChoices = SelectChoices.from(legs, "uniqueIdentifier", claim.getLeg());
 		typeChoices = SelectChoices.from(ClaimType.class, claim.getClaimType());
 		indicatorChoices = SelectChoices.from(ClaimState.class, claim.getIndicator());
 
-		dataset = super.unbindObject(claim, "passengerEmail", "description", "claimType", "indicator", "isPublished", "leg");
+		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "claimType", "indicator", "isPublished", "leg");
 		dataset.put("claimType", typeChoices);
 		dataset.put("indicator", indicatorChoices);
 		dataset.put("leg", legChoices);

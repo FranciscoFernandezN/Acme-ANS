@@ -58,7 +58,10 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 	@Override
 	public void validate(final Claim claim) {
 		Leg leg = this.aacr.findLegByClaimId(claim.getId());
-		super.state(!claim.getIsPublished() || claim.getIsPublished() && leg != null && !leg.getIsDraftMode(), "isPublished", "assistance-agent.claim.create.cant-be-published");
+		if (claim.getIsPublished() && leg != null && !leg.getIsDraftMode())
+			super.state(true, "isPublished", "assistance-agent.claim.create.leg-not-published");
+		if (claim.getIndicator() == ClaimState.IN_PROGRESS && claim.getIsPublished())
+			super.state(claim.getIndicator() != ClaimState.IN_PROGRESS, "indicator", "assistance-agent.claim.create.cant-be-published");
 	}
 
 	@Override
@@ -86,7 +89,7 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 		typeChoices = SelectChoices.from(ClaimType.class, claim.getClaimType());
 		indicatorChoices = SelectChoices.from(ClaimState.class, claim.getIndicator());
 
-		dataset = super.unbindObject(claim, "passengerEmail", "description", "claimType", "indicator", "isPublished", "leg");
+		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "claimType", "indicator", "isPublished", "leg");
 		dataset.put("claimType", typeChoices);
 		dataset.put("indicator", indicatorChoices);
 		dataset.put("leg", legChoices);

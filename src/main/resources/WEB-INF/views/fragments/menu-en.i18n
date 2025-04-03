@@ -30,6 +30,11 @@ master.menu.any.list-bad-weather-flights = List bad weather flights
 master.menu.airport = Airports
 master.menu.authenticated.list-airport = List airports
 
+# master.menu.service #######################################################
+
+master.menu.service = Services
+master.menu.any.list-services = List services
+
 # master.menu.anonymous #######################################################
 
 master.menu.anonymous = Anonymous
@@ -68,15 +73,22 @@ master.menu.assistance-agent.dashboard = Dashboard
 master.menu.assistance-agent.list-tracking-logs = List tracking logs
 master.menu.assistance-agent.create-tracking-logs = Create tracking logs
 
+
+# master.menu.flight-crew-member ###################################################
+
+master.menu.flight-crew-member = Flight crew member
+master.menu.flight-crew-member.list-activity-log = List of activity logs
 master.menu.assistance-agent.list-complete-claims = List completed claims
 master.menu.assistance-agent.list-in-progress-claims = List in progress claims
 master.menu.assistance-agent.create-claims = Create claims
+
 
 # master.menu.flight-crew-member ###################################################
 
 master.menu.flight-crew-member = Flight crew member
 master.menu.flight-crew-member.list-before-current = List of flight assignments that have arrived
 master.menu.flight-crew-member.list-after-current = List of flight assignments that haven't arrived yet
+
 
 # master.menu.provider ########################################################
 

@@ -45,6 +45,10 @@
 		<acme:menu-option code="master.menu.airport">
 			<acme:menu-suboption code="master.menu.authenticated.list-airport" action="/any/airport/list" />
 		</acme:menu-option>
+		
+		<acme:menu-option code="master.menu.service">
+			<acme:menu-suboption code="master.menu.any.list-services" action="/any/service/list" />
+		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.administrator" access="hasRealm('Administrator')">
 			<acme:menu-suboption code="master.menu.administrator.list-airlines"  action="/administrator/airline/list" />
@@ -88,6 +92,10 @@
 		<acme:menu-option code="master.menu.flight-crew-member" access="hasRealm('FlightCrewMember')">
 			<acme:menu-suboption code="master.menu.flight-crew-member.list-before-current" action="/flight-crew-member/flight-assignment/list-before-current"/>
 			<acme:menu-suboption code="master.menu.flight-crew-member.list-after-current" action="/flight-crew-member/flight-assignment/list-after-current"/>
+		</acme:menu-option>
+
+		<acme:menu-option code="master.menu.flight-crew-member" access="hasRealm('FlightCrewMember')">
+			<acme:menu-suboption code="master.menu.flight-crew-member.list-activity-log" action="/flight-crew-member/activity-log/list"/>
 		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.provider" access="hasRealm('Provider')">
