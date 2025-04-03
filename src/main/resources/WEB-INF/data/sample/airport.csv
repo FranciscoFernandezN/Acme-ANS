@@ -1,6 +1,6 @@
-key,name,iATACode,operational-scope,city,country,website,email,contact-number,confirm
-airport-01,London Heathrow,LHR,INTERNATIONAL,London,UK,https://www.londonheathrow.com,info@londonheathrow.com,+447123456789,true
-airport-02,Barcelona El Prat,BCN,INTERNATIONAL,Barcelona,Spain,https://www.barcelona-airport.com,contact@barcelona-airport.com,+34930220000,true
-airport-03,Charles de Gaulle,CDG,INTERNATIONAL,Paris,France,https://www.parisaeroport.fr,contact@parisaeroport.fr,+33170070202,true
-airport-04,Los Angeles International,LAX,INTERNATIONAL,Los Angeles,USA,https://www.flylax.com,info@flylax.com,+13102568902,true
-airport-05,JFK International,JFK,INTERNATIONAL,New York,USA,https://www.jfkairport.com,support@jfkairport.com,+17186453600,true
+key,name,iATACode,operational-scope,city,country,website,email,contact-number
+airport-01,London Heathrow,LHR,INTERNATIONAL,London,UK,https://www.londonheathrow.com,info@londonheathrow.com,+447123456789
+airport-02,Barcelona El Prat,BCN,INTERNATIONAL,Barcelona,Spain,https://www.barcelona-airport.com,contact@barcelona-airport.com,+34930220000
+airport-03,Charles de Gaulle,CDG,INTERNATIONAL,Paris,France,https://www.parisaeroport.fr,contact@parisaeroport.fr,+33170070202
+airport-04,Los Angeles International,LAX,INTERNATIONAL,Los Angeles,USA,https://www.flylax.com,info@flylax.com,+13102568902
+airport-05,JFK International,JFK,INTERNATIONAL,New York,USA,https://www.jfkairport.com,support@jfkairport.com,+17186453600

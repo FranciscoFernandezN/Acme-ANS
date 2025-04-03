@@ -52,11 +52,12 @@ public class AdministratorAirportUpdateService extends AbstractGuiService<Admini
 		List<Airport> airports = this.aar.findAllAirports();
 		List<String> airportCodes = airports.stream().filter(m -> m.getId() != object.getId()).map(Airport::getIATACode).toList();
 
+		boolean confirmation = super.getRequest().getData("confirm", boolean.class);
+		super.state(confirmation, "confirm", "acme.validation.confirmation.message");
+
 		if (object.getIATACode() != null)
 			super.state(!airportCodes.contains(object.getIATACode()), "iATACode", "administrator.airport.create.already-exists");
 
-		if (object.getConfirm() != null)
-			super.state(object.getConfirm(), "confirm", "administrator.airport.create.confirm-operation");
 	}
 
 	@Override
@@ -71,8 +72,9 @@ public class AdministratorAirportUpdateService extends AbstractGuiService<Admini
 
 		choices = SelectChoices.from(OperationalScope.class, airport.getOperationalScope());
 
-		dataset = super.unbindObject(airport, "name", "iATACode", "operationalScope", "city", "country", "website", "email", "contactNumber", "confirm");
+		dataset = super.unbindObject(airport, "name", "iATACode", "operationalScope", "city", "country", "website", "email", "contactNumber");
 		dataset.put("operationalScope", choices);
+		dataset.put("confirm", false);
 
 		super.getResponse().addData(dataset);
 	}
