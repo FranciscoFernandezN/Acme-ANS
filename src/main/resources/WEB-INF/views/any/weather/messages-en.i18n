@@ -1,0 +1,16 @@
+any.weather.form.title = Forecast form
+any.weather.list.title = Listing of the forecast
+
+any.weather.form.label.forecastDate = Date of the forecast:
+any.weather.form.label.city = City:
+any.weather.form.label.status = Status:
+any.weather.form.label.temperature = Temperature (°C):
+any.weather.form.label.visibility = Visibility (m):
+any.weather.form.label.rainPerHour = Rain per hour (mm/h):
+any.weather.form.label.snowPerHour = Snow per hour (mm/h):
+any.weather.form.label.wind = Wind (km/h):
+
+any.weather.list.label.forecastDate = Date of the forecast
+any.weather.list.label.city = City
+any.weather.list.label.status = Status
+any.weather.list.label.temperature = Temperature (°C)

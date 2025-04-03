@@ -94,7 +94,11 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 	public void validate(final Leg leg) {
 
 		//Ver si haría falta validar cosas aunque sean con un SelectChoices
+		
+		Manager manager;
 
+		manager = (Manager) super.getRequest().getPrincipal().getRealmOfType(Manager.class);
+		
 		Date currentMoment = MomentHelper.getCurrentMoment();
 
 		List<Leg> legs = this.lr.findAllLegs();
@@ -109,8 +113,10 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 		if (leg.getScheduledDeparture() != null)
 			super.state(leg.getScheduledDeparture().after(currentMoment), "scheduledDeparture", "manager.leg.create.not-future-date");
 
-		if (leg.getScheduledArrival() != null && leg.getScheduledDeparture() != null)
+		if (leg.getScheduledArrival() != null && leg.getScheduledDeparture() != null) {
 			super.state(leg.getScheduledArrival().after(leg.getScheduledDeparture()), "scheduledArrival", "manager.leg.create.not-after-arrival");
+			super.state(leg.getDuration() <= 24, "scheduledArrival", "manager.leg.create.too-long-leg");
+		}
 
 		int arrivalAirportId = super.getRequest().getData("arrivalAirport", int.class);
 		int departureAirportId = super.getRequest().getData("departureAirport", int.class);
@@ -118,16 +124,28 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 		if (arrivalAirportId != 0 && departureAirportId != 0)
 			super.state(arrivalAirportId != departureAirportId, "arrivalAirport", "manager.leg.create.not-different-airport");
 
-		super.state(leg.getDuration() <= 24, "scheduledArrival", "manager.leg.create.too-long-leg");
+		
 
 		int aircraftId;
+		Aircraft aircraft;
 		aircraftId = super.getRequest().getData("aircraft", int.class);
 		List<Leg> legsOfAircraft = this.lr.findAllLegsOfAircraftByAircraftId(aircraftId);
-
+		aircraft = this.lr.findAircraftById(aircraftId);
+		
+		if (aircraftId != 0) {
+			super.state(aircraft.getAirline().getId() == manager.getAirlineManaging().getId(), "aircraft", "manager.leg.create.not-your-aircraft");
+		}
+		
 		int flightId;
 		flightId = super.getRequest().getData("flight", int.class);
 		List<Leg> legsOfFlight = this.lr.findAllLegsByFlightId(flightId);
-
+		List<Flight> flights;
+		flights = this.lr.findAllFlightsEditableByManagerId(manager.getId());
+		if(flightId != 0) {
+			super.state(flights.stream().map(f -> f.getId()).anyMatch(f -> f == flightId), "flight", "manager.leg.create.not-your-flight");
+		}
+		
+		
 		Predicate<Leg> legsAreBefore = (final Leg l) -> (leg.getScheduledArrival().before(l.getScheduledDeparture()) && leg.getScheduledDeparture().before(l.getScheduledDeparture()));
 		Predicate<Leg> legsAreAfter = (final Leg l) -> (leg.getScheduledArrival().after(l.getScheduledArrival()) && leg.getScheduledDeparture().after(l.getScheduledArrival()));
 

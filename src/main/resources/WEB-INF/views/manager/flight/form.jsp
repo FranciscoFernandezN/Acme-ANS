@@ -9,11 +9,13 @@
 	<acme:input-money code="manager.flight.form.label.cost" path="cost"/>
 	<acme:input-textarea code="manager.flight.form.label.description" path="description"/>
 	<acme:input-checkbox code="manager.flight.form.label.isDraftMode" path="isDraftMode"/>
-	<acme:input-textbox code="manager.flight.form.label.origin" path="origin" readonly="true"/>
-	<acme:input-textbox code="manager.flight.form.label.destiny" path="destiny" readonly="true"/>
-	<acme:input-textbox code="manager.flight.form.label.scheduledDeparture" path="scheduledDeparture" readonly="true"/>
-	<acme:input-textbox code="manager.flight.form.label.scheduledArrival" path="scheduledArrival" readonly="true"/>
-	<acme:input-textbox code="manager.flight.form.label.numberOfLayovers" path="numberOfLayovers" readonly="true"/>
+	<jstl:if test="${ acme:anyOf(_command, 'show|update|delete') }">
+		<acme:input-textbox code="manager.flight.form.label.origin" path="origin" readonly="true"/>
+		<acme:input-textbox code="manager.flight.form.label.destiny" path="destiny" readonly="true"/>
+		<acme:input-textbox code="manager.flight.form.label.scheduledDeparture" path="scheduledDeparture" readonly="true"/>
+		<acme:input-textbox code="manager.flight.form.label.scheduledArrival" path="scheduledArrival" readonly="true"/>
+		<acme:input-textbox code="manager.flight.form.label.numberOfLayovers" path="numberOfLayovers" readonly="true"/>
+	</jstl:if>
 	
 	<jstl:choose>
 		<jstl:when test="${acme:anyOf(_command, 'show|update|delete') && isDraftMode == true}">

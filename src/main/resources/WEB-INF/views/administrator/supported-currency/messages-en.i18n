@@ -1,0 +1,19 @@
+administrator.supported-currency.form.title = Supported currency form
+administrator.supported-currency.list.title = Listing of supported currencies
+
+administrator.supported-currency.list.label.currencyName = Currency
+administrator.supported-currency.list.label.isDefaultCurrency = Is this currency the system default?
+
+administrator.supported-currency.list.button.create = Create new supported currency
+
+administrator.supported-currency.form.label.currencyName = Currency:
+administrator.supported-currency.form.placeholder.currencyName = USD
+administrator.supported-currency.form.label.isDefaultCurrency = Is this currency the system default?
+
+administrator.supported-currency.form.button.update = Update this supported currency
+administrator.supported-currency.form.button.create = Create this supported currency
+
+administrator.supported-currency.create.is-default-currency = This currency is the default of the system, you must not touch it.
+administrator.supported-currency.create.already-exists-currency = This currency already exists.
+
+

@@ -1,0 +1,23 @@
+any.flight.form.title = Flight form
+any.flight.list.title = Listing of flights
+
+any.flight.list.label.tag = Tag
+any.flight.list.label.cost = Cost
+any.flight.list.label.origin = Origin city
+any.flight.list.label.destiny = Destiny city
+any.flight.list.label.scheduledDeparture = Scheduled departure
+any.flight.list.label.scheduledArrival = Scheduled arrival
+any.flight.list.label.needsSelfTransfer = Needs self transfer?
+
+any.flight.form.label.id = Id of the flight:
+any.flight.form.label.tag = Tag:
+any.flight.form.label.needsSelfTransfer = Does it need self transfer?
+any.flight.form.label.cost = Cost:
+any.flight.form.label.description = Description:
+any.flight.form.label.origin = Origin city:
+any.flight.form.label.destiny = Destiny city:
+any.flight.form.label.scheduledDeparture = Scheduled departure:
+any.flight.form.label.scheduledArrival = Scheduled arrival:
+any.flight.form.label.numberOfLayovers = Number of layovers:
+
+any.flight.form.button.legs = View legs

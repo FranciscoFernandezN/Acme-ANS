@@ -1,0 +1,13 @@
+customer.customer-dashboard.form.title = Customer dashboard
+
+customer.customer-dashboard.form.label.lastFiveDestinations = Last five destinations:
+customer.customer-dashboard.form.label.moneySpentLastYear = Money spent last year:
+customer.customer-dashboard.form.label.numOfBookingsByTravelClass = Number of bookings by travel class:
+customer.customer-dashboard.form.label.avgCostOfBookingsLastFiveYears = Average of cost of bookings in the last five years:
+customer.customer-dashboard.form.label.minCostOfBookingsLastFiveYears = Minimum of cost of bookings in the last five years:
+customer.customer-dashboard.form.label.maxCostOfBookingsLastFiveYears = Maximum of cost of bookings in the last five years:
+customer.customer-dashboard.form.label.stdDeviationCostOfBookingsLastFiveYears = Standard deviation of cost of bookings in the last five years:
+customer.customer-dashboard.form.label.avgNumOfPassengersInBookings = Average of passengers in bookings:
+customer.customer-dashboard.form.label.minNumOfPassengersInBookings = Minimum of passengers in bookings:
+customer.customer-dashboard.form.label.maxNumOfPassengersInBookings = Maximum of passengers in bookings:
+customer.customer-dashboard.form.label.stdDeviationNumOfPassengersInBookings = Standard deviation of passengers in bookings:

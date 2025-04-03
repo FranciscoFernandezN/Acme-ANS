@@ -20,8 +20,10 @@ teniendo en cuenta que se debe vincular la versión adecuada de Acme-Framework, 
 
 Enlace al tablero de GitHub del proyecto: https://github.com/users/FranciscoFernandezN/projects/2/views/1
 
-Enlace al tablero del proyecto de Francisco Fernández Noguerol: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=FranciscoFernandezN
+Enlace al tablero del proyecto de Francisco Fernández Noguerol: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=assignee%3AFranciscoFernandezN
 Enlace al tablero del proyecto de Esteban Gómez Navarro: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=Estegn10
 Enlace al tablero del proyecto de Beatriz Gutiérrez Arazo: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=BPP4634
 Enlace al tablero del proyecto de Juan Varo Vera: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=Juan-Varo
 Enlace al tablero del proyecto de Manuel Jesús Benito Merchán: https://github.com/users/FranciscoFernandezN/projects/2/views/1?filterQuery=ManuelJBM
+
+Enlace al testeo del requisito 14 grupal de la aplicación: https://uses0-my.sharepoint.com/:v:/g/personal/beagutara_alum_us_es/Eec8I5YLmKNJhqI-qkrZ8woB77mB2AFDcOC6ubZyMpKkig?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=jPfU4B

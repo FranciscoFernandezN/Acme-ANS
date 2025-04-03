@@ -56,7 +56,7 @@ public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight
 		Date scheduledDeparture = flight.getScheduledDeparture();
 		Date scheduledArrival = flight.getScheduledArrival();
 
-		dataset = super.unbindObject(flight, "id", "tag", "cost", "isDraftMode");
+		dataset = super.unbindObject(flight, "id", "tag", "description", "cost", "isDraftMode", "needsSelfTransfer");
 
 		dataset.put("origin", origin == null ? "N/A" : origin);
 		dataset.put("destiny", destiny == null ? "N/A" : destiny);

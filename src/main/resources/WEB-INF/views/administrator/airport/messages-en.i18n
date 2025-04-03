@@ -1,0 +1,29 @@
+administrator.airport.form.title = Airport form
+administrator.airport.list.title = Listing of airports
+
+administrator.airport.form.label.name = Name:
+administrator.airport.form.label.iATACode = IATA Code:
+administrator.airport.form.label.operationalScope = Scope:
+administrator.airport.form.label.city = City:
+administrator.airport.form.label.country = Country:
+administrator.airport.form.label.website = Website:
+administrator.airport.form.label.email = Contact email:
+administrator.airport.form.label.contactNumber = Contact number:
+administrator.airport.form.label.confirm = Do you confirm this operation?
+
+administrator.airport.form.button.create = Create airport
+administrator.airport.form.button.update = Update airport
+
+administrator.airport.list.label.name = Name
+administrator.airport.list.label.iATACode = IATA Code
+administrator.airport.list.label.operationalScope = Scope
+administrator.airport.list.label.city = City
+administrator.airport.list.label.country = Country
+administrator.airport.list.label.website = Website
+administrator.airport.list.label.email = Contact email
+administrator.airport.list.label.contactNumber = Contact number
+
+administrator.airport.list.button.create = Create new airport
+
+administrator.airport.create.already-exists = This IATA code already exists
+administrator.airport.create.confirm-operation = You have to confirm this operation

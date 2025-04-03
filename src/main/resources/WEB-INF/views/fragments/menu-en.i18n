@@ -10,9 +10,25 @@
 
 # master.menu.reviews #######################################################
 
+master.menu.weather = Weather
+master.menu.any.list-weather = List weather
+
+# master.menu.reviews #######################################################
+
 master.menu.review = Reviews
-master.menu.authenticated.list-reviews = List reviews
-master.menu.authenticated.create-reviews = Create reviews
+master.menu.any.list-reviews = List reviews
+master.menu.any.create-reviews = Create reviews
+
+# master.menu.flight #######################################################
+
+master.menu.flight = Flights
+master.menu.any.list-flights = List flights
+master.menu.any.list-bad-weather-flights = List bad weather flights
+
+# master.menu.airport #######################################################
+
+master.menu.airport = Airports
+master.menu.authenticated.list-airport = List airports
 
 # master.menu.anonymous #######################################################
 
@@ -28,13 +44,30 @@ master.menu.anonymous.estegn10-favourite-link = 53962653F: Gómez Navarro, Esteb
 
 master.menu.administrator = Administrator
 master.menu.administrator.list-user-accounts = List user accounts
+master.menu.administrator.list-supported-currencies = List system configuration
 master.menu.administrator.populate-db-initial = Populate DB (initial)
 master.menu.administrator.populate-db-sample = Populate DB (samples)
 master.menu.administrator.shut-system-down = Shut system down
+master.menu.administrator.list-services = List services
+master.menu.administrator.create-services = Create services
+master.menu.administrator.list-airlines = List airlines
+master.menu.administrator.create-airlines = Create airlines
+master.menu.administrator.list-aircrafts = List aircrafts
+master.menu.administrator.list-airports = List airports
+master.menu.administrator.create-airports = Create airports
+master.menu.administrator.list-bookings = List bookings
+
+master.menu.administrator.list-supported-currencies = List system configuration
+master.menu.administrator.list-claims = List of claims
+master.menu.administrator.populate-weather = Populate weather (actual)
 
 # master.menu.assistance-agent ###################################################
 
 master.menu.assistance-agent = Assistance agent
+master.menu.assistance-agent.dashboard = Dashboard
+master.menu.assistance-agent.list-tracking-logs = List tracking logs
+master.menu.assistance-agent.create-tracking-logs = Create tracking logs
+
 master.menu.assistance-agent.list-complete-claims = List completed claims
 master.menu.assistance-agent.list-in-progress-claims = List in progress claims
 master.menu.assistance-agent.create-claims = Create claims
@@ -52,10 +85,20 @@ master.menu.consumer.favourite-link = Favourite link
 # master.menu.manager ##########################################################
 
 master.menu.manager = Manager
+master.menu.manager.dashboard = Dashboard
 master.menu.manager.list-legs = List legs
 master.menu.manager.create-legs = Create legs
 master.menu.manager.list-flights = List flights
 master.menu.manager.create-flights = Create flights
+
+# master.menu.customer ##########################################################
+
+master.menu.customer = Customer
+master.menu.customer.dashboard = Dashboard
+master.menu.customer.list-booking = List bookings
+master.menu.customer.create-booking = Create booking
+master.menu.customer.list-passenger = List passengers
+master.menu.customer.create-passenger = Create passenger
 
 # master.menu.user-account ####################################################
 
@@ -65,3 +108,9 @@ master.menu.user-account.become-provider = Become a provider
 master.menu.user-account.provider-profile = Provider profile
 master.menu.user-account.become-consumer = Become a consumer
 master.menu.user-account.consumer-profile = Consumer profile
+master.menu.user-account.become-manager = Become a manager
+master.menu.user-account.manager-profile =  Manager profile
+master.menu.user-account.become-customer = Become a customer
+master.menu.user-account.customer-profile =  Customer profile
+master.menu.user-account.become-agent = Become an assistance agent
+master.menu.user-account.agent-profile = Assistance agent profile

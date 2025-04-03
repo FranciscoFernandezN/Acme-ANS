@@ -35,8 +35,6 @@ public class Manager extends AbstractRole {
 
 	// Attributes -------------------------------------------------------------
 
-	//TODO: revisar que el patrón esté bien a la hora de inicializar datos
-	@Unique
 	@ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$")
 	@Mandatory
 	@Column(unique = true)
