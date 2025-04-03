@@ -1,0 +1,20 @@
+administrator.claim.form.title = Claim form
+administrator.claim.list.title = Listing of claims
+
+administrator.claim.form.label.registrationMoment = Registration moment:
+administrator.claim.form.label.passengerEmail = Passenger email:
+administrator.claim.form.label.description = Description:
+administrator.claim.form.label.claimType = Type of claim:
+administrator.claim.form.label.indicator = Claim state: 
+administrator.claim.form.label.leg = Leg in which occurred:
+administrator.claim.form.label.isPublished = Is it published?
+
+administrator.claim.form.button.log = Associated log
+
+administrator.claim.list.label.registrationMoment = Registration moment
+administrator.claim.list.label.passengerEmail = Passenger email
+administrator.claim.list.label.description = Description
+administrator.claim.list.label.claimType = Type
+administrator.claim.list.label.indicator = Claim state
+administrator.claim.list.label.leg = Leg in which occurred
+administrator.claim.list.label.isPublished = Is it published?

@@ -1,0 +1,25 @@
+assistance-agent.tracking-log.form.title = Tracking-log form
+assistance-agent.tracking-log.list.title = Listing of Tracking-logs
+
+assistance-agent.tracking-log.form.label.lastUpdateMoment = Last update moment:
+assistance-agent.tracking-log.form.label.step = Step undergoing:
+assistance-agent.tracking-log.form.label.resolutionPercentage = Resolution percentage:
+assistance-agent.tracking-log.form.label.resolution = Resolution:
+assistance-agent.tracking-log.form.label.claim = Claim referred to:
+assistance-agent.tracking-log.form.label.isPublished = Is it published?
+
+assistance-agent.tracking-log.form.button.update = Update this Tracking-log
+assistance-agent.tracking-log.form.button.delete = Delete this Tracking-log
+assistance-agent.tracking-log.form.button.create = Create this Tracking-log
+
+assistance-agent.tracking-log.list.label.lastUpdateMoment = Last update moment
+assistance-agent.tracking-log.list.label.step = Step undergoing
+assistance-agent.tracking-log.list.label.resolutionPercentage = Resolution percentage
+assistance-agent.tracking-log.list.label.resolution = Resolution
+assistance-agent.tracking-log.list.label.claim = Claim referred to
+assistance-agent.tracking-log.list.label.isPublished = Is it published?
+
+assistance-agent.tracking-log.list.button.create = Create a Tracking-log
+
+assistance-agent.tracking-log.create.cant-be-published = This tracking-log can't be published because his claim isn't published 
+assistance-agent.tracking-log.delete.is-published = This tracking-log can't be deleted because it's already published
