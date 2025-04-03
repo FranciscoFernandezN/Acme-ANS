@@ -19,6 +19,11 @@ master.menu.any.create-reviews = Crear reseña
 master.menu.flight = Vuelos
 master.menu.any.list-flights = Ver vuelos
 
+# master.menu.airport #######################################################
+
+master.menu.airport = Aeropuertos
+master.menu.authenticated.list-airport = Ver aeropuertos
+
 # master.menu.anonymous #######################################################
 
 master.menu.anonymous = Anónimo

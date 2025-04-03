@@ -36,6 +36,10 @@
 		<acme:menu-option code="master.menu.flight">
 			<acme:menu-suboption code="master.menu.any.list-flights" action="/any/flight/list" />
 		</acme:menu-option>
+		
+		<acme:menu-option code="master.menu.airport">
+			<acme:menu-suboption code="master.menu.authenticated.list-airport" action="/any/airport/list" />
+		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.administrator" access="hasRealm('Administrator')">
 			<acme:menu-suboption code="master.menu.administrator.list-aircrafts" action="/administrator/aircraft/list"/>
