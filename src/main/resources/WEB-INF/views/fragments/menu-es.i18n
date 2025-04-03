@@ -10,6 +10,11 @@
 
 # master.menu.reviews #######################################################
 
+master.menu.weather = Weather
+master.menu.any.list-weather = List weather
+
+# master.menu.reviews #######################################################
+
 master.menu.review = Reseñas
 master.menu.any.list-reviews = Ver reseñas
 master.menu.any.create-reviews = Crear reseña
@@ -18,6 +23,7 @@ master.menu.any.create-reviews = Crear reseña
 
 master.menu.flight = Vuelos
 master.menu.any.list-flights = Ver vuelos
+master.menu.any.list-bad-weather-flights = Ver vuelos con mal tiempo
 
 # master.menu.airport #######################################################
 
@@ -69,6 +75,8 @@ master.menu.assistance-agent.create-tracking-logs = Crear registros de seguimien
 master.menu.assistance-agent = Agente de asistencia
 master.menu.assistance-agent.list-tracking-logs = Ver registros de seguimiento
 master.menu.assistance-agent.create-tracking-logs = Crear registros de seguimiento
+
+master.menu.administrator.populate-weather = Poblar tiempo (actual)
 
 # master.menu.provider ########################################################
 

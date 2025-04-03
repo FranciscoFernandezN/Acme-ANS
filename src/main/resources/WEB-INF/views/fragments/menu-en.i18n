@@ -10,6 +10,11 @@
 
 # master.menu.reviews #######################################################
 
+master.menu.weather = Weather
+master.menu.any.list-weather = List weather
+
+# master.menu.reviews #######################################################
+
 master.menu.review = Reviews
 master.menu.any.list-reviews = List reviews
 master.menu.any.create-reviews = Create reviews
@@ -18,6 +23,7 @@ master.menu.any.create-reviews = Create reviews
 
 master.menu.flight = Flights
 master.menu.any.list-flights = List flights
+master.menu.any.list-bad-weather-flights = List bad weather flights
 
 # master.menu.airport #######################################################
 
@@ -67,6 +73,8 @@ master.menu.assistance-agent.create-claims = Create claims
 master.menu.assistance-agent = Assistance agent
 master.menu.assistance-agent.list-tracking-logs = List tracking logs
 master.menu.assistance-agent.create-tracking-logs = Create tracking logs
+
+master.menu.administrator.populate-weather = Populate weather (actual)
 
 # master.menu.provider ########################################################
 

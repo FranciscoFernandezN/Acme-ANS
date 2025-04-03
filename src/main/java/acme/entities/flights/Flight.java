@@ -17,11 +17,14 @@ import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
+import acme.client.helpers.MomentHelper;
 import acme.client.helpers.SpringHelper;
 import acme.constraints.ValidSupportedCurrency;
 import acme.entities.airlines.Airline;
 import acme.entities.airports.Airport;
 import acme.entities.legs.Leg;
+import acme.entities.weather.Weather;
+import acme.entities.weather.WeatherStatus;
 import acme.realms.Manager;
 import lombok.Getter;
 import lombok.Setter;
@@ -127,6 +130,31 @@ public class Flight extends AbstractEntity {
 	@Transient
 	public Airline getAirline() {
 		return this.getManager().getAirlineManaging();
+	}
+	
+	@Transient
+	public Boolean getFlownWithBadWeather() {
+		Boolean result = null;
+		List<Leg> legs = getSortedLegs();
+		if(!legs.isEmpty()) {
+			result = false;
+			FlightRepository repository = SpringHelper.getBean(FlightRepository.class);
+			for(Leg l: legs) {
+				List<Weather> listOriginWeather = repository.findWeatherByCity(l.getDepartureAirport().getCity());
+				List<Weather> listDestinyWeather = repository.findWeatherByCity(l.getArrivalAirport().getCity());
+				Comparator<Weather> timeComparatorOrigin = Comparator.comparing((Weather w) -> (w.getForecastDate().getTime() - l.getScheduledDeparture().getTime()));
+				Comparator<Weather> timeComparatorDestiny = Comparator.comparing((Weather w) -> (w.getForecastDate().getTime() - l.getScheduledArrival().getTime()));
+				Weather originWeather = listOriginWeather.stream().min(timeComparatorOrigin).orElse(null);
+				Weather destinyWeather = listDestinyWeather.stream().min(timeComparatorDestiny).orElse(null);
+				if((originWeather != null && (originWeather.getStatus().equals(WeatherStatus.BAD_WEATHER))) 
+					|| (destinyWeather != null && (destinyWeather.getStatus().equals(WeatherStatus.BAD_WEATHER)))) {
+					result = true;
+					break;
+				}
+				
+			}
+		}
+		return result;
 	}
 
 	// Relationships ----------------------------------------------------------
