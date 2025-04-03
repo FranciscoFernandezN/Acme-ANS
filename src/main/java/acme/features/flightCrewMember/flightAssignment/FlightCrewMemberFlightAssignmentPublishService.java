@@ -41,14 +41,14 @@ public class FlightCrewMemberFlightAssignmentPublishService extends AbstractGuiS
 
 			int flightAssignmentId = super.getRequest().getData("id", int.class);
 			FlightAssignment flightAssignment = this.repository.findFlightAssignmentById(flightAssignmentId);
-
+			Date date = MomentHelper.getCurrentMoment();
 			if (flightAssignment != null) {
 				// Verificar que el Leg no sea null antes de acceder a su status
 				Leg leg = flightAssignment.getLeg();
 				if (leg != null) {
 					// Verificar que el Leg no haya ocurrido y que su scheduledDeparture sea futura
 					boolean legHasOccurred = leg.getStatus() == LegStatus.LANDED || leg.getStatus() == LegStatus.CANCELLED;
-					boolean legIsInFuture = leg.getScheduledDeparture().after(new Date());
+					boolean legIsInFuture = leg.getScheduledDeparture().after(date);
 
 					if (legHasOccurred || !legIsInFuture)
 						super.state(false, "leg", "flight-crew-member.flight-assignment.error.already-occurred-or-future");
@@ -167,7 +167,7 @@ public class FlightCrewMemberFlightAssignmentPublishService extends AbstractGuiS
 		int id = super.getRequest().getPrincipal().getRealmOfType(FlightCrewMember.class).getId();
 		Boolean isAvailable = this.repository.findFlightCrewMemberById(id).getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
 
-		legs = this.repository.findAllLegs();
+		legs = this.repository.findAllLegs().stream().filter(leg -> !leg.getIsDraftMode() && leg.getStatus() != LegStatus.LANDED && leg.getStatus() != LegStatus.CANCELLED && leg.getScheduledDeparture().before(date)).toList();
 
 		flightCrewMembers = this.repository.findAllFlightCrewMembers();
 		dutyChoices = SelectChoices.from(Duty.class, flightAssignment.getDuty());

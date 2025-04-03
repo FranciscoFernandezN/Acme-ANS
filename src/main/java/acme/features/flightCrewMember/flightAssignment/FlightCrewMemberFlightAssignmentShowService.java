@@ -15,6 +15,7 @@ import acme.entities.flightAssignments.CurrentStatus;
 import acme.entities.flightAssignments.Duty;
 import acme.entities.flightAssignments.FlightAssignment;
 import acme.entities.legs.Leg;
+import acme.entities.legs.LegStatus;
 import acme.realms.AvailabilityStatus;
 import acme.realms.FlightCrewMember;
 
@@ -57,7 +58,7 @@ public class FlightCrewMemberFlightAssignmentShowService extends AbstractGuiServ
 		Boolean isAvailable = this.repository.findFlightCrewMemberById(id).getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
 
 		// Obtener los Legs que estén publicados, no sean Landed/Canceled y tengan un scheduledDeparture futuro
-		legs = this.repository.findAllLegs();
+		legs = this.repository.findAllLegs().stream().filter(leg -> !leg.getIsDraftMode() && leg.getStatus() != LegStatus.LANDED && leg.getStatus() != LegStatus.CANCELLED && leg.getScheduledDeparture().before(date)).toList();
 		flightCrewMembers = this.repository.findAllFlightCrewMembers();
 
 		// Obtener todos los FlightCrewMembers disponibles
