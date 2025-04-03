@@ -38,7 +38,6 @@ master.menu.anonymous.estegn10-favourite-link = 53962653F: Gómez Navarro, Esteb
 
 master.menu.administrator = Administrator
 master.menu.administrator.list-user-accounts = List user accounts
-master.menu.administrator.list-aircrafts = List aircrafts
 master.menu.administrator.list-supported-currencies = List system configuration
 master.menu.administrator.populate-db-initial = Populate DB (initial)
 master.menu.administrator.populate-db-sample = Populate DB (samples)
@@ -48,6 +47,17 @@ master.menu.administrator.create-airlines = Create airlines
 master.menu.administrator.list-aircrafts = List aircrafts
 master.menu.administrator.list-bookings = List bookings
 master.menu.administrator.list-supported-currencies = List system configuration
+master.menu.administrator.list-claims = List of claims
+
+# master.menu.assistance-agent ###################################################
+
+master.menu.assistance-agent = Assistance agent
+master.menu.assistance-agent.list-tracking-logs = List tracking logs
+master.menu.assistance-agent.create-tracking-logs = Create tracking logs
+
+master.menu.assistance-agent.list-complete-claims = List completed claims
+master.menu.assistance-agent.list-in-progress-claims = List in progress claims
+master.menu.assistance-agent.create-claims = Create claims
 
 # master.menu.assistance-agent ###################################################
 
