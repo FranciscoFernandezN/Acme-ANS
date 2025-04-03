@@ -1,0 +1,30 @@
+flight-crew-member.flight-assignment.form.title = Flight assignment form
+flight-crew-member.flight-assignment.list.title = Listing of flight assignments
+
+flight-crew-member.flight-assignment.form.label.duty = Duty:
+flight-crew-member.flight-assignment.form.label.leg = Leg:
+flight-crew-member.flight-assignment.form.label.flightCrewMember = Flight crew member:
+flight-crew-member.flight-assignment.form.label.lastUpDate = Last up date:
+flight-crew-member.flight-assignment.form.label.currentStatus = Current status:
+flight-crew-member.flight-assignment.form.label.remarks = Remarks:
+flight-crew-member.flight-assignment.form.label.confirmation = Do you confirm this operation?
+
+flight-crew-member.flight-assignment.form.button.create = Create
+flight-crew-member.flight-assignment.form.button.update = Update
+flight-crew-member.flight-assignment.form.button.publish = Publish
+flight-crew-member.flight-assignment.form.button.delete = Delete
+
+flight-crew-member.flight-assignment.list.label.duty = Duty
+flight-crew-member.flight-assignment.list.label.lastUpDate = Last up date
+flight-crew-member.flight-assignment.list.label.currentStatus = Current status
+flight-crew-member.flight-assignment.list.label.remarks = Remarks
+flight-crew-member.flight-assignment.list.label.confirmation = Do you confirm this operation?
+
+flight-crew-member.flight-assignment.list.button.create = Create new flight assignment  
+
+flight-crew-member.flight-assignment.error.not-available = The flight crew member is not available
+flight-crew-member.flight-assignment.error.already-assigned = The flight crew member has been assigned yet 
+flight-crew-member.flight-assignment.error.already-occurred = The leg has occurred yet  
+flight-crew-member.flight-assignment.error.pilot-limit-exceeded = It has to be at most one pilot   
+flight-crew-member.flight-assignment.error.copilot-limit-exceeded = It has to be at most one copilot 
+flight-crew-member.flight-assignment.error.leg-null = A leg cannot be null  

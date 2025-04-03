@@ -85,6 +85,13 @@ master.menu.assistance-agent = Agente de asistencia
 master.menu.assistance-agent.list-tracking-logs = Ver registros de seguimiento
 master.menu.assistance-agent.create-tracking-logs = Crear registros de seguimiento
 
+# master.menu.flight-crew-member ###################################################
+
+master.menu.flight-crew-member = Miembro de la tripulación
+master.menu.flight-crew-member.list-before-current = Lista de asignaciones de vuelo que ya han llegado
+master.menu.flight-crew-member.list-after-current = Lista de asignaciones de vuelo que aún no han llegado
+
+
 
 # master.menu.provider ########################################################
 
