@@ -69,7 +69,11 @@ public class Airport extends AbstractEntity {
 	@Automapped
 	private String				contactNumber;
 
+	@Mandatory
+	@Automapped
+	private Boolean				confirm;
+
 	// Derived attributes -----------------------------------------------------
 	// Relationships ----------------------------------------------------------
-  
+
 }

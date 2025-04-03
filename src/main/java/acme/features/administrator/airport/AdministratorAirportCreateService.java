@@ -40,23 +40,21 @@ public class AdministratorAirportCreateService extends AbstractGuiService<Admini
 
 	@Override
 	public void bind(final Airport airport) {
-		super.bindObject(airport, "name", "iATACode", "operationalScope", "city", "country", "website", "email", "contactNumber");
+		super.bindObject(airport, "name", "iATACode", "operationalScope", "city", "country", "website", "email", "contactNumber", "confirm");
 	}
 
 	@Override
 	public void validate(final Airport object) {
 		assert object != null;
-		boolean confirmation;
-		confirmation = super.getRequest().getData("confirmation", boolean.class);
 
 		List<Airport> airports = this.aar.findAllAirports();
-		List<String> airportIds = airports.stream().map(Airport::getIATACode).toList();
+		List<String> airportCodes = airports.stream().map(Airport::getIATACode).toList();
 
 		if (object.getIATACode() != null)
-			super.state(!airportIds.contains(object.getIATACode()), "iATACode", "administrator.airport.create.already-exists");
+			super.state(!airportCodes.contains(object.getIATACode()), "iATACode", "administrator.airport.create.already-exists");
 
-		if (!confirmation)
-			super.state(!confirmation, "confirmation", "administrator.airport.create.confirm-operation");
+		if (object.getConfirm() != null)
+			super.state(object.getConfirm(), "confirm", "administrator.airport.create.confirm-operation");
 	}
 
 	@Override
@@ -71,7 +69,7 @@ public class AdministratorAirportCreateService extends AbstractGuiService<Admini
 
 		choices = SelectChoices.from(OperationalScope.class, airport.getOperationalScope());
 
-		dataset = super.unbindObject(airport, "name", "iATACode", "operationalScope", "city", "country", "website", "email", "contactNumber");
+		dataset = super.unbindObject(airport, "name", "iATACode", "operationalScope", "city", "country", "website", "email", "contactNumber", "confirm");
 		dataset.put("operationalScope", choices);
 
 		super.getResponse().addData(dataset);

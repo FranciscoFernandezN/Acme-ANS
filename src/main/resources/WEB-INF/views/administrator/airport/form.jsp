@@ -12,7 +12,7 @@
 	<acme:input-url code="administrator.airport.form.label.website" path="website" />
 	<acme:input-email code="administrator.airport.form.label.email" path="email" />
 	<acme:input-textbox code="administrator.airport.form.label.contactNumber" path="contactNumber" />
-	<acme:input-checkbox code="administrator.airport.form.label.confirmation" path="confirmation"/>
+	<acme:input-checkbox code="administrator.airport.form.label.confirm" path="confirm"/>
 	
 	<jstl:choose>
 		<jstl:when test="${acme:anyOf(_command, 'show|update')}">

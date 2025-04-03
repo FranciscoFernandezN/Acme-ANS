@@ -9,7 +9,7 @@ administrator.airport.form.label.country = País:
 administrator.airport.form.label.website = Sitio web:
 administrator.airport.form.label.email = Email de contacto:
 administrator.airport.form.label.contactNumber = Número de contacto:
-administrator.airport.form.label.confirmation = Deseas confirmar la operación?
+administrator.airport.form.label.confirm = Deseas confirmar la operación?
 
 administrator.airport.form.button.create = Crear aeropuerto
 administrator.airport.form.button.update = Actualizar aeropuerto
