@@ -4,8 +4,6 @@ package acme.realms;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-import org.checkerframework.common.aliasing.qual.Unique;
-
 import acme.client.components.basis.AbstractRole;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
@@ -26,7 +24,6 @@ public class Technician extends AbstractRole {
 
 	// Attributes -------------------------------------------------------------
 
-	@Unique
 	@Mandatory
 	@ValidString(pattern = "^[A-Z]{2,3}\\d{6}$")
 	@Column(unique = true)

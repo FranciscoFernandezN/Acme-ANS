@@ -1,23 +1,19 @@
+
 package acme.features.any.flight;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.principals.Any;
 import acme.client.services.AbstractGuiService;
-import acme.client.services.AbstractService;
 import acme.client.services.GuiService;
 import acme.entities.flights.Flight;
-import acme.entities.legs.Leg;
-import acme.features.manager.flight.ManagerFlightRepository;
-import acme.realms.Manager;
 
 @GuiService
 public class AnyFlightShowService extends AbstractGuiService<Any, Flight> {
-	
+
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
@@ -65,8 +61,8 @@ public class AnyFlightShowService extends AbstractGuiService<Any, Flight> {
 		dataset.put("scheduledDeparture", scheduledDeparture);
 		dataset.put("scheduledArrival", scheduledArrival);
 		dataset.put("numberOfLayovers", flight.getNumberOfLayovers());
-		
+
 		super.getResponse().addData(dataset);
 	}
-	
+
 }

@@ -1,3 +1,4 @@
+
 package acme.features.any.leg;
 
 import java.util.List;
@@ -10,26 +11,22 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flights.Flight;
 import acme.entities.legs.Leg;
-import acme.entities.legs.Leg;
 import acme.features.any.flight.AnyFlightRepository;
-import acme.features.any.leg.AnyLegRepository;
-import acme.realms.Manager;
 
 @GuiService
-public class AnyLegListService extends AbstractGuiService<Any, Leg>{
-	
+public class AnyLegListService extends AbstractGuiService<Any, Leg> {
+
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AnyLegRepository lr;
+	private AnyLegRepository	lr;
 
 	// AbstractGuiService interface -------------------------------------------
 
-
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AnyFlightRepository fr;
+	private AnyFlightRepository	fr;
 
 	// AbstractGuiService interface -------------------------------------------
 
@@ -44,7 +41,7 @@ public class AnyLegListService extends AbstractGuiService<Any, Leg>{
 
 		super.getResponse().setAuthorised(!flight.getIsDraftMode());
 	}
-	
+
 	@Override
 	public void load() {
 		List<Leg> legs;
@@ -65,5 +62,5 @@ public class AnyLegListService extends AbstractGuiService<Any, Leg>{
 		dataset.put("duration", leg.getDuration());
 		super.getResponse().addData(dataset);
 	}
-	
+
 }

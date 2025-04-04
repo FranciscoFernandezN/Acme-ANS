@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.controllers.AbstractGuiController;
 import acme.client.controllers.GuiController;
-import acme.entities.trackingLogs.TrackingLog;
+import acme.entities.trackinglogs.TrackingLog;
 import acme.realms.AssistanceAgent;
 
 @GuiController

@@ -53,18 +53,20 @@ master.menu.administrator.list-supported-currencies = List system configuration
 master.menu.administrator.populate-db-initial = Populate DB (initial)
 master.menu.administrator.populate-db-sample = Populate DB (samples)
 master.menu.administrator.shut-system-down = Shut system down
-master.menu.administrator.list-services = List services
-master.menu.administrator.create-services = Create services
+master.menu.administrator.list-services = List services (admin)
+master.menu.administrator.create-services = Create services (admin)
 master.menu.administrator.list-airlines = List airlines
 master.menu.administrator.create-airlines = Create airlines
 master.menu.administrator.list-aircrafts = List aircrafts
-master.menu.administrator.list-airports = List airports
-master.menu.administrator.create-airports = Create airports
+master.menu.administrator.create-aircrafts = Create aircraft
+master.menu.administrator.list-airports = List airports (admin)
+master.menu.administrator.create-airports = Create airports (admin)
 master.menu.administrator.list-bookings = List bookings
 
 master.menu.administrator.list-supported-currencies = List system configuration
+master.menu.administrator.create-supported-currencies = Create new supported currency
 master.menu.administrator.list-claims = List of claims
-master.menu.administrator.populate-weather = Populate weather (actual)
+master.menu.administrator.populate-weather = Populate weather actual (admin)
 
 # master.menu.assistance-agent ###################################################
 

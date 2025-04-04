@@ -41,7 +41,6 @@ public class MaintenanceRecord extends AbstractEntity {
 	private Date				moment;
 
 	@Mandatory
-	@Valid
 	@Enumerated(EnumType.STRING)
 	@Automapped
 	private MaintenanceStatus	status;

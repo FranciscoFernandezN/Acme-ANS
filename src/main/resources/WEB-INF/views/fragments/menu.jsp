@@ -40,42 +40,41 @@
 		
 		<acme:menu-option code="master.menu.weather">
 			<acme:menu-suboption code="master.menu.any.list-weather" action="/any/weather/list" />
+			<acme:menu-suboption access="hasRealm('Administrator')" code="master.menu.administrator.populate-weather" action="/administrator/weather/populate"/>
 		</acme:menu-option>
 		
 		<acme:menu-option code="master.menu.airport">
 			<acme:menu-suboption code="master.menu.authenticated.list-airport" action="/any/airport/list" />
+			<acme:menu-suboption access="hasRealm('Administrator')" code="master.menu.administrator.list-airports" action="/administrator/airport/list"/>
+			<acme:menu-suboption access="hasRealm('Administrator')" code="master.menu.administrator.create-airports" action="/administrator/airport/create"/>
 		</acme:menu-option>
-		
+
 		<acme:menu-option code="master.menu.service">
 			<acme:menu-suboption code="master.menu.any.list-services" action="/any/service/list" />
+			<acme:menu-suboption access="hasRealm('Administrator')" code="master.menu.administrator.list-services" action="/administrator/service/list"/>
+			<acme:menu-suboption access="hasRealm('Administrator')" code="master.menu.administrator.create-services" action="/administrator/service/create"/>
 		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.administrator" access="hasRealm('Administrator')">
 			<acme:menu-suboption code="master.menu.administrator.list-airlines"  action="/administrator/airline/list" />
 			<acme:menu-suboption code="master.menu.administrator.create-airlines"  action="/administrator/airline/create" />
-      <acme:menu-separator/>
+      		<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.list-aircrafts" action="/administrator/aircraft/list"/>
+			<acme:menu-suboption code="master.menu.administrator.create-aircrafts" action="/administrator/aircraft/create"/>
 			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.list-bookings" action="/administrator/booking/list"/>
 			<acme:menu-separator/>
+			<acme:menu-suboption code="master.menu.administrator.list-claims" action="/administrator/claim/list"/>
+			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.list-user-accounts" action="/administrator/user-account/list"/>
 			<acme:menu-separator/>
-			<acme:menu-suboption code="master.menu.administrator.list-services" action="/administrator/service/list"/>
-			<acme:menu-suboption code="master.menu.administrator.create-services" action="/administrator/service/create"/>
+			<acme:menu-suboption code="master.menu.administrator.list-supported-currencies" action="/administrator/supported-currency/list"/>
+			<acme:menu-suboption code="master.menu.administrator.create-supported-currencies" action="/administrator/supported-currency/create"/>
 			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.populate-db-initial" action="/administrator/system/populate-initial"/>
 			<acme:menu-suboption code="master.menu.administrator.populate-db-sample" action="/administrator/system/populate-sample"/>			
 			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.shut-system-down" action="/administrator/system/shut-down"/>
-			<acme:menu-separator/>
-			<acme:menu-suboption code="master.menu.administrator.list-supported-currencies" action="/administrator/supported-currency/list"/>
-			<acme:menu-separator/>
-			<acme:menu-suboption code="master.menu.administrator.populate-weather" action="/administrator/weather/populate"/>
-      <acme:menu-separator/>
-			<acme:menu-suboption code="master.menu.administrator.list-claims" action="/administrator/claim/list"/>
-			<acme:menu-separator/>
-			<acme:menu-suboption code="master.menu.administrator.list-airports" action="/administrator/airport/list"/>
-			<acme:menu-suboption code="master.menu.administrator.create-airports" action="/administrator/airport/create"/>
 		</acme:menu-option>
 		
 		<acme:menu-option code="master.menu.assistance-agent" access="hasRealm('AssistanceAgent')">

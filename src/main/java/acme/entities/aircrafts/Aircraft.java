@@ -50,7 +50,6 @@ public class Aircraft extends AbstractEntity {
 	private Integer				cargoWeight;
 
 	@Mandatory
-	@Valid
 	@Enumerated(EnumType.STRING)
 	@Automapped
 	private AircraftStatus		status;

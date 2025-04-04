@@ -1,6 +1,5 @@
-package acme.features.any.weather;
 
-import java.util.List;
+package acme.features.any.weather;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,7 +11,7 @@ import acme.entities.weather.Weather;
 
 @GuiService
 public class AnyWeatherShowService extends AbstractGuiService<Any, Weather> {
-	
+
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
@@ -30,7 +29,7 @@ public class AnyWeatherShowService extends AbstractGuiService<Any, Weather> {
 	public void load() {
 		Weather weather;
 		int weatherId;
-		
+
 		weatherId = super.getRequest().getData("id", int.class);
 		weather = this.wr.findWeatherById(weatherId);
 
@@ -48,5 +47,5 @@ public class AnyWeatherShowService extends AbstractGuiService<Any, Weather> {
 
 		super.getResponse().addData(dataset);
 	}
-	
+
 }

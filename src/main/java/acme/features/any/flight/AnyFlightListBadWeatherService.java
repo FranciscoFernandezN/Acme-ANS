@@ -1,3 +1,4 @@
+
 package acme.features.any.flight;
 
 import java.util.Date;
@@ -12,9 +13,10 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flights.Flight;
 
+@SuppressWarnings("deprecation")
 @GuiService
 public class AnyFlightListBadWeatherService extends AbstractGuiService<Any, Flight> {
-	
+
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
@@ -32,18 +34,17 @@ public class AnyFlightListBadWeatherService extends AbstractGuiService<Any, Flig
 	public void load() {
 		List<Flight> flights;
 		Date currentMoment;
-		
+
 		currentMoment = MomentHelper.getCurrentMoment();
 		Integer newMonth = currentMoment.getMonth() - 1;
-		if(newMonth < 0) {
+		if (newMonth < 0) {
 			currentMoment.setMonth(11);
 			currentMoment.setYear(currentMoment.getYear() - 1);
-		} else {
+		} else
 			currentMoment.setMonth(newMonth);
-		}
-		
+
 		flights = this.fr.findAllFlightsPosted();
-		
+
 		super.getBuffer().addData(flights.stream().filter(f -> f.getScheduledArrival().after(currentMoment)).filter(f -> f.getFlownWithBadWeather() != null && f.getFlownWithBadWeather()).toList());
 	}
 
@@ -66,5 +67,5 @@ public class AnyFlightListBadWeatherService extends AbstractGuiService<Any, Flig
 
 		super.getResponse().addData(dataset);
 	}
-	
+
 }

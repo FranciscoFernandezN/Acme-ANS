@@ -16,9 +16,8 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form>
-    <!-- Uso textbox debido a un bug visual en integer -->
 	<acme:input-textbox code="authenticated.manager.form.label.identifierNumber" path="identifierNumber" placeholder="authenticated.manager.form.placeholder.identifierNumber" />
-	<acme:input-textbox code="authenticated.manager.form.label.yearsOfExperience" path="yearsOfExperience" placeholder="authenticated.manager.form.placeholder.yearsOfExperience"/>
+	<acme:input-integer code="authenticated.manager.form.label.yearsOfExperience" path="yearsOfExperience" placeholder="authenticated.manager.form.placeholder.yearsOfExperience"/>
 	<acme:input-moment code="authenticated.manager.form.label.birth" path="birth"/>
 	<acme:input-url code="authenticated.manager.form.label.linkPicture" path="linkPicture"/>
 	<acme:input-select code="authenticated.manager.form.label.airlineManaging" path="airlineManaging" choices="${ airlineIATACodes }" readonly="${_command == 'update|show'}"/>

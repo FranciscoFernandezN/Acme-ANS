@@ -3,7 +3,6 @@ package acme.forms;
 
 import acme.client.components.basis.AbstractForm;
 import acme.client.components.datatypes.Money;
-import acme.entities.airports.Airport;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,5 +1,5 @@
-package acme.features.any.review;
 
+package acme.features.any.review;
 
 import java.util.Date;
 
@@ -18,16 +18,17 @@ import acme.client.services.AbstractRestService;
 import acme.client.services.RestService;
 import acme.entities.reviews.Review;
 
-
+@SuppressWarnings("deprecation")
 @RestService
-public class AnyReviewFetchService extends AbstractRestService<Any, DatatableOutput<Review>>{
-	
+public class AnyReviewFetchService extends AbstractRestService<Any, DatatableOutput<Review>> {
+
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
 	private AnyReviewRepository rr;
 
 	// AbstractRestService interface -------------------------------------------
+
 
 	@Override
 	public void authorise() {
@@ -48,7 +49,7 @@ public class AnyReviewFetchService extends AbstractRestService<Any, DatatableOut
 		errors = pair.getSecond();
 		assert !errors.hasErrors();
 		pageRequest = DatatablesHelper.toPageRequest(input);
-		
+
 		Date currentMoment;
 
 		currentMoment = MomentHelper.getCurrentMoment();
@@ -68,5 +69,5 @@ public class AnyReviewFetchService extends AbstractRestService<Any, DatatableOut
 	public void unbind(final DatatableOutput<Review> review) {
 		super.getResponse().addData(review);
 	}
-	
+
 }

@@ -22,6 +22,7 @@ import acme.entities.bookings.TravelClass;
 import acme.forms.CustomerDashboard;
 import acme.realms.Customer;
 
+@SuppressWarnings("deprecation")
 @GuiService
 public class CustomerDashboardShowService extends AbstractGuiService<Customer, CustomerDashboard> {
 

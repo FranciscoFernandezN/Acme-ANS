@@ -10,7 +10,7 @@ import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claims.Claim;
-import acme.entities.trackingLogs.TrackingLog;
+import acme.entities.trackinglogs.TrackingLog;
 import acme.realms.AssistanceAgent;
 
 @GuiService
