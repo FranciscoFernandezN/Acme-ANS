@@ -29,7 +29,6 @@ public class Task extends AbstractEntity {
 	// Attributes -------------------------------------------------------------
 
 	@Mandatory
-	@Valid
 	@Enumerated(EnumType.STRING)
 	@Automapped
 	private TaskType			type;

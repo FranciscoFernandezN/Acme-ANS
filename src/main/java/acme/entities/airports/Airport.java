@@ -39,7 +39,6 @@ public class Airport extends AbstractEntity {
 	private String				iATACode;
 
 	@Mandatory
-	@Valid
 	@Enumerated(EnumType.STRING)
 	@Automapped
 	private OperationalScope	operationalScope;

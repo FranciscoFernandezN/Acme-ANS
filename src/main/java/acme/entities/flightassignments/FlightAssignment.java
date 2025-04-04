@@ -34,7 +34,6 @@ public class FlightAssignment extends AbstractEntity {
 	// Attributes --------------------------------------------------------------
 
 	@Mandatory
-	@Valid
 	@Enumerated(EnumType.STRING)
 	@Automapped
 	private Duty				duty;
@@ -45,7 +44,6 @@ public class FlightAssignment extends AbstractEntity {
 	private Date				lastUpDate;
 
 	@Mandatory
-	@Valid
 	@Enumerated(EnumType.STRING)
 	@Automapped
 	private CurrentStatus		currentStatus;

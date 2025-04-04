@@ -49,13 +49,11 @@ public class Claim extends AbstractEntity {
 	private String				description;
 
 	@Mandatory
-	@Valid
 	@Enumerated(EnumType.STRING)
 	@Automapped
 	private ClaimType			claimType;
 
 	@Mandatory
-	@Valid
 	@Enumerated(EnumType.STRING)
 	@Automapped
 	private ClaimState			indicator;

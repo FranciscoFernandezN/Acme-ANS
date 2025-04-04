@@ -9,7 +9,7 @@
 	<acme:input-select code="flight-crew-member.activity-log.form.label.flightCrewMember" path="flightCrewMember" choices="${flightCrewMembers}" />
 	<acme:input-textbox code="flight-crew-member.activity-log.form.label.typeOfIncident" path="typeOfIncident" />
 	<acme:input-textbox code="flight-crew-member.activity-log.form.label.description" path="description"/>
-	<acme:input-textbox code="flight-crew-member.activity-log.form.label.severityLevel" path="severityLevel" />
+	<acme:input-integer code="flight-crew-member.activity-log.form.label.severityLevel" path="severityLevel" />
 	<acme:input-checkbox code="flight-crew-member.activity-log.form.label.confirmation" path="confirmation"/>
 	
 	<jstl:choose>
