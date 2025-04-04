@@ -1,6 +1,5 @@
-package acme.features.any.service;
 
-import java.util.List;
+package acme.features.any.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,7 +11,7 @@ import acme.entities.services.Service;
 
 @GuiService
 public class AnyServiceShowService extends AbstractGuiService<Any, Service> {
-	
+
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
@@ -30,7 +29,7 @@ public class AnyServiceShowService extends AbstractGuiService<Any, Service> {
 	public void load() {
 		Service service;
 		int serviceId;
-		
+
 		serviceId = super.getRequest().getData("id", int.class);
 		service = this.sr.findServiceById(serviceId);
 
@@ -41,10 +40,10 @@ public class AnyServiceShowService extends AbstractGuiService<Any, Service> {
 	public void unbind(final Service service) {
 		Dataset dataset;
 
-		dataset = super.unbindObject(service, "name", "picture","avgDwellTime", "promotionCode", "money");
+		dataset = super.unbindObject(service, "name", "picture", "avgDwellTime", "promotionCode", "money");
 		dataset.put("airport", service.getAirport().getIATACode());
-		
+
 		super.getResponse().addData(dataset);
 	}
-	
+
 }

@@ -1,4 +1,5 @@
-package acme.features.administrator.supportedCurrency;
+
+package acme.features.administrator.supportedcurrency;
 
 import java.util.List;
 
@@ -9,13 +10,11 @@ import acme.client.components.principals.Administrator;
 import acme.client.helpers.PropertyHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.entities.flights.Flight;
-import acme.entities.legs.Leg;
-import acme.entities.supportedCurrency.SupportedCurrency;
+import acme.entities.supportedcurrency.SupportedCurrency;
 
 @GuiService
 public class AdministratorSupportedCurrencyCreateService extends AbstractGuiService<Administrator, SupportedCurrency> {
-	
+
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
@@ -32,12 +31,12 @@ public class AdministratorSupportedCurrencyCreateService extends AbstractGuiServ
 	@Override
 	public void load() {
 		SupportedCurrency supportedCurrency;
-		
+
 		supportedCurrency = new SupportedCurrency();
 
 		super.getBuffer().addData(supportedCurrency);
 	}
-	
+
 	@Override
 	public void bind(final SupportedCurrency supportedCurrency) {
 		super.bindObject(supportedCurrency, "currencyName");
@@ -46,15 +45,15 @@ public class AdministratorSupportedCurrencyCreateService extends AbstractGuiServ
 	@Override
 	public void validate(final SupportedCurrency supportedCurrency) {
 		String defaultCurrency = PropertyHelper.getRequiredProperty("acme.currency.default", String.class);
-		
+
 		List<SupportedCurrency> supportedCurrencies = this.scr.findAllSupportedCurrencies();
 		List<String> currencyNames = supportedCurrencies.stream().map(sp -> sp.getCurrencyName()).toList();
-		
-		if(supportedCurrency.getCurrencyName() != null) {
+
+		if (supportedCurrency.getCurrencyName() != null) {
 			super.state(!supportedCurrency.getCurrencyName().equals(defaultCurrency), "currencyName", "administrator.supported-currency.create.is-default-currency");
 			super.state(!currencyNames.contains(supportedCurrency.getCurrencyName()), "currencyName", "administrator.supported-currency.create.already-exists-currency");
 		}
-		
+
 	}
 
 	@Override
@@ -65,13 +64,13 @@ public class AdministratorSupportedCurrencyCreateService extends AbstractGuiServ
 	@Override
 	public void unbind(final SupportedCurrency supportedCurrency) {
 		Dataset dataset;
-		
+
 		String defaultCurrency = PropertyHelper.getRequiredProperty("acme.currency.default", String.class);
-		
+
 		dataset = super.unbindObject(supportedCurrency, "currencyName");
 		dataset.put("isDefaultCurrency", supportedCurrency.getCurrencyName() == null ? "N/A" : supportedCurrency.getCurrencyName().equals(defaultCurrency));
 
 		super.getResponse().addData(dataset);
 	}
-	
+
 }

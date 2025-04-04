@@ -18,6 +18,7 @@ import acme.entities.claims.Claim;
 import acme.forms.AssistanceAgentDashboard;
 import acme.realms.AssistanceAgent;
 
+@SuppressWarnings("deprecation")
 @GuiService
 public class AssistanceAgentDashboardShowService extends AbstractGuiService<AssistanceAgent, AssistanceAgentDashboard> {
 

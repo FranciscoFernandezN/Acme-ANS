@@ -1,5 +1,5 @@
 
-package acme.features.flightCrewMember.flightAssignment;
+package acme.features.flightCrewMember.flightassignment;
 
 import java.util.Date;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import acme.client.repositories.AbstractRepository;
-import acme.entities.flightAssignments.FlightAssignment;
+import acme.entities.flightassignments.FlightAssignment;
 import acme.entities.legs.Leg;
 import acme.realms.FlightCrewMember;
 

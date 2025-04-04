@@ -1,5 +1,5 @@
 
-package acme.features.administrator.trackingLog;
+package acme.features.administrator.trackinglog;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -7,7 +7,7 @@ import acme.client.components.models.Dataset;
 import acme.client.components.principals.Administrator;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.entities.trackingLogs.TrackingLog;
+import acme.entities.trackinglogs.TrackingLog;
 
 @GuiService
 public class AdministratorTrackingLogShowService extends AbstractGuiService<Administrator, TrackingLog> {

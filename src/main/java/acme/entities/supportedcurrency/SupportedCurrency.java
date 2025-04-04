@@ -1,11 +1,10 @@
 
-package acme.entities.supportedCurrency;
+package acme.entities.supportedcurrency;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import acme.client.components.basis.AbstractEntity;
-import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidCurrency;
 import lombok.Getter;

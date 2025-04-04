@@ -1,7 +1,6 @@
 
 package acme.features.administrator.airline;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.components.models.Dataset;
 import acme.client.components.principals.Administrator;
 import acme.client.components.views.SelectChoices;
-import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airlines.Airline;
 import acme.entities.airlines.AirlineType;
-import acme.entities.legs.Leg;
-import acme.realms.Manager;
 
 @GuiService
 public class AdministratorAirlineCreateService extends AbstractGuiService<Administrator, Airline> {
@@ -54,11 +50,11 @@ public class AdministratorAirlineCreateService extends AbstractGuiService<Admini
 
 		if (airline.getIATACode() != null)
 			super.state(!airlineIds.contains(airline.getIATACode()), "iATACode", "administrator.airline.create.not-unique-iata");
-		
+
 		boolean confirmation;
 		confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
-		
+
 	}
 
 	@Override

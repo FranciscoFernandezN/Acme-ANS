@@ -1,11 +1,11 @@
 
-package acme.features.administrator.trackingLog;
+package acme.features.administrator.trackinglog;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import acme.client.repositories.AbstractRepository;
-import acme.entities.trackingLogs.TrackingLog;
+import acme.entities.trackinglogs.TrackingLog;
 
 @Repository
 public interface AdministratorTrackingLogRepository extends AbstractRepository {

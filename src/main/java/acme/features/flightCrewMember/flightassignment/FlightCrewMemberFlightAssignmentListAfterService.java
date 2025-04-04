@@ -1,5 +1,5 @@
 
-package acme.features.flightCrewMember.flightAssignment;
+package acme.features.flightCrewMember.flightassignment;
 
 import java.util.Date;
 import java.util.List;
@@ -11,7 +11,7 @@ import acme.client.components.views.SelectChoices;
 import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.entities.flightAssignments.FlightAssignment;
+import acme.entities.flightassignments.FlightAssignment;
 import acme.entities.legs.Leg;
 import acme.realms.AvailabilityStatus;
 import acme.realms.FlightCrewMember;

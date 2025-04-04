@@ -1,6 +1,6 @@
+
 package acme.features.any.weather;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +9,11 @@ import acme.client.components.models.Dataset;
 import acme.client.components.principals.Any;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.entities.flights.Flight;
 import acme.entities.weather.Weather;
-import acme.features.any.flight.AnyFlightRepository;
 
 @GuiService
 public class AnyWeatherListService extends AbstractGuiService<Any, Weather> {
-	
+
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
@@ -49,5 +47,5 @@ public class AnyWeatherListService extends AbstractGuiService<Any, Weather> {
 
 		super.getResponse().addData(dataset);
 	}
-	
+
 }

@@ -13,6 +13,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.reviews.Review;
 
+@SuppressWarnings("deprecation")
 @GuiService
 public class AnyReviewListService extends AbstractGuiService<Any, Review> {
 

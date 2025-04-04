@@ -1,5 +1,5 @@
 
-package acme.entities.activityLogs;
+package acme.entities.activitylogs;
 
 import java.util.Date;
 

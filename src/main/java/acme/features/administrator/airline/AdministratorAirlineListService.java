@@ -1,7 +1,6 @@
 
 package acme.features.administrator.airline;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,7 @@ public class AdministratorAirlineListService extends AbstractGuiService<Administ
 	private AdministratorAirlineRepository ar;
 
 	// AbstractGuiService interface -------------------------------------------
+
 
 	@Override
 	public void authorise() {
@@ -40,7 +40,7 @@ public class AdministratorAirlineListService extends AbstractGuiService<Administ
 		Dataset dataset;
 
 		dataset = super.unbindObject(airline, "name", "iATACode", "airlineType", "email", "contactNumber");
-		
+
 		super.getResponse().addData(dataset);
 	}
 

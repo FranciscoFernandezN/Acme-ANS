@@ -1,6 +1,5 @@
-package acme.features.administrator.supportedCurrency;
 
-import java.util.List;
+package acme.features.administrator.supportedcurrency;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -9,11 +8,11 @@ import acme.client.components.principals.Administrator;
 import acme.client.helpers.PropertyHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.entities.supportedCurrency.SupportedCurrency;
+import acme.entities.supportedcurrency.SupportedCurrency;
 
 @GuiService
 public class AdministratorSupportedCurrencyShowService extends AbstractGuiService<Administrator, SupportedCurrency> {
-	
+
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
@@ -31,7 +30,7 @@ public class AdministratorSupportedCurrencyShowService extends AbstractGuiServic
 	public void load() {
 		SupportedCurrency supportedCurrency;
 		int supportedCurrencyId;
-		
+
 		supportedCurrencyId = super.getRequest().getData("id", int.class);
 		supportedCurrency = this.scr.findSupportedCurrencyById(supportedCurrencyId);
 
@@ -41,13 +40,13 @@ public class AdministratorSupportedCurrencyShowService extends AbstractGuiServic
 	@Override
 	public void unbind(final SupportedCurrency supportedCurrency) {
 		Dataset dataset;
-		
+
 		String defaultCurrency = PropertyHelper.getRequiredProperty("acme.currency.default", String.class);
-		
+
 		dataset = super.unbindObject(supportedCurrency, "currencyName");
 		dataset.put("isDefaultCurrency", supportedCurrency.getCurrencyName() == null ? "N/A" : supportedCurrency.getCurrencyName().equals(defaultCurrency));
 
 		super.getResponse().addData(dataset);
 	}
-	
+
 }

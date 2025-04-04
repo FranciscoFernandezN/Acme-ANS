@@ -2,14 +2,12 @@
 package acme.features.manager.dashboard;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import acme.client.repositories.AbstractRepository;
 import acme.entities.flights.Flight;
-import acme.entities.legs.LegStatus;
 import acme.realms.Manager;
 
 @Repository
@@ -29,13 +27,13 @@ public interface ManagerDashboardRepository extends AbstractRepository {
 
 	@Query("SELECT COUNT(l) FROM Leg l WHERE l.manager.id = :managerId AND l.status LIKE 'ON_TIME'")
 	Long numberOfOnTimeLegs(int managerId);
-	
+
 	@Query("SELECT COUNT(l) FROM Leg l WHERE l.manager.id = :managerId AND l.status LIKE 'CANCELLED'")
 	Long numberOfCancelledLegs(int managerId);
-	
+
 	@Query("SELECT COUNT(l) FROM Leg l WHERE l.manager.id = :managerId AND l.status LIKE 'DELAYED'")
 	Long numberOfDelayedLegs(int managerId);
-	
+
 	@Query("SELECT COUNT(l) FROM Leg l WHERE l.manager.id = :managerId AND l.status LIKE 'LANDED'")
 	Long numberOfLandedLegs(int managerId);
 

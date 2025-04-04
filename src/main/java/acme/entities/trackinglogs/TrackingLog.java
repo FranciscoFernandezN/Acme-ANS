@@ -1,5 +1,5 @@
 
-package acme.entities.trackingLogs;
+package acme.entities.trackinglogs;
 
 import java.util.Date;
 

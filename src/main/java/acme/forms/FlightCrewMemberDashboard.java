@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import acme.client.components.basis.AbstractForm;
-import acme.entities.flightAssignments.CurrentStatus;
-import acme.entities.flightAssignments.FlightAssignment;
+import acme.entities.flightassignments.CurrentStatus;
+import acme.entities.flightassignments.FlightAssignment;
 import acme.realms.FlightCrewMember;
 import lombok.Getter;
 import lombok.Setter;
