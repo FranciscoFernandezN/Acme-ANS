@@ -58,7 +58,7 @@ public class FlightCrewMemberFlightAssignmentShowService extends AbstractGuiServ
 		Boolean isAvailable = this.repository.findFlightCrewMemberById(id).getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
 
 		// Obtener los Legs que estén publicados, no sean Landed/Canceled y tengan un scheduledDeparture futuro
-		legs = this.repository.findAllLegs().stream().filter(leg -> !leg.getIsDraftMode() && leg.getStatus() != LegStatus.LANDED && leg.getStatus() != LegStatus.CANCELLED && leg.getScheduledDeparture().before(date)).toList();
+		legs = this.repository.findAllLegs().stream().filter(leg -> !leg.getIsDraftMode() && leg.getStatus() != LegStatus.LANDED && leg.getStatus() != LegStatus.CANCELLED && leg.getScheduledDeparture().after(date)).toList();
 		flightCrewMembers = this.repository.findAllFlightCrewMembers();
 
 		// Obtener todos los FlightCrewMembers disponibles
