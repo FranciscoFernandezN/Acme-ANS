@@ -1,8 +1,10 @@
 
 package acme.features.flightCrewMember.flightAssignment;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -58,7 +60,10 @@ public class FlightCrewMemberFlightAssignmentShowService extends AbstractGuiServ
 		Boolean isAvailable = this.repository.findFlightCrewMemberById(id).getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
 
 		// Obtener los Legs que estén publicados, no sean Landed/Canceled y tengan un scheduledDeparture futuro
-		legs = this.repository.findAllLegs().stream().filter(leg -> !leg.getIsDraftMode() && leg.getStatus() != LegStatus.LANDED && leg.getStatus() != LegStatus.CANCELLED && leg.getScheduledDeparture().after(date)).toList();
+		legs = this.repository.findAllLegs().stream().filter(leg -> !leg.getIsDraftMode() && leg.getStatus() != LegStatus.LANDED && leg.getStatus() != LegStatus.CANCELLED && leg.getScheduledDeparture().after(date))
+			.collect(Collectors.toCollection(ArrayList::new));
+		if (!legs.contains(flightAssignment.getLeg()))
+			legs.add(flightAssignment.getLeg());
 		flightCrewMembers = this.repository.findAllFlightCrewMembers();
 
 		// Obtener todos los FlightCrewMembers disponibles
