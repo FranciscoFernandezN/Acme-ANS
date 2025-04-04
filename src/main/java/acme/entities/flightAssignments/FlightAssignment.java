@@ -59,6 +59,7 @@ public class FlightAssignment extends AbstractEntity {
 	@Automapped
 	private Boolean				isDraftMode			= true;
 
+
 	// Derived attributes -----------------------------------------------------
 	// Relationships ----------------------------------------------------------
 

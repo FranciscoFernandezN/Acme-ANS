@@ -1,0 +1,14 @@
+any.service.form.title = Service form
+any.service.list.title = Listing of services
+
+any.service.form.label.name = Name:
+any.service.form.label.picture = Picture:
+any.service.form.label.avgDwellTime = Average dwell time:
+any.service.form.label.promotionCode = Promotion code:
+any.service.form.label.money = Money:
+any.service.form.label.airport = IATA Code of the airport:
+
+any.service.list.label.name = Name
+any.service.list.label.avgDwellTime = Average dwell time
+any.service.list.label.promotionCode = Promotion code
+any.service.list.label.money = Money

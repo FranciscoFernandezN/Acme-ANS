@@ -62,7 +62,7 @@ public class Service extends AbstractEntity {
 
 	@Mandatory
 	@Valid
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private Airport				airport;
 
 }

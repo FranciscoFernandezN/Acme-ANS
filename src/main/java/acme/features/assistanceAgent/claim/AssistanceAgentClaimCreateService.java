@@ -61,7 +61,10 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 		legId = super.getRequest().getData("leg", int.class);
 
 		Leg leg = this.aacr.findLegById(legId);
-		super.state(!claim.getIsPublished() || claim.getIsPublished() && leg != null && !leg.getIsDraftMode(), "isPublished", "assistance-agent.claim.create.cant-be-published");
+		if (claim.getIsPublished() && leg != null && !leg.getIsDraftMode())
+			super.state(true, "isPublished", "assistance-agent.claim.create.leg-not-published");
+		if (claim.getIndicator() == ClaimState.IN_PROGRESS && claim.getIsPublished())
+			super.state(claim.getIndicator() != ClaimState.IN_PROGRESS, "indicator", "assistance-agent.claim.create.cant-be-published");
 	}
 
 	@Override
