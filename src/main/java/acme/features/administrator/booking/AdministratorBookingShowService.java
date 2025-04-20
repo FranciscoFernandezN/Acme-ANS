@@ -52,7 +52,6 @@ public class AdministratorBookingShowService extends AbstractGuiService<Administ
 
 		f = booking.getFlight();
 		dataset = super.unbindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "lastNibble");
-		dataset.put("passportNumber", booking.getPassenger().getPassportNumber());
 		dataset.put("flight", String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), f.getCost()));
 
 		super.getResponse().addData(dataset);

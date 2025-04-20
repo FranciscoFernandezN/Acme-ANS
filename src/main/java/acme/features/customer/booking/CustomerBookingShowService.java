@@ -12,6 +12,7 @@ import acme.client.services.GuiService;
 import acme.entities.bookings.Booking;
 import acme.entities.bookings.TravelClass;
 import acme.entities.flights.Flight;
+import acme.entities.passengers.Passenger;
 import acme.realms.Customer;
 
 @GuiService
@@ -52,6 +53,7 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 	@Override
 	public void unbind(final Booking booking) {
 		Dataset dataset;
+		int customerId = super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId();
 
 		if (super.getBuffer().getErrors().hasErrors()) {
 			booking.setIsDraftMode(true);
@@ -66,10 +68,19 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 		SelectChoices flightChoices = new SelectChoices();
 		flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), f.getCost()), booking.getFlight().getId() == f.getId()));
 
+		Collection<Passenger> passengers = this.repository.findPassengersByCustomerId(customerId);
+		passengers.removeAll(this.repository.findPassengersByBookingId(booking.getId()));
+		SelectChoices passengerChoices = new SelectChoices();
+		int passengerId = super.getRequest().hasData("passenger") ? super.getRequest().getData("passenger", int.class) : -1;
+		passengers.stream().distinct().forEach(p -> passengerChoices.add(String.valueOf((Integer) p.getId()), String.format("%s - %s", p.getPassportNumber(), p.getFullName()), passengerId == p.getId()));
+		passengerChoices.add("0", "----", passengerId <= 0);
+
 		dataset = super.unbindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "lastNibble", "isDraftMode");
 		dataset.put("travelClasses", travelClasses);
 		dataset.put("flightChoices", flightChoices);
-		dataset.put("passportNumber", booking.getPassenger().getPassportNumber());
+		dataset.put("passenger", passengerId);
+		dataset.put("passengerChoices", passengerChoices);
+		dataset.put("updatedBooking", true);
 
 		super.getResponse().addData(dataset);
 	}

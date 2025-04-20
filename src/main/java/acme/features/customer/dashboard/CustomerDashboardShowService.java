@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.DoubleSummaryStatistics;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -62,8 +63,12 @@ public class CustomerDashboardShowService extends AbstractGuiService<Customer, C
 		dashboard.setLastFiveDestinations(lastDestinies);
 
 		Date lastYear = MomentHelper.getCurrentMoment();
+		String defaultCurrency = PropertyHelper.getRequiredProperty("acme.currency.default", String.class);
 		lastYear.setYear(lastYear.getYear() - 1);
-		dashboard.setMoneySpentLastYear(this.repository.moneySpentLastYear(lastYear, customerId));
+		Money spentLastYear = new Money();
+		spentLastYear.setCurrency(defaultCurrency);
+		spentLastYear.setAmount(this.repository.moneySpentLastYear(lastYear, customerId));
+		dashboard.setMoneySpentLastYear(spentLastYear);
 
 		Map<TravelClass, Integer> numOfBookingsByTravelClassMap = bookings.stream().collect(Collectors.groupingBy(Booking::getTravelClass, Collectors.summingInt(e -> 1)));
 		String numOfBookingsByTravelClass = "";
@@ -76,9 +81,8 @@ public class CustomerDashboardShowService extends AbstractGuiService<Customer, C
 
 		Date lastFiveYears = MomentHelper.getCurrentMoment();
 		lastFiveYears.setYear(lastYear.getYear() - 5);
-		dashboard.setMoneySpentLastYear(this.repository.moneySpentLastYear(lastYear, customerId));
+
 		DoubleSummaryStatistics moneyStats = bookings.stream().filter(e -> e.getPurchaseMoment().after(lastFiveYears)).mapToDouble(e -> e.getPrice().getAmount()).summaryStatistics();
-		String defaultCurrency = PropertyHelper.getRequiredProperty("acme.currency.default", String.class);
 
 		Money maxMon = new Money();
 		Money minMon = new Money();
@@ -102,10 +106,17 @@ public class CustomerDashboardShowService extends AbstractGuiService<Customer, C
 		standardDeviation = Math.sqrt(standardDeviation / bookings.size());
 		dashboard.setStdDeviationCostOfBookingsLastFiveYears(standardDeviation);
 
-		dashboard.setMinNumOfPassengersInBookings(1);
-		dashboard.setMaxNumOfPassengersInBookings(1);
-		dashboard.setAvgNumOfPassengersInBookings(1.);
-		dashboard.setStdDeviationNumOfPassengersInBookings(0.);
+		IntSummaryStatistics passengerStats = bookings.stream().mapToInt(e -> this.repository.findPassengersByBookingId(e.getId()).size()).summaryStatistics();
+
+		dashboard.setMinNumOfPassengersInBookings(passengerStats.getMin());
+		dashboard.setMaxNumOfPassengersInBookings(passengerStats.getMax());
+		dashboard.setAvgNumOfPassengersInBookings(passengerStats.getAverage());
+		standardDeviation = 0.0;
+		Double avgPas = passengerStats.getAverage();
+		for (Booking b : bookings)
+			standardDeviation += Math.pow(this.repository.findPassengersByBookingId(b.getId()).size() - avgPas, 2);
+		standardDeviation = Math.sqrt(standardDeviation / bookings.size());
+		dashboard.setStdDeviationNumOfPassengersInBookings(standardDeviation);
 
 		super.getBuffer().addData(dashboard);
 

@@ -1,0 +1,4 @@
+key,key:passenger,key:booking
+belongs-to-01,passenger-01,booking-01
+belongs-to-02,passenger-02,booking-02
+belongs-to-03,passenger-03,booking-01

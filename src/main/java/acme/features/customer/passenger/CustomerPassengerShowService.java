@@ -1,11 +1,15 @@
 
 package acme.features.customer.passenger;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
+import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
+import acme.entities.bookings.Booking;
 import acme.entities.passengers.Passenger;
 import acme.realms.Customer;
 
@@ -28,7 +32,7 @@ public class CustomerPassengerShowService extends AbstractGuiService<Customer, P
 
 		passengerId = super.getRequest().getData("id", int.class);
 		passenger = this.repository.findPassengerById(passengerId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class) && super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId() == passenger.getCustomer().getId();
+		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class) && this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId()).contains(passenger);
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -47,15 +51,29 @@ public class CustomerPassengerShowService extends AbstractGuiService<Customer, P
 	@Override
 	public void unbind(final Passenger passenger) {
 		Dataset dataset;
+		int bookingId;
+		Collection<Booking> bookings = this.repository.findBookingByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId());
+		bookings.removeAll(this.repository.findBookingByPassengerId(passenger.getId()));
 
 		if (super.getBuffer().getErrors().hasErrors()) {
 			passenger.setIsDraftMode(true);
 			System.out.print(super.getBuffer().getErrors());
 		}
 
+		SelectChoices bookingChoices = new SelectChoices();
+
 		dataset = super.unbindObject(passenger, "fullName", "email", "passportNumber", "dateOfBirth", "specialNeeds", "isDraftMode");
 
+		bookingId = super.getRequest().hasData("booking") ? super.getRequest().getData("booking", int.class) : -1;
+		bookings.stream().forEach(b -> bookingChoices.add(String.valueOf(b.getId()), String.format("%s - %s", b.getLocatorCode(), b.getFlight().getTag()), bookingId == b.getId()));
+		bookingChoices.add("0", "----", bookingId <= 0);
+		dataset.put("booking", bookingId);
+
+		dataset.put("bookingChoices", bookingChoices);
+		dataset.put("createdInBooking", false);
+
 		super.getResponse().addData(dataset);
+
 	}
 
 }

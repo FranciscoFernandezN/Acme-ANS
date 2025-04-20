@@ -22,7 +22,6 @@ import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
 import acme.constraints.ValidSupportedCurrency;
 import acme.entities.flights.Flight;
-import acme.entities.passengers.Passenger;
 import acme.realms.Customer;
 import lombok.Getter;
 import lombok.Setter;
@@ -76,11 +75,6 @@ public class Booking extends AbstractEntity {
 	@Valid
 	@ManyToOne(optional = false)
 	private Flight				flight;
-
-	@Mandatory
-	@Valid
-	@ManyToOne(optional = false)
-	private Passenger			passenger;
 
 	@Mandatory
 	@Valid
