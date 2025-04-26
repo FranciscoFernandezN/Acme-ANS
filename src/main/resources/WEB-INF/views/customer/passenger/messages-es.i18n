@@ -16,9 +16,14 @@ customer.passenger.form.label.passportNumber = Número de pasaporte
 customer.passenger.form.label.dateOfBirth = Fecha de nacimiento
 customer.passenger.form.label.specialNeeds = Necesidades espaciales
 customer.passenger.form.label.isDraftMode = ¿Modo borrador?
+customer.passenger.form.label.booking = Añadir reserva
 
 customer.passenger.form.button.create = Crear nuevo pasajero
 customer.passenger.form.button.update = Actualizar pasajero
+customer.passenger.form.button.publish = Publicar pasajero
 
 customer.passenger.create.passport-number-must-be-unique = Ya existe en el sistema un pasajero con el mismo pasaporte
+customer.passenger.create.booking-does-not-exist = La reserva no existe
+
 customer.passenger.update.passport-number-must-be-unique = Ya existe en el sistema un pasajero con el mismo pasaporte
+customer.passenger.update.booking-does-not-exist = La reserva no existe

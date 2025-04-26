@@ -19,7 +19,7 @@
 		</jstl:when>		
 	</jstl:choose>
 	<jstl:if test="${isDraftMode == true}">
-		<acme:submit code="customer.booking.list.button.publish" action="/customer/booking/publish"/>
+		<acme:submit code="customer.booking.form.button.publish" action="/customer/booking/publish"/>
 	</jstl:if>
 	<jstl:if test="${updatedBooking}">
 		<acme:button code="customer.booking.form.button.passengers" action="/customer/passenger/list?bookingId=${id}"/>

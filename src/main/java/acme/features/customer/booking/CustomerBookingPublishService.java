@@ -97,7 +97,7 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 
 		int flightId = super.getRequest().getData("flight", int.class);
 		Flight flight = this.repository.findFlightById(flightId);
-		super.state(flight != null, "flight", "customer.booking.create.flight-does-not-exist");
+		super.state(flight != null, "flight", "customer.booking.publish.flight-does-not-exist");
 
 		int passengerId = super.getRequest().getData("passenger", int.class);
 		Passenger passenger = this.repository.findPassengerById(passengerId);
@@ -105,14 +105,14 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 		if (passenger != null) {
 			Collection<Passenger> passengersOfCustomer = this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId());
 			boolean yours = passengersOfCustomer.contains(passenger);
-			super.state(yours, "passenger", "customer.booking.create.passenger-not-yours");
+			super.state(yours, "passenger", "customer.booking.publish.passenger-not-yours");
 			boolean passengersAreAlready = this.repository.findPassengersByBookingId(bookingId).remove(passenger);
-			super.state(!passengersAreAlready, "passenger", "customer.booking.create.repeated-passenger");
+			super.state(!passengersAreAlready, "passenger", "customer.booking.publish.repeated-passenger");
 		}
 
 		lastNibble = super.getRequest().getData("lastNibble", String.class);
 
-		super.state(booking.getTravelClass() != null, "travelClass", "customer.booking.create.travel-class-does-not-exist");
+		super.state(booking.getTravelClass() != null, "travelClass", "customer.booking.publish.travel-class-does-not-exist");
 
 		super.state(!lastNibble.isBlank(), "lastNibble", "customer.booking.publish.need-last-nibble");
 

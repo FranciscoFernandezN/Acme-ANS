@@ -66,14 +66,14 @@ public class CustomerPassengerUpdateService extends AbstractGuiService<Customer,
 		super.state(passportAlreadyInUse, "passportNumber", "customer.passenger.update.passport-number-must-be-unique");
 
 		existentBooking = super.getRequest().hasData("booking");
-		super.state(existentBooking, "booking", "customer.passenger.create.booking-does-not-exist");
+		super.state(existentBooking, "booking", "customer.passenger.update.booking-does-not-exist");
 
 		if (existentBooking) {
 			int bookingId = super.getRequest().getData("booking", int.class);
 			Booking booking = this.repository.findBookingById(bookingId);
 			if (booking != null) {
-				super.state(booking.getIsDraftMode() && super.getRequest().getPrincipal().hasRealm(booking.getCustomer()), "booking", "customer.passenger.create.booking-is-not-valid");
-				super.state(!this.repository.findBookingByPassengerId(passenger.getId()).contains(booking), "booking", "customer.passenger.create.booking-is-repeated");
+				super.state(booking.getIsDraftMode() && super.getRequest().getPrincipal().hasRealm(booking.getCustomer()), "booking", "customer.passenger.update.booking-is-not-valid");
+				super.state(!this.repository.findBookingByPassengerId(passenger.getId()).contains(booking), "booking", "customer.passenger.update.booking-is-repeated");
 			}
 		}
 	}

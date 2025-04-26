@@ -79,12 +79,12 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 		if (passenger != null) {
 			Collection<Passenger> passengersOfCustomer = this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId());
 			boolean yours = passengersOfCustomer.contains(passenger);
-			super.state(yours, "passenger", "customer.booking.create.passenger-not-yours");
+			super.state(yours, "passenger", "customer.booking.update.passenger-not-yours");
 			boolean passengersAreAlready = this.repository.findPassengersByBookingId(bookingId).remove(passenger);
-			super.state(!passengersAreAlready, "passenger", "customer.booking.create.repeated-passenger");
+			super.state(!passengersAreAlready, "passenger", "customer.booking.update.repeated-passenger");
 		}
 
-		super.state(booking.getTravelClass() != null, "travelClass", "customer.booking.create.travel-class-does-not-exist");
+		super.state(booking.getTravelClass() != null, "travelClass", "customer.booking.update.travel-class-does-not-exist");
 
 		super.state(flight != null, "flight", "customer.booking.update.flight-does-not-exist");
 

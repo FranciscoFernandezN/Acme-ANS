@@ -16,9 +16,16 @@ customer.passenger.form.label.passportNumber = Passport Number
 customer.passenger.form.label.dateOfBirth = Date of birth
 customer.passenger.form.label.specialNeeds = Special needs
 customer.passenger.form.label.isDraftMode = Draft mode?
+customer.passenger.form.label.booking = Add booking
 
 customer.passenger.form.button.update = Update this passenger
 customer.passenger.form.button.create = Create this passenger
+customer.passenger.form.button.publish = Publish this passenger
 
 customer.passenger.create.passport-number-must-be-unique = There is a registered passenger in the system with the same passport number
-customer.passenger.update.passport-number-must-be-unique = There is a registered passenger in the system with the same passport number
+customer.passenger.create.booking-does-not-exist = That booking does not exist
+
+customer.passenger.publish.passport-number-must-be-unique = There is a registered passenger in the system with the same passport number
+customer.passenger.publish.booking-does-not-exist = That booking does not exist
+customer.passenger.publish.booking-is-not-valid = That booking is not valid
+customer.passenger.publish.booking-is-repeated = The passenger is already in that booking
