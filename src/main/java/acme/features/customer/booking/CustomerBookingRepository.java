@@ -2,7 +2,6 @@
 package acme.features.customer.booking;
 
 import java.util.Collection;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -19,7 +18,7 @@ public interface CustomerBookingRepository extends AbstractRepository {
 	Booking findBookingById(int id);
 
 	@Query("select b from Booking b where b.locatorCode = :locatorCode")
-	Optional<Booking> findBookingByLocatorCode(String locatorCode);
+	Booking findBookingByLocatorCode(String locatorCode);
 
 	@Query("select b from Booking b where b.customer.id = :customerId")
 	Collection<Booking> findBookingByCustomerId(int customerId);

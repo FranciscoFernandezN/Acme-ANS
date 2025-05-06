@@ -58,24 +58,26 @@ public class CustomerPassengerUpdateService extends AbstractGuiService<Customer,
 	public void validate(final Passenger passenger) {
 		Boolean passportAlreadyInUse;
 		Passenger oldPassenger;
-		boolean existentBooking;
 
 		oldPassenger = this.repository.findPassengerById(passenger.getId());
 		passportAlreadyInUse = !this.repository.findAllPassportNumbers().contains(passenger.getPassportNumber()) || oldPassenger.getPassportNumber().equals(passenger.getPassportNumber());
 
 		super.state(passportAlreadyInUse, "passportNumber", "customer.passenger.update.passport-number-must-be-unique");
 
-		existentBooking = super.getRequest().hasData("booking");
-		super.state(existentBooking, "booking", "customer.passenger.update.booking-does-not-exist");
+		int bookingId;
+		bookingId = super.getRequest().getData("booking", int.class);
+		Booking booking = this.repository.findBookingById(bookingId);
 
-		if (existentBooking) {
-			int bookingId = super.getRequest().getData("booking", int.class);
-			Booking booking = this.repository.findBookingById(bookingId);
-			if (booking != null) {
-				super.state(booking.getIsDraftMode() && super.getRequest().getPrincipal().hasRealm(booking.getCustomer()), "booking", "customer.passenger.update.booking-is-not-valid");
+		if (booking != null) {
+			boolean yours = super.getRequest().getPrincipal().hasRealm(booking.getCustomer());
+			super.state(yours, "booking", "customer.passenger.update.booking-not-yours");
+			if (yours) {
+				super.state(booking.getIsDraftMode(), "booking", "customer.passenger.update.booking-is-already-published");
 				super.state(!this.repository.findBookingByPassengerId(passenger.getId()).contains(booking), "booking", "customer.passenger.update.booking-is-repeated");
 			}
-		}
+		} else
+			super.state(bookingId <= 0, "booking", "customer.passenger.update.booking-does-not-exist");
+
 	}
 
 	@Override
@@ -116,6 +118,7 @@ public class CustomerPassengerUpdateService extends AbstractGuiService<Customer,
 
 		dataset.put("bookingChoices", bookingChoices);
 		dataset.put("createdInBooking", false);
+		dataset.put("updatedPassenger", true);
 
 		super.getResponse().addData(dataset);
 	}

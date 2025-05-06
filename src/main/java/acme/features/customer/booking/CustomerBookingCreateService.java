@@ -76,7 +76,14 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 		int flightId;
 		flightId = super.getRequest().getData("flight", int.class);
 		Flight flight = this.repository.findFlightById(flightId);
-		super.state(flight != null, "flight", "customer.booking.create.flight-does-not-exist");
+		if (flight != null)
+			super.state(!flight.getIsDraftMode(), "flight", "customer.booking.create.flight-must-be-published");
+		else if (flightId <= 0)
+			super.state(false, "flight", "customer.booking.create.flight-must-be-chosen");
+		else
+			super.state(false, "flight", "customer.booking.create.flight-does-not-exist");
+
+		super.state(this.repository.findBookingByLocatorCode(super.getRequest().getData("locatorCode", String.class)) == null, "locatorCode", "customer.booking.create.locator-not-unique");
 
 		int passengerId;
 		passengerId = super.getRequest().getData("passenger", int.class);
@@ -85,7 +92,8 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 		if (passenger != null) {
 			boolean yours = this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId()).contains(passenger);
 			super.state(yours, "passenger", "customer.booking.create.passenger-not-yours");
-		}
+		} else
+			super.state(passengerId <= 0, "passenger", "customer.booking.create.passenger-does-not-exist");
 
 		super.state(booking.getTravelClass() != null, "travelClass", "customer.booking.create.travel-class-does-not-exist");
 
@@ -133,7 +141,7 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 					String chosen = RandomHelper.nextInt(2) == 1 ? String.valueOf(letter) : String.valueOf(num);
 					locatorCode += chosen;
 				}
-				uniqueLocatorCode = this.repository.findBookingByLocatorCode(locatorCode).isEmpty();
+				uniqueLocatorCode = this.repository.findBookingByLocatorCode(locatorCode) == null;
 			}
 		}
 		SelectChoices travelClasses;
@@ -142,8 +150,9 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 		travelClasses = SelectChoices.from(TravelClass.class, booking.getTravelClass());
 
 		SelectChoices flightChoices = new SelectChoices();
-		flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), f.getCost()), false));
-		flightChoices.add("0", "----", true);
+		int flightId = super.getRequest().hasData("flight") ? super.getRequest().getData("flight", int.class) : -1;
+		flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), f.getCost()), flightId == f.getId()));
+		flightChoices.add("0", "----", flightId <= 0);
 
 		Collection<Passenger> passengers = this.repository.findPassengersByCustomerId(customerId);
 		passengers.removeAll(this.repository.findPassengersByBookingId(booking.getId()));
@@ -160,6 +169,7 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 		dataset.put("passenger", passengerId);
 		dataset.put("passengerChoices", passengerChoices);
 		dataset.put("updatedBooking", false);
+		dataset.put("purchaseMoment", MomentHelper.getCurrentMoment());
 
 		super.getResponse().addData(dataset);
 	}

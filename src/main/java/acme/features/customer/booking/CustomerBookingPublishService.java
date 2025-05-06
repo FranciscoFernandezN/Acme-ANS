@@ -97,7 +97,15 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 
 		int flightId = super.getRequest().getData("flight", int.class);
 		Flight flight = this.repository.findFlightById(flightId);
-		super.state(flight != null, "flight", "customer.booking.publish.flight-does-not-exist");
+		if (flight != null)
+			super.state(!flight.getIsDraftMode(), "flight", "customer.booking.publish.flight-must-be-published");
+		else if (flightId <= 0)
+			super.state(false, "flight", "customer.booking.publish.flight-must-be-chosen");
+		else
+			super.state(false, "flight", "customer.booking.publish.flight-does-not-exist");
+
+		Booking bookingOfLocatorCode = this.repository.findBookingByLocatorCode(super.getRequest().getData("locatorCode", String.class));
+		super.state(bookingOfLocatorCode == null || bookingOfLocatorCode.getId() == bookingId, "locatorCode", "customer.booking.publish.locator-not-unique");
 
 		int passengerId = super.getRequest().getData("passenger", int.class);
 		Passenger passenger = this.repository.findPassengerById(passengerId);
@@ -108,7 +116,8 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 			super.state(yours, "passenger", "customer.booking.publish.passenger-not-yours");
 			boolean passengersAreAlready = this.repository.findPassengersByBookingId(bookingId).remove(passenger);
 			super.state(!passengersAreAlready, "passenger", "customer.booking.publish.repeated-passenger");
-		}
+		} else
+			super.state(passengerId <= 0, "passenger", "customer.booking.publish.passenger-does-not-exist");
 
 		lastNibble = super.getRequest().getData("lastNibble", String.class);
 
@@ -172,7 +181,7 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 					String chosen = RandomHelper.nextInt(2) == 1 ? String.valueOf(letter) : String.valueOf(num);
 					locatorCode += chosen;
 				}
-				uniqueLocatorCode = this.repository.findBookingByLocatorCode(locatorCode).isEmpty();
+				uniqueLocatorCode = this.repository.findBookingByLocatorCode(locatorCode) == null;
 			}
 		}
 
@@ -182,13 +191,15 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 		travelClasses = SelectChoices.from(TravelClass.class, booking.getTravelClass());
 
 		SelectChoices flightChoices = new SelectChoices();
+		int flightId = super.getRequest().hasData("flight") ? super.getRequest().getData("flight", int.class) : -1;
+		boolean validFlight = flights.stream().anyMatch(f -> f.getId() == flightId);
 
-		if (oldBooking != null)
+		if (validFlight || oldBooking == null) {
+			flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), f.getCost()), flightId == f.getId()));
+			if (!validFlight)
+				flightChoices.add("0", "----", true);
+		} else
 			flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), f.getCost()), oldBooking.getFlight().getId() == f.getId()));
-		else {
-			flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), f.getCost()), false));
-			flightChoices.add("0", "----", true);
-		}
 
 		Collection<Passenger> passengers = this.repository.findPassengersByCustomerId(customerId);
 		passengers.removeAll(this.repository.findPassengersByBookingId(booking.getId()));
@@ -205,6 +216,7 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 		dataset.put("passenger", passengerId);
 		dataset.put("passengerChoices", passengerChoices);
 		dataset.put("updatedBooking", oldBooking != null);
+		dataset.put("purchaseMoment", oldBooking != null ? oldBooking.getPurchaseMoment() : MomentHelper.getCurrentMoment());
 
 		super.getResponse().addData(dataset);
 	}

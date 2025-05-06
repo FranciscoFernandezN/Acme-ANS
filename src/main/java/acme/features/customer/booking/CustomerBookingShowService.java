@@ -66,7 +66,12 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 		travelClasses = SelectChoices.from(TravelClass.class, booking.getTravelClass());
 
 		SelectChoices flightChoices = new SelectChoices();
-		flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), f.getCost()), booking.getFlight().getId() == f.getId()));
+		int flightId = super.getRequest().hasData("flight") ? super.getRequest().getData("flight", int.class) : -1;
+
+		if (flights.stream().anyMatch(f -> f.getId() == flightId))
+			flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), f.getCost()), flightId == f.getId()));
+		else
+			flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), f.getCost()), booking.getFlight().getId() == f.getId()));
 
 		Collection<Passenger> passengers = this.repository.findPassengersByCustomerId(customerId);
 		passengers.removeAll(this.repository.findPassengersByBookingId(booking.getId()));

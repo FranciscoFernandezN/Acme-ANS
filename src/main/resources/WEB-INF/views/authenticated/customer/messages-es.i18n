@@ -7,11 +7,11 @@ authenticated.customer.form.label.city = Ciudad:
 authenticated.customer.form.label.country = País:
 authenticated.customer.form.label.earnedPoints = Puntos obtenidos:
 
-authenticated.customer.form.placeholder.identifier = ABC123456
-authenticated.customer.form.placeholder.earnedPoints = 300
-authenticated.customer.form.placeholder.phoneNumber = 643647352
-
 authenticated.customer.form.button.create = Registrar
 authenticated.customer.form.button.update = Actualizar
 
 authenticated.customer.create.not-unique-identifier = Este identificador ya está en uso
+authenticated.customer.create.not-initials-in-identifier = Las iniciales del usuario no están en el identificador
+
+authenticated.customer.update.not-unique-identifier = Este identificador ya está en uso
+authenticated.customer.update.not-initials-in-identifier = Las iniciales del usuario no están en el identificador

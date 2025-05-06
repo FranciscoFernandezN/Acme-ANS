@@ -28,13 +28,15 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 	@Override
 	public void authorise() {
 		boolean status;
+		boolean createdInBooking;
 		int passengerId;
 		Booking booking;
 		Passenger passenger;
 
 		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
+		createdInBooking = super.getRequest().hasData(CustomerPassengerController.MASTER_ID);
 
-		if (status && super.getRequest().hasData(CustomerPassengerController.MASTER_ID)) {
+		if (status && createdInBooking) {
 			passengerId = super.getRequest().getData(CustomerPassengerController.MASTER_ID, int.class);
 			booking = this.repository.findBookingById(passengerId);
 			status = booking != null && booking.getIsDraftMode() && super.getRequest().getPrincipal().hasRealm(booking.getCustomer());
@@ -74,9 +76,7 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 	@Override
 	public void validate(final Passenger passenger) {
 		Boolean passportAlreadyInUse;
-		boolean existentBooking;
 		Passenger oldPassenger;
-		Booking booking = null;
 
 		oldPassenger = this.repository.findPassengerById(passenger.getId());
 		if (oldPassenger == null) {
@@ -87,23 +87,24 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 			super.state(passportAlreadyInUse, "passportNumber", "customer.passenger.update.passport-number-must-be-unique");
 		}
 
-		existentBooking = super.getRequest().hasData("booking");
-		super.state(existentBooking, "booking", "customer.passenger.create.booking-does-not-exist");
-
 		boolean passengerInBooking = !this.repository.findBookingByPassengerId(passenger.getId()).isEmpty();
 
-		if (existentBooking) {
-			int bookingId = super.getRequest().getData("booking", int.class);
-			booking = this.repository.findBookingById(bookingId);
-			if (passengerInBooking) {
-				if (booking != null) {
-					super.state(booking.getIsDraftMode() && super.getRequest().getPrincipal().hasRealm(booking.getCustomer()), "booking", "customer.passenger.publish.booking-is-not-valid");
+		int bookingId;
+		bookingId = super.getRequest().getData("booking", int.class);
+		Booking booking = this.repository.findBookingById(bookingId);
+		super.state(passengerInBooking || booking != null, "booking", "customer.passenger.publish.booking-must-be-chosen");
+
+		if (booking != null) {
+			boolean yours = super.getRequest().getPrincipal().hasRealm(booking.getCustomer());
+			super.state(yours, "booking", "customer.passenger.publish.booking-not-yours");
+			if (yours) {
+				super.state(booking.getIsDraftMode(), "booking", "customer.passenger.publish.booking-is-already-published");
+				if (oldPassenger != null)
 					super.state(!this.repository.findBookingByPassengerId(passenger.getId()).contains(booking), "booking", "customer.passenger.publish.booking-is-repeated");
-				}
-			} else
-				super.state(booking != null && booking.getIsDraftMode() && super.getRequest().getPrincipal().hasRealm(booking.getCustomer()), "booking", "customer.passenger.publish.booking-is-not-valid");
+			}
 		} else
-			super.state(passengerInBooking, "booking", "customer.passenger.publish.booking-must-be-chosen");
+			super.state(bookingId <= 0, "booking", "customer.passenger.publish.booking-does-not-exist");
+
 	}
 
 	@Override

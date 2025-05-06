@@ -4,10 +4,11 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form>
-	<acme:input-textbox code="customer.booking.form.label.locatorCode" path="locatorCode" readonly="true"/>
+	<acme:input-textbox code="customer.booking.form.label.locatorCode" path="locatorCode"/>
+	<acme:input-textbox code="customer.booking.form.label.purchaseMoment" path="purchaseMoment" readonly="true"/>
 	<acme:input-select code="customer.booking.form.label.flight" path="flight" choices="${flightChoices}"/>
 	<acme:input-select code="customer.booking.form.label.travelClass" path="travelClass" choices="${travelClasses}"/>
-	<acme:input-textbox code="customer.booking.form.label.lastNibble" path="lastNibble"/>
+	<acme:input-textbox code="customer.booking.form.label.lastNibble" path="lastNibble" placeholder="1234"/>
 	<acme:input-select code="customer.booking.form.label.passenger" path="passenger" choices="${passengerChoices}"/>
 	
 	<jstl:choose>

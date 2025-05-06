@@ -7,11 +7,11 @@ authenticated.customer.form.label.city = City:
 authenticated.customer.form.label.country = Country:
 authenticated.customer.form.label.earnedPoints = Earned points:
 
-authenticated.customer.form.placeholder.identifier = ABC123456
-authenticated.customer.form.placeholder.earnedPoints = 300
-authenticated.customer.form.placeholder.phoneNumber = 643647352
-
 authenticated.customer.form.button.create = Register
 authenticated.customer.form.button.update = Update
 
 authenticated.customer.create.not-unique-identifier = This identifier is already in use
+authenticated.customer.create.not-initials-in-identifier = The initials of the user are not in the identifier
+
+authenticated.customer.update.not-unique-identifier = This identifier is already in use
+authenticated.customer.update.not-initials-in-identifier = The initials of the user are not in the identifier
