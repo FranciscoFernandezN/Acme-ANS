@@ -1,0 +1,5 @@
+key,name,city,business-status,formatted-address,rating,user-ratings-total,open-now,photo-reference
+recommendation-01,City Tour,New York,OPERATIONAL,"C/29 Maracuya, New York, 20300",4.5,50000,true,https://d3iso9mq9tb10q.cloudfront.net/citylandingherocomp/image/Big-Bus-Tours_New-York_desktop_1_8.jpg
+recommendation-02,Big Monument,London,OPERATIONAL,"C/13 Miarma, London, 12345",5.0,999999,true,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIXef8f48Pz6-0_Sa_Ch-6CVwuYdhBc1Xhix-Dnjucag&s&ec=72940542.jpg
+recommendation-03,Z,Z,CLOSED_PERMANENTLY,A,3.3,1,false,https://www.shutterstock.com/image-vector/unavailable-photo-iconmissingimage-vector-illustration-260nw-1835554645.jpg
+recommendation-04,Very Special Eventtttttttttttttttttttttttttttttttt,Unavailable cityyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy,CLOSED_TEMPORARILY,C/1 Far Awayyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy,0.0,0,true,https://www.shutterstock.com/image-vector/unavailable-photo-iconmissingimage-vector-illustration-260nw-1835554645.jpg
