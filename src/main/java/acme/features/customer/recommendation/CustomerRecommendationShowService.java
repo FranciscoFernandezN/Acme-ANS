@@ -1,21 +1,21 @@
 
-package acme.features.any.recommendation;
+package acme.features.customer.recommendation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
-import acme.client.components.principals.Any;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.recommendations.Recommendation;
+import acme.realms.Customer;
 
 @GuiService
-public class AnyRecommendationShowService extends AbstractGuiService<Any, Recommendation> {
+public class CustomerRecommendationShowService extends AbstractGuiService<Customer, Recommendation> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AnyRecommendationRepository repository;
+	private CustomerRecommendationRepository repository;
 
 	// AbstractGuiService interface -------------------------------------------
 

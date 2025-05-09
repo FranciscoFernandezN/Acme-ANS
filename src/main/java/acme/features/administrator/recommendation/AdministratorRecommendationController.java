@@ -4,6 +4,8 @@ package acme.features.administrator.recommendation;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import acme.client.components.principals.Administrator;
+import acme.client.controllers.AbstractGuiController;
 import acme.client.controllers.GuiController;
 import acme.client.helpers.Assert;
 import acme.client.helpers.PrincipalHelper;
@@ -19,15 +22,29 @@ import acme.components.recommendation.ResultsPOJO;
 import acme.entities.recommendations.Recommendation;
 
 @GuiController
-public class AdministratorRecommendationController {
+public class AdministratorRecommendationController extends AbstractGuiController<Administrator, Recommendation> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AdministratorRecommendationRepository repository;
+	private AdministratorRecommendationRepository	repository;
+
+	@Autowired
+	private AdministratorRecommendationListService	listService;
+
+	@Autowired
+	private AdministratorRecommendationShowService	showService;
+
+	// Constructors -----------------------------------------------------------
+
+
+	@PostConstruct
+	protected void initialise() {
+		super.addBasicCommand("list", this.listService);
+		super.addBasicCommand("show", this.showService);
+	}
 
 	// Endpoints --------------------------------------------------------------
-
 
 	@GetMapping("/administrator/recommendation/populate")
 	public ModelAndView populateInitial() {

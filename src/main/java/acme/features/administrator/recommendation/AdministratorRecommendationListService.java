@@ -1,30 +1,31 @@
 
-package acme.features.any.recommendation;
+package acme.features.administrator.recommendation;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
-import acme.client.components.principals.Any;
+import acme.client.components.principals.Administrator;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.recommendations.Recommendation;
+import acme.features.customer.recommendation.CustomerRecommendationRepository;
 
 @GuiService
-public class AnyRecommendationListService extends AbstractGuiService<Any, Recommendation> {
+public class AdministratorRecommendationListService extends AbstractGuiService<Administrator, Recommendation> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AnyRecommendationRepository repository;
+	private CustomerRecommendationRepository repository;
 
 	// AbstractGuiService interface -------------------------------------------
 
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Administrator.class));
 	}
 
 	@Override

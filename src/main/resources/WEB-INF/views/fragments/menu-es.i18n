@@ -16,7 +16,8 @@ master.menu.any.list-weather = Ver tiempos
 # master.menu.recommendation #######################################################
 
 master.menu.recommendation = Recomendaciones
-master.menu.any.list-recommendation = Ver recomendaciones
+master.menu.administrator.list-recommendation = Ver recomendaciones (admin)
+master.menu.customer.list-recommendation = Ver recomendaciones
 
 # master.menu.reviews #######################################################
 

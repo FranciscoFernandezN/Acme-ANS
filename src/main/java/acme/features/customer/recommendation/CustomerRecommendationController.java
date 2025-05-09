@@ -1,25 +1,25 @@
 
-package acme.features.any.recommendation;
+package acme.features.customer.recommendation;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acme.client.components.principals.Any;
 import acme.client.controllers.AbstractGuiController;
 import acme.client.controllers.GuiController;
 import acme.entities.recommendations.Recommendation;
+import acme.realms.Customer;
 
 @GuiController
-public class AnyRecommendationController extends AbstractGuiController<Any, Recommendation> {
+public class CustomerRecommendationController extends AbstractGuiController<Customer, Recommendation> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AnyRecommendationListService	listService;
+	private CustomerRecommendationListService	listService;
 
 	@Autowired
-	private AnyRecommendationShowService	showService;
+	private CustomerRecommendationShowService	showService;
 
 	// Constructors -----------------------------------------------------------
 
