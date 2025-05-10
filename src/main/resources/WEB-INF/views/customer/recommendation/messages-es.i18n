@@ -1,0 +1,16 @@
+customer.recommendation.form.title = Formulario de recomendación
+customer.recommendation.list.title = Listado de recomendaciones
+
+customer.recommendation.form.label.name = Nombre de la recomendación:
+customer.recommendation.form.label.city = Ciudad:
+customer.recommendation.form.label.businessStatus = Estado:
+customer.recommendation.form.label.formattedAddress = Dirección:
+customer.recommendation.form.label.rating = Valoración (0-5):
+customer.recommendation.form.label.userRatingsTotal = Número de valoraciones:
+customer.recommendation.form.label.openNow = ¿Abierto?
+customer.recommendation.form.label.photoReference = Foto de referencia:
+
+customer.recommendation.list.label.city = Ciudad
+customer.recommendation.list.label.name = Nombre
+customer.recommendation.list.label.rating = Valoración
+customer.recommendation.list.label.openNow = ¿Abierto?

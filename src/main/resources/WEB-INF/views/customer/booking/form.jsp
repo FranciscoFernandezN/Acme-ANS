@@ -19,4 +19,7 @@
 			<acme:submit code="customer.booking.form.button.create" action="/customer/booking/create"/>
 		</jstl:when>		
 	</jstl:choose>
+	<jstl:if test="${acme:anyOf(_command, 'show|update') || _command == 'publish' && updatedBooking }">
+    	<acme:button code="customer.booking.form.button.recommendations" action="/customer/recommendation/list?city=${city}"/>
+    </jstl:if>
 </acme:form>

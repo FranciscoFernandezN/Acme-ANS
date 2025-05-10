@@ -20,6 +20,7 @@ customer.booking.form.label.lastNibble = Últimos dígitos de la tarjeta de cré
 
 customer.booking.form.button.create = Crear nueva reserva
 customer.booking.form.button.update = Actualizar reserva
+customer.booking.form.button.recommendations = Ver recomendaciones del destino
 
 customer.booking.create.flight-does-not-exist = Escoge un vuelo
 customer.booking.create.passenger-does-not-exist = No hay ningún pasajero registrado con ese pasaporte

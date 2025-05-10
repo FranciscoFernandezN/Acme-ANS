@@ -21,6 +21,7 @@ customer.booking.form.label.lastNibble = Last nibble of the credit card
 
 customer.booking.form.button.update = Update this booking
 customer.booking.form.button.create = Create this booking
+customer.booking.form.button.recommendations = See recommendations of destination
 
 customer.booking.create.flight-does-not-exist = Choose a flight
 customer.booking.create.passenger-does-not-exist = There is no passenger registered with that passport
