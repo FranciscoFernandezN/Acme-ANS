@@ -9,8 +9,8 @@
 	<acme:input-moment code="manager.leg.form.label.scheduledDeparture" path="scheduledDeparture" readonly="${ !isDraftMode }"/>
 	<acme:input-moment code="manager.leg.form.label.scheduledArrival" path="scheduledArrival" readonly="${ !isDraftMode }"/>
 	<acme:input-select code="manager.leg.form.label.status" path="status" choices="${statuses}"/>
-	<acme:input-select code="manager.leg.form.label.departureAirport" path="departureAirport" choices="${arrivalIATACodes}" readonly="${ !isDraftMode }"/>
-	<acme:input-select code="manager.leg.form.label.arrivalAirport" path="arrivalAirport" choices="${departureIATACodes}" readonly="${ !isDraftMode }"/>
+	<acme:input-select code="manager.leg.form.label.departureAirport" path="departureAirport" choices="${departureIATACodes}" readonly="${ !isDraftMode }"/>
+	<acme:input-select code="manager.leg.form.label.arrivalAirport" path="arrivalAirport" choices="${arrivalIATACodes}" readonly="${ !isDraftMode }"/>
 	<acme:input-select code="manager.leg.form.label.aircraft" path="aircraft" choices="${registrationNumbers}" readonly="${ !isDraftMode }"/>
 	<acme:input-select code="manager.leg.form.label.flight" path="flight" choices="${flightChoices}" readonly="${ !isDraftMode }"/>
 	<acme:input-checkbox code="manager.leg.form.label.isDraftMode" path="isDraftMode" readonly="${ !isDraftMode }"/>
