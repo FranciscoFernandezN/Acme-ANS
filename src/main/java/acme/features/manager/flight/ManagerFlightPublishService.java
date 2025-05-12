@@ -2,6 +2,7 @@
 package acme.features.manager.flight;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -9,10 +10,11 @@ import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flights.Flight;
+import acme.entities.legs.Leg;
 import acme.realms.Manager;
 
 @GuiService
-public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flight> {
+public class ManagerFlightPublishService extends AbstractGuiService<Manager, Flight> {
 
 	// Internal state ---------------------------------------------------------
 
@@ -49,20 +51,26 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 	@Override
 	public void bind(final Flight flight) {
 		super.bindObject(flight, "tag", "needsSelfTransfer", "cost", "description");
+		flight.setIsDraftMode(false);
 	}
 
 	@Override
 	public void validate(final Flight flight) {
-		super.state(flight.getIsDraftMode(), "isDraftMode", "manager.flight.delete.is-published");
+		List<Leg> legs = this.fr.findAllLegsByFlightId(flight.getId());
+		super.state(flight.getIsDraftMode() || !flight.getIsDraftMode() && !legs.isEmpty() && legs.stream().allMatch(l -> !l.getIsDraftMode()), "isDraftMode", "manager.flight.create.cant-be-published");
 	}
 
 	@Override
 	public void perform(final Flight flight) {
-		this.fr.delete(flight);
+		this.fr.save(flight);
 	}
 
 	@Override
 	public void unbind(final Flight flight) {
+
+		if (super.getBuffer().getErrors().hasErrors())
+			flight.setIsDraftMode(true);
+
 		Dataset dataset;
 
 		String origin = flight.getOrigin();

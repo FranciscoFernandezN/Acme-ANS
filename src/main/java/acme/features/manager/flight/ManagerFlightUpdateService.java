@@ -32,7 +32,7 @@ public class ManagerFlightUpdateService extends AbstractGuiService<Manager, Flig
 
 		flightId = super.getRequest().getData("id", int.class);
 		flight = this.fr.findFlightById(flightId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class) && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == flight.getManager().getId();
+		status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class) && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == flight.getManager().getId() && flight.getIsDraftMode();
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -50,7 +50,7 @@ public class ManagerFlightUpdateService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void bind(final Flight flight) {
-		super.bindObject(flight, "tag", "needsSelfTransfer", "cost", "description", "isDraftMode");
+		super.bindObject(flight, "tag", "needsSelfTransfer", "cost", "description");
 	}
 
 	@Override
