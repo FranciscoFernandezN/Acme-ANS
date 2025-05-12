@@ -50,7 +50,7 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void bind(final Leg leg) {
-		super.bindObject(leg, "uniqueIdentifier", "scheduledDeparture", "scheduledArrival", "status", "isDraftMode");
+		super.bindObject(leg, "uniqueIdentifier", "scheduledDeparture", "scheduledArrival", "status");
 
 		Airport departureAirport;
 		int departureAirportId;
@@ -136,15 +136,18 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 			super.state(flights.stream().map(f -> f.getId()).anyMatch(f -> f == flightId), "flight", "manager.leg.create.not-your-flight");
 		}
 		
+		if(leg.getScheduledArrival() != null && leg.getScheduledDeparture() != null) {
+			Predicate<Leg> legsAreBefore = (final Leg l) -> (leg.getScheduledArrival().before(l.getScheduledDeparture()) && leg.getScheduledDeparture().before(l.getScheduledDeparture()));
+			Predicate<Leg> legsAreAfter = (final Leg l) -> (leg.getScheduledArrival().after(l.getScheduledArrival()) && leg.getScheduledDeparture().after(l.getScheduledArrival()));
+			
+			Predicate<Leg> hasNotConcurrenLegsPredicate = legsAreBefore.or(legsAreAfter);
+
+			super.state(legsOfAircraft.stream().allMatch(hasNotConcurrenLegsPredicate), "aircraft", "manager.leg.create.already-in-use-aircraft");
+
+			super.state(legsOfFlight.stream().allMatch(hasNotConcurrenLegsPredicate), "flight", "manager.leg.create.already-in-use-flight");
+		}
+
 		
-		Predicate<Leg> legsAreBefore = (final Leg l) -> (leg.getScheduledArrival().before(l.getScheduledDeparture()) && leg.getScheduledDeparture().before(l.getScheduledDeparture()));
-		Predicate<Leg> legsAreAfter = (final Leg l) -> (leg.getScheduledArrival().after(l.getScheduledArrival()) && leg.getScheduledDeparture().after(l.getScheduledArrival()));
-
-		Predicate<Leg> hasNotConcurrenLegsPredicate = legsAreBefore.or(legsAreAfter);
-
-		super.state(legsOfAircraft.stream().allMatch(hasNotConcurrenLegsPredicate), "aircraft", "manager.leg.create.already-in-use-aircraft");
-
-		super.state(legsOfFlight.stream().allMatch(hasNotConcurrenLegsPredicate), "flight", "manager.leg.create.already-in-use-flight");
 	}
 
 	@Override

@@ -8,6 +8,7 @@ manager.flight.list.label.origin = Ciudad origen
 manager.flight.list.label.destiny = Ciudad destino
 manager.flight.list.label.scheduledDeparture = Salida programada
 manager.flight.list.label.scheduledArrival = Llegada programada
+manager.flight.list.label.isDraftMode = ¿Modo borrador?
 
 manager.flight.list.button.create = Create nuevo vuelo
 

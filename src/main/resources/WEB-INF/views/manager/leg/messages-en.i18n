@@ -9,9 +9,10 @@ manager.leg.form.label.departureAirport = IATA code of Departure Airport:
 manager.leg.form.label.arrivalAirport = IATA code of Arrival Airport:
 manager.leg.form.label.aircraft = Registration number of Aircraft:
 manager.leg.form.label.flight = Id of associated flight:
-manager.leg.form.label.isDraftMode = Is it in draft mode?
 
 manager.leg.form.button.update = Update this leg
+manager.leg.form.button.state = Change status
+manager.leg.form.button.publish = Publish this leg
 manager.leg.form.button.delete = Delete this leg
 manager.leg.form.button.create = Create this leg
 
@@ -23,7 +24,7 @@ manager.leg.list.label.scheduledArrival = Scheduled arrival
 manager.leg.list.label.duration = Duration (hours)
 manager.leg.list.label.status = Status
 manager.leg.list.label.flight = Flight id
-manager.leg.list.label.isDraftMode = Draft mode?
+manager.leg.list.label.isDraftMode = Is it in draft mode?
 
 manager.leg.list.button.create = Create a leg
 

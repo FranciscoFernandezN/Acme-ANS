@@ -8,6 +8,7 @@ manager.flight.list.label.origin = Origin city
 manager.flight.list.label.destiny = Destiny city
 manager.flight.list.label.scheduledDeparture = Scheduled departure
 manager.flight.list.label.scheduledArrival = Scheduled arrival
+manager.flight.list.label.isDraftMode = Is it in draft mode?
 
 manager.flight.list.button.create = Create new flight
 
