@@ -37,6 +37,21 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 		booking = this.repository.findBookingById(bookingId);
 		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class) && super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId() == booking.getCustomer().getId();
 
+		if (status && super.getRequest().hasData("flight")) {
+			int flightId = super.getRequest().getData("flight", int.class);
+			Flight flight = this.repository.findFlightById(flightId);
+			status = flightId <= 0 || flight != null && !flight.getIsDraftMode();
+		}
+
+		if (status && super.getRequest().hasData("passenger")) {
+			int passengerId = super.getRequest().getData("passenger", int.class);
+			Passenger passenger = this.repository.findPassengerById(passengerId);
+			Collection<Passenger> passengersOfCustomer = this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId());
+			boolean yours = passengersOfCustomer.contains(passenger);
+			boolean passengersAreAlready = super.getRequest().hasData("id") && this.repository.findPassengersByBookingId(super.getRequest().getData("id", int.class)).remove(passenger);
+			status = passengerId <= 0 || yours && !passengersAreAlready;
+		}
+
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -73,10 +88,10 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 		Flight flight = this.repository.findFlightById(flightId);
 		if (flight != null)
 			super.state(!flight.getIsDraftMode(), "flight", "customer.booking.update.flight-must-be-published");
-		else if (flightId <= 0)
-			super.state(false, "flight", "customer.booking.update.flight-must-be-chosen");
-		else
-			super.state(false, "flight", "customer.booking.update.flight-does-not-exist");
+		else {
+			super.state(flightId > 0, "flight", "customer.booking.update.flight-must-be-chosen");
+			super.state(flightId <= 0, "flight", "customer.booking.update.flight-does-not-exist");
+		}
 
 		Booking bookingOfLocatorCode = this.repository.findBookingByLocatorCode(super.getRequest().getData("locatorCode", String.class));
 		super.state(bookingOfLocatorCode == null || bookingOfLocatorCode.getId() == bookingId, "locatorCode", "customer.booking.update.locator-not-unique");

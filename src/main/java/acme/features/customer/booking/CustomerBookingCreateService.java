@@ -32,7 +32,23 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Customer.class));
+
+		boolean status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
+
+		if (status && super.getRequest().hasData("flight")) {
+			int flightId = super.getRequest().getData("flight", int.class);
+			Flight flight = this.repository.findFlightById(flightId);
+			status = flightId <= 0 || flight != null && !flight.getIsDraftMode();
+		}
+
+		if (status && super.getRequest().hasData("passenger")) {
+			int passengerId = super.getRequest().getData("passenger", int.class);
+			Passenger passenger = this.repository.findPassengerById(passengerId);
+			status = passengerId <= 0 || passenger != null && this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId()).contains(passenger);
+		}
+
+		super.getResponse().setAuthorised(status);
+
 	}
 
 	@Override
@@ -78,10 +94,10 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 		Flight flight = this.repository.findFlightById(flightId);
 		if (flight != null)
 			super.state(!flight.getIsDraftMode(), "flight", "customer.booking.create.flight-must-be-published");
-		else if (flightId <= 0)
-			super.state(false, "flight", "customer.booking.create.flight-must-be-chosen");
-		else
-			super.state(false, "flight", "customer.booking.create.flight-does-not-exist");
+		else {
+			super.state(flightId > 0, "flight", "customer.booking.create.flight-must-be-chosen");
+			super.state(flightId <= 0, "flight", "customer.booking.create.flight-does-not-exist");
+		}
 
 		super.state(this.repository.findBookingByLocatorCode(super.getRequest().getData("locatorCode", String.class)) == null, "locatorCode", "customer.booking.create.locator-not-unique");
 
