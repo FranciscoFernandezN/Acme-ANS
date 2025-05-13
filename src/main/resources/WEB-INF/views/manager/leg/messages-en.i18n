@@ -11,7 +11,7 @@ manager.leg.form.label.aircraft = Registration number of Aircraft:
 manager.leg.form.label.flight = Id of associated flight:
 
 manager.leg.form.button.update = Update this leg
-manager.leg.form.button.state = Change status
+manager.leg.form.button.status = Change status
 manager.leg.form.button.publish = Publish this leg
 manager.leg.form.button.delete = Delete this leg
 manager.leg.form.button.create = Create this leg

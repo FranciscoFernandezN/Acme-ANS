@@ -11,7 +11,7 @@ manager.leg.form.label.aircraft = Número de registro de la aeronave:
 manager.leg.form.label.flight = Id del vuelo asociado:
 
 manager.leg.form.button.update = Actualizar este tramo
-manager.leg.form.button.state = Cambiar estado
+manager.leg.form.button.status = Cambiar estado
 manager.leg.form.button.publish = Publicar este tramo
 manager.leg.form.button.delete = Borrar este tramo
 manager.leg.form.button.create = Crear este tramo

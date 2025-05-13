@@ -22,7 +22,7 @@
 				<acme:submit code="manager.leg.form.button.delete" action="/manager/leg/delete"/>
 			</jstl:if>
 			<jstl:if test="${ !isDraftMode }"> 
-				<acme:submit code="manager.leg.form.button.state" action="/manager/leg/state"/>
+				<acme:submit code="manager.leg.form.button.status" action="/manager/leg/status"/>
 			</jstl:if>
 		</jstl:when>
 		<jstl:when test="${_command == 'create'}">

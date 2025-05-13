@@ -32,7 +32,31 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Manager.class));
+		
+		Boolean status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class);
+		
+		if(status) {
+			Manager manager = (Manager) super.getRequest().getPrincipal().getRealmOfType(Manager.class);
+			Integer aircraftId = super.getRequest().getData("aircraft", int.class, 0);
+			Integer arrivalId = super.getRequest().getData("arrivalAirport", int.class, 0);
+			Integer departureId = super.getRequest().getData("departureAirport", int.class, 0);
+			Integer flightId = super.getRequest().getData("flight", int.class, 0);
+			List<Integer> airports = this.lr.findAllAirports().stream().map(a -> a.getId()).toList();
+			List<Integer> aircrafts = this.lr.findAllAircraftsByAirlineId(manager.getAirlineManaging().getId()).stream().map(a -> a.getId()).toList();
+			List<Integer> flights = this.lr.findAllFlightsEditableByManagerId(manager.getId()).stream().map(f -> f.getId()).toList();
+			status = 
+				(aircraftId == 0 || aircrafts.contains(aircraftId)) && 
+				(arrivalId == 0 || airports.contains(arrivalId)) && 
+				(departureId == 0 || airports.contains(departureId)) && 
+				(flightId == 0 || flights.contains(flightId));
+		}
+		
+		
+		super.getResponse().setAuthorised(status);
+		
+		
+		
+		
 	}
 
 	@Override
