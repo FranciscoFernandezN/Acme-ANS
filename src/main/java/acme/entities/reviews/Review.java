@@ -23,7 +23,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(indexes = {
-	@Index(columnList = "posted_at")
+	@Index(columnList = "postedAt")
 })
 public class Review extends AbstractEntity {
 

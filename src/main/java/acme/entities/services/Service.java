@@ -25,7 +25,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(indexes = {
-	@Index(columnList = "promotion_code")
+	@Index(columnList = "promotionCode")
 })
 public class Service extends AbstractEntity {
 
