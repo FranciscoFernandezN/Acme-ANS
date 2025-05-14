@@ -34,7 +34,7 @@ public class AssistanceAgentClaimDeleteService extends AbstractGuiService<Assist
 
 		claimId = super.getRequest().getData("id", int.class);
 		claim = this.aacr.findClaimById(claimId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && super.getRequest().getPrincipal().getRealmOfType(AssistanceAgent.class).getId() == claim.getAgent().getId() && !claim.getIsPublished();
+		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && super.getRequest().getPrincipal().getRealmOfType(AssistanceAgent.class).getId() == claim.getAgent().getId() && !claim.getIsPublished() && claim != null;
 
 		super.getResponse().setAuthorised(status);
 	}

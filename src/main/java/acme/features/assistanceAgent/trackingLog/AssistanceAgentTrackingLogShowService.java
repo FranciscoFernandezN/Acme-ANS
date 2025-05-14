@@ -32,7 +32,8 @@ public class AssistanceAgentTrackingLogShowService extends AbstractGuiService<As
 
 		trackingLogId = super.getRequest().getData("id", int.class);
 		trackingLog = this.aatlr.findTrackingLogById(trackingLogId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && super.getRequest().getPrincipal().getRealmOfType(AssistanceAgent.class).getId() == trackingLog.getAgent().getId();
+		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && super.getRequest().getPrincipal().getRealmOfType(AssistanceAgent.class).getId() == trackingLog.getAgent().getId() && trackingLog != null
+			&& trackingLog.getClaim() != null;
 
 		super.getResponse().setAuthorised(status);
 	}
