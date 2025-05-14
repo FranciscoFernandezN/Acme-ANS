@@ -29,4 +29,5 @@ manager.flight.form.button.create = Crear este vuelo
 
 manager.flight.create.cant-be-published = No puedes publicar este vuelo porque sus tramos aún no han sido publicados
 manager.flight.delete.is-published = No puedes borrar un vuelo publicado
+manager.flight.delete.has-legs = No puedes borrar este vuelo porque tiene tramos asociados
 

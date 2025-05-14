@@ -30,8 +30,10 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 
 		flightId = super.getRequest().getData("id", int.class);
 		flight = this.fr.findFlightById(flightId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class) && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == flight.getManager().getId() && flight.getIsDraftMode();
-
+		status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class) && flight != null  && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == flight.getManager().getId() && flight.getIsDraftMode();
+		
+		
+		
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -53,6 +55,7 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void validate(final Flight flight) {
+		super.state(fr.findAllLegsByFlightId(flight.getId()).isEmpty(), "*", "manager.flight.delete.has-legs");
 		super.state(flight.getIsDraftMode(), "isDraftMode", "manager.flight.delete.is-published");
 	}
 
