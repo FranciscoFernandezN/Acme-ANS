@@ -20,6 +20,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.bookings.Booking;
 import acme.entities.bookings.TravelClass;
+import acme.entities.supportedcurrency.SupportedCurrency;
 import acme.forms.CustomerDashboard;
 import acme.realms.Customer;
 
@@ -50,7 +51,7 @@ public class CustomerDashboardShowService extends AbstractGuiService<Customer, C
 		CustomerDashboard dashboard = new CustomerDashboard();
 		Collection<Booking> bookings = this.repository.findAllBookings(customerId);
 		Integer numBookings = bookings.size();
-		String defaultCurrency = PropertyHelper.getRequiredProperty("acme.currency.default", String.class);
+		String defaultCurrency = SupportedCurrency.getDefaultCurrency();
 		Money noMoney = new Money();
 		noMoney.setCurrency(defaultCurrency);
 		noMoney.setAmount(0.0);
