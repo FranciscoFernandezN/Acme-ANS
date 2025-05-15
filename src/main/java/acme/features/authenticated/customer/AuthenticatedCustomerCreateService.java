@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.principals.Authenticated;
+import acme.client.components.principals.DefaultUserIdentity;
 import acme.client.components.principals.UserAccount;
 import acme.client.helpers.PrincipalHelper;
+import acme.client.helpers.RandomHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.realms.Customer;
@@ -62,9 +64,15 @@ public class AuthenticatedCustomerCreateService extends AbstractGuiService<Authe
 
 		Collection<Customer> customers = this.repository.findAllCustomers();
 		Collection<String> customerIds = customers.stream().map(Customer::getIdentifier).toList();
+		String identifier = object.getIdentifier();
 
-		if (object.getIdentifier() != null)
+		if (identifier != null && identifier.length() >= 2) {
 			super.state(!customerIds.contains(object.getIdentifier()), "identifier", "authenticated.customer.create.not-unique-identifier");
+			DefaultUserIdentity dui = this.repository.findUserAccountById(super.getRequest().getPrincipal().getAccountId()).getIdentity();
+			boolean identifierBegin = object.getIdentifier().charAt(0) == dui.getName().charAt(0) && object.getIdentifier().charAt(1) == dui.getSurname().charAt(0);
+			super.state(identifierBegin, "identifier", "authenticated.customer.create.not-initials-in-identifier");
+		}
+
 	}
 
 	@Override
@@ -79,7 +87,26 @@ public class AuthenticatedCustomerCreateService extends AbstractGuiService<Authe
 		assert object != null;
 
 		Dataset dataset;
-		dataset = super.unbindObject(object, "identifier", "phoneNumber", "physicalAddress", "city", "country", "earnedPoints");
+		String identifierBegin;
+		DefaultUserIdentity dui = this.repository.findUserAccountById(super.getRequest().getPrincipal().getAccountId()).getIdentity();
+		identifierBegin = String.valueOf(dui.getName().charAt(0)) + String.valueOf(dui.getSurname().charAt(0));
+		String identifier = "";
+
+		dataset = super.unbindObject(object, "phoneNumber", "physicalAddress", "city", "country", "earnedPoints");
+
+		if (super.getRequest().hasData("identifier"))
+			identifier = super.getRequest().getData("identifier", String.class);
+		else {
+			boolean uniqueIdentifier = false;
+			while (!uniqueIdentifier) {
+				identifier += identifierBegin;
+				for (int i = 0; i < 6; i++)
+					identifier += RandomHelper.nextInt(10);
+				uniqueIdentifier = this.repository.findCustomerByIdentifier(identifier) == null;
+			}
+		}
+
+		dataset.put("identifier", identifier);
 
 		super.getResponse().addData(dataset);
 	}

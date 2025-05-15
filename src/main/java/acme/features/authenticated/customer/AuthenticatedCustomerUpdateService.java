@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.principals.Authenticated;
+import acme.client.components.principals.DefaultUserIdentity;
 import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
@@ -58,9 +59,14 @@ public class AuthenticatedCustomerUpdateService extends AbstractGuiService<Authe
 		Collection<Customer> customers = this.repository.findAllCustomers();
 		Collection<String> customerIds = customers.stream().map(Customer::getIdentifier).toList();
 		Customer oldCustomer = this.repository.findCustomerById(customer.getId());
+		String identifier = customer.getIdentifier();
 
-		if (customer.getIdentifier() != null && !oldCustomer.getIdentifier().equals(customer.getIdentifier()))
-			super.state(!customerIds.contains(customer.getIdentifier()), "identifier", "authenticated.customer.create.not-unique-identifier");
+		if (identifier != null && !oldCustomer.getIdentifier().equals(identifier) && identifier.length() >= 2) {
+			super.state(!customerIds.contains(customer.getIdentifier()), "identifier", "authenticated.customer.update.not-unique-identifier");
+			DefaultUserIdentity dui = this.repository.findUserAccountById(super.getRequest().getPrincipal().getAccountId()).getIdentity();
+			boolean identifierBegin = customer.getIdentifier().charAt(0) == dui.getName().charAt(0) && customer.getIdentifier().charAt(1) == dui.getSurname().charAt(0);
+			super.state(identifierBegin, "identifier", "authenticated.customer.update.not-initials-in-identifier");
+		}
 	}
 
 	@Override

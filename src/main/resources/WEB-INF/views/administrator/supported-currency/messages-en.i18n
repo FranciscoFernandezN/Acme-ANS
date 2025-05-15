@@ -13,7 +13,7 @@ administrator.supported-currency.form.label.isDefaultCurrency = Is this currency
 administrator.supported-currency.form.button.update = Update this supported currency
 administrator.supported-currency.form.button.create = Create this supported currency
 
-administrator.supported-currency.create.is-default-currency = This currency is the default of the system, you must not touch it.
-administrator.supported-currency.create.already-exists-currency = This currency already exists.
+administrator.supported-currency.update.cant-set-no-default = You can't set no default currency for the system
+administrator.supported-currency.create.already-exists-currency = This currency already exists
 
 

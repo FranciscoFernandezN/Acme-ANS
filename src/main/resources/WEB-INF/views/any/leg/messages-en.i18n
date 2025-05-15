@@ -7,6 +7,7 @@ any.leg.list.label.scheduledArrival = Scheduled arrival
 any.leg.list.label.duration = Duration (hours)
 any.leg.list.label.status = Status
 
+any.leg.form.label.uniqueIdentifier = Unique identifier:
 any.leg.form.label.flightNumber = Flight number:
 any.leg.form.label.scheduledDeparture = Scheduled departure:
 any.leg.form.label.scheduledArrival = Scheduled arrival:

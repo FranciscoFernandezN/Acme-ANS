@@ -8,5 +8,5 @@
 	<acme:list-column code="any.service.list.label.avgDwellTime" path="avgDwellTime" width="10%"/>
 	<acme:list-column code="any.service.list.label.promotionCode" path="promotionCode" width="40%"/>
 	<acme:list-column code="any.service.list.label.money" path="money" width="30%"/>
-		
+	<acme:list-column code="any.service.list.label.defaultMoney" path="defaultMoney" width="20%"/>
 </acme:list>

@@ -6,28 +6,49 @@ customer.booking.list.label.purchaseMoment = Purchase Moment
 customer.booking.list.label.travelClass = Travel Class
 customer.booking.list.label.price = Price
 customer.booking.list.label.isDraftMode = Draft mode?
-customer.booking.list.label.fullName = Passenger
-customer.booking.list.label.email = Passenger email
-
+customer.booking.list.label.passengers = Passengers
+customer.booking.list.label.defaultPrice = Price (in default currency)
 
 customer.booking.list.button.create = Create new booking
 
 customer.booking.form.label.locatorCode = Locator Code
+customer.booking.form.label.purchaseMoment = Purchase Moment
 customer.booking.form.label.flight = Flight
 customer.booking.form.label.travelClass = Travel Class
 customer.booking.form.label.isDraftMode = Draft mode?
 customer.booking.form.label.passportNumber = Passenger passport
 customer.booking.form.label.lastNibble = Last nibble of the credit card
+customer.booking.form.label.passenger = Add passenger
 
 customer.booking.form.button.update = Update this booking
 customer.booking.form.button.create = Create this booking
+customer.booking.form.button.recommendations = See recommendations of destination
+customer.booking.form.button.publish = Publish this booking
+customer.booking.form.button.passengers = See passengers
 
-customer.booking.create.flight-does-not-exist = Choose a flight
-customer.booking.create.passenger-does-not-exist = There is no passenger registered with that passport
+customer.booking.create.flight-does-not-exist = That flight does not exist
+customer.booking.create.flight-must-be-chosen = Choose a flight
+customer.booking.create.flight-must-be-published = You must choose a published flight
+customer.booking.create.passenger-does-not-exist = That passenger does not exist
+customer.booking.create.passenger-not-yours = That passenger does not belong to you
 customer.booking.create.travel-class-does-not-exist = Choose a travel class
-customer.booking.create.cant-be-published = You can't publish this booking because it does not have the last nibble
 
-customer.booking.update.flight-does-not-exist = Choose a flight
-customer.booking.update.passenger-does-not-exist = There is no passenger registered with that passport
+customer.booking.update.flight-does-not-exist = That flight does not exist
+customer.booking.update.flight-must-be-chosen = Choose a flight
+customer.booking.update.flight-must-be-published = You must choose a published flight
 customer.booking.update.travel-class-does-not-exist = Choose a travel class
 customer.booking.update.cant-be-published = You can't publish this booking because it does not have the last nibble
+customer.booking.update.passenger-does-not-exist = That passenger does not exist
+customer.booking.update.passenger-not-yours = That passenger does not belong to you
+customer.booking.update.repeated-passenger = That passenger is already in the booking
+
+customer.booking.publish.flight-does-not-exist = That flight does not exist
+customer.booking.publish.flight-must-be-chosen = Choose a flight
+customer.booking.publish.flight-must-be-published = You must choose a published flight
+customer.booking.publish.passenger-does-not-exist = That passenger does not exist
+customer.booking.publish.passenger-not-yours = That passenger does not belong to you
+customer.booking.publish.repeated-passenger = That passenger is already in the booking
+customer.booking.publish.travel-class-does-not-exist = Choose a travel class
+customer.booking.publish.need-last-nibble = You can't publish this booking because it does not have the last nibble
+customer.booking.publish.need-passenger = The booking needs at least 1 passenger
+customer.booking.publish.need-passengers-published = The bookings must have all passengers published

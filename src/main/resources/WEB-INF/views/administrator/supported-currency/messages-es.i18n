@@ -13,5 +13,5 @@ administrator.supported-currency.form.label.isDefaultCurrency = ¿Es la moneda p
 administrator.supported-currency.form.button.update = Actualizar esta moneda aceptada
 administrator.supported-currency.form.button.create = Crear esta moneda aceptada
 
-administrator.supported-currency.create.is-default-currency = Esta moneda es la moneda por defecto, no debes modificarla.
-administrator.supported-currency.create.already-exists-currency = Esta moneda ya existe.
+administrator.supported-currency.create.cant-set-no-default = No puedes dejar sin moneda por defecto al sistema
+administrator.supported-currency.create.already-exists-currency = Esta moneda ya existe

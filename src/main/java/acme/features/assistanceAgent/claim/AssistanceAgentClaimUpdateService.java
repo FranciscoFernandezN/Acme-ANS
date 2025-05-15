@@ -28,7 +28,22 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class));
+		boolean status;
+		int claimId;
+		Claim claim;
+		List<Leg> legs;
+		AssistanceAgent agent;
+
+		agent = (AssistanceAgent) super.getRequest().getPrincipal().getRealmOfType(AssistanceAgent.class);
+
+		legs = this.aacr.findAllLegsByAirlineId(agent.getAirline().getId());
+
+		claimId = super.getRequest().getData("id", int.class);
+		claim = this.aacr.findClaimById(claimId);
+		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && agent.getId() == claim.getAgent().getId() && !claim.getIsPublished() && !super.getRequest().getData("leg", Leg.class).getIsDraftMode()
+			&& legs.contains(this.aacr.findLegById(super.getRequest().getData("leg", int.class))) && claim != null;
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override

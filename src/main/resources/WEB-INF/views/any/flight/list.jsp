@@ -11,4 +11,5 @@
 	<acme:list-column code="any.flight.list.label.scheduledArrival" path="scheduledArrival" width="10%"/>
 	<acme:list-column code="any.flight.list.label.cost" path="cost" width="10%"/>
 	<acme:list-column code="any.flight.list.label.needsSelfTransfer" path="needsSelfTransfer" width="10%"/>
+	<acme:list-column code="any.flight.list.label.defaultCost" path="defaultCost" width="20%"/>
 </acme:list>

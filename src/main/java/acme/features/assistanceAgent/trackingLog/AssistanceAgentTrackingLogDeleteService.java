@@ -28,7 +28,16 @@ public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class));
+		boolean status;
+		int trackingLogId;
+		TrackingLog trackingLog;
+
+		trackingLogId = super.getRequest().getData("id", int.class);
+		trackingLog = this.aatlr.findTrackingLogById(trackingLogId);
+		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && super.getRequest().getPrincipal().getRealmOfType(AssistanceAgent.class).getId() == trackingLog.getAgent().getId() && !trackingLog.getIsPublished()
+			&& trackingLog != null && trackingLog.getClaim() != null && super.getRequest().getPrincipal().getRealmOfType(AssistanceAgent.class).getId() == trackingLog.getClaim().getAgent().getId();
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override

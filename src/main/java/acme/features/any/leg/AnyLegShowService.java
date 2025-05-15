@@ -46,8 +46,8 @@ public class AnyLegShowService extends AbstractGuiService<Any, Leg> {
 	public void unbind(final Leg leg) {
 		Dataset dataset;
 
-		dataset = super.unbindObject(leg, "scheduledDeparture", "scheduledArrival", "status");
-
+		dataset = super.unbindObject(leg, "uniqueIdentifier", "scheduledDeparture", "scheduledArrival", "status");
+		
 		dataset.put("flightNumber", leg.getFlightNumber());
 		dataset.put("arrivalAirport", leg.getArrivalAirport().getIATACode());
 		dataset.put("departureAirport", leg.getDepartureAirport().getIATACode());
