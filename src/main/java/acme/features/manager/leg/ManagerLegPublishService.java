@@ -38,7 +38,7 @@ public class ManagerLegPublishService extends AbstractGuiService<Manager, Leg> {
 		legId = super.getRequest().getData("id", int.class);
 		leg = this.lr.findLegById(legId);
 		
-		Boolean status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class) && leg != null &&super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == leg.getManager().getId() && leg.getIsDraftMode();
+		Boolean status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class) && leg != null && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == leg.getManager().getId() && leg.getIsDraftMode();
 		
 		if(status) {
 			Manager manager = (Manager) super.getRequest().getPrincipal().getRealmOfType(Manager.class);
@@ -74,8 +74,6 @@ public class ManagerLegPublishService extends AbstractGuiService<Manager, Leg> {
 	public void bind(final Leg leg) {
 		super.bindObject(leg, "uniqueIdentifier", "scheduledDeparture", "scheduledArrival", "status");
 		
-		leg.setIsDraftMode(false);
-
 		Airport departureAirport;
 		int departureAirportId;
 
@@ -177,14 +175,12 @@ public class ManagerLegPublishService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void perform(final Leg leg) {
+		leg.setIsDraftMode(false);
 		this.lr.save(leg);
 	}
 
 	@Override
 	public void unbind(final Leg leg) {
-
-		if (super.getBuffer().getErrors().hasErrors())
-			leg.setIsDraftMode(true);
 
 		Dataset dataset;
 		List<Airport> airports;

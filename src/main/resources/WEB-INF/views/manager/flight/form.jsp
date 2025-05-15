@@ -16,9 +16,9 @@
 		<acme:input-textbox code="manager.flight.form.label.numberOfLayovers" path="numberOfLayovers" readonly="true"/>
 	</jstl:if>
 	
-	<jstl:when test="${_command == 'show'}">
-		<acme:input-textbox code="any.flight.form.label.defaultCost" path="defaultCost" readonly="true"/>
-	</jstl:when>
+	<jstl:if test="${_command == 'show'}">
+		<acme:input-textbox code="manager.flight.form.label.defaultCost" path="defaultCost" readonly="true"/>
+	</jstl:if>
 	
 	<jstl:choose>
 		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && isDraftMode == true}">

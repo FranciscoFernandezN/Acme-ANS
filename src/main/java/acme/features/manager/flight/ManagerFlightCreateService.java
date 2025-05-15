@@ -48,8 +48,6 @@ public class ManagerFlightCreateService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void validate(final Flight flight) {
-		List<Leg> legs = this.fr.findAllLegsByFlightId(flight.getId());
-		super.state(flight.getIsDraftMode() || !flight.getIsDraftMode() && !legs.isEmpty() && legs.stream().allMatch(l -> !l.getIsDraftMode()), "isDraftMode", "manager.flight.create.cant-be-published");
 	}
 
 	@Override

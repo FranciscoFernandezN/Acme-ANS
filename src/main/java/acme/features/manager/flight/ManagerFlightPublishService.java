@@ -51,25 +51,22 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 	@Override
 	public void bind(final Flight flight) {
 		super.bindObject(flight, "tag", "needsSelfTransfer", "cost", "description");
-		flight.setIsDraftMode(false);
 	}
 
 	@Override
 	public void validate(final Flight flight) {
 		List<Leg> legs = this.fr.findAllLegsByFlightId(flight.getId());
-		super.state(flight.getIsDraftMode() || !flight.getIsDraftMode() && !legs.isEmpty() && legs.stream().allMatch(l -> !l.getIsDraftMode()), "isDraftMode", "manager.flight.create.cant-be-published");
+		super.state(!legs.isEmpty() && legs.stream().allMatch(l -> !l.getIsDraftMode()), "*", "manager.flight.create.cant-be-published");
 	}
 
 	@Override
 	public void perform(final Flight flight) {
+		flight.setIsDraftMode(false);
 		this.fr.save(flight);
 	}
 
 	@Override
 	public void unbind(final Flight flight) {
-
-		if (super.getBuffer().getErrors().hasErrors())
-			flight.setIsDraftMode(true);
 
 		Dataset dataset;
 
@@ -80,7 +77,7 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 		Date scheduledArrival = flight.getScheduledArrival();
 
 		dataset = super.unbindObject(flight, "id", "tag", "cost", "description", "isDraftMode", "needsSelfTransfer");
-
+		
 		dataset.put("origin", origin == null ? "N/A" : origin);
 		dataset.put("destiny", destiny == null ? "N/A" : destiny);
 		dataset.put("scheduledDeparture", scheduledDeparture == null ? "N/A" : scheduledDeparture);

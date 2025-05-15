@@ -38,7 +38,7 @@ public class ManagerLegStatusService extends AbstractGuiService<Manager, Leg> {
 
 		legId = super.getRequest().getData("id", int.class);
 		leg = this.lr.findLegById(legId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class) && leg != null  && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == leg.getManager().getId() && !leg.getIsDraftMode();
+		status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class) && leg != null  && !leg.getStatus().equals(LegStatus.LANDED) && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == leg.getManager().getId() && !leg.getIsDraftMode();
 
 		super.getResponse().setAuthorised(status);
 	}

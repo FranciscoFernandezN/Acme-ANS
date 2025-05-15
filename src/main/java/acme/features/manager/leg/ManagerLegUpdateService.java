@@ -181,9 +181,6 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 	@Override
 	public void unbind(final Leg leg) {
 
-		if (super.getBuffer().getErrors().hasErrors())
-			leg.setIsDraftMode(true);
-
 		Dataset dataset;
 		List<Airport> airports;
 		List<Aircraft> aircrafts;
