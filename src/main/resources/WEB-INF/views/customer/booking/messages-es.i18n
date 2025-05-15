@@ -22,6 +22,7 @@ customer.booking.form.label.passenger = Añadir pasajero
 
 customer.booking.form.button.create = Crear nueva reserva
 customer.booking.form.button.update = Actualizar reserva
+customer.booking.form.button.recommendations = Ver recomendaciones del destino
 customer.booking.form.button.publish = Publicar reserva
 customer.booking.form.button.passengers = Ver pasajeros
 

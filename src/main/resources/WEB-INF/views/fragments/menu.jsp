@@ -43,6 +43,12 @@
 			<acme:menu-suboption access="hasRealm('Administrator')" code="master.menu.administrator.populate-weather" action="/administrator/weather/populate"/>
 		</acme:menu-option>
 		
+		<acme:menu-option code="master.menu.recommendation" access="hasRealm('Administrator') || hasRealm('Customer')">
+			<acme:menu-suboption access="hasRealm('Administrator')" code="master.menu.administrator.list-recommendation" action="/administrator/recommendation/list" />
+			<acme:menu-suboption access="hasRealm('Customer')" code="master.menu.customer.list-recommendation" action="/customer/recommendation/list" />
+			<acme:menu-suboption access="hasRealm('Administrator')" code="master.menu.administrator.populate-recommendation" action="/administrator/recommendation/populate"/>
+		</acme:menu-option>
+		
 		<acme:menu-option code="master.menu.airport">
 			<acme:menu-suboption code="master.menu.authenticated.list-airport" action="/any/airport/list" />
 			<acme:menu-suboption access="hasRealm('Administrator')" code="master.menu.administrator.list-airports" action="/administrator/airport/list"/>

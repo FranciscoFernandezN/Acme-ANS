@@ -43,7 +43,6 @@ public class AdministratorWeatherController {
 		List<String> cities = this.repository.findAllCities();
 		List<Weather> weather = cities.stream().map(c -> this.findWeatherOfCity(c)).filter(c -> c != null).toList();
 		this.repository.saveAll(weather);
-		this.repository.save(this.findWeatherOfCity("Cambridge Bay"));
 
 		ModelAndView result = new ModelAndView();
 		result.setViewName("fragments/welcome");

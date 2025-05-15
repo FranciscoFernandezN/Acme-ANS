@@ -22,6 +22,7 @@ customer.booking.form.label.passenger = Add passenger
 
 customer.booking.form.button.update = Update this booking
 customer.booking.form.button.create = Create this booking
+customer.booking.form.button.recommendations = See recommendations of destination
 customer.booking.form.button.publish = Publish this booking
 customer.booking.form.button.passengers = See passengers
 
