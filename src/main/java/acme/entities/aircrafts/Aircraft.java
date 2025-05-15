@@ -24,7 +24,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(indexes = {
-	@Index(columnList = "isEnabled")
+	@Index(columnList = "airline_id,isEnabled")
 })
 public class Aircraft extends AbstractEntity {
 
