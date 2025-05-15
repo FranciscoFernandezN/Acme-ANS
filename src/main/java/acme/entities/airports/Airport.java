@@ -5,7 +5,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.validation.Valid;
+import javax.persistence.Index;
+import javax.persistence.Table;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
@@ -20,6 +21,9 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Table(indexes = {
+	@Index(columnList = "city")
+})
 public class Airport extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
