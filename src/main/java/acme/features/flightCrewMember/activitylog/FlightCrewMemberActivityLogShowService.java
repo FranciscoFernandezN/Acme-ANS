@@ -1,17 +1,16 @@
 
 package acme.features.flightCrewMember.activitylog;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
-import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.activitylogs.ActivityLog;
-import acme.entities.legs.Leg;
+import acme.entities.flightassignments.FlightAssignment;
 import acme.realms.FlightCrewMember;
 
 @GuiService
@@ -26,7 +25,12 @@ public class FlightCrewMemberActivityLogShowService extends AbstractGuiService<F
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class));
+		int id = super.getRequest().getData("id", int.class);
+		ActivityLog activityLog = this.repository.findActivityLogById(id);
+
+		boolean status = activityLog != null && super.getRequest().getPrincipal().hasRealm(activityLog.getFlightAssignment().getFlightCrewMember());
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -42,26 +46,24 @@ public class FlightCrewMemberActivityLogShowService extends AbstractGuiService<F
 
 	@Override
 	public void unbind(final ActivityLog activityLog) {
-		Dataset dataset;
-		SelectChoices flightCrewMemberChoices, legChoices;
-		List<Leg> legs;
-		List<FlightCrewMember> flightCrewMembers;
+		int memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		Collection<FlightAssignment> assignments = this.repository.findFlightAssignmentsByFlightCrewMember(memberId);
 
-		// Filtrar los Legs válidos (publicados, no cancelados/aterrizados, con salida futura)
-		legs = this.repository.findAllLegs();
-		// Obtener todos los FlightCrewMembers
-		flightCrewMembers = this.repository.findAllFlightCrewMembers();
+		SelectChoices choices = new SelectChoices();
+		choices.add("0", "----", activityLog.getFlightAssignment() == null);
 
-		flightCrewMemberChoices = SelectChoices.from(flightCrewMembers, "employeeCode", activityLog.getFlightCrewMember());
+		for (FlightAssignment a : assignments) {
+			String key = String.valueOf(a.getId());
+			String label = String.format("%s - %s - %s - %s", a.getLastUpDate(), a.getDuty(), a.getCurrentStatus(), a.getLeg().getFlightNumber());
+			boolean selected = a.equals(activityLog.getFlightAssignment());
+			choices.add(key, label, selected);
+		}
 
-		legChoices = SelectChoices.from(legs, "flightNumber", activityLog.getLeg());
+		Dataset dataset = super.unbindObject(activityLog, "registrationMoment", "typeOfIncident", "description", "severityLevel", "isDraftMode");
+		dataset.put("assignments", choices);
 
-		dataset = super.unbindObject(activityLog, "registrationMoment", "typeOfIncident", "description", "severityLevel", "isDraftMode");
-		dataset.put("legs", legChoices);
-		dataset.put("leg", legChoices.getSelected().getKey()); // Validación segura
-		dataset.put("flightCrewMembers", flightCrewMemberChoices);
-		dataset.put("flightCrewMember", flightCrewMemberChoices.getSelected().getKey());
-		dataset.put("registrationMoment", MomentHelper.getCurrentMoment());
+		if (activityLog.getFlightAssignment() != null)
+			dataset.put("flightAssignment", choices.getSelected().getKey());
 
 		super.getResponse().addData(dataset);
 	}

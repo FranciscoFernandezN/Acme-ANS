@@ -1,2 +1,2 @@
-key,registration-moment,type-of-incident,description,severity-level,is-draft-mode,key:flight-crew-member,key:leg
-activity-log-01,2017/08/07 18:15,Mechanical Failure,Engine malfunction detected during routine check.,7,true,flight-crew-member-01,leg-01
+key,registration-moment,type-of-incident,description,severity-level,is-draft-mode,key:flight-assignment
+activity-log-01,2017/08/07 18:15,Mechanical Failure,Engine malfunction detected during routine check.,7,true,flight-assignment-01

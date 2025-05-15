@@ -13,14 +13,13 @@ import acme.realms.FlightCrewMember;
 
 @GuiService
 public class FlightCrewMemberActivityLogListService extends AbstractGuiService<FlightCrewMember, ActivityLog> {
-	// Internal state ---------------------------------------------------------
 
+	// Internal state ---------------------------------------------------------
 	@Autowired
 	private FlightCrewMemberActivityLogRepository repository;
 
+
 	// AbstractGuiService interface -------------------------------------------
-
-
 	@Override
 	public void authorise() {
 		boolean authorised = super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class);
@@ -29,18 +28,18 @@ public class FlightCrewMemberActivityLogListService extends AbstractGuiService<F
 
 	@Override
 	public void load() {
-		Collection<ActivityLog> activityLogs;
-
-		activityLogs = this.repository.findAllActivityLogs();
+		int userId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		Collection<ActivityLog> activityLogs = this.repository.findAllActivityLogsByFlightCrewMemberId(userId);
 
 		super.getBuffer().addData(activityLogs);
 	}
 
 	@Override
 	public void unbind(final ActivityLog activityLog) {
-		Dataset dataset;
+		Dataset dataset = super.unbindObject(activityLog, "registrationMoment", "typeOfIncident", "description", "severityLevel", "isDraftMode");
 
-		dataset = super.unbindObject(activityLog, "registrationMoment", "typeOfIncident", "description", "severityLevel", "isDraftMode");
+		if (activityLog.getFlightAssignment() != null && activityLog.getFlightAssignment().getLeg() != null)
+			dataset.put("flightNumber", activityLog.getFlightAssignment().getLeg().getFlightNumber());
 
 		super.getResponse().addData(dataset);
 	}
