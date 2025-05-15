@@ -7,6 +7,7 @@ any.leg.list.label.scheduledArrival = Llegada programada
 any.leg.list.label.duration = Duración (horas)
 any.leg.list.label.status = Estado
 
+any.leg.form.label.uniqueIdentifier = Identificador único:
 any.leg.form.label.flightNumber = Número de vuelo:
 any.leg.form.label.scheduledDeparture = Salida programada:
 any.leg.form.label.scheduledArrival = Llegada programada:

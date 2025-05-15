@@ -7,6 +7,7 @@ customer.booking.list.label.travelClass = Travel Class
 customer.booking.list.label.price = Price
 customer.booking.list.label.isDraftMode = Draft mode?
 customer.booking.list.label.passengers = Passengers
+customer.booking.list.label.defaultPrice = Price (in default currency)
 
 customer.booking.list.button.create = Create new booking
 
@@ -21,6 +22,7 @@ customer.booking.form.label.passenger = Add passenger
 
 customer.booking.form.button.update = Update this booking
 customer.booking.form.button.create = Create this booking
+customer.booking.form.button.recommendations = See recommendations of destination
 customer.booking.form.button.publish = Publish this booking
 customer.booking.form.button.passengers = See passengers
 

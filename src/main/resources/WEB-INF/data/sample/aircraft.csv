@@ -1,6 +1,6 @@
 key,model,registration-number,capacity,cargo-weight,status,details,is-enabled,key:airline
-aircraft-01,Boeing 737,ABC123,200,22000,ACTIVE,Large passenger aircraft,true,airline-01
-aircraft-02,A320,DEF456,180,15000,UNDER_MAINTENANCE,Short-haul aircraft,true,airline-01
-aircraft-03,Embraer E195,GHI789,130,8000,ACTIVE,Regional aircraft,true,airline-02
-aircraft-04,Boeing 747,JKL012,400,35000,ACTIVE,Wide-body long-haul aircraft,false,airline-02
-aircraft-05,Airbus A380,MNO345,500,40000,UNDER_MAINTENANCE,Largest commercial airliner,false,airline-03
+aircraft-01,Boeing 737 MAX 8 Extended Ultra Range,ABC123-XYZ789-ULR-2025-TEST999,750,50000,ACTIVE,"Large aircraft 🚀 with international range & high-efficiency engines.",true,airline-01
+aircraft-02,Airbus A320 Neo 🌟,DEF456-SAFE-MODEL-2025,180,2000,UNDER_MAINTENANCE,"✈️ Short-haul with emoji, symbols & weird chars []{}",false,airline-01
+aircraft-03,Emoji Model ✈️✈️✈️,GHI789GHI789GHI789GHI789GHI789GHI789,400,49999,ACTIVE,"Model name filled with emojis and 50-character reg number test",true,airline-02
+aircraft-04,TestModel50Charxxxxxxxxxxxxxxxxx,JKL012JKL012JKL012JKL012JKL012JKL012JKL,1,3000,ACTIVE,"\"Quoted detail with, commas\" and\nnewlines\nin text.",true,airline-02
+aircraft-05,Unicode测试機型,MNO345测试🚁🚁,749,45000,UNDER_MAINTENANCE,"Description with 汉字, accented áéíóúñ, and symbols %&/#",true,airline-03

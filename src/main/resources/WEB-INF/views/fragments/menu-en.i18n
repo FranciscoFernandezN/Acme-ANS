@@ -8,10 +8,16 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-# master.menu.reviews #######################################################
+# master.menu.weather #######################################################
 
 master.menu.weather = Weather
 master.menu.any.list-weather = List weather
+
+# master.menu.recommendation #######################################################
+
+master.menu.recommendation = Recommendations
+master.menu.administrator.list-recommendation = List recommendations (admin)
+master.menu.customer.list-recommendation = List recommendations
 
 # master.menu.reviews #######################################################
 
@@ -67,6 +73,7 @@ master.menu.administrator.list-supported-currencies = List system configuration
 master.menu.administrator.create-supported-currencies = Create new supported currency
 master.menu.administrator.list-claims = List of claims
 master.menu.administrator.populate-weather = Populate weather actual (admin)
+master.menu.administrator.populate-recommendation = Populate recommendations actual (admin)
 
 # master.menu.assistance-agent ###################################################
 

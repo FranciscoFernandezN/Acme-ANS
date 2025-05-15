@@ -111,7 +111,9 @@ public class CustomerDashboardShowService extends AbstractGuiService<Customer, C
 
 			Double standardDeviationBookings = 0.0;
 			if (numBookingsAfterYear > 0) {
-				DoubleSummaryStatistics moneyStats = bookingsAfterYear.stream().mapToDouble(e -> e.getPrice().getAmount()).summaryStatistics();
+				DoubleSummaryStatistics moneyStats = bookingsAfterYear.stream().mapToDouble(e -> {
+					return e.getPrice().getCurrency().equals(defaultCurrency) ? e.getPrice().getAmount() : SupportedCurrency.convertToDefault(e.getPrice()).getAmount();
+				}).summaryStatistics();
 				maxMon.setAmount(moneyStats.getMax());
 				minMon.setAmount(moneyStats.getMin());
 				Double avgMonVal = moneyStats.getAverage();

@@ -25,4 +25,7 @@
 	<jstl:if test="${updatedBooking}">
 		<acme:button code="customer.booking.form.button.passengers" action="/customer/passenger/list?bookingId=${id}"/>
 	</jstl:if>
+		<jstl:if test="${acme:anyOf(_command, 'show|update') || _command == 'publish' && updatedBooking }">
+    	<acme:button code="customer.booking.form.button.recommendations" action="/customer/recommendation/list?city=${city}"/>
+    </jstl:if>
 </acme:form>

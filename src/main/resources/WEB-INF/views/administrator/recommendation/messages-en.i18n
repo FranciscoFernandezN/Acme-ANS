@@ -1,0 +1,16 @@
+administrator.recommendation.form.title = Recommendation form
+administrator.recommendation.list.title = Listing of recommendations
+
+administrator.recommendation.form.label.name = Name of the recommendation:
+administrator.recommendation.form.label.city = City:
+administrator.recommendation.form.label.businessStatus = Business status:
+administrator.recommendation.form.label.formattedAddress = Address:
+administrator.recommendation.form.label.rating = Rating (0-5):
+administrator.recommendation.form.label.userRatingsTotal = User ratings total:
+administrator.recommendation.form.label.openNow = Open?
+administrator.recommendation.form.label.photoReference = Photo reference:
+
+administrator.recommendation.list.label.city = City
+administrator.recommendation.list.label.name = Name
+administrator.recommendation.list.label.rating = Rating
+administrator.recommendation.list.label.openNow = Open?

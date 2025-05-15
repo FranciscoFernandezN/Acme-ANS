@@ -7,6 +7,7 @@ customer.booking.list.label.travelClass = Clase
 customer.booking.list.label.price = Precio
 customer.booking.list.label.isDraftMode = ¿Borrador?
 customer.booking.list.label.passengers = Pasajeros
+customer.booking.list.label.defaultPrice = Precio (en moneda por defecto)
 
 customer.booking.list.button.create = Crear nueva reserva
 
@@ -21,6 +22,7 @@ customer.booking.form.label.passenger = Añadir pasajero
 
 customer.booking.form.button.create = Crear nueva reserva
 customer.booking.form.button.update = Actualizar reserva
+customer.booking.form.button.recommendations = Ver recomendaciones del destino
 customer.booking.form.button.publish = Publicar reserva
 customer.booking.form.button.passengers = Ver pasajeros
 

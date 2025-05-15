@@ -163,6 +163,7 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 		dataset = super.unbindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "lastNibble", "isDraftMode");
 		dataset.put("travelClasses", travelClasses);
 		dataset.put("flightChoices", flightChoices);
+		dataset.put("city", booking.getFlight().getDestinyAirport().getCity());
 		dataset.put("passenger", passengerId);
 		dataset.put("passengerChoices", passengerChoices);
 		dataset.put("updatedBooking", true);
