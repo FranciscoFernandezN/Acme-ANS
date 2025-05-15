@@ -11,6 +11,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.bookings.Booking;
 import acme.entities.passengers.Passenger;
+import acme.entities.supportedcurrency.SupportedCurrency;
 
 @GuiService
 public class AdministratorBookingListService extends AbstractGuiService<Administrator, Booking> {
@@ -43,7 +44,7 @@ public class AdministratorBookingListService extends AbstractGuiService<Administ
 		Passenger passenger = bookings.getPassenger();
 
 		dataset = super.unbindObject(bookings, "locatorCode", "purchaseMoment", "travelClass", "price");
-
+		
 		dataset.put("fullName", passenger.getFullName());
 
 		dataset.put("email", passenger.getEmail());

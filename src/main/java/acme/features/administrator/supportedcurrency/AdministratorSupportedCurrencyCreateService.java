@@ -44,13 +44,11 @@ public class AdministratorSupportedCurrencyCreateService extends AbstractGuiServ
 
 	@Override
 	public void validate(final SupportedCurrency supportedCurrency) {
-		String defaultCurrency = SupportedCurrency.getDefaultCurrency();
 
 		List<SupportedCurrency> supportedCurrencies = this.scr.findAllSupportedCurrencies();
 		List<String> currencyNames = supportedCurrencies.stream().map(sp -> sp.getCurrencyName()).toList();
 
 		if (supportedCurrency.getCurrencyName() != null) {
-			super.state(!supportedCurrency.getCurrencyName().equals(defaultCurrency), "currencyName", "administrator.supported-currency.create.is-default-currency");
 			super.state(!currencyNames.contains(supportedCurrency.getCurrencyName()), "currencyName", "administrator.supported-currency.create.already-exists-currency");
 		}
 
@@ -58,23 +56,19 @@ public class AdministratorSupportedCurrencyCreateService extends AbstractGuiServ
 
 	@Override
 	public void perform(final SupportedCurrency supportedCurrency) {
-		this.scr.save(supportedCurrency);
 		if(supportedCurrency.getIsDefaultCurrency()) {
 			SupportedCurrency defaultCurrency = this.scr.findDefaultSupportedCurrency();
 			defaultCurrency.setIsDefaultCurrency(false);
 			this.scr.save(defaultCurrency);
 		}
+		this.scr.save(supportedCurrency);
 	}
 
 	@Override
 	public void unbind(final SupportedCurrency supportedCurrency) {
 		Dataset dataset;
 
-		String defaultCurrency = SupportedCurrency.getDefaultCurrency();
-
-		dataset = super.unbindObject(supportedCurrency, "currencyName");
-		dataset.put("isDefaultCurrency", supportedCurrency.getCurrencyName() == null ? "N/A" : supportedCurrency.getCurrencyName().equals(defaultCurrency));
-
+		dataset = super.unbindObject(supportedCurrency, "currencyName", "isDefaultCurrency");
 		super.getResponse().addData(dataset);
 	}
 
