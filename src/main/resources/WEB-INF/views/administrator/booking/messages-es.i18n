@@ -7,6 +7,7 @@ administrator.booking.list.label.travelClass = Clase
 administrator.booking.list.label.price = Precio
 administrator.booking.list.label.fullName = Pasajero
 administrator.booking.list.label.email = Email del pasajero
+administrator.booking.list.label.defaultPrice = Precio (en moneda por defecto)
 
 administrator.booking.form.label.locatorCode = Localizador
 administrator.booking.form.label.flight = Vuelo

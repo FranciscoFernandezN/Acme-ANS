@@ -8,6 +8,7 @@ any.flight.list.label.destiny = Destiny city
 any.flight.list.label.scheduledDeparture = Scheduled departure
 any.flight.list.label.scheduledArrival = Scheduled arrival
 any.flight.list.label.needsSelfTransfer = Needs self transfer?
+any.flight.list.label.defaultCost = Price (in default currency)
 
 any.flight.form.label.id = Id of the flight:
 any.flight.form.label.tag = Tag:
@@ -19,5 +20,6 @@ any.flight.form.label.destiny = Destiny city:
 any.flight.form.label.scheduledDeparture = Scheduled departure:
 any.flight.form.label.scheduledArrival = Scheduled arrival:
 any.flight.form.label.numberOfLayovers = Number of layovers:
+any.flight.form.label.defaultCost = Price (in default currency):
 
 any.flight.form.button.legs = View legs

@@ -70,7 +70,9 @@ public class ManagerDashboardShowService extends AbstractGuiService<Manager, Man
 
 		String defaultCurrency = SupportedCurrency.getDefaultCurrency();
 
-		DoubleSummaryStatistics statistics = allFlightsOfManager.stream().mapToDouble(f -> f.getCost().getAmount()).summaryStatistics();
+		DoubleSummaryStatistics statistics = allFlightsOfManager.stream().mapToDouble(f -> {
+			return f.getCost().getCurrency().equals(defaultCurrency) ? f.getCost().getAmount() : SupportedCurrency.convertToDefault(f.getCost()).getAmount();
+		}).summaryStatistics();
 		Money average = new Money();
 		Money min = new Money();
 		Money max = new Money();

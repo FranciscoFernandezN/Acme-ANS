@@ -7,6 +7,7 @@ administrator.service.list.label.avgDwellTime = Average dwell time
 administrator.service.list.label.promotionCode = Promotion Code
 administrator.service.list.label.money = Discount
 administrator.service.list.label.iATACode = Airport
+administrator.service.list.label.defaultMoney = Price (in default currency)
 
 administrator.service.list.button.create = Create new service
 
@@ -16,6 +17,7 @@ administrator.service.form.label.avgDwellTime = Average dwell time
 administrator.service.form.label.promotionCode = Promotion Code
 administrator.service.form.label.money = Discount
 administrator.service.form.label.airport = Airport
+administrator.service.form.label.defaultMoney = Price (in default currency):
 
 administrator.service.form.button.update = Update this service
 administrator.service.form.button.delete = Delete this service

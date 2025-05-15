@@ -12,6 +12,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airports.Airport;
 import acme.entities.services.Service;
+import acme.entities.supportedcurrency.SupportedCurrency;
 
 @GuiService
 public class AdministratorServiceShowService extends AbstractGuiService<Administrator, Service> {
@@ -48,8 +49,11 @@ public class AdministratorServiceShowService extends AbstractGuiService<Administ
 
 		SelectChoices airportChoices = new SelectChoices();
 		airports.stream().forEach(a -> airportChoices.add(String.valueOf(a.getId()), String.format("%s - %s", a.getIATACode(), a.getCity()), false));
-
+		
 		dataset = super.unbindObject(service, "name", "picture", "avgDwellTime", "promotionCode", "money");
+		
+		dataset.put("defaultMoney", SupportedCurrency.convertToDefault(service.getMoney()));
+		
 		dataset.put("airport", "0");
 		dataset.put("airportChoices", airportChoices);
 

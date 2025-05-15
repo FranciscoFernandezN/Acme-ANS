@@ -8,6 +8,7 @@ any.flight.list.label.destiny = Ciudad destino
 any.flight.list.label.scheduledDeparture = Salida programada
 any.flight.list.label.scheduledArrival = Llegada programada
 any.flight.list.label.needsSelfTransfer = ¿Necesita transporte propio?
+any.flight.list.label.defaultCost = Precio (en moneda por defecto)
 
 any.flight.form.label.id = Id del vuelo:
 any.flight.form.label.tag = Etiqueta:
@@ -19,5 +20,6 @@ any.flight.form.label.destiny = Ciudad destino:
 any.flight.form.label.scheduledDeparture = Salida programada:
 any.flight.form.label.scheduledArrival = Llegada programada:
 any.flight.form.label.numberOfLayovers = Número de escalas:
+any.flight.form.label.defaultCost = Precio (en moneda por defecto):
 
 any.flight.form.button.legs = Ver tramos del vuelo
