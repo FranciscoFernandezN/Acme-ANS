@@ -4,5 +4,5 @@ claim-02,2022/03/11 10:00,blebleble@gmail.com,El gracioso que sea ha taponao el 
 claim-03,2022/03/12 10:00,blublublu@gmail.com,El piloto se ha puesto a hacer maniobras acrobáticas,IN_PROGRESS,FLIGHT_ISSUES,false,assistance-agent-02,leg-03
 claim-04,2022/03/13 10:00,linganguliguliwacha@gmail.com,Yo cuando me monté en el avión tenia una maleta negra ahora es rosa,REJECTED,LUGGAGE_ISSUES,true,assistance-agent-01,leg-03
 claim-05,2000/12/31 23:59,lialkdfniu@patata.com,洛伦·伊普森,ACCEPTED,SECURITY_INCIDENT,true,assistance-agent-01,leg-09
-claim-06,1999/12/30 23:58,bombaclat@gg.com,โลเร็ม อิปซัม,REJECTED,SECURITY_INCIDENT,true,assistance-agent-01,leg-10
-claim-07,1998/12/29 23:57,rassclat@genda.com,---?---,IN_PROGRESS,FLIGHT_ISSUES,false,assistance-agent-02,leg-11
+claim-06,1900/01/01 00:00,bombaclat@gg.com,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",REJECTED,SECURITY_INCIDENT,true,assistance-agent-01,leg-10
+claim-07,2025/01/01 00:00,rassclat@genda.com,?,IN_PROGRESS,FLIGHT_ISSUES,false,assistance-agent-02,leg-11
