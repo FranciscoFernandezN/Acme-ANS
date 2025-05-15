@@ -3,3 +3,4 @@ claim-01,2022/03/10 10:00,blablabla@gmail.com,La azafata me ha mirao mal,ACCEPTE
 claim-02,2022/03/11 10:00,blebleble@gmail.com,El gracioso que sea ha taponao el baño,IN_PROGRESS,OTHER_ISSUES,false,assistance-agent-02,leg-01
 claim-03,2022/03/12 10:00,blublublu@gmail.com,El piloto se ha puesto a hacer maniobras acrobáticas,IN_PROGRESS,FLIGHT_ISSUES,false,assistance-agent-02,leg-03
 claim-04,2022/03/13 10:00,linganguliguliwacha@gmail.com,Yo cuando me monté en el avión tenia una maleta negra ahora es rosa,REJECTED,LUGGAGE_ISSUES,true,assistance-agent-01,leg-03
+claim-05,2000/12/31 23:59,lialkdfniu@patata.com,洛伦·伊普森,ACCEPTED,SECURITY_INCIDENT,false,assistance-agent-01,leg-09
