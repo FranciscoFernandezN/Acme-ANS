@@ -1,13 +1,13 @@
 
 package acme.entities.supportedcurrency;
 
-import java.beans.Transient;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Transient;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -49,6 +49,9 @@ public class SupportedCurrency extends AbstractEntity {
 	// Derived attributes -----------------------------------------------------
 	
 	@Transient
+	private static Map<String, Map<String, Double>> lastData;
+	
+	@Transient
 	public static String getDefaultCurrency() {
 		SupportedCurrencyRepository repository = SpringHelper.getBean(SupportedCurrencyRepository.class);
 		return repository.getDefaultCurrency();
@@ -61,12 +64,19 @@ public class SupportedCurrency extends AbstractEntity {
 			if(!money.getCurrency().equals(defaultCurrency)) {
 				String apiKey = "fca_live_LoNLzqN8xfOE524QdmeycQrAkUMvlwcsWGd5nEhw";
 				Date now = MomentHelper.getCurrentMoment();
-				String nowFormatted = (now.getYear() + 1900) + "-" + (now.getMonth() + 1) + "-" + now.getDate();
+				String nowFormatted = (now.getYear() + 1900) + "-" + String.format("%02d", (now.getMonth() + 1)) + "-" + String.format("%02d", now.getDate());
 				String url = "https://api.freecurrencyapi.com/v1/historical?apikey=" + apiKey + "&date=" + nowFormatted + "&base_currency=" + defaultCurrency;
-				RestTemplate api = new RestTemplate();
+				Map<String, Map<String, Double>> data;
+				if(lastData != null && lastData.get(nowFormatted) != null) {
+					 data = lastData;
+				} else {
+					RestTemplate api = new RestTemplate();
+					ResponseEntity<ExchangePOJO> response = api.getForEntity(url, ExchangePOJO.class);
+					data = response.getBody().getData();
+					lastData = data;
+				}
 				
-				ResponseEntity<ExchangePOJO> response = api.getForEntity(url, ExchangePOJO.class);
-				Double newAmount = money.getAmount() / response.getBody().getData().values().iterator().next().get(money.getCurrency());
+				Double newAmount = money.getAmount() / data.values().iterator().next().get(money.getCurrency());
 				Money result = new Money();
 				result.setAmount(newAmount);
 				result.setCurrency(defaultCurrency);
