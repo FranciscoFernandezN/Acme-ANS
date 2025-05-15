@@ -6,27 +6,47 @@ customer.booking.list.label.purchaseMoment = Fecha de compra
 customer.booking.list.label.travelClass = Clase
 customer.booking.list.label.price = Precio
 customer.booking.list.label.isDraftMode = ¿Borrador?
-customer.booking.list.label.fullName = Pasajero
-customer.booking.list.label.email = Email del pasajero
+customer.booking.list.label.passengers = Pasajeros
 
 customer.booking.list.button.create = Crear nueva reserva
 
 customer.booking.form.label.locatorCode = Localizador
+customer.booking.form.label.purchaseMoment = Fecha de compra
 customer.booking.form.label.flight = Vuelo
 customer.booking.form.label.travelClass = Clase
 customer.booking.form.label.isDraftMode = ¿Modo borrador?
 customer.booking.form.label.passportNumber = Pasaporte del pasajero
 customer.booking.form.label.lastNibble = Últimos dígitos de la tarjeta de crédito
+customer.booking.form.label.passenger = Añadir pasajero
 
 customer.booking.form.button.create = Crear nueva reserva
 customer.booking.form.button.update = Actualizar reserva
+customer.booking.form.button.publish = Publicar reserva
+customer.booking.form.button.passengers = Ver pasajeros
 
-customer.booking.create.flight-does-not-exist = Escoge un vuelo
-customer.booking.create.passenger-does-not-exist = No hay ningún pasajero registrado con ese pasaporte
+customer.booking.create.flight-does-not-exist = Ese vuelo no existe
+customer.booking.create.flight-must-be-chosen = Escoge un vuelo
+customer.booking.create.flight-must-be-published = Escoge un vuelo publicado
+customer.booking.create.passenger-does-not-exist = Ese pasajero no existe
+customer.booking.create.passenger-not-yours = El pasajero no te pertenece
 customer.booking.create.travel-class-does-not-exist = Escoge una clase
-customer.booking.create.cant-be-published = No se puede publicar sin los último dígitos de la tarjeta
 
-customer.booking.update.flight-does-not-exist = Escoge un vuelo
-customer.booking.update.passenger-does-not-exist = No hay ningún pasajero registrado con ese pasaporte
+customer.booking.update.flight-does-not-exist = Ese vuelo no existe
+customer.booking.update.flight-must-be-chosen = Escoge un vuelo
+customer.booking.update.flight-must-be-published = Escoge un vuelo publicado
+customer.booking.update.passenger-does-not-exist = Ese pasajero no existe
+customer.booking.update.passenger-not-yours = El pasajero no te pertenece
 customer.booking.update.travel-class-does-not-exist = Escoge una clase
 customer.booking.update.cant-be-published = No se puede publicar sin los último dígitos de la tarjeta
+customer.booking.update.repeated-passenger = El pasajero ya está en la reserva
+
+customer.booking.publish.flight-does-not-exist = Ese vuelo no existe
+customer.booking.publish.flight-must-be-chosen = Escoge un vuelo
+customer.booking.publish.flight-must-be-published = Escoge un vuelo publicado
+customer.booking.publish.passenger-does-not-exist = Ese pasajero no existe
+customer.booking.publish.passenger-not-yours = El pasajero no te pertenece
+customer.booking.publish.repeated-passenger = El pasajero ya está en la reserva
+customer.booking.publish.travel-class-does-not-exist = Escoge una clase
+customer.booking.publish.need-last-nibble = No se puede publicar sin los último dígitos de la tarjeta
+customer.booking.publish.need-passenger = La reserva necesita al menos un pasajero
+customer.booking.publish.need-passengers-published = Las reservas necesitan todos los pasajeros publicados

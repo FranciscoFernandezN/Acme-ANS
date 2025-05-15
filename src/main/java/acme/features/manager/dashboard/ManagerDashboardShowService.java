@@ -19,6 +19,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airports.Airport;
 import acme.entities.flights.Flight;
+import acme.entities.supportedcurrency.SupportedCurrency;
 import acme.forms.ManagerDashboard;
 import acme.realms.Manager;
 
@@ -67,7 +68,7 @@ public class ManagerDashboardShowService extends AbstractGuiService<Manager, Man
 		Airport mostPopularAirport = originAirports.stream().collect(Collectors.collectingAndThen(Collectors.groupingBy(Function.identity(), Collectors.counting()), m -> m.entrySet().stream().max(Comparator.comparing(e -> e.getValue())).get())).getKey();
 		Airport lessPopularAirport = originAirports.stream().collect(Collectors.collectingAndThen(Collectors.groupingBy(Function.identity(), Collectors.counting()), m -> m.entrySet().stream().min(Comparator.comparing(e -> e.getValue())).get())).getKey();
 
-		String defaultCurrency = PropertyHelper.getRequiredProperty("acme.currency.default", String.class);
+		String defaultCurrency = SupportedCurrency.getDefaultCurrency();
 
 		DoubleSummaryStatistics statistics = allFlightsOfManager.stream().mapToDouble(f -> f.getCost().getAmount()).summaryStatistics();
 		Money average = new Money();

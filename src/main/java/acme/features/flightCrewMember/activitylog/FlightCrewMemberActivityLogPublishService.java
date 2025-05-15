@@ -1,7 +1,7 @@
 
 package acme.features.flightCrewMember.activitylog;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,7 +10,7 @@ import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.activitylogs.ActivityLog;
-import acme.entities.legs.Leg;
+import acme.entities.flightassignments.FlightAssignment;
 import acme.realms.FlightCrewMember;
 
 @GuiService
@@ -32,7 +32,7 @@ public class FlightCrewMemberActivityLogPublishService extends AbstractGuiServic
 			return; // Terminar si no existe el registro de actividad.
 		}
 
-		boolean isMember = activityLog.getFlightCrewMember() != null && super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class);
+		boolean isMember = activityLog.getFlightAssignment().getFlightCrewMember() != null && super.getRequest().getPrincipal().hasRealm(activityLog.getFlightAssignment().getFlightCrewMember());
 
 		boolean isDraft = activityLog.getIsDraftMode() != null && activityLog.getIsDraftMode();
 
@@ -49,15 +49,8 @@ public class FlightCrewMemberActivityLogPublishService extends AbstractGuiServic
 
 	@Override
 	public void bind(final ActivityLog activityLog) {
-		int flightCrewMemberId = super.getRequest().getData("flightCrewMember", int.class);
-		FlightCrewMember flightCrewMember = this.repository.findFlightCrewMemberById(flightCrewMemberId);
+		super.bindObject(activityLog, "registrationMoment", "typeOfIncident", "description", "severityLevel", "flightAssignment");
 
-		int legId = super.getRequest().getData("leg", int.class);
-		Leg leg = this.repository.findLegById(legId);
-		super.bindObject(activityLog, "registrationMoment", "typeOfIncident", "description", "severityLevel");
-
-		activityLog.setFlightCrewMember(flightCrewMember);
-		activityLog.setLeg(leg);
 	}
 
 	@Override
@@ -65,14 +58,12 @@ public class FlightCrewMemberActivityLogPublishService extends AbstractGuiServic
 		boolean confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
 
-		if (activityLog.getFlightCrewMember() != null) {
-			FlightCrewMember flightCrewMember = this.repository.findFlightCrewMemberById(activityLog.getFlightCrewMember().getId());
-			super.state(flightCrewMember != null, "employeeCode", "flight-crew-member.activity-log.error.invalid-flight-crew-member");
-		}
-
-		if (activityLog.getLeg() != null) {
-			Leg leg = this.repository.findLegById(activityLog.getLeg().getId());
-			super.state(leg != null, "flightNumber", "flight-crew-member.activity-log.error.invalid-leg");
+		// Validar si 'flightAssignment' o 'draftMode' son nulos
+		if (activityLog != null && activityLog.getFlightAssignment() != null) {
+			boolean isDraftMode = activityLog.getFlightAssignment().getIsDraftMode();
+			if (isDraftMode)
+				// Si 'draftMode' es verdadero, agregar un mensaje de error
+				super.state(false, "*", "acme.validation.activity-log.flight-assignment.draftMode");
 		}
 
 	}
@@ -85,25 +76,24 @@ public class FlightCrewMemberActivityLogPublishService extends AbstractGuiServic
 
 	@Override
 	public void unbind(final ActivityLog activityLog) {
-		Dataset dataset;
-		SelectChoices flightCrewMemberChoices, legChoices;
-		List<Leg> legs;
-		List<FlightCrewMember> flightCrewMembers;
+		int memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		Collection<FlightAssignment> assignments = this.repository.findFlightAssignmentsByFlightCrewMember(memberId);
 
-		// Filtrar los Legs válidos (publicados, no cancelados/aterrizados, con salida futura)
-		legs = this.repository.findAllLegs();
-		// Obtener todos los FlightCrewMembers
-		flightCrewMembers = this.repository.findAllFlightCrewMembers();
+		SelectChoices choices = new SelectChoices();
+		choices.add("0", "----", activityLog.getFlightAssignment() == null);
 
-		flightCrewMemberChoices = SelectChoices.from(flightCrewMembers, "employeeCode", activityLog.getFlightCrewMember());
+		for (FlightAssignment a : assignments) {
+			String key = String.valueOf(a.getId());
+			String label = String.format("%s - %s - %s - %s", a.getLastUpDate(), a.getDuty(), a.getCurrentStatus(), a.getLeg().getFlightNumber());
+			boolean selected = a.equals(activityLog.getFlightAssignment());
+			choices.add(key, label, selected);
+		}
 
-		legChoices = SelectChoices.from(legs, "flightNumber", activityLog.getLeg());
+		Dataset dataset = super.unbindObject(activityLog, "registrationMoment", "typeOfIncident", "description", "severityLevel", "isDraftMode");
+		dataset.put("assignments", choices);
 
-		dataset = super.unbindObject(activityLog, "registrationMoment", "typeOfIncident", "description", "severityLevel", "isDraftMode");
-		dataset.put("legs", legChoices);
-		dataset.put("leg", legChoices.getSelected().getKey()); // Validación segura
-		dataset.put("flightCrewMembers", flightCrewMemberChoices);
-		dataset.put("flightCrewMember", flightCrewMemberChoices.getSelected().getKey());
+		if (activityLog.getFlightAssignment() != null)
+			dataset.put("flightAssignment", choices.getSelected().getKey());
 
 		super.getResponse().addData(dataset);
 	}

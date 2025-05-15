@@ -12,4 +12,9 @@
 	<acme:list-column code="customer.passenger.list.label.isDraftMode" path="isDraftMode" width="20%"/>
 </acme:list>
 
-<acme:button code="customer.passenger.list.button.create" action="/customer/passenger/create"/>
+<jstl:if test="${showCreate && booking!=null}">
+	<acme:button code="customer.passenger.list.button.create" action="/customer/passenger/create?bookingId=${booking}"/>
+</jstl:if>
+<jstl:if test="${showCreate && booking==null}">
+	<acme:button code="customer.passenger.list.button.create" action="/customer/passenger/create"/>
+</jstl:if>

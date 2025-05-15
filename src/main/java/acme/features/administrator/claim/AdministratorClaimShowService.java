@@ -22,7 +22,15 @@ public class AdministratorClaimShowService extends AbstractGuiService<Administra
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Administrator.class));
+		boolean status;
+		int claimId;
+		Claim claim;
+
+		claimId = super.getRequest().getData("id", int.class);
+		claim = this.acr.findClaimById(claimId);
+		status = super.getRequest().getPrincipal().hasRealmOfType(Administrator.class) && claim.getIsPublished();
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override

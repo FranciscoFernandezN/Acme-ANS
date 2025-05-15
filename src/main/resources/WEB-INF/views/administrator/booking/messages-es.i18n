@@ -11,5 +11,4 @@ administrator.booking.list.label.email = Email del pasajero
 administrator.booking.form.label.locatorCode = Localizador
 administrator.booking.form.label.flight = Vuelo
 administrator.booking.form.label.travelClass = Clase
-administrator.booking.form.label.passportNumber = Pasaporte del pasajero
 administrator.booking.form.label.lastNibble = Últimos dígitos de la tarjeta de crédito

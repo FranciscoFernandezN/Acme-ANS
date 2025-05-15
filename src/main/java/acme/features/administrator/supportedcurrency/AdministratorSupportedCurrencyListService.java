@@ -41,7 +41,7 @@ public class AdministratorSupportedCurrencyListService extends AbstractGuiServic
 	public void unbind(final SupportedCurrency supportedCurrency) {
 		Dataset dataset;
 
-		String defaultCurrency = PropertyHelper.getRequiredProperty("acme.currency.default", String.class);
+		String defaultCurrency = SupportedCurrency.getDefaultCurrency();
 
 		dataset = super.unbindObject(supportedCurrency, "currencyName");
 		dataset.put("isDefaultCurrency", supportedCurrency.getCurrencyName().equals(defaultCurrency));
