@@ -38,13 +38,13 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 		if (status && super.getRequest().hasData("flight")) {
 			int flightId = super.getRequest().getData("flight", int.class);
 			Flight flight = this.repository.findFlightById(flightId);
-			status = flightId <= 0 || flight != null && !flight.getIsDraftMode();
+			status = flightId == 0 || flight != null && !flight.getIsDraftMode();
 		}
 
 		if (status && super.getRequest().hasData("passenger")) {
 			int passengerId = super.getRequest().getData("passenger", int.class);
 			Passenger passenger = this.repository.findPassengerById(passengerId);
-			status = passengerId <= 0 || passenger != null && this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId()).contains(passenger);
+			status = passengerId == 0 || passenger != null && this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId()).contains(passenger);
 		}
 
 		super.getResponse().setAuthorised(status);

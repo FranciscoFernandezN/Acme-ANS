@@ -29,17 +29,29 @@ public class CustomerPassengerCreateService extends AbstractGuiService<Customer,
 	public void authorise() {
 		boolean status;
 		int masterId;
+		int bookingId;
 		Booking booking;
 
 		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
+		boolean hasMasterId = super.getRequest().hasData(CustomerPassengerController.MASTER_ID);
+		boolean hasBooking = super.getRequest().hasData("booking");
+		masterId = hasMasterId ? super.getRequest().getData(CustomerPassengerController.MASTER_ID, int.class) : 0;
 
-		if (super.getRequest().hasData(CustomerPassengerController.MASTER_ID)) {
-			masterId = super.getRequest().getData(CustomerPassengerController.MASTER_ID, int.class);
+		if (status && hasMasterId) {
 			booking = this.repository.findBookingById(masterId);
-			status = status && booking != null && booking.getIsDraftMode() && super.getRequest().getPrincipal().hasRealm(booking.getCustomer());
+			status = booking != null && super.getRequest().getPrincipal().hasRealm(booking.getCustomer()) && booking.getIsDraftMode();
+		}
+
+		if (status && hasBooking) {
+			bookingId = super.getRequest().getData("booking", int.class);
+			booking = this.repository.findBookingById(bookingId);
+			status = bookingId == 0 || booking != null && super.getRequest().getPrincipal().hasRealm(booking.getCustomer()) && booking.getIsDraftMode();
+			if (status && hasMasterId)
+				status = bookingId == masterId;
 		}
 
 		super.getResponse().setAuthorised(status);
+
 	}
 
 	@Override

@@ -28,25 +28,34 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 	@Override
 	public void authorise() {
 		boolean status;
-		boolean createdInBooking;
+		boolean hasMasterId;
+		boolean hasBooking;
+		int masterId;
+		int bookingId;
 		int passengerId;
 		Booking booking;
 		Passenger passenger;
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
-		createdInBooking = super.getRequest().hasData(CustomerPassengerController.MASTER_ID);
+		passengerId = super.getRequest().getData("id", int.class);
+		passenger = this.repository.findPassengerById(passengerId);
 
-		if (status && createdInBooking) {
-			passengerId = super.getRequest().getData(CustomerPassengerController.MASTER_ID, int.class);
-			booking = this.repository.findBookingById(passengerId);
-			status = booking != null && booking.getIsDraftMode() && super.getRequest().getPrincipal().hasRealm(booking.getCustomer());
+		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class) && (passenger == null || this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId()).contains(passenger));
+
+		hasMasterId = super.getRequest().hasData(CustomerPassengerController.MASTER_ID);
+		hasBooking = super.getRequest().hasData("booking");
+		masterId = hasMasterId ? super.getRequest().getData(CustomerPassengerController.MASTER_ID, int.class) : 0;
+
+		if (status && hasMasterId) {
+			booking = this.repository.findBookingById(masterId);
+			status = booking != null && super.getRequest().getPrincipal().hasRealm(booking.getCustomer()) && booking.getIsDraftMode();
 		}
 
-		if (status) {
-			passengerId = super.getRequest().getData("id", int.class);
-			passenger = this.repository.findPassengerById(passengerId);
-			if (passenger != null)
-				status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class) && this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId()).contains(passenger);
+		if (status && hasBooking) {
+			bookingId = super.getRequest().getData("booking", int.class);
+			booking = this.repository.findBookingById(bookingId);
+			status = bookingId == 0 || booking != null && super.getRequest().getPrincipal().hasRealm(booking.getCustomer()) && !this.repository.findBookingByPassengerId(passengerId).contains(booking) && booking.getIsDraftMode();
+			if (status && hasMasterId)
+				status = bookingId == masterId;
 		}
 
 		super.getResponse().setAuthorised(status);

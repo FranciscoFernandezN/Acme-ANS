@@ -40,7 +40,7 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 		if (status && super.getRequest().hasData("flight")) {
 			int flightId = super.getRequest().getData("flight", int.class);
 			Flight flight = this.repository.findFlightById(flightId);
-			status = flightId <= 0 || flight != null && !flight.getIsDraftMode();
+			status = flightId == 0 || flight != null && !flight.getIsDraftMode();
 		}
 
 		if (status && super.getRequest().hasData("passenger")) {
@@ -49,7 +49,7 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 			Collection<Passenger> passengersOfCustomer = this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId());
 			boolean yours = passengersOfCustomer.contains(passenger);
 			boolean passengersAreAlready = super.getRequest().hasData("id") && this.repository.findPassengersByBookingId(super.getRequest().getData("id", int.class)).remove(passenger);
-			status = passengerId <= 0 || yours && !passengersAreAlready;
+			status = passengerId == 0 || yours && !passengersAreAlready;
 		}
 
 		super.getResponse().setAuthorised(status);
