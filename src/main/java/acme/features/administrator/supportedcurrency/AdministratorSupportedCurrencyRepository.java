@@ -17,4 +17,7 @@ public interface AdministratorSupportedCurrencyRepository extends AbstractReposi
 	@Query("SELECT sc FROM SupportedCurrency sc WHERE sc.id = :id")
 	SupportedCurrency findSupportedCurrencyById(int id);
 	
+	@Query("SELECT sc FROM SupportedCurrency sc WHERE sc.isDefaultCurrency = true")
+	SupportedCurrency findDefaultSupportedCurrency();
+	
 }

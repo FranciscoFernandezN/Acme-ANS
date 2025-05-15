@@ -47,7 +47,7 @@ public class AdministratorSupportedCurrencyUpdateService extends AbstractGuiServ
 	@Override
 	public void validate(final SupportedCurrency supportedCurrency) {
 
-		String defaultCurrency = PropertyHelper.getRequiredProperty("acme.currency.default", String.class);
+		String defaultCurrency = SupportedCurrency.getDefaultCurrency();
 
 		List<SupportedCurrency> supportedCurrencies = this.scr.findAllSupportedCurrencies();
 		List<String> currencyNames = supportedCurrencies.stream().filter(sp -> sp.getId() != supportedCurrency.getId()).map(sp -> sp.getCurrencyName()).toList();
@@ -61,13 +61,18 @@ public class AdministratorSupportedCurrencyUpdateService extends AbstractGuiServ
 	@Override
 	public void perform(final SupportedCurrency supportedCurrency) {
 		this.scr.save(supportedCurrency);
+		if(supportedCurrency.getIsDefaultCurrency()) {
+			SupportedCurrency defaultCurrency = this.scr.findDefaultSupportedCurrency();
+			defaultCurrency.setIsDefaultCurrency(false);
+			this.scr.save(defaultCurrency);
+		}
 	}
 
 	@Override
 	public void unbind(final SupportedCurrency supportedCurrency) {
 		Dataset dataset;
 
-		String defaultCurrency = PropertyHelper.getRequiredProperty("acme.currency.default", String.class);
+		String defaultCurrency = SupportedCurrency.getDefaultCurrency();
 
 		dataset = super.unbindObject(supportedCurrency, "currencyName");
 		dataset.put("isDefaultCurrency", supportedCurrency.getCurrencyName() == null ? "N/A" : supportedCurrency.getCurrencyName().equals(defaultCurrency));

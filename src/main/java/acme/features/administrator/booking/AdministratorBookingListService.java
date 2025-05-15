@@ -1,7 +1,9 @@
 
 package acme.features.administrator.booking;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,7 +12,6 @@ import acme.client.components.principals.Administrator;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.bookings.Booking;
-import acme.entities.passengers.Passenger;
 
 @GuiService
 public class AdministratorBookingListService extends AbstractGuiService<Administrator, Booking> {
@@ -40,13 +41,12 @@ public class AdministratorBookingListService extends AbstractGuiService<Administ
 	@Override
 	public void unbind(final Booking bookings) {
 		Dataset dataset;
-		Passenger passenger = bookings.getPassenger();
+		List<String> passengers = new ArrayList<>();
+		this.repository.findPassengersByBookingId(bookings.getId()).stream().forEach(e -> passengers.add(e.getFullName()));
 
 		dataset = super.unbindObject(bookings, "locatorCode", "purchaseMoment", "travelClass", "price");
 
-		dataset.put("fullName", passenger.getFullName());
-
-		dataset.put("email", passenger.getEmail());
+		dataset.put("passengers", passengers.isEmpty() ? "N/A" : passengers);
 
 		super.getResponse().addData(dataset);
 	}
