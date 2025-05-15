@@ -1,12 +1,17 @@
 
 package acme.entities.supportedcurrency;
 
+import java.beans.Transient;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import acme.client.components.basis.AbstractEntity;
+import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidCurrency;
+import acme.client.helpers.SpringHelper;
+import acme.entities.flights.FlightRepository;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,7 +30,18 @@ public class SupportedCurrency extends AbstractEntity {
 	@ValidCurrency
 	@Column(unique = true)
 	private String				currencyName;
+	
+	@Mandatory
+	@Automapped
+	private Boolean isDefaultCurrency;
 
 	// Derived attributes -----------------------------------------------------
+	
+	@Transient
+	public static String getDefaultCurrency() {
+		SupportedCurrencyRepository repository = SpringHelper.getBean(SupportedCurrencyRepository.class);
+		return repository.getDefaultCurrency();
+	}
+	
 	// Relationships ----------------------------------------------------------
 }
