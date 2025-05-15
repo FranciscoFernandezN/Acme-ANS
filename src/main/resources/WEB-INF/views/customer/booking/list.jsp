@@ -10,7 +10,7 @@
 	<acme:list-column code="customer.booking.list.label.price" path="price" width="20%"/>
 	<acme:list-column code="customer.booking.list.label.isDraftMode" path="isDraftMode" width="20%"/>
 	<acme:list-column code="customer.booking.list.label.passengers" path="passengers" width="20%"/>
-	
+	<acme:list-column code="customer.booking.list.label.defaultPrice" path="defaultPrice" width="20%"/>
 	
 </acme:list>
 

@@ -7,8 +7,10 @@ any.service.form.label.avgDwellTime = Media de dwell time:
 any.service.form.label.promotionCode = Código promocional:
 any.service.form.label.money = Dinero:
 any.service.form.label.airport = Código IATA del aeropuerto:
+any.service.form.label.defaultMoney = Precio (en moneda por defecto):
 
 any.service.list.label.name = Nombre
 any.service.list.label.avgDwellTime = Media de dwell time
 any.service.list.label.promotionCode = Código promocional
 any.service.list.label.money = Dinero
+any.service.list.label.defaultMoney = Precio (en moneda por defecto)

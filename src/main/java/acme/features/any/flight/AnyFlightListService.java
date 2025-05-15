@@ -50,6 +50,8 @@ public class AnyFlightListService extends AbstractGuiService<Any, Flight> {
 		Date scheduledArrival = flight.getScheduledArrival();
 
 		dataset = super.unbindObject(flight, "tag", "cost", "needsSelfTransfer");
+		
+		dataset.put("defaultCost", SupportedCurrency.convertToDefault(flight.getCost()));
 
 		dataset.put("origin", origin);
 		dataset.put("destiny", destiny);

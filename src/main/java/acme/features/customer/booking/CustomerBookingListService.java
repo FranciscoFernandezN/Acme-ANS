@@ -11,6 +11,7 @@ import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.bookings.Booking;
+import acme.entities.supportedcurrency.SupportedCurrency;
 import acme.realms.Customer;
 
 @GuiService
@@ -47,7 +48,9 @@ public class CustomerBookingListService extends AbstractGuiService<Customer, Boo
 		this.repository.findPassengersByBookingId(bookings.getId()).stream().forEach(e -> passengers.add(e.getFullName()));
 
 		dataset = super.unbindObject(bookings, "locatorCode", "purchaseMoment", "travelClass", "price", "isDraftMode");
-
+		
+		dataset.put("defaultPrice", SupportedCurrency.convertToDefault(bookings.getPrice()));
+		
 		dataset.put("passengers", passengers.isEmpty() ? "N/A" : passengers);
 
 		super.getResponse().addData(dataset);

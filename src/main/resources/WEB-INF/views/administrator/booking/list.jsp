@@ -9,4 +9,5 @@
 	<acme:list-column code="administrator.booking.list.label.travelClass" path="travelClass" width="20%"/>
 	<acme:list-column code="administrator.booking.list.label.price" path="price" width="20%"/>	
 	<acme:list-column code="customer.booking.list.label.passengers" path="passengers" width="20%"/>
+	<acme:list-column code="administrator.booking.list.label.defaultPrice" path="defaultPrice" width="20%"/>
 </acme:list>
