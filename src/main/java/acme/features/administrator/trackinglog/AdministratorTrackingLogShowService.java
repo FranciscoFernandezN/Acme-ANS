@@ -28,7 +28,7 @@ public class AdministratorTrackingLogShowService extends AbstractGuiService<Admi
 		claimId = super.getRequest().getData("masterId", int.class);
 		trackingLog = this.atlr.findTrackingLogByClaimId(claimId);
 
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Administrator.class) && trackingLog != null);
+		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Administrator.class) && trackingLog != null && trackingLog.getIsPublished());
 	}
 
 	@Override

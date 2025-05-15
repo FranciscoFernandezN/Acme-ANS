@@ -11,8 +11,8 @@
 	<acme:input-money code="customer.customer-dashboard.form.label.minCostOfBookingsLastFiveYears" path="minCostOfBookingsLastFiveYears" readonly="true"/>
 	<acme:input-money code="customer.customer-dashboard.form.label.maxCostOfBookingsLastFiveYears" path="maxCostOfBookingsLastFiveYears" readonly="true"/>
 	<acme:input-textbox code="customer.customer-dashboard.form.label.stdDeviationCostOfBookingsLastFiveYears" path="stdDeviationCostOfBookingsLastFiveYears" readonly="true"/>
-	<acme:input-textbox code="customer.customer-dashboard.form.label.avgNumOfPassengersInBookings" path="avgNumOfPassengersInBookings" readonly="true"/>
-	<acme:input-textbox code="customer.customer-dashboard.form.label.minNumOfPassengersInBookings" path="minNumOfPassengersInBookings" readonly="true"/>
-	<acme:input-textbox code="customer.customer-dashboard.form.label.maxNumOfPassengersInBookings" path="maxNumOfPassengersInBookings" readonly="true"/>
+	<acme:input-integer code="customer.customer-dashboard.form.label.avgNumOfPassengersInBookings" path="avgNumOfPassengersInBookings" readonly="true"/>
+	<acme:input-integer code="customer.customer-dashboard.form.label.minNumOfPassengersInBookings" path="minNumOfPassengersInBookings" readonly="true"/>
+	<acme:input-integer code="customer.customer-dashboard.form.label.maxNumOfPassengersInBookings" path="maxNumOfPassengersInBookings" readonly="true"/>
 	<acme:input-textbox code="customer.customer-dashboard.form.label.stdDeviationNumOfPassengersInBookings" path="stdDeviationNumOfPassengersInBookings" readonly="true"/>
 </acme:form>
