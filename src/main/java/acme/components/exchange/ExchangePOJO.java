@@ -12,12 +12,12 @@ import lombok.Setter;
 @Setter
 public class ExchangePOJO {
 	
-	@JsonProperty("conversion_rates")
-	private Map<String, Double> conversionRates;
+	@JsonProperty("data")
+	private Map<String, Map<String, Double>> data;
 
 	@Override
 	public String toString() {
-		return "ExchangePOJO [conversionRates=" + conversionRates + "]";
+		return "ExchangePOJO [conversionRates=" + data + "]";
 	}
 	
 	

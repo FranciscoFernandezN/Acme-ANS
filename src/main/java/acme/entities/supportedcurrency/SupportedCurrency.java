@@ -3,6 +3,8 @@ package acme.entities.supportedcurrency;
 
 import java.beans.Transient;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -56,16 +58,22 @@ public class SupportedCurrency extends AbstractEntity {
 	public static Money convertToDefault(Money money) {
 		try {
 			String defaultCurrency = SupportedCurrency.getDefaultCurrency();
-			String apiKey = "eaec41a4fab107fa1e81e199";
-			String url = "https://v6.exchangerate-api.com/v6/ " + apiKey + "/latest/" + defaultCurrency;
-			RestTemplate api = new RestTemplate();
-			
-			ResponseEntity<ExchangePOJO> response = api.getForEntity(url, ExchangePOJO.class);
-			Double newAmount = money.getAmount() / response.getBody().getConversionRates().get(money.getCurrency());
-			Money result = new Money();
-			result.setAmount(newAmount);
-			result.setCurrency(defaultCurrency);
-			return result;
+			if(!money.getCurrency().equals(defaultCurrency)) {
+				String apiKey = "fca_live_LoNLzqN8xfOE524QdmeycQrAkUMvlwcsWGd5nEhw";
+				Date now = MomentHelper.getCurrentMoment();
+				String nowFormatted = (now.getYear() + 1900) + "-" + (now.getMonth() + 1) + "-" + now.getDate();
+				String url = "https://api.freecurrencyapi.com/v1/historical?apikey=" + apiKey + "&date=" + nowFormatted + "&base_currency=" + defaultCurrency;
+				RestTemplate api = new RestTemplate();
+				
+				ResponseEntity<ExchangePOJO> response = api.getForEntity(url, ExchangePOJO.class);
+				Double newAmount = money.getAmount() / response.getBody().getData().values().iterator().next().get(money.getCurrency());
+				Money result = new Money();
+				result.setAmount(newAmount);
+				result.setCurrency(defaultCurrency);
+				return result;
+			} else {
+				return money;
+			}
 		} catch (final Throwable oops) {
 			System.out.println(oops);
 			Money result = new Money();
