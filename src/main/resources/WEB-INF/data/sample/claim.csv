@@ -1,4 +1,4 @@
-key,registrationMoment,passengerEmail,description,indicator,claimType,isPublished,key:agent,key:leg
+key,registration-moment,passenger-email,description,indicator,claim-type,is-published,key:agent,key:leg
 claim-01,2022/03/10 10:00,blablabla@gmail.com,La azafata me ha mirao mal,ACCEPTED,OTHER_ISSUES,true,assistance-agent-02,leg-01
 claim-02,2022/03/11 10:00,blebleble@gmail.com,El gracioso que sea ha taponao el baño,IN_PROGRESS,OTHER_ISSUES,false,assistance-agent-02,leg-01
 claim-03,2022/03/12 10:00,blublublu@gmail.com,El piloto se ha puesto a hacer maniobras acrobáticas,IN_PROGRESS,FLIGHT_ISSUES,false,assistance-agent-02,leg-03
