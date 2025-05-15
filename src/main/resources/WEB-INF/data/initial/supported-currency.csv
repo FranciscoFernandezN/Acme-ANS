@@ -1,2 +1,2 @@
-key,currencyName
-supportedCurrency1,EUR
+key,currencyName,isDefaultCurrency
+supportedCurrency-01,EUR,true

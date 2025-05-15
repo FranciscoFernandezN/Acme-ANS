@@ -19,6 +19,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.bookings.Booking;
 import acme.entities.bookings.TravelClass;
+import acme.entities.supportedcurrency.SupportedCurrency;
 import acme.forms.CustomerDashboard;
 import acme.realms.Customer;
 
@@ -78,7 +79,7 @@ public class CustomerDashboardShowService extends AbstractGuiService<Customer, C
 		lastFiveYears.setYear(lastYear.getYear() - 5);
 		dashboard.setMoneySpentLastYear(this.repository.moneySpentLastYear(lastYear, customerId));
 		DoubleSummaryStatistics moneyStats = bookings.stream().filter(e -> e.getPurchaseMoment().after(lastFiveYears)).mapToDouble(e -> e.getPrice().getAmount()).summaryStatistics();
-		String defaultCurrency = PropertyHelper.getRequiredProperty("acme.currency.default", String.class);
+		String defaultCurrency = SupportedCurrency.getDefaultCurrency();
 
 		Money maxMon = new Money();
 		Money minMon = new Money();
