@@ -2,7 +2,6 @@
 package acme.features.customer.booking;
 
 import java.util.Collection;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -19,7 +18,7 @@ public interface CustomerBookingRepository extends AbstractRepository {
 	Booking findBookingById(int id);
 
 	@Query("select b from Booking b where b.locatorCode = :locatorCode")
-	Optional<Booking> findBookingByLocatorCode(String locatorCode);
+	Booking findBookingByLocatorCode(String locatorCode);
 
 	@Query("select b from Booking b where b.customer.id = :customerId")
 	Collection<Booking> findBookingByCustomerId(int customerId);
@@ -30,10 +29,13 @@ public interface CustomerBookingRepository extends AbstractRepository {
 	@Query("select f from Flight f where f.id = :id")
 	Flight findFlightById(int id);
 
-	@Query("select p from Passenger p")
-	Collection<Passenger> findAllPassengers();
+	@Query("select bt.passenger from BelongsTo bt where bt.booking.id = :id")
+	Collection<Passenger> findPassengersByBookingId(int id);
 
-	@Query("select p from Passenger p where p.passportNumber = :passportNumber")
-	Passenger findPassengerByPassportNumber(String passportNumber);
+	@Query("select bt.passenger from BelongsTo bt where (bt.booking.customer.id = :customerId)")
+	Collection<Passenger> findPassengersByCustomerId(int customerId);
+
+	@Query("select p from Passenger p where p.id = :id")
+	Passenger findPassengerById(int id);
 
 }

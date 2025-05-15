@@ -1,5 +1,7 @@
 
-package acme.features.administrator.booking;
+package acme.features.administrator.passenger;
+
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -8,15 +10,15 @@ import acme.client.components.principals.Administrator;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.bookings.Booking;
-import acme.entities.flights.Flight;
+import acme.entities.passengers.Passenger;
 
 @GuiService
-public class AdministratorBookingShowService extends AbstractGuiService<Administrator, Booking> {
+public class AdministratorPassengerListService extends AbstractGuiService<Administrator, Passenger> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AdministratorBookingRepository repository;
+	private AdministratorPassengerRepository repository;
 
 	// AbstractGuiService interface -------------------------------------------
 
@@ -27,7 +29,7 @@ public class AdministratorBookingShowService extends AbstractGuiService<Administ
 		int bookingId;
 		Booking booking;
 
-		bookingId = super.getRequest().getData("id", int.class);
+		bookingId = super.getRequest().getData(AdministratorPassengerController.MASTER_ID, int.class);
 		booking = this.repository.findBookingById(bookingId);
 		status = booking != null && super.getRequest().getPrincipal().hasRealmOfType(Administrator.class) && !booking.getIsDraftMode();
 
@@ -36,23 +38,22 @@ public class AdministratorBookingShowService extends AbstractGuiService<Administ
 
 	@Override
 	public void load() {
-		Booking booking;
-		int bookingId;
+		Collection<Passenger> passengers;
+		Integer bookingId;
 
-		bookingId = super.getRequest().getData("id", int.class);
-		booking = this.repository.findBookingById(bookingId);
+		bookingId = super.getRequest().getData(AdministratorPassengerController.MASTER_ID, int.class);
+		passengers = this.repository.findPassengersByBookingId(bookingId);
 
-		super.getBuffer().addData(booking);
+		super.getBuffer().addData(passengers);
 	}
 
 	@Override
-	public void unbind(final Booking booking) {
+	public void unbind(final Passenger passengers) {
 		Dataset dataset;
-		Flight f;
+		String specialNeeds = passengers.getSpecialNeeds();
 
-		f = booking.getFlight();
-		dataset = super.unbindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "lastNibble");
-		dataset.put("flight", String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), f.getCost()));
+		dataset = super.unbindObject(passengers, "fullName", "email", "passportNumber", "dateOfBirth");
+		dataset.put("specialNeeds", specialNeeds.isBlank() ? "N/A" : specialNeeds);
 
 		super.getResponse().addData(dataset);
 	}
