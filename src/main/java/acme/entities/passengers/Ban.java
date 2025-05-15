@@ -1,12 +1,14 @@
 
-package acme.realms;
+package acme.entities.passengers;
 
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
@@ -44,7 +46,7 @@ public class Ban extends AbstractEntity {
 	private Date				banIssuedDate;
 
 	@Optional
-	@ValidMoment(past = false)
+	@ValidMoment
 	@Temporal(TemporalType.DATE)
 	private Date				liftDate;
 
@@ -57,5 +59,11 @@ public class Ban extends AbstractEntity {
 	}
 
 	// Relationships ----------------------------------------------------------
+
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Passenger passenger;
 
 }

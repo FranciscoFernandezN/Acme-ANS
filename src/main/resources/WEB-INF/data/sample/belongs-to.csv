@@ -7,3 +7,5 @@ belongs-to-05,passenger-01,booking-04
 belongs-to-06,passenger-03,booking-04
 belongs-to-07,passenger-02,booking-02
 belongs-to-08,passenger-05,booking-02
+belongs-to-09,passenger-07,booking-01
+belongs-to-10,passenger-08,booking-06
