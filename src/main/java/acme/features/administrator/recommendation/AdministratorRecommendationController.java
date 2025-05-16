@@ -61,7 +61,7 @@ public class AdministratorRecommendationController extends AbstractGuiController
 
 		List<String> recommendationsNames = this.repository.findAllRecommendationsNames();
 
-		List<List<Recommendation>> recommendations = cities.stream().map(c -> this.findRecommendationOfCity(c)).filter(c -> c != null).toList();
+		List<List<Recommendation>> recommendations = cities.stream().map(this::findRecommendationOfCity).filter(c -> c != null).toList();
 		for (List<Recommendation> lis : recommendations)
 			for (Recommendation rec : lis) {
 				String name = rec.getName();
