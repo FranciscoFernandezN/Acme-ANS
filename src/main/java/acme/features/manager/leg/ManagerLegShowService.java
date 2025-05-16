@@ -72,6 +72,7 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 			flights = this.lr.findAllFlightsEditableByManagerId(manager.getId());
 		else
 			flights = this.lr.findAllFlightsByManagerId(manager.getId());
+
 		arrivalIATACodeChoices = SelectChoices.from(airports, "iATACode", leg.getArrivalAirport());
 		departureIATACodeChoices = SelectChoices.from(airports, "iATACode", leg.getDepartureAirport());
 		registrationNumberChoices = SelectChoices.from(aircrafts, "registrationNumber", leg.getAircraft());
