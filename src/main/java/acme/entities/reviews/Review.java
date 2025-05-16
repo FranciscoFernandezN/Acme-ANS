@@ -4,6 +4,8 @@ package acme.entities.reviews;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -20,6 +22,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@Table(indexes = {
+	@Index(columnList = "postedAt")
+})
 public class Review extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
