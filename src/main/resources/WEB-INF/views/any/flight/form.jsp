@@ -15,9 +15,9 @@
 	<acme:input-textbox code="any.flight.form.label.scheduledDeparture" path="scheduledDeparture" readonly="true"/>
 	<acme:input-textbox code="any.flight.form.label.scheduledArrival" path="scheduledArrival" readonly="true"/>
 	<acme:input-textbox code="any.flight.form.label.numberOfLayovers" path="numberOfLayovers" readonly="true"/>
-	<jstl:when test="${_command == 'show'}">
+	<jstl:if test="${_command == 'show'}">
 		<acme:input-textbox code="any.flight.form.label.defaultCost" path="defaultCost" readonly="true"/>
-	</jstl:when>
+	</jstl:if>
 	
 	<acme:button code="any.flight.form.button.legs" action="/any/leg/list?masterId=${id}"/>
 	

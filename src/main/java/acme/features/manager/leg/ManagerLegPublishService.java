@@ -20,7 +20,7 @@ import acme.entities.legs.LegStatus;
 import acme.realms.Manager;
 
 @GuiService
-public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
+public class ManagerLegPublishService extends AbstractGuiService<Manager, Leg> {
 
 	// Internal state ---------------------------------------------------------
 
@@ -73,7 +73,7 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 	@Override
 	public void bind(final Leg leg) {
 		super.bindObject(leg, "uniqueIdentifier", "scheduledDeparture", "scheduledArrival", "status");
-
+		
 		Airport departureAirport;
 		int departureAirportId;
 
@@ -175,6 +175,7 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void perform(final Leg leg) {
+		leg.setIsDraftMode(false);
 		this.lr.save(leg);
 	}
 

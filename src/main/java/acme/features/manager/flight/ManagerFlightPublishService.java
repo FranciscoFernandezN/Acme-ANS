@@ -2,6 +2,7 @@
 package acme.features.manager.flight;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -9,10 +10,11 @@ import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flights.Flight;
+import acme.entities.legs.Leg;
 import acme.realms.Manager;
 
 @GuiService
-public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flight> {
+public class ManagerFlightPublishService extends AbstractGuiService<Manager, Flight> {
 
 	// Internal state ---------------------------------------------------------
 
@@ -31,9 +33,7 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 		flightId = super.getRequest().getData("id", int.class);
 		flight = this.fr.findFlightById(flightId);
 		status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class) && flight != null  && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == flight.getManager().getId() && flight.getIsDraftMode();
-		
-		
-		
+
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -55,17 +55,19 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void validate(final Flight flight) {
-		super.state(fr.findAllLegsByFlightId(flight.getId()).isEmpty(), "*", "manager.flight.delete.has-legs");
-		super.state(flight.getIsDraftMode(), "isDraftMode", "manager.flight.delete.is-published");
+		List<Leg> legs = this.fr.findAllLegsByFlightId(flight.getId());
+		super.state(!legs.isEmpty() && legs.stream().allMatch(l -> !l.getIsDraftMode()), "*", "manager.flight.create.cant-be-published");
 	}
 
 	@Override
 	public void perform(final Flight flight) {
-		this.fr.delete(flight);
+		flight.setIsDraftMode(false);
+		this.fr.save(flight);
 	}
 
 	@Override
 	public void unbind(final Flight flight) {
+
 		Dataset dataset;
 
 		String origin = flight.getOrigin();
@@ -75,7 +77,7 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 		Date scheduledArrival = flight.getScheduledArrival();
 
 		dataset = super.unbindObject(flight, "id", "tag", "cost", "description", "isDraftMode", "needsSelfTransfer");
-
+		
 		dataset.put("origin", origin == null ? "N/A" : origin);
 		dataset.put("destiny", destiny == null ? "N/A" : destiny);
 		dataset.put("scheduledDeparture", scheduledDeparture == null ? "N/A" : scheduledDeparture);

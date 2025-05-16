@@ -26,10 +26,12 @@ manager.flight.form.label.isDraftMode = Draft mode?
 manager.flight.form.label.defaultCost = Price (in default currency):
 
 manager.flight.form.button.update = Update this flight
+manager.flight.form.button.publish = Publish this flight
 manager.flight.form.button.delete = Delete this flight
 manager.flight.form.button.create = Create this flight
 
 manager.flight.create.cant-be-published = You can't publish this flight because its legs are not published yet
 manager.flight.delete.is-published = You can't delete a published leg
+manager.flight.delete.has-legs = You can't delete this flight because it has legs associated
 
 

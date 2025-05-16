@@ -9,9 +9,10 @@ manager.leg.form.label.departureAirport = Código IATA del Aeropuerto de Salida:
 manager.leg.form.label.arrivalAirport = Código IATA del Aeropuerto de Llegada:
 manager.leg.form.label.aircraft = Número de registro de la aeronave:
 manager.leg.form.label.flight = Id del vuelo asociado:
-manager.leg.form.label.isDraftMode = ¿Está en modo borrador?
 
 manager.leg.form.button.update = Actualizar este tramo
+manager.leg.form.button.status = Cambiar estado
+manager.leg.form.button.publish = Publicar este tramo
 manager.leg.form.button.delete = Borrar este tramo
 manager.leg.form.button.create = Crear este tramo
 

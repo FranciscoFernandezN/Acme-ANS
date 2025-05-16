@@ -32,7 +32,31 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Manager.class));
+		
+		Boolean status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class);
+		
+		if(status) {
+			Manager manager = (Manager) super.getRequest().getPrincipal().getRealmOfType(Manager.class);
+			Integer aircraftId = super.getRequest().getData("aircraft", int.class, 0);
+			Integer arrivalId = super.getRequest().getData("arrivalAirport", int.class, 0);
+			Integer departureId = super.getRequest().getData("departureAirport", int.class, 0);
+			Integer flightId = super.getRequest().getData("flight", int.class, 0);
+			List<Integer> airports = this.lr.findAllAirports().stream().map(a -> a.getId()).toList();
+			List<Integer> aircrafts = this.lr.findAllAircraftsByAirlineId(manager.getAirlineManaging().getId()).stream().map(a -> a.getId()).toList();
+			List<Integer> flights = this.lr.findAllFlightsEditableByManagerId(manager.getId()).stream().map(f -> f.getId()).toList();
+			status = 
+				(aircraftId == 0 || aircrafts.contains(aircraftId)) && 
+				(arrivalId == 0 || airports.contains(arrivalId)) && 
+				(departureId == 0 || airports.contains(departureId)) && 
+				(flightId == 0 || flights.contains(flightId));
+		}
+		
+		
+		super.getResponse().setAuthorised(status);
+		
+		
+		
+		
 	}
 
 	@Override
@@ -50,7 +74,7 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void bind(final Leg leg) {
-		super.bindObject(leg, "uniqueIdentifier", "scheduledDeparture", "scheduledArrival", "status", "isDraftMode");
+		super.bindObject(leg, "uniqueIdentifier", "scheduledDeparture", "scheduledArrival", "status");
 
 		Airport departureAirport;
 		int departureAirportId;
@@ -136,15 +160,18 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 			super.state(flights.stream().map(f -> f.getId()).anyMatch(f -> f == flightId), "flight", "manager.leg.create.not-your-flight");
 		}
 		
+		if(leg.getScheduledArrival() != null && leg.getScheduledDeparture() != null) {
+			Predicate<Leg> legsAreBefore = (final Leg l) -> (leg.getScheduledArrival().before(l.getScheduledDeparture()) && leg.getScheduledDeparture().before(l.getScheduledDeparture()));
+			Predicate<Leg> legsAreAfter = (final Leg l) -> (leg.getScheduledArrival().after(l.getScheduledArrival()) && leg.getScheduledDeparture().after(l.getScheduledArrival()));
+			
+			Predicate<Leg> hasNotConcurrenLegsPredicate = legsAreBefore.or(legsAreAfter);
+
+			super.state(legsOfAircraft.stream().allMatch(hasNotConcurrenLegsPredicate), "aircraft", "manager.leg.create.already-in-use-aircraft");
+
+			super.state(legsOfFlight.stream().allMatch(hasNotConcurrenLegsPredicate), "flight", "manager.leg.create.already-in-use-flight");
+		}
+
 		
-		Predicate<Leg> legsAreBefore = (final Leg l) -> (leg.getScheduledArrival().before(l.getScheduledDeparture()) && leg.getScheduledDeparture().before(l.getScheduledDeparture()));
-		Predicate<Leg> legsAreAfter = (final Leg l) -> (leg.getScheduledArrival().after(l.getScheduledArrival()) && leg.getScheduledDeparture().after(l.getScheduledArrival()));
-
-		Predicate<Leg> hasNotConcurrenLegsPredicate = legsAreBefore.or(legsAreAfter);
-
-		super.state(legsOfAircraft.stream().allMatch(hasNotConcurrenLegsPredicate), "aircraft", "manager.leg.create.already-in-use-aircraft");
-
-		super.state(legsOfFlight.stream().allMatch(hasNotConcurrenLegsPredicate), "flight", "manager.leg.create.already-in-use-flight");
 	}
 
 	@Override
