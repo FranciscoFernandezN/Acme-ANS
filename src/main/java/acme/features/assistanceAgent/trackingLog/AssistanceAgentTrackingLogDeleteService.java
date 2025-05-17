@@ -31,11 +31,14 @@ public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<
 		boolean status;
 		int trackingLogId;
 		TrackingLog trackingLog;
+		AssistanceAgent agent;
+
+		agent = (AssistanceAgent) super.getRequest().getPrincipal().getRealmOfType(AssistanceAgent.class);
 
 		trackingLogId = super.getRequest().getData("id", int.class);
 		trackingLog = this.aatlr.findTrackingLogById(trackingLogId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && super.getRequest().getPrincipal().getRealmOfType(AssistanceAgent.class).getId() == trackingLog.getAgent().getId() && !trackingLog.getIsPublished()
-			&& trackingLog != null && trackingLog.getClaim() != null && super.getRequest().getPrincipal().getRealmOfType(AssistanceAgent.class).getId() == trackingLog.getClaim().getAgent().getId();
+		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && agent.getId() == trackingLog.getAgent().getId() && !trackingLog.getIsPublished() && trackingLog != null && trackingLog.getClaim() != null
+			&& agent.getId() == trackingLog.getClaim().getAgent().getId();
 
 		super.getResponse().setAuthorised(status);
 	}

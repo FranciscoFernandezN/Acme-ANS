@@ -49,11 +49,11 @@ public class AdministratorServiceShowService extends AbstractGuiService<Administ
 
 		SelectChoices airportChoices = new SelectChoices();
 		airports.stream().forEach(a -> airportChoices.add(String.valueOf(a.getId()), String.format("%s - %s", a.getIATACode(), a.getCity()), false));
-		
+
 		dataset = super.unbindObject(service, "name", "picture", "avgDwellTime", "promotionCode", "money");
-		
-		dataset.put("defaultMoney", SupportedCurrency.convertToDefault(service.getMoney()));
-		
+
+		dataset.put("defaultMoney", dataset.get("money") != null ? SupportedCurrency.convertToDefault(service.getMoney()) : "");
+
 		dataset.put("airport", "0");
 		dataset.put("airportChoices", airportChoices);
 
