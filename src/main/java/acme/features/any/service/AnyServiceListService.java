@@ -42,7 +42,7 @@ public class AnyServiceListService extends AbstractGuiService<Any, Service> {
 		Dataset dataset;
 
 		dataset = super.unbindObject(service, "name", "avgDwellTime", "promotionCode", "money");
-		dataset.put("defaultMoney", SupportedCurrency.convertToDefault(service.getMoney()));
+		dataset.put("defaultMoney", dataset.get("money") != null ? SupportedCurrency.convertToDefault(service.getMoney()) : "");
 		super.getResponse().addData(dataset);
 	}
 

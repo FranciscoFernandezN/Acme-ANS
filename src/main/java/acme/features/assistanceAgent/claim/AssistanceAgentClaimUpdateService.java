@@ -31,17 +31,20 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 		boolean status;
 		int claimId;
 		Claim claim;
-		List<Leg> legs;
 		AssistanceAgent agent;
 
 		agent = (AssistanceAgent) super.getRequest().getPrincipal().getRealmOfType(AssistanceAgent.class);
 
-		legs = this.aacr.findAllLegsByAirlineId(agent.getAirline().getId());
-
 		claimId = super.getRequest().getData("id", int.class);
 		claim = this.aacr.findClaimById(claimId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && agent.getId() == claim.getAgent().getId() && !claim.getIsPublished() && !super.getRequest().getData("leg", Leg.class).getIsDraftMode()
-			&& legs.contains(this.aacr.findLegById(super.getRequest().getData("leg", int.class))) && claim != null;
+		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && agent.getId() == claim.getAgent().getId() && !claim.getIsPublished() && claim != null;
+
+		if (status && super.getRequest().hasData("leg")) {
+			int legId = super.getRequest().getData("leg", int.class);
+			Leg leg = this.aacr.findLegById(legId);
+			List<Leg> legs = this.aacr.findAllLegsByAirlineId(agent.getAirline().getId());
+			status = legId == 0 || leg != null && !leg.getIsDraftMode() || legs.contains(leg);
+		}
 
 		super.getResponse().setAuthorised(status);
 	}

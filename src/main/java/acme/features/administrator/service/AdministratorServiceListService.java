@@ -44,7 +44,7 @@ public class AdministratorServiceListService extends AbstractGuiService<Administ
 		Airport airport = services.getAirport();
 
 		dataset = super.unbindObject(services, "name", "picture", "avgDwellTime", "promotionCode", "money");
-		dataset.put("defaultMoney", SupportedCurrency.convertToDefault(services.getMoney()));
+		dataset.put("defaultMoney", dataset.get("money") != null ? SupportedCurrency.convertToDefault(services.getMoney()) : "");
 		dataset.put("iATACode", airport.getIATACode());
 
 		super.getResponse().addData(dataset);
