@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.principals.Administrator;
-import acme.client.helpers.PropertyHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.supportedcurrency.SupportedCurrency;
@@ -48,15 +47,13 @@ public class AdministratorSupportedCurrencyCreateService extends AbstractGuiServ
 		List<SupportedCurrency> supportedCurrencies = this.scr.findAllSupportedCurrencies();
 		List<String> currencyNames = supportedCurrencies.stream().map(sp -> sp.getCurrencyName()).toList();
 
-		if (supportedCurrency.getCurrencyName() != null) {
-			super.state(!currencyNames.contains(supportedCurrency.getCurrencyName()), "currencyName", "administrator.supported-currency.create.already-exists-currency");
-		}
+		super.state(!currencyNames.contains(supportedCurrency.getCurrencyName()), "currencyName", "administrator.supported-currency.create.already-exists-currency");
 
 	}
 
 	@Override
 	public void perform(final SupportedCurrency supportedCurrency) {
-		if(supportedCurrency.getIsDefaultCurrency()) {
+		if (supportedCurrency.getIsDefaultCurrency()) {
 			SupportedCurrency defaultCurrency = this.scr.findDefaultSupportedCurrency();
 			defaultCurrency.setIsDefaultCurrency(false);
 			this.scr.save(defaultCurrency);
