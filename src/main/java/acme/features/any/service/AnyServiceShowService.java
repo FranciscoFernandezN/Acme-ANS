@@ -43,7 +43,7 @@ public class AnyServiceShowService extends AbstractGuiService<Any, Service> {
 
 		dataset = super.unbindObject(service, "name", "picture", "avgDwellTime", "promotionCode", "money");
 		dataset.put("airport", service.getAirport().getIATACode());
-		dataset.put("defaultMoney", SupportedCurrency.convertToDefault(service.getMoney()));
+		dataset.put("defaultMoney", dataset.get("money") != null ? SupportedCurrency.convertToDefault(service.getMoney()) : "");
 		super.getResponse().addData(dataset);
 	}
 
