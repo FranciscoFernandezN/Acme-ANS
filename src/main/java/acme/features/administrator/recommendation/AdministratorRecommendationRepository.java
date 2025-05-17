@@ -19,7 +19,7 @@ public interface AdministratorRecommendationRepository extends AbstractRepositor
 	@Query("SELECT DISTINCT(a.city) FROM Airport a")
 	List<String> findAllCities();
 
-	@Query("SELECT DISTINCT(r.name) FROM Recommendation r")
+	@Query("SELECT r.name FROM Recommendation r")
 	List<String> findAllRecommendationsNames();
 
 	@Query("SELECT r FROM Recommendation r WHERE r.name = :name")
