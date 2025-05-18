@@ -39,6 +39,7 @@ public class FlightCrewMemberFlightAssignmentCreateService extends AbstractGuiSe
 	public void load() {
 		FlightAssignment flightAssignment = new FlightAssignment();
 		flightAssignment.setIsDraftMode(true);
+		flightAssignment.setLastUpDate(MomentHelper.getCurrentMoment()); // <- Valor por defecto
 		super.getBuffer().addData(flightAssignment);
 	}
 
@@ -109,7 +110,7 @@ public class FlightCrewMemberFlightAssignmentCreateService extends AbstractGuiSe
 
 	@Override
 	public void unbind(final FlightAssignment flightAssignment) {
-		SelectChoices dutyChoices, currentStatuses, flightCrewMemberChoices, legChoices;
+		SelectChoices dutyChoices, flightCrewMemberChoices, legChoices;
 		List<Leg> legs;
 		List<FlightCrewMember> flightCrewMembers;
 		Dataset dataset;
@@ -122,13 +123,26 @@ public class FlightCrewMemberFlightAssignmentCreateService extends AbstractGuiSe
 		Boolean isAvailable = this.repository.findFlightCrewMemberById(id).getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
 
 		// Filtrar los Legs válidos (publicados, no cancelados/aterrizados, con salida futura)
-		legs = this.repository.findAllLegs().stream().filter(leg -> !leg.getIsDraftMode() && leg.getStatus() != LegStatus.LANDED && leg.getStatus() != LegStatus.CANCELLED && leg.getScheduledDeparture().after(date)).toList();
+		legs = this.repository.findPublishedLegs().stream().filter(leg -> leg.getStatus() != LegStatus.LANDED && leg.getStatus() != LegStatus.CANCELLED && leg.getScheduledDeparture().after(date)).toList();
 		// Obtener todos los FlightCrewMembers
 		flightCrewMembers = this.repository.findAllFlightCrewMembers();
 
 		// Crear opciones de selección para Duty, Current Status y FlightCrewMember
 		dutyChoices = SelectChoices.from(Duty.class, flightAssignment.getDuty());
-		currentStatuses = SelectChoices.from(CurrentStatus.class, flightAssignment.getCurrentStatus());
+		SelectChoices currentStatuses = new SelectChoices();
+
+		CurrentStatus selected = flightAssignment.getCurrentStatus();
+
+		// Opción por defecto (como hace la clase internamente)
+		currentStatuses.add("0", "----", selected == null);
+
+		// Agregamos solo los valores que queremos mostrar
+		for (CurrentStatus status : List.of(CurrentStatus.PENDING, CurrentStatus.CONFIRMED)) {
+			String key = status.toString();
+			String label = status.toString(); // Puedes usar algo más amigable si quieres
+			boolean isSelected = status.equals(selected);
+			currentStatuses.add(key, label, isSelected);
+		}
 		flightCrewMemberChoices = SelectChoices.from(flightCrewMembers, "employeeCode", flightAssignment.getFlightCrewMember());
 
 		legChoices = SelectChoices.from(legs, "flightNumber", flightAssignment.getLeg());

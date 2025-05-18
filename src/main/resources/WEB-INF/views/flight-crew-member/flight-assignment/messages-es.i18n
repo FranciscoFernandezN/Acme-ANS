@@ -24,7 +24,9 @@ flight-crew-member.flight-assignment.list.button.create = Crear nueva asignació
 
 flight-crew-member.flight-assignment.error.not-available = El miembro de la tripulación no está disponible
 flight-crew-member.flight-assignment.error.already-assigned = El miembro de la tripulación ya ha sido asignado
-flight-crew-member.flight-assignment.error.already-occurred = El vuelo ya ha ocurrido
+flight-crew-member.flight-assignment.error.already-occurred-or-future = El vuelo ya ha ocurrido
 flight-crew-member.flight-assignment.error.pilot-limit-exceeded = Debe haber al menos un piloto
 flight-crew-member.flight-assignment.error.copilot-limit-exceeded = Debe haber al menos un copiloto
 flight-crew-member.flight-assignment.error.leg-null = Un tramo no puede ser nulo  
+flight-crew-member.flight-assignment.error.cannot-publish-pending = El estado actual no puede ser pendiente.
+flight-crew-member.flight-assignment.error.overlapping-legs = Los tramos son simultáneos
