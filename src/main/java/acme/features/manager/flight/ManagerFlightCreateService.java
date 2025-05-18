@@ -70,11 +70,12 @@ public class ManagerFlightCreateService extends AbstractGuiService<Manager, Flig
 		Date scheduledArrival = flight.getScheduledArrival();
 
 		dataset = super.unbindObject(flight, "id", "tag", "cost", "description","isDraftMode", "needsSelfTransfer");
-
-		dataset.put("origin", origin == null ? "N/A" : origin);
-		dataset.put("destiny", destiny == null ? "N/A" : destiny);
-		dataset.put("scheduledDeparture", scheduledDeparture == null ? "N/A" : scheduledDeparture);
-		dataset.put("scheduledArrival", scheduledArrival == null ? "N/A" : scheduledArrival);
+		
+		dataset.put("origin", "N/A");
+		dataset.put("destiny", "N/A");
+		dataset.put("scheduledDeparture", "N/A");
+		dataset.put("scheduledArrival", "N/A");
+		
 		dataset.put("numberOfLayovers", flight.getNumberOfLayovers());
 		super.getResponse().addData(dataset);
 	}

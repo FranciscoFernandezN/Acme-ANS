@@ -1,6 +1,5 @@
 package acme.components.exchange;
 
-import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,16 +9,14 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ExchangePOJO {
+public class AllowedExchangePOJO {
 	
 	@JsonProperty("data")
-	private Map<String, Map<String, Double>> data;
+	private Map<String, Map<String, String>> data;
 
 	@Override
 	public String toString() {
 		return "ExchangePOJO [data=" + data + "]";
 	}
-	
-	
 	
 }

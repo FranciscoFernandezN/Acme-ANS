@@ -1,12 +1,17 @@
 
 package acme.features.administrator.supportedcurrency;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acme.client.components.datatypes.Money;
 import acme.client.components.models.Dataset;
 import acme.client.components.principals.Administrator;
+import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.supportedcurrency.SupportedCurrency;
@@ -48,7 +53,11 @@ public class AdministratorSupportedCurrencyCreateService extends AbstractGuiServ
 		List<String> currencyNames = supportedCurrencies.stream().map(sp -> sp.getCurrencyName()).toList();
 
 		super.state(!currencyNames.contains(supportedCurrency.getCurrencyName()), "currencyName", "administrator.supported-currency.create.already-exists-currency");
-
+		
+		Set<String> allowedCurrencies = SupportedCurrency.getAllowedCurrencies();
+		
+		super.state(allowedCurrencies.contains(supportedCurrency.getCurrencyName()), "currencyName", "administrator.supported-currency.create.not-valid-currency");
+		
 	}
 
 	@Override
@@ -64,7 +73,7 @@ public class AdministratorSupportedCurrencyCreateService extends AbstractGuiServ
 	@Override
 	public void unbind(final SupportedCurrency supportedCurrency) {
 		Dataset dataset;
-
+				
 		dataset = super.unbindObject(supportedCurrency, "currencyName", "isDefaultCurrency");
 		super.getResponse().addData(dataset);
 	}
