@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import acme.client.repositories.AbstractRepository;
-import acme.entities.bookings.BelongsTo;
 import acme.entities.passengers.Ban;
 import acme.entities.passengers.Passenger;
 
@@ -36,11 +35,5 @@ public interface AdministratorBanRepository extends AbstractRepository {
 
 	@Query("select distinct(b.passenger) from Ban b where b.passenger not in (select b.passenger from Ban b where b.liftDate is null or b.liftDate > :today)")
 	Collection<Passenger> findLiftedBanPassengers(Date today);
-
-	@Query("select bt from BelongsTo bt where bt.passenger.id = :id")
-	Collection<BelongsTo> findBelongsToOfPassenger(int id);
-
-	@Query("select bt.passenger from BelongsTo bt where bt.booking.id = :id")
-	Collection<Passenger> findPassengersByBookingId(int id);
 
 }
