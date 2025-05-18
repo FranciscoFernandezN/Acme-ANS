@@ -19,6 +19,14 @@ master.menu.recommendation = Recommendations
 master.menu.administrator.list-recommendation = List recommendations (admin)
 master.menu.customer.list-recommendation = List recommendations
 
+# master.menu.banned-passengers #######################################################
+
+master.menu.banned-passengers = Banned passengers
+master.menu.administrator.list-banned-passengers = List banned passengers
+master.menu.administrator.list-banned-passengers-last-month = List passengers banned last month
+master.menu.administrator.list-lifted-ban-passengers = List passengers with lifted ban
+master.menu.administrator.create-ban = Ban passenger
+
 # master.menu.reviews #######################################################
 
 master.menu.review = Reviews

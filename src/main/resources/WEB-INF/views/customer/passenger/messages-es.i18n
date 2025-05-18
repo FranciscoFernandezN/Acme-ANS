@@ -5,7 +5,7 @@ customer.passenger.list.label.fullName = Nombre del pasajero
 customer.passenger.list.label.email = Email
 customer.passenger.list.label.passportNumber = Número de pasaporte
 customer.passenger.list.label.dateOfBirth = Fecha de nacimiento
-customer.passenger.list.label.specialNeeds = Necesidades espaciales
+customer.passenger.list.label.specialNeeds = Necesidades especiales
 customer.passenger.list.label.isDraftMode = ¿Modo borrador?
 
 customer.passenger.list.button.create = Crear nuevo pasajero
