@@ -19,6 +19,14 @@ master.menu.recommendation = Recomendaciones
 master.menu.administrator.list-recommendation = Ver recomendaciones (admin)
 master.menu.customer.list-recommendation = Ver recomendaciones
 
+# master.menu.banned-passengers #######################################################
+
+master.menu.banned-passengers = Pasajeros vetados
+master.menu.administrator.list-banned-passengers = Ver pasajeros vetados
+master.menu.administrator.list-banned-passengers-last-month = Pasajeros vetados el último mes
+master.menu.administrator.list-lifted-ban-passengers = Pasajeros que ya no están vetados
+master.menu.administrator.create-ban = Vetar pasajero
+
 # master.menu.reviews #######################################################
 
 master.menu.review = Reseñas

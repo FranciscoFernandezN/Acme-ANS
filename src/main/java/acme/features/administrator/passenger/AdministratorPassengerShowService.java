@@ -1,6 +1,8 @@
 
 package acme.features.administrator.passenger;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -50,6 +52,10 @@ public class AdministratorPassengerShowService extends AbstractGuiService<Admini
 
 		dataset = super.unbindObject(passenger, "fullName", "email", "passportNumber", "dateOfBirth");
 		dataset.put("specialNeeds", specialNeeds.isBlank() ? "N/A" : specialNeeds);
+
+		List<String> nationalities = this.repository.findNationality(passenger.getId());
+		if (!nationalities.isEmpty())
+			dataset.put("nationality", nationalities.get(0));
 
 		super.getResponse().addData(dataset);
 	}

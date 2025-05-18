@@ -48,6 +48,15 @@
 			<acme:menu-suboption access="hasRealm('Customer')" code="master.menu.customer.list-recommendation" action="/customer/recommendation/list" />
 			<acme:menu-suboption access="hasRealm('Administrator')" code="master.menu.administrator.populate-recommendation" action="/administrator/recommendation/populate"/>
 		</acme:menu-option>
+
+		<acme:menu-option code="master.menu.banned-passengers" access="hasRealm('Administrator')">
+			<acme:menu-suboption code="master.menu.administrator.list-banned-passengers" action="/administrator/passenger/list-banned-passengers"/>
+			<acme:menu-suboption code="master.menu.administrator.list-banned-passengers-last-month" action="/administrator/passenger/list-banned-passengers-last-month"/>
+			<acme:menu-suboption code="master.menu.administrator.list-lifted-ban-passengers" action="/administrator/passenger/list-lifted-ban-passengers"/>
+			<acme:menu-suboption code="master.menu.administrator.create-ban" action="/administrator/ban/create"/>
+
+
+		</acme:menu-option>
 		
 		<acme:menu-option code="master.menu.airport">
 			<acme:menu-suboption code="master.menu.authenticated.list-airport" action="/any/airport/list" />
