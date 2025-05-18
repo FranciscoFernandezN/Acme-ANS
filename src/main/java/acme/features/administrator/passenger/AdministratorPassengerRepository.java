@@ -31,8 +31,8 @@ public interface AdministratorPassengerRepository extends AbstractRepository {
 	@Query("select distinct(b.passenger) from Ban b where b.liftDate is null or b.liftDate > :today")
 	Collection<Passenger> findBannedPassengers(Date today);
 
-	@Query("select distinct(b.passenger) from Ban b where b.passenger not in (select b.passenger from Ban b where b.liftDate is null or b.liftDate > :today)")
-	Collection<Passenger> findLiftedBanPassengers(Date today);
+	@Query("select distinct(b.passenger) from Ban b")
+	Collection<Passenger> findPassengersEverBanned();
 
 	@Query("select distinct(b.passenger) from Ban b where b.banIssuedDate >= :lastMonth")
 	Collection<Passenger> findPassengersBannedLastMonth(Date lastMonth);

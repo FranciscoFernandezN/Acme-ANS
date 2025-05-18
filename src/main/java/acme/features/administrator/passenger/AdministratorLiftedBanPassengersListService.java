@@ -34,7 +34,8 @@ public class AdministratorLiftedBanPassengersListService extends AbstractGuiServ
 		Collection<Passenger> passengers;
 
 		Date today = MomentHelper.getCurrentMoment();
-		passengers = this.repository.findLiftedBanPassengers(today);
+		passengers = this.repository.findPassengersEverBanned();
+		passengers.removeAll(this.repository.findBannedPassengers(today));
 
 		super.getBuffer().addData(passengers);
 	}

@@ -29,6 +29,7 @@ public class AdministratorBannedPassengersLastMonthListService extends AbstractG
 		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Administrator.class));
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void load() {
 		Collection<Passenger> passengers;
