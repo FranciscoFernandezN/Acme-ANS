@@ -1,10 +1,16 @@
 
 package acme.features.administrator.supportedcurrency;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acme.client.components.datatypes.Money;
 import acme.client.components.models.Dataset;
 import acme.client.components.principals.Administrator;
+import acme.client.components.views.SelectChoices;
 import acme.client.helpers.PropertyHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
@@ -41,9 +47,7 @@ public class AdministratorSupportedCurrencyShowService extends AbstractGuiServic
 	public void unbind(final SupportedCurrency supportedCurrency) {
 		Dataset dataset;
 
-
 		dataset = super.unbindObject(supportedCurrency, "currencyName", "isDefaultCurrency");
-
 		super.getResponse().addData(dataset);
 	}
 

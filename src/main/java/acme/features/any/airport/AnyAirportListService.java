@@ -10,6 +10,7 @@ import acme.client.components.principals.Any;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airports.Airport;
+import acme.entities.supportedcurrency.SupportedCurrency;
 
 @GuiService
 public class AnyAirportListService extends AbstractGuiService<Any, Airport> {

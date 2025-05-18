@@ -2,8 +2,10 @@
 package acme.entities.supportedcurrency;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,6 +21,7 @@ import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidCurrency;
 import acme.client.helpers.MomentHelper;
 import acme.client.helpers.SpringHelper;
+import acme.components.exchange.AllowedExchangePOJO;
 import acme.components.exchange.ExchangePOJO;
 import acme.components.weather.WeatherPOJO;
 import acme.entities.flights.FlightRepository;
@@ -55,6 +58,21 @@ public class SupportedCurrency extends AbstractEntity {
 	public static String getDefaultCurrency() {
 		SupportedCurrencyRepository repository = SpringHelper.getBean(SupportedCurrencyRepository.class);
 		return repository.getDefaultCurrency();
+	}
+	
+	@Transient
+	public static Set<String> getAllowedCurrencies() {
+		try {
+			String apiKey = "fca_live_LoNLzqN8xfOE524QdmeycQrAkUMvlwcsWGd5nEhw";
+			String url = "https://api.freecurrencyapi.com/v1/currencies?apikey=" + apiKey;
+			RestTemplate api = new RestTemplate();
+			ResponseEntity<AllowedExchangePOJO> response = api.getForEntity(url, AllowedExchangePOJO.class);
+			Map<String, Map<String, String>> data = response.getBody().getData();
+			return data.keySet();
+		} catch (final Throwable oops) {
+			System.out.println(oops);
+			return new HashSet<>();
+		}
 	}
 	
 	@Transient

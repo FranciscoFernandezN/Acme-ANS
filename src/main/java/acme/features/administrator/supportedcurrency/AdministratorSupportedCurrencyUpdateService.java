@@ -2,6 +2,7 @@
 package acme.features.administrator.supportedcurrency;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -52,6 +53,10 @@ public class AdministratorSupportedCurrencyUpdateService extends AbstractGuiServ
 		super.state(!(this.scr.findDefaultSupportedCurrency().getId() == supportedCurrency.getId() && !supportedCurrency.getIsDefaultCurrency()), "isDefaultCurrency", "administrator.supported-currency.update.cant-set-no-default");
 
 		super.state(!currencyNames.contains(supportedCurrency.getCurrencyName()), "currencyName", "administrator.supported-currency.create.already-exists-currency");
+		
+		Set<String> allowedCurrencies = SupportedCurrency.getAllowedCurrencies();
+		
+		super.state(allowedCurrencies.contains(supportedCurrency.getCurrencyName()), "currencyName", "administrator.supported-currency.create.not-valid-currency");
 	}
 
 	@Override
