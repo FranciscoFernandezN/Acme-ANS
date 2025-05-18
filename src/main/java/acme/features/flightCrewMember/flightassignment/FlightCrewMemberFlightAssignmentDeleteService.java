@@ -114,44 +114,49 @@ public class FlightCrewMemberFlightAssignmentDeleteService extends AbstractGuiSe
 
 	@Override
 	public void unbind(final FlightAssignment flightAssignment) {
-		SelectChoices dutyChoices, currentStatuses, flightCrewMemberChoices, legChoices, availabilityChoices;
+		SelectChoices dutyChoices, legChoices;
 		List<Leg> legs;
-		List<FlightCrewMember> flightCrewMembers;
 		Dataset dataset;
 		Date date;
+
 		date = MomentHelper.getCurrentMoment();
 
+		// Obtener el ID del FlightCrewMember actual
 		int id = super.getRequest().getPrincipal().getRealmOfType(FlightCrewMember.class).getId();
 		Boolean isAvailable = this.repository.findFlightCrewMemberById(id).getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
 
-		// Obtener los Legs que estén publicados, no sean Landed/Canceled y tengan un scheduledDeparture futuro
+		// Filtrar los Legs válidos (publicados, no cancelados/aterrizados, con salida futura)
 		legs = this.repository.findPublishedLegs().stream().filter(leg -> leg.getStatus() != LegStatus.LANDED && leg.getStatus() != LegStatus.CANCELLED && leg.getScheduledDeparture().after(date)).toList();
 
-		// Obtener todos los FlightCrewMembers disponibles
-		flightCrewMembers = this.repository.findAllFlightCrewMembers();
-		// Crear opciones de selección
+		// Crear opciones de selección para Duty, Current Status y FlightCrewMember
 		dutyChoices = SelectChoices.from(Duty.class, flightAssignment.getDuty());
-		currentStatuses = SelectChoices.from(CurrentStatus.class, flightAssignment.getCurrentStatus());
-		flightCrewMemberChoices = SelectChoices.from(flightCrewMembers, "employeeCode", flightAssignment.getFlightCrewMember());
+		SelectChoices currentStatuses = new SelectChoices();
 
-		// Generar SelectChoices solo con los Legs válidos
-		legChoices = new SelectChoices();
-		for (Leg leg : legs)
-			legChoices.add(String.valueOf(leg.getId()), leg.getFlightNumber(), flightAssignment.getLeg() != null && leg.equals(flightAssignment.getLeg()));
-		legChoices.add("0", "----", flightAssignment.getLeg() == null); // Opción por defecto
+		CurrentStatus selected = flightAssignment.getCurrentStatus();
 
-		// Desvincular los datos
+		// Opción por defecto (como hace la clase internamente)
+		currentStatuses.add("0", "----", selected == null);
+
+		// Agregamos solo los valores que queremos mostrar
+		for (CurrentStatus status : List.of(CurrentStatus.PENDING, CurrentStatus.CONFIRMED)) {
+			String key = status.toString();
+			String label = status.toString(); // Puedes usar algo más amigable si quieres
+			boolean isSelected = status.equals(selected);
+			currentStatuses.add(key, label, isSelected);
+		}
+
+		legChoices = SelectChoices.from(legs, "flightNumber", flightAssignment.getLeg());
+		// Desvincular los datos del FlightAssignment
 		dataset = super.unbindObject(flightAssignment, "duty", "lastUpDate", "currentStatus", "remarks", "isDraftMode");
 
-		// Colocar los valores de las selecciones
+		// Colocar las opciones en el Dataset
 		dataset.put("duties", dutyChoices);
 		dataset.put("currentStatus", currentStatuses);
 		dataset.put("legs", legChoices);
-		dataset.put("leg", legChoices.getSelected().getKey());
-		dataset.put("flightCrewMembers", flightCrewMemberChoices);
-		dataset.put("flightCrewMember", flightCrewMemberChoices.getSelected().getKey());
+		dataset.put("leg", legChoices.getSelected().getKey()); // Validación segura
 		dataset.put("isAvailable", isAvailable);
-
+		dataset.put("flightCrewMember", flightAssignment.getFlightCrewMember().getEmployeeCode());
+		// Enviar los datos a la respuesta
 		super.getResponse().addData(dataset);
 	}
 
