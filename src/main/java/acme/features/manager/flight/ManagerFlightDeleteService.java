@@ -30,9 +30,7 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 
 		flightId = super.getRequest().getData("id", int.class);
 		flight = this.fr.findFlightById(flightId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class) && flight != null  && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == flight.getManager().getId() && flight.getIsDraftMode();
-		
-		
+		status = flight != null  && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == flight.getManager().getId() && flight.getIsDraftMode();
 		
 		super.getResponse().setAuthorised(status);
 	}
@@ -76,10 +74,10 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 
 		dataset = super.unbindObject(flight, "id", "tag", "cost", "description", "isDraftMode", "needsSelfTransfer");
 
-		dataset.put("origin", origin == null ? "N/A" : origin);
-		dataset.put("destiny", destiny == null ? "N/A" : destiny);
-		dataset.put("scheduledDeparture", scheduledDeparture == null ? "N/A" : scheduledDeparture);
-		dataset.put("scheduledArrival", scheduledArrival == null ? "N/A" : scheduledArrival);
+		dataset.put("origin", origin);
+		dataset.put("destiny", destiny);
+		dataset.put("scheduledDeparture", scheduledDeparture);
+		dataset.put("scheduledArrival", scheduledArrival);
 		dataset.put("numberOfLayovers", flight.getNumberOfLayovers());
 		super.getResponse().addData(dataset);
 	}
