@@ -34,9 +34,11 @@ public class AdministratorDashboardShowService extends AbstractGuiService<Admini
 	public void load() {
 		AdministratorDashboard dashboard = new AdministratorDashboard();
 
-		// --- Count Airports by OperationalScope
+		// --- Count Airports by OperationalScope (initialize with all enum values)
 		List<Object[]> airportsCountList = this.repository.countAirportsByOperationalScope();
 		Map<OperationalScope, Integer> airportsCountMap = new HashMap<>();
+		for (OperationalScope scope : OperationalScope.values())
+			airportsCountMap.put(scope, 0);
 		for (Object[] row : airportsCountList) {
 			OperationalScope scope = (OperationalScope) row[0];
 			Long count = (Long) row[1];
@@ -45,9 +47,11 @@ public class AdministratorDashboardShowService extends AbstractGuiService<Admini
 		String airportsCountAsString = airportsCountMap.entrySet().stream().map(entry -> entry.getKey() + ": " + entry.getValue()).collect(Collectors.joining(", "));
 		dashboard.setTotalNumAirportsByOperationalScope(airportsCountAsString);
 
-		// --- Count Airlines by AirlineType
+		// --- Count Airlines by AirlineType (initialize with all enum values)
 		List<Object[]> airlinesCountList = this.repository.countAirlinesByType();
 		Map<AirlineType, Integer> airlinesCountMap = new HashMap<>();
+		for (AirlineType type : AirlineType.values())
+			airlinesCountMap.put(type, 0);
 		for (Object[] row : airlinesCountList) {
 			AirlineType type = (AirlineType) row[0];
 			Long count = (Long) row[1];
