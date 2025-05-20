@@ -60,36 +60,55 @@ public class ManagerDashboardShowService extends AbstractGuiService<Manager, Man
 		dashboard.setYearsToRetire(yearsToRetire <= 0. ? 0. : yearsToRetire);
 		dashboard.setRatioOfOnTimeLegs(this.md.ratioOfOnTimeLegs(manager.getId()));
 		dashboard.setRatioOfDelayedLegs(this.md.ratioOfDelayedLegs(manager.getId()));
-
-		List<Flight> allFlightsOfManager = this.md.findAllFlightsByManagerId(manager.getId());
-		List<Airport> originAirports = allFlightsOfManager.stream().filter(f -> f.getOriginAirport() != null).map(Flight::getOriginAirport).collect(Collectors.toCollection(ArrayList::new));
-		List<Airport> destinyAirports = allFlightsOfManager.stream().filter(f -> f.getDestinyAirport() != null).map(Flight::getDestinyAirport).toList();
-		originAirports.addAll(destinyAirports);
-		Airport mostPopularAirport = originAirports.stream().collect(Collectors.collectingAndThen(Collectors.groupingBy(Function.identity(), Collectors.counting()), m -> m.entrySet().stream().max(Comparator.comparing(e -> e.getValue())).get())).getKey();
-		Airport lessPopularAirport = originAirports.stream().collect(Collectors.collectingAndThen(Collectors.groupingBy(Function.identity(), Collectors.counting()), m -> m.entrySet().stream().min(Comparator.comparing(e -> e.getValue())).get())).getKey();
-
+		
+		dashboard.setRatioOfDelayedLegs(dashboard.getRatioOfDelayedLegs() == null ? 0: dashboard.getRatioOfDelayedLegs());
+		dashboard.setRatioOfOnTimeLegs(dashboard.getRatioOfOnTimeLegs() == null ? 0: dashboard.getRatioOfOnTimeLegs());
+		
 		String defaultCurrency = SupportedCurrency.getDefaultCurrency();
-
-		DoubleSummaryStatistics statistics = allFlightsOfManager.stream().mapToDouble(f -> {
-			return f.getCost().getCurrency().equals(defaultCurrency) ? f.getCost().getAmount() : SupportedCurrency.convertToDefault(f.getCost()).getAmount();
-		}).summaryStatistics();
+		Airport mostPopularAirport;
+		Airport lessPopularAirport;
 		Money average = new Money();
 		Money min = new Money();
 		Money max = new Money();
+		Double standardDeviation = 0.0;
 		average.setCurrency(defaultCurrency);
 		min.setCurrency(defaultCurrency);
 		max.setCurrency(defaultCurrency);
+		
+		List<Flight> allFlightsOfManager = this.md.findAllFlightsByManagerId(manager.getId());
+		
+		if(!allFlightsOfManager.isEmpty()) {
+			List<Airport> originAirports = allFlightsOfManager.stream().filter(f -> f.getOriginAirport() != null).map(Flight::getOriginAirport).collect(Collectors.toCollection(ArrayList::new));
+			List<Airport> destinyAirports = allFlightsOfManager.stream().filter(f -> f.getDestinyAirport() != null).map(Flight::getDestinyAirport).toList();
+			originAirports.addAll(destinyAirports);
+			mostPopularAirport = originAirports.stream().collect(Collectors.collectingAndThen(Collectors.groupingBy(Function.identity(), Collectors.counting()), m -> m.entrySet().stream().max(Comparator.comparing(e -> e.getValue())).get())).getKey();
+			lessPopularAirport = originAirports.stream().collect(Collectors.collectingAndThen(Collectors.groupingBy(Function.identity(), Collectors.counting()), m -> m.entrySet().stream().min(Comparator.comparing(e -> e.getValue())).get())).getKey();
+			
+			DoubleSummaryStatistics statistics = allFlightsOfManager.stream().mapToDouble(f -> {
+				return f.getCost().getCurrency().equals(defaultCurrency) ? f.getCost().getAmount() : SupportedCurrency.convertToDefault(f.getCost()).getAmount();
+			}).summaryStatistics();
+			
 
-		average.setAmount(statistics.getAverage());
-		min.setAmount(statistics.getMin());
-		max.setAmount(statistics.getMax());
+			average.setAmount(statistics.getAverage());
+			min.setAmount(statistics.getMin());
+			max.setAmount(statistics.getMax());
 
-		Double standardDeviation = 0.0;
-		for (Flight f : allFlightsOfManager)
-			standardDeviation += Math.pow(f.getCost().getAmount() - average.getAmount(), 2);
+			
+			for (Flight f : allFlightsOfManager)
+				standardDeviation += Math.pow(f.getCost().getAmount() - average.getAmount(), 2);
 
-		standardDeviation = Math.sqrt(standardDeviation / allFlightsOfManager.size());
-
+			standardDeviation = Math.sqrt(standardDeviation / allFlightsOfManager.size());
+			
+		} else {
+			Airport dummyAirport = new Airport();
+			dummyAirport.setIATACode("N/A");
+			mostPopularAirport = dummyAirport;
+			lessPopularAirport = dummyAirport;
+			average.setAmount(0.);
+			max.setAmount(0.);
+			min.setAmount(0.);
+		}
+		
 		dashboard.setMostPopularAirportOfFlights(mostPopularAirport.getIATACode());
 		dashboard.setLessPopularAirportOfFlights(lessPopularAirport.getIATACode());
 		dashboard.setNumberOfOnTimeLegs(this.md.numberOfOnTimeLegs(manager.getId()));
