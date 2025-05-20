@@ -14,6 +14,7 @@ customer.booking.list.button.create = Create new booking
 customer.booking.form.label.locatorCode = Locator Code
 customer.booking.form.label.purchaseMoment = Purchase Moment
 customer.booking.form.label.flight = Flight
+customer.booking.form.label.price = Price
 customer.booking.form.label.travelClass = Travel Class
 customer.booking.form.label.isDraftMode = Draft mode?
 customer.booking.form.label.passportNumber = Passenger passport

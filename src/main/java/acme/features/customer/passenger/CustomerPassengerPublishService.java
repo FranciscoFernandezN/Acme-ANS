@@ -86,13 +86,14 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 	public void validate(final Passenger passenger) {
 		Boolean passportAlreadyInUse;
 		Passenger oldPassenger;
+		int customerId = super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId();
 
 		oldPassenger = this.repository.findPassengerById(passenger.getId());
 		if (oldPassenger == null) {
-			passportAlreadyInUse = !this.repository.findAllPassportNumbers().contains(passenger.getPassportNumber());
+			passportAlreadyInUse = !this.repository.findAllPassportNumbersOfCustomer(customerId).contains(passenger.getPassportNumber());
 			super.state(passportAlreadyInUse, "passportNumber", "customer.passenger.create.passport-number-must-be-unique");
 		} else {
-			passportAlreadyInUse = !this.repository.findAllPassportNumbers().contains(passenger.getPassportNumber()) || oldPassenger.getPassportNumber().equals(passenger.getPassportNumber());
+			passportAlreadyInUse = !this.repository.findAllPassportNumbersOfCustomer(customerId).contains(passenger.getPassportNumber()) || oldPassenger.getPassportNumber().equals(passenger.getPassportNumber());
 			super.state(passportAlreadyInUse, "passportNumber", "customer.passenger.update.passport-number-must-be-unique");
 		}
 

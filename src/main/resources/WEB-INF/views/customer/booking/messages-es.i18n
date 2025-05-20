@@ -14,6 +14,7 @@ customer.booking.list.button.create = Crear nueva reserva
 customer.booking.form.label.locatorCode = Localizador
 customer.booking.form.label.purchaseMoment = Fecha de compra
 customer.booking.form.label.flight = Vuelo
+customer.booking.form.label.price = Precio
 customer.booking.form.label.travelClass = Clase
 customer.booking.form.label.isDraftMode = ¿Modo borrador?
 customer.booking.form.label.passportNumber = Pasaporte del pasajero
