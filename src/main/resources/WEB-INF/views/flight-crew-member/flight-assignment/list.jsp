@@ -11,6 +11,6 @@
 		
 </acme:list>
 
-<jstl:if test="${_command == 'list-after-current' && isAvailable == true}">
+<jstl:if test="${_command == 'list-after-current'}">
 	<acme:button code="flight-crew-member.flight-assignment.form.button.create" action="/flight-crew-member/flight-assignment/create"/>
 </jstl:if>

@@ -33,10 +33,10 @@ public class FlightCrewMemberFlightAssignmentListBeforeService extends AbstractG
 	@Override
 	public void load() {
 		List<FlightAssignment> flightAssignments;
-		Date date;
-		date = MomentHelper.getCurrentMoment();
+		Date date = MomentHelper.getCurrentMoment();
 
-		flightAssignments = this.repository.findFlightAssignmentBeforeCurrent(date);
+		int crewId = super.getRequest().getPrincipal().getRealmOfType(FlightCrewMember.class).getId();
+		flightAssignments = this.repository.findFlightAssignmentBeforeCurrentByCrewMember(crewId, date);
 
 		super.getBuffer().addData(flightAssignments);
 	}

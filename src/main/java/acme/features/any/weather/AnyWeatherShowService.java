@@ -22,7 +22,12 @@ public class AnyWeatherShowService extends AbstractGuiService<Any, Weather> {
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		Weather weather;
+		int weatherId;
+		weatherId = super.getRequest().getData("id", int.class);
+		weather = this.wr.findWeatherById(weatherId);
+		
+		super.getResponse().setAuthorised(weather != null);
 	}
 
 	@Override

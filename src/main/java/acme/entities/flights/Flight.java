@@ -138,7 +138,7 @@ public class Flight extends AbstractEntity {
 
 	@Transient
 	public Boolean getFlownWithBadWeather() {
-		Boolean result = null;
+		Boolean result = false;
 		List<Leg> legs = this.getSortedLegs();
 		if (!legs.isEmpty()) {
 			result = false;
