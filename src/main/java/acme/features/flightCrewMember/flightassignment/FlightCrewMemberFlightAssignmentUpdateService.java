@@ -168,19 +168,7 @@ public class FlightCrewMemberFlightAssignmentUpdateService extends AbstractGuiSe
 		// Crear opciones de selección para Duty, Current Status y FlightCrewMember
 		dutyChoices = SelectChoices.from(Duty.class, flightAssignment.getDuty());
 		SelectChoices currentStatuses = new SelectChoices();
-
-		CurrentStatus selected = flightAssignment.getCurrentStatus();
-
-		// Opción por defecto (como hace la clase internamente)
-		currentStatuses.add("0", "----", selected == null);
-
-		// Agregamos solo los valores que queremos mostrar
-		for (CurrentStatus status : List.of(CurrentStatus.PENDING, CurrentStatus.CONFIRMED)) {
-			String key = status.toString();
-			String label = status.toString(); // Puedes usar algo más amigable si quieres
-			boolean isSelected = status.equals(selected);
-			currentStatuses.add(key, label, isSelected);
-		}
+		currentStatuses = SelectChoices.from(CurrentStatus.class, flightAssignment.getCurrentStatus());
 
 		legChoices = SelectChoices.from(legs, "flightNumber", flightAssignment.getLeg());
 		// Desvincular los datos del FlightAssignment
@@ -192,7 +180,7 @@ public class FlightCrewMemberFlightAssignmentUpdateService extends AbstractGuiSe
 		dataset.put("legs", legChoices);
 		dataset.put("leg", legChoices.getSelected().getKey()); // Validación segura
 		dataset.put("isAvailable", isAvailable);
-		dataset.put("member", flightAssignment.getFlightCrewMember().getEmployeeCode());
+		dataset.put("flightCrewMember", flightAssignment.getFlightCrewMember().getEmployeeCode());
 		// Enviar los datos a la respuesta
 		super.getResponse().addData(dataset);
 	}
