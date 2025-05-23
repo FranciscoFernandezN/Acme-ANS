@@ -29,43 +29,23 @@ public class FlightCrewMemberFlightAssignmentDeleteService extends AbstractGuiSe
 
 	@Override
 	public void authorise() {
-		boolean isAuthorised = false;
+		int id = super.getRequest().getData("id", int.class);
+		FlightAssignment assignment = this.repository.findFlightAssignmentById(id);
 
-		// Verificar si el principal es de tipo FlightCrewMember
-		if (super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class)) {
-			int id = super.getRequest().getPrincipal().getRealmOfType(FlightCrewMember.class).getId();
-			FlightCrewMember flightCrewMember = this.repository.findFlightCrewMemberById(id);
+		boolean status = assignment != null && assignment.getIsDraftMode() && super.getRequest().getPrincipal().hasRealm(assignment.getFlightCrewMember());
 
-			int flightAssignmentId = super.getRequest().getData("id", int.class);
-			FlightAssignment flightAssignment = this.repository.findFlightAssignmentById(flightAssignmentId);
-			Date date = MomentHelper.getCurrentMoment();
-			if (flightAssignment != null) {
-				// Verificar que el Leg no sea null antes de acceder a su status
-				Leg leg = flightAssignment.getLeg();
-				if (leg != null) {
-					// Verificar que el Leg no haya ocurrido y que su scheduledDeparture sea futura
-					boolean legHasOccurred = leg.getStatus() == LegStatus.LANDED || leg.getStatus() == LegStatus.CANCELLED;
-					boolean legIsInFuture = leg.getScheduledDeparture().after(date);
-
-					if (legHasOccurred || !legIsInFuture)
-						super.state(false, "leg", "flight-crew-member.flight-assignment.error.already-occurred-or-future");
-					else
-						isAuthorised = true; // La autorización es válida si las condiciones anteriores no fallan
-				} else
-					super.state(false, "leg", "flight-crew-member.flight-assignment.error.leg-null");
-			}
-		} else
-			super.state(false, "flightCrewMember", "flight-crew-member.flight-assignment.error.not-available");
-		int id = super.getRequest().getPrincipal().getRealmOfType(FlightCrewMember.class).getId();
-		Boolean isAvailable = this.repository.findFlightCrewMemberById(id).getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
-		super.getResponse().setAuthorised(isAuthorised && isAvailable);
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
-		FlightAssignment flightAssignment = new FlightAssignment();
-		flightAssignment.setIsDraftMode(true);
-		super.getBuffer().addData(flightAssignment);
+		FlightAssignment assignment;
+		int id;
+
+		id = super.getRequest().getData("id", int.class);
+		assignment = this.repository.findFlightAssignmentById(id);
+
+		super.getBuffer().addData(assignment);
 	}
 
 	@Override
@@ -74,42 +54,14 @@ public class FlightCrewMemberFlightAssignmentDeleteService extends AbstractGuiSe
 	}
 
 	@Override
-	public void validate(final FlightAssignment flightAssignment) {
-		// Obtener el FlightAssignment original antes de la edición
-		int flightAssignmentId = super.getRequest().getData("id", int.class);
-		FlightAssignment originalFlightAssignment = this.repository.findFlightAssignmentById(flightAssignmentId);
-
-		// Conservar los valores originales si no se han actualizado
-		if (flightAssignment.getFlightCrewMember() == null && originalFlightAssignment != null)
-			flightAssignment.setFlightCrewMember(originalFlightAssignment.getFlightCrewMember());
-
-		if (flightAssignment.getLeg() == null && originalFlightAssignment != null)
-			flightAssignment.setLeg(originalFlightAssignment.getLeg());
-
-		// Validar Duty si se ha cambiado
-		if (flightAssignment.getDuty() != null && !flightAssignment.getDuty().equals(originalFlightAssignment.getDuty())) {
-			if (flightAssignment.getDuty() == Duty.PILOT) {
-				long pilotCount = this.repository.findAllFlightAssignments().stream().filter(fa -> fa.getLeg().equals(flightAssignment.getLeg()) && fa.getDuty() == Duty.PILOT).count();
-				super.state(pilotCount < 1, "duty", "flight-crew-member.flight-assignment.error.pilot-limit-exceeded");
-			}
-
-			if (flightAssignment.getDuty() == Duty.COPILOT) {
-				long copilotCount = this.repository.findAllFlightAssignments().stream().filter(fa -> fa.getLeg().equals(flightAssignment.getLeg()) && fa.getDuty() == Duty.COPILOT).count();
-				super.state(copilotCount < 1, "duty", "flight-crew-member.flight-assignment.error.copilot-limit-exceeded");
-			}
-		}
+	public void validate(final FlightAssignment assignment) {
+		boolean confirmation = super.getRequest().getData("confirmation", boolean.class);
+		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
 	}
 
 	@Override
 	public void perform(final FlightAssignment flightAssignment) {
-		boolean confirmation = super.getRequest().getData("confirmation", boolean.class);
-
-		if (confirmation)
-			this.repository.delete(flightAssignment);
-		else {
-			flightAssignment.setIsDraftMode(true);
-			this.repository.save(flightAssignment); // Guardamos para asegurar que sigue en borrador
-		}
+		this.repository.delete(flightAssignment);
 	}
 
 	@Override
