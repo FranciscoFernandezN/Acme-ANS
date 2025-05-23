@@ -137,7 +137,7 @@ public class FlightCrewMemberFlightAssignmentCreateService extends AbstractGuiSe
 		currentStatuses.add("0", "----", selected == null);
 
 		// Agregamos solo los valores que queremos mostrar
-		for (CurrentStatus status : List.of(CurrentStatus.PENDING, CurrentStatus.CONFIRMED)) {
+		for (CurrentStatus status : List.of(CurrentStatus.PENDING)) {
 			String key = status.toString();
 			String label = status.toString(); // Puedes usar algo más amigable si quieres
 			boolean isSelected = status.equals(selected);
