@@ -2,7 +2,6 @@
 package acme.features.manager.flight;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,7 +9,6 @@ import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flights.Flight;
-import acme.entities.legs.Leg;
 import acme.realms.Manager;
 
 @GuiService
@@ -55,7 +53,7 @@ public class ManagerFlightUpdateService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void validate(final Flight flight) {
-	
+
 	}
 
 	@Override

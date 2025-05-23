@@ -69,7 +69,8 @@ public class FlightCrewMemberFlightAssignmentListAfterService extends AbstractGu
 
 		//legChoices = SelectChoices.from(legs, "flightNumber", flightAssignment.getLeg());
 		// Desvincular los datos del FlightAssignment
-		dataset = super.unbindObject(flightAssignment, "duty", "lastUpDate", "currentStatus", "remarks", "isDraftMode");
+		dataset = super.unbindObject(flightAssignment, "duty", "lastUpDate", "currentStatus", "remarks");
+		dataset.put("isDraftMode", flightAssignment.getIsDraftMode() ? "✓" : "x");
 
 		// Colocar las opciones en el Dataset
 		//dataset.put("duties", dutyChoices);
@@ -78,7 +79,7 @@ public class FlightCrewMemberFlightAssignmentListAfterService extends AbstractGu
 		//dataset.put("leg", legChoices.getSelected().getKey()); // Validación segura
 		//dataset.put("flightCrewMembers", flightCrewMemberChoices);
 		//dataset.put("flightCrewMember", flightCrewMemberChoices.getSelected().getKey());
-		super.getResponse().addGlobal("isAvailable", isAvailable);
+		super.getResponse().addGlobal("isAvailable", isAvailable ? "✓" : "x");
 
 		// Enviar los datos a la respuesta
 		super.getResponse().addData(dataset);
