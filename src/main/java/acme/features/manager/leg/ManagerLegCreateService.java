@@ -33,23 +33,22 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 	@Override
 	public void authorise() {
 		
-		Boolean status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class);
+		boolean status;
 		
-		if(status) {
-			Manager manager = (Manager) super.getRequest().getPrincipal().getRealmOfType(Manager.class);
-			Integer aircraftId = super.getRequest().getData("aircraft", int.class, 0);
-			Integer arrivalId = super.getRequest().getData("arrivalAirport", int.class, 0);
-			Integer departureId = super.getRequest().getData("departureAirport", int.class, 0);
-			Integer flightId = super.getRequest().getData("flight", int.class, 0);
-			List<Integer> airports = this.lr.findAllAirports().stream().map(a -> a.getId()).toList();
-			List<Integer> aircrafts = this.lr.findAllAircraftsByAirlineId(manager.getAirlineManaging().getId()).stream().map(a -> a.getId()).toList();
-			List<Integer> flights = this.lr.findAllFlightsEditableByManagerId(manager.getId()).stream().map(f -> f.getId()).toList();
-			status = 
-				(aircraftId == 0 || aircrafts.contains(aircraftId)) && 
-				(arrivalId == 0 || airports.contains(arrivalId)) && 
-				(departureId == 0 || airports.contains(departureId)) && 
-				(flightId == 0 || flights.contains(flightId));
-		}
+		Manager manager = (Manager) super.getRequest().getPrincipal().getRealmOfType(Manager.class);
+		Integer aircraftId = super.getRequest().getData("aircraft", int.class, 0);
+		Integer arrivalId = super.getRequest().getData("arrivalAirport", int.class, 0);
+		Integer departureId = super.getRequest().getData("departureAirport", int.class, 0);
+		Integer flightId = super.getRequest().getData("flight", int.class, 0);
+		List<Integer> airports = this.lr.findAllAirports().stream().map(a -> a.getId()).toList();
+		List<Integer> aircrafts = this.lr.findAllAircraftsByAirlineId(manager.getAirlineManaging().getId()).stream().map(a -> a.getId()).toList();
+		List<Integer> flights = this.lr.findAllFlightsEditableByManagerId(manager.getId()).stream().map(f -> f.getId()).toList();
+		status = 
+			(aircraftId == 0 || aircrafts.contains(aircraftId)) && 
+			(arrivalId == 0 || airports.contains(arrivalId)) && 
+			(departureId == 0 || airports.contains(departureId)) && 
+			(flightId == 0 || flights.contains(flightId));
+		
 		
 		
 		super.getResponse().setAuthorised(status);
@@ -119,8 +118,8 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 
 		List<Leg> legs = this.lr.findAllLegs();
 		List<String> legIds = legs.stream().map(Leg::getUniqueIdentifier).toList();
-
-		if (leg.getUniqueIdentifier() != null)
+		
+		if (!leg.getUniqueIdentifier().equals(""))
 			super.state(!legIds.contains(leg.getUniqueIdentifier()), "uniqueIdentifier", "manager.leg.create.not-unique-identifier");
 
 		Date currentMoment = MomentHelper.getCurrentMoment();
@@ -141,16 +140,6 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 		if (arrivalAirportId != 0 && departureAirportId != 0)
 			super.state(arrivalAirportId != departureAirportId, "arrivalAirport", "manager.leg.create.not-different-airport");
 
-		int aircraftId;
-		Aircraft aircraft;
-		aircraftId = super.getRequest().getData("aircraft", int.class);
-		List<Leg> legsOfAircraft = this.lr.findAllLegsOfAircraftByAircraftId(aircraftId);
-		aircraft = this.lr.findAircraftById(aircraftId);
-		
-		if (aircraftId != 0) {
-			super.state(aircraft.getAirline().getId() == manager.getAirlineManaging().getId(), "aircraft", "manager.leg.create.not-your-aircraft");
-		}
-
 		int flightId;
 		flightId = super.getRequest().getData("flight", int.class);
 		List<Leg> legsOfFlight = this.lr.findAllLegsByFlightId(flightId);
@@ -161,6 +150,8 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 		}
 		
 		if(leg.getScheduledArrival() != null && leg.getScheduledDeparture() != null) {
+			int aircraftId = super.getRequest().getData("aircraft", int.class);
+			List<Leg> legsOfAircraft = this.lr.findAllLegsOfAircraftByAircraftId(aircraftId);
 			Predicate<Leg> legsAreBefore = (final Leg l) -> (leg.getScheduledArrival().before(l.getScheduledDeparture()) && leg.getScheduledDeparture().before(l.getScheduledDeparture()));
 			Predicate<Leg> legsAreAfter = (final Leg l) -> (leg.getScheduledArrival().after(l.getScheduledArrival()) && leg.getScheduledDeparture().after(l.getScheduledArrival()));
 			
