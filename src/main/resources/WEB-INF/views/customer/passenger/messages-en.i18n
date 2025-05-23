@@ -24,19 +24,19 @@ customer.passenger.form.button.update = Update this passenger
 customer.passenger.form.button.create = Create this passenger
 customer.passenger.form.button.publish = Publish this passenger
 
-customer.passenger.create.passport-number-must-be-unique = There is a registered passenger in the system with the same passport number
+customer.passenger.create.passport-number-must-be-unique = You have already registered a passenger with the same passport number
 customer.passenger.create.booking-does-not-exist = That booking does not exist
 customer.passenger.create.booking-not-yours = That booking does not belong to you
 customer.passenger.create.booking-is-already-published = You cannot add passengers to an already published booking
 customer.passenger.create.booking-must-be-chosen = Choose a booking
 
-customer.passenger.update.passport-number-must-be-unique = There is a registered passenger in the system with the same passport number
+customer.passenger.update.passport-number-must-be-unique = You have already registered a passenger with the same passport number
 customer.passenger.update.booking-does-not-exist = That booking does not exist
 customer.passenger.update.booking-not-yours = That booking does not belong to you
 customer.passenger.update.booking-is-repeated = The passenger is already in that booking
 customer.passenger.update.booking-is-already-published = You cannot add passengers to an already published booking
 
-customer.passenger.publish.passport-number-must-be-unique = There is a registered passenger in the system with the same passport number
+customer.passenger.publish.passport-number-must-be-unique = You have already registered a passenger with the same passport number
 customer.passenger.publish.booking-does-not-exist = That booking does not exist
 customer.passenger.publish.booking-not-yours = That booking does not belong to you
 customer.passenger.publish.booking-is-repeated = The passenger is already in that booking

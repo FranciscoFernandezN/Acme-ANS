@@ -17,6 +17,7 @@ import acme.entities.bookings.Booking;
 import acme.entities.bookings.TravelClass;
 import acme.entities.flights.Flight;
 import acme.entities.passengers.Passenger;
+import acme.entities.supportedcurrency.SupportedCurrency;
 import acme.realms.Customer;
 
 @GuiService
@@ -38,7 +39,7 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 			int bookingId = super.getRequest().getData("id", int.class);
 			Booking booking = this.repository.findBookingById(bookingId);
 			if (booking != null)
-				status = super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId() == booking.getCustomer().getId();
+				status = super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId() == booking.getCustomer().getId() && booking.getIsDraftMode();
 		}
 
 		if (status && super.getRequest().hasData("flight")) {
@@ -210,11 +211,11 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 		boolean validFlight = flights.stream().anyMatch(f -> f.getId() == flightId);
 
 		if (validFlight || oldBooking == null) {
-			flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), f.getCost()), flightId == f.getId()));
+			flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), SupportedCurrency.convertToDefault(f.getCost())), flightId == f.getId()));
 			if (!validFlight)
 				flightChoices.add("0", "----", true);
 		} else
-			flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), f.getCost()), oldBooking.getFlight().getId() == f.getId()));
+			flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), SupportedCurrency.convertToDefault(f.getCost())), oldBooking.getFlight().getId() == f.getId()));
 
 		Collection<Passenger> passengers = this.repository.findPassengersByCustomerId(customerId);
 		passengers.removeAll(this.repository.findPassengersByBookingId(booking.getId()));

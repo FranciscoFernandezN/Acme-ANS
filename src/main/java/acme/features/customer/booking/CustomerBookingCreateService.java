@@ -17,6 +17,7 @@ import acme.entities.bookings.Booking;
 import acme.entities.bookings.TravelClass;
 import acme.entities.flights.Flight;
 import acme.entities.passengers.Passenger;
+import acme.entities.supportedcurrency.SupportedCurrency;
 import acme.realms.Customer;
 
 @GuiService
@@ -167,7 +168,7 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 
 		SelectChoices flightChoices = new SelectChoices();
 		int flightId = super.getRequest().hasData("flight") ? super.getRequest().getData("flight", int.class) : -1;
-		flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), f.getCost()), flightId == f.getId()));
+		flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), SupportedCurrency.convertToDefault(f.getCost())), flightId == f.getId()));
 		flightChoices.add("0", "----", flightId <= 0);
 
 		Collection<Passenger> passengers = this.repository.findPassengersByCustomerId(customerId);

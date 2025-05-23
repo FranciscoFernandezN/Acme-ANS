@@ -35,7 +35,7 @@ public interface CustomerPassengerRepository extends AbstractRepository {
 	@Query("select bt.passenger from BelongsTo bt where bt.booking.customer.id = :id")
 	Collection<Passenger> findPassengersByCustomerId(int id);
 
-	@Query("select p.passportNumber from Passenger p")
-	Collection<String> findAllPassportNumbers();
+	@Query("select bt.passenger.passportNumber from BelongsTo bt where bt.booking.customer.id = :id")
+	Collection<String> findAllPassportNumbersOfCustomer(int id);
 
 }

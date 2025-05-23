@@ -72,8 +72,9 @@ public class CustomerPassengerCreateService extends AbstractGuiService<Customer,
 	@Override
 	public void validate(final Passenger passenger) {
 		Boolean passportAlreadyInUse;
+		int customerId = super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId();
 
-		passportAlreadyInUse = !this.repository.findAllPassportNumbers().contains(passenger.getPassportNumber());
+		passportAlreadyInUse = !this.repository.findAllPassportNumbersOfCustomer(customerId).contains(passenger.getPassportNumber());
 		super.state(passportAlreadyInUse, "passportNumber", "customer.passenger.create.passport-number-must-be-unique");
 
 		int bookingId;
