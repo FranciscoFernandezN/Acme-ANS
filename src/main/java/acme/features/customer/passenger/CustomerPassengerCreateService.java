@@ -112,11 +112,6 @@ public class CustomerPassengerCreateService extends AbstractGuiService<Customer,
 		SelectChoices bookingChoices = new SelectChoices();
 		Collection<Booking> bookings = this.repository.findBookingByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId());
 
-		if (super.getBuffer().getErrors().hasErrors()) {
-			passenger.setIsDraftMode(true);
-			System.out.print(super.getBuffer().getErrors());
-		}
-
 		dataset = super.unbindObject(passenger, "fullName", "email", "passportNumber", "dateOfBirth", "specialNeeds", "isDraftMode");
 
 		if (super.getRequest().hasData(CustomerPassengerController.MASTER_ID)) {

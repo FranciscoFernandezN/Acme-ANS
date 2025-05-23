@@ -36,7 +36,7 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 
 		bookingId = super.getRequest().getData("id", int.class);
 		booking = this.repository.findBookingById(bookingId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class) && super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId() == booking.getCustomer().getId() && booking.getIsDraftMode();
+		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class) && booking != null && super.getRequest().getPrincipal().hasRealm(booking.getCustomer()) && booking.getIsDraftMode();
 
 		if (status && super.getRequest().hasData("flight")) {
 			int flightId = super.getRequest().getData("flight", int.class);
@@ -135,11 +135,6 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 	public void unbind(final Booking booking) {
 		Dataset dataset;
 		int customerId = super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId();
-
-		if (super.getBuffer().getErrors().hasErrors()) {
-			booking.setIsDraftMode(true);
-			System.out.print(super.getBuffer().getErrors());
-		}
 
 		SelectChoices travelClasses;
 		Collection<Flight> flights = this.repository.findAllFlightsForBooking();

@@ -55,9 +55,6 @@ public class CustomerPassengerShowService extends AbstractGuiService<Customer, P
 		Collection<Booking> bookings = this.repository.findBookingByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId());
 		bookings.removeAll(this.repository.findBookingByPassengerId(passenger.getId()));
 
-		if (super.getBuffer().getErrors().hasErrors())
-			System.out.print(super.getBuffer().getErrors());
-
 		SelectChoices bookingChoices = new SelectChoices();
 
 		dataset = super.unbindObject(passenger, "fullName", "email", "passportNumber", "dateOfBirth", "specialNeeds", "isDraftMode");

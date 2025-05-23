@@ -136,11 +136,6 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 		Dataset dataset;
 		int customerId = super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId();
 
-		if (super.getBuffer().getErrors().hasErrors()) {
-			booking.setIsDraftMode(true);
-			System.out.print(super.getBuffer().getErrors());
-		}
-
 		String locatorCode = "";
 
 		if (super.getRequest().hasData("locatorCode"))

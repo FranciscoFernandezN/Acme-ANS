@@ -139,11 +139,6 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 		Collection<Booking> bookings = this.repository.findBookingByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId());
 		Boolean updatedPassenger = bookings.removeAll(this.repository.findBookingByPassengerId(passenger.getId()));
 
-		if (super.getBuffer().getErrors().hasErrors()) {
-			passenger.setIsDraftMode(true);
-			System.out.print(super.getBuffer().getErrors());
-		}
-
 		dataset = super.unbindObject(passenger, "fullName", "email", "passportNumber", "dateOfBirth", "specialNeeds", "isDraftMode");
 
 		if (super.getRequest().hasData(CustomerPassengerController.MASTER_ID)) {

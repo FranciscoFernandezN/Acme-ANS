@@ -173,11 +173,6 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 		int customerId = super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId();
 		Booking oldBooking = this.repository.findBookingById(super.getRequest().getData("id", int.class));
 
-		if (super.getBuffer().getErrors().hasErrors()) {
-			booking.setIsDraftMode(true);
-			System.out.print(super.getBuffer().getErrors());
-		}
-
 		String locatorCode = "";
 
 		if (oldBooking != null)
