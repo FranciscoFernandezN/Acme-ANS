@@ -1,8 +1,6 @@
 
 package acme.features.manager.leg;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -29,19 +27,8 @@ public class ManagerLegDeleteService extends AbstractGuiService<Manager, Leg> {
 
 		legId = super.getRequest().getData("id", int.class);
 		leg = this.lr.findLegById(legId);
-		
+
 		Boolean status = leg != null && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == leg.getManager().getId() && leg.getIsDraftMode();
-		
-		if(status) {
-			Manager manager = (Manager) super.getRequest().getPrincipal().getRealmOfType(Manager.class);
-			Integer aircraftId = super.getRequest().getData("aircraft", int.class, 0);
-			Integer arrivalId = super.getRequest().getData("arrivalAirport", int.class, 0);
-			Integer departureId = super.getRequest().getData("departureAirport", int.class, 0);
-			Integer flightId = super.getRequest().getData("flight", int.class, 0);
-			List<Integer> airports = this.lr.findAllAirports().stream().map(a -> a.getId()).toList();
-			List<Integer> aircrafts = this.lr.findAllAircraftsByAirlineId(manager.getAirlineManaging().getId()).stream().map(a -> a.getId()).toList();
-			List<Integer> flights = this.lr.findAllFlightsEditableByManagerId(manager.getId()).stream().map(f -> f.getId()).toList();
-		}
 
 		super.getResponse().setAuthorised(status);
 	}
