@@ -14,6 +14,7 @@ import acme.entities.bookings.Booking;
 import acme.entities.bookings.TravelClass;
 import acme.entities.flights.Flight;
 import acme.entities.passengers.Passenger;
+import acme.entities.supportedcurrency.SupportedCurrency;
 import acme.realms.Customer;
 
 @GuiService
@@ -35,7 +36,7 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 
 		bookingId = super.getRequest().getData("id", int.class);
 		booking = this.repository.findBookingById(bookingId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class) && super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId() == booking.getCustomer().getId();
+		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class) && super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId() == booking.getCustomer().getId() && booking.getIsDraftMode();
 
 		if (status && super.getRequest().hasData("flight")) {
 			int flightId = super.getRequest().getData("flight", int.class);
@@ -149,9 +150,9 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 		int flightId = super.getRequest().hasData("flight") ? super.getRequest().getData("flight", int.class) : -1;
 
 		if (flights.stream().anyMatch(f -> f.getId() == flightId))
-			flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), f.getCost()), flightId == f.getId()));
+			flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), SupportedCurrency.convertToDefault(f.getCost())), flightId == f.getId()));
 		else
-			flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), f.getCost()), booking.getFlight().getId() == f.getId()));
+			flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), SupportedCurrency.convertToDefault(f.getCost())), booking.getFlight().getId() == f.getId()));
 
 		Collection<Passenger> passengers = this.repository.findPassengersByCustomerId(customerId);
 		passengers.removeAll(this.repository.findPassengersByBookingId(booking.getId()));
