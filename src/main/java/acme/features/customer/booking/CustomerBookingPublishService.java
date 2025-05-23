@@ -211,11 +211,13 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 		boolean validFlight = flights.stream().anyMatch(f -> f.getId() == flightId);
 
 		if (validFlight || oldBooking == null) {
-			flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), SupportedCurrency.convertToDefault(f.getCost())), flightId == f.getId()));
+			flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()),
+				String.format("%s - %s, %s - %s, %s, %s", f.getOrigin(), f.getDestiny(), f.getScheduledDeparture(), f.getScheduledArrival(), SupportedCurrency.convertToDefault(f.getCost()), f.getTag()), flightId == f.getId()));
 			if (!validFlight)
 				flightChoices.add("0", "----", true);
 		} else
-			flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), SupportedCurrency.convertToDefault(f.getCost())), oldBooking.getFlight().getId() == f.getId()));
+			flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()),
+				String.format("%s - %s, %s - %s, %s, %s", f.getOrigin(), f.getDestiny(), f.getScheduledDeparture(), f.getScheduledArrival(), SupportedCurrency.convertToDefault(f.getCost()), f.getTag()), oldBooking.getFlight().getId() == f.getId()));
 
 		Collection<Passenger> passengers = this.repository.findPassengersByCustomerId(customerId);
 		passengers.removeAll(this.repository.findPassengersByBookingId(booking.getId()));
