@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>712</x>
-      <y>336</y>
+      <y>136</y>
       <w>592</w>
       <h>112</h>
     </coordinates>
@@ -15,17 +15,17 @@ Booking
 --
 + locatorCode: String {Mandatory, ValidString(min = 6, max = 8, pattern = "^[A-Z0-9]{6,8}$"), Column(unique = true)}
 + purchaseMoment: Date {Mandatory, ValidMoment(past = true), Temporal(TemporalType.TIMESTAMP)}
-+ travelClass: TravelClass {Mandatory, Valid, Enumerated(EnumType.STRING), Automapped}
++ travelClass: TravelClass {Mandatory, Enumerated(EnumType.STRING), Automapped}
 + price: Money {Mandatory, ValidMoney(min = 0, max = 1000000), ValidSupportedCurrency, Automapped}
 + lastNibble: String {Optional, ValidString(min = 4, max = 4, pattern = "\\d{4}"), Automapped}
-+ isDraftMode: Boolean {Mandatory, Valid, Automapped}</panel_attributes>
++ isDraftMode: Boolean {Mandatory, Automapped}</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>528</x>
-      <y>496</y>
+      <x>976</x>
+      <y>24</y>
       <w>88</w>
       <h>64</h>
     </coordinates>
@@ -41,27 +41,27 @@ bg=GRAY</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1928</x>
-      <y>328</y>
-      <w>608</w>
+      <y>128</y>
+      <w>560</w>
       <h>120</h>
     </coordinates>
     <panel_attributes>bg=green
 &lt;&lt;Entity&gt;&gt;
 Passenger
 --
-+ fulName: String {Mandatory, ValidString, Automapped}
++ fullName: String {Mandatory, ValidString, Automapped}
 + email: String {Mandatory, ValidEmail, Automapped}
-+ passportNumber: String {Mandatory, ValidString(min = 6, max = 9, pattern = "^[A-Z0-9]{6,9}$"), Column(unique = true)}
++ passportNumber: String {Mandatory, ValidString(min = 6, max = 9, pattern = "^[A-Z0-9]{6,9}$"), Automapped}
 + dateOfBirth: Date {Mandatory, ValidMoment(past = true), Temporal(TemporalType.DATE)}
 + specialNeeds: String {Optional, ValidString(max = 50), Automapped}
-+ isDraftMode: Boolean {Mandatory, Valid, Automapped}</panel_attributes>
++ isDraftMode: Boolean {Mandatory, Automapped}</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>712</x>
-      <y>608</y>
+      <y>408</y>
       <w>576</w>
       <h>112</h>
     </coordinates>
@@ -81,7 +81,7 @@ Customer
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>320</y>
+      <y>120</y>
       <w>448</w>
       <h>224</h>
     </coordinates>
@@ -92,7 +92,7 @@ Flight
 + needsSelfTransfer: Boolean {Mandatory, Automapped}
 + cost: Money {Mandatory, ValidMoney(min = 0), ValidSupportedCurrency, Automapped}
 + description: String {Optional, ValidString, Automapped}
-+ isDraftMode: Boolean {Mandatory, Valid, Automapped}
++ isDraftMode: Boolean {Mandatory, Automapped}
 --
 /+ getScheduledDeparture(): Date {Mandatory, Valid, Transient}
 /+ getScheduledArrival(): Date {Mandatory, Valid, Transient}
@@ -110,7 +110,7 @@ bg=GREEN</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>440</x>
-      <y>376</y>
+      <y>176</y>
       <w>288</w>
       <h>40</h>
     </coordinates>
@@ -124,7 +124,7 @@ m2=*
     <id>Relation</id>
     <coordinates>
       <x>1648</x>
-      <y>376</y>
+      <y>176</y>
       <w>296</w>
       <h>40</h>
     </coordinates>
@@ -138,7 +138,7 @@ m2=*
     <id>Relation</id>
     <coordinates>
       <x>1016</x>
-      <y>440</y>
+      <y>240</y>
       <w>88</w>
       <h>184</h>
     </coordinates>
@@ -152,7 +152,7 @@ is done by v</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1584</x>
-      <y>376</y>
+      <y>176</y>
       <w>72</w>
       <h>32</h>
     </coordinates>
@@ -165,7 +165,7 @@ Belongs To</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1296</x>
-      <y>376</y>
+      <y>176</y>
       <w>304</w>
       <h>40</h>
     </coordinates>
