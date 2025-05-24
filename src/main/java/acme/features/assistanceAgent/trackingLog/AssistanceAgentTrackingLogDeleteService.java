@@ -64,7 +64,6 @@ public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<
 
 	@Override
 	public void validate(final TrackingLog trackingLog) {
-		super.state(!trackingLog.getIsPublished(), "isPublished", "assistance-agent.tracking-log.delete.is-published");
 	}
 
 	@Override
