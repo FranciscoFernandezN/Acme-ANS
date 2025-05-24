@@ -26,6 +26,8 @@ public class FlightCrewMemberFlightAssignmentDeleteService extends AbstractGuiSe
 	@Autowired
 	private FlightCrewMemberFlightAssignmentRepository repository;
 
+	// AbstractGuiService interface -------------------------------------------
+
 
 	@Override
 	public void authorise() {
