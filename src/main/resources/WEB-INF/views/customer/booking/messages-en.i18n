@@ -27,6 +27,7 @@ customer.booking.form.button.recommendations = See recommendations of destinatio
 customer.booking.form.button.publish = Publish this booking
 customer.booking.form.button.passengers = See passengers
 
+customer.booking.create.locator-not-unique = This locator already exists
 customer.booking.create.flight-does-not-exist = That flight does not exist
 customer.booking.create.flight-must-be-chosen = Choose a flight
 customer.booking.create.flight-must-be-published = You must choose a published flight
@@ -34,6 +35,7 @@ customer.booking.create.passenger-does-not-exist = That passenger does not exist
 customer.booking.create.passenger-not-yours = That passenger does not belong to you
 customer.booking.create.travel-class-does-not-exist = Choose a travel class
 
+customer.booking.update.locator-not-unique = This locator already exists
 customer.booking.update.flight-does-not-exist = That flight does not exist
 customer.booking.update.flight-must-be-chosen = Choose a flight
 customer.booking.update.flight-must-be-published = You must choose a published flight
@@ -43,6 +45,7 @@ customer.booking.update.passenger-does-not-exist = That passenger does not exist
 customer.booking.update.passenger-not-yours = That passenger does not belong to you
 customer.booking.update.repeated-passenger = That passenger is already in the booking
 
+customer.booking.publish.locator-not-unique = This locator already exists
 customer.booking.publish.flight-does-not-exist = That flight does not exist
 customer.booking.publish.flight-must-be-chosen = Choose a flight
 customer.booking.publish.flight-must-be-published = You must choose a published flight

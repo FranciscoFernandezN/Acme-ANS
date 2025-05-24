@@ -93,12 +93,7 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 		int flightId;
 		flightId = super.getRequest().getData("flight", int.class);
 		Flight flight = this.repository.findFlightById(flightId);
-		if (flight != null)
-			super.state(!flight.getIsDraftMode(), "flight", "customer.booking.create.flight-must-be-published");
-		else {
-			super.state(flightId > 0, "flight", "customer.booking.create.flight-must-be-chosen");
-			super.state(flightId <= 0, "flight", "customer.booking.create.flight-does-not-exist");
-		}
+		super.state(flight != null, "flight", "customer.booking.create.flight-must-be-chosen");
 
 		super.state(this.repository.findBookingByLocatorCode(super.getRequest().getData("locatorCode", String.class)) == null, "locatorCode", "customer.booking.create.locator-not-unique");
 
@@ -109,8 +104,7 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 		if (passenger != null) {
 			boolean yours = this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId()).contains(passenger);
 			super.state(yours, "passenger", "customer.booking.create.passenger-not-yours");
-		} else
-			super.state(passengerId <= 0, "passenger", "customer.booking.create.passenger-does-not-exist");
+		}
 
 		super.state(booking.getTravelClass() != null, "travelClass", "customer.booking.create.travel-class-does-not-exist");
 
@@ -122,7 +116,7 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 		booking.setPrice(booking.getFlight().getCost());
 		this.repository.save(booking);
 
-		if (super.getRequest().hasData("passenger") && this.repository.findPassengerById(super.getRequest().getData("passenger", int.class)) != null) {
+		if (this.repository.findPassengerById(super.getRequest().getData("passenger", int.class)) != null) {
 			BelongsTo belongsTo = new BelongsTo();
 
 			belongsTo.setBooking(booking);
