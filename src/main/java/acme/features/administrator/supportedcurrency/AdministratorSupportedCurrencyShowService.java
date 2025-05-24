@@ -1,17 +1,10 @@
 
 package acme.features.administrator.supportedcurrency;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acme.client.components.datatypes.Money;
 import acme.client.components.models.Dataset;
 import acme.client.components.principals.Administrator;
-import acme.client.components.views.SelectChoices;
-import acme.client.helpers.PropertyHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.supportedcurrency.SupportedCurrency;

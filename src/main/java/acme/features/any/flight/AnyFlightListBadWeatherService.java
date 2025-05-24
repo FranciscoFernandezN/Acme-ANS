@@ -59,7 +59,9 @@ public class AnyFlightListBadWeatherService extends AbstractGuiService<Any, Flig
 		Date scheduledDeparture = flight.getScheduledDeparture();
 		Date scheduledArrival = flight.getScheduledArrival();
 
-		dataset = super.unbindObject(flight, "tag", "cost", "needsSelfTransfer");
+		dataset = super.unbindObject(flight, "tag", "cost");
+
+		dataset.put("needsSelfTransfer", flight.getNeedsSelfTransfer() ? "✓" : "x");
 		
 		dataset.put("defaultCost", SupportedCurrency.convertToDefault(flight.getCost()));
 
