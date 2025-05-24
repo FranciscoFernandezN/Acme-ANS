@@ -176,7 +176,7 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 		String locatorCode = "";
 
 		if (oldBooking != null)
-			locatorCode = oldBooking.getLocatorCode();
+			locatorCode = booking.getLocatorCode();
 		else if (super.getRequest().hasData("locatorCode"))
 			locatorCode = super.getRequest().getData("locatorCode", String.class);
 		else {
