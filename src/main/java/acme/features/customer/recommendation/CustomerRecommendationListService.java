@@ -56,7 +56,9 @@ public class CustomerRecommendationListService extends AbstractGuiService<Custom
 	public void unbind(final Recommendation recommendation) {
 		Dataset dataset;
 
-		dataset = super.unbindObject(recommendation, "city", "name", "rating", "openNow", "photoReference");
+		dataset = super.unbindObject(recommendation, "city", "name", "rating", "photoReference");
+
+		dataset.put("openNow", recommendation.getOpenNow() ? "✓" : "x");
 
 		super.getResponse().addData(dataset);
 	}

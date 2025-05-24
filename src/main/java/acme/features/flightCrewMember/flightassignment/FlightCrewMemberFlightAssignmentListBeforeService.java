@@ -48,7 +48,7 @@ public class FlightCrewMemberFlightAssignmentListBeforeService extends AbstractG
 		Boolean isAvailable = this.repository.findFlightCrewMemberById(id).getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
 
 		dataset = super.unbindObject(flightAssignment, "duty", "lastUpDate", "currentStatus", "remarks");
-		dataset.put("isAvailable", isAvailable);
+		dataset.put("isAvailable", isAvailable ? "✓" : "x");
 
 		super.getResponse().addData(dataset);
 	}

@@ -42,7 +42,10 @@ public class AssistanceAgentClaimInProgressListService extends AbstractGuiServic
 	public void unbind(final Claim claim) {
 		Dataset dataset;
 
-		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "claimType", "indicator", "isPublished", "leg");
+		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "claimType", "indicator", "leg");
+
+		dataset.put("isPublished", claim.getIsPublished() ? "✓" : "x");
+
 		dataset.put("leg", claim.getLeg().getUniqueIdentifier());
 		super.getResponse().addData(dataset);
 	}
