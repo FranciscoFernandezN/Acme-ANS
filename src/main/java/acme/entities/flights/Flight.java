@@ -71,7 +71,6 @@ public class Flight extends AbstractEntity {
 	// Derived attributes -----------------------------------------------------
 
 
-	//TODO: no me gusta esto de aquí
 	private List<Leg> getSortedLegs() {
 		FlightRepository repository = SpringHelper.getBean(FlightRepository.class);
 		List<Leg> legs = repository.findAllLegsByFlightId(this.getId());
