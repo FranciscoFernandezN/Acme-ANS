@@ -53,7 +53,7 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 			Passenger passenger = this.repository.findPassengerById(passengerId);
 			Collection<Passenger> passengersOfCustomer = this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId());
 			boolean yours = passengersOfCustomer.contains(passenger);
-			boolean passengersAreAlready = super.getRequest().hasData("id") && this.repository.findPassengersByBookingId(super.getRequest().getData("id", int.class)).remove(passenger);
+			boolean passengersAreAlready = this.repository.findPassengersByBookingId(super.getRequest().getData("id", int.class)).remove(passenger);
 			status = passengerId == 0 || yours && !passengersAreAlready;
 		}
 
@@ -68,7 +68,7 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 
 		customer = (Customer) super.getRequest().getPrincipal().getRealmOfType(Customer.class);
 
-		bookingId = super.getRequest().getData("id", int.class);
+		bookingId = super.getRequest().hasData("id") ? super.getRequest().getData("id", int.class) : -1;
 		booking = this.repository.findBookingById(bookingId);
 
 		if (booking == null) {
@@ -84,7 +84,7 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 	public void bind(final Booking booking) {
 		int flightId;
 		Flight flight;
-		int bookingId = super.getRequest().getData("id", int.class);
+		int bookingId = booking.getId();
 
 		super.bindObject(booking, "locatorCode", "travelClass", "lastNibble");
 
@@ -125,8 +125,6 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 			Collection<Passenger> passengersOfCustomer = this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId());
 			boolean yours = passengersOfCustomer.contains(passenger);
 			super.state(yours, "passenger", "customer.booking.publish.passenger-not-yours");
-			boolean passengersAreAlready = this.repository.findPassengersByBookingId(bookingId).remove(passenger);
-			super.state(!passengersAreAlready, "passenger", "customer.booking.publish.repeated-passenger");
 		}
 
 		lastNibble = super.getRequest().getData("lastNibble", String.class);
@@ -165,7 +163,7 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 	public void unbind(final Booking booking) {
 		Dataset dataset;
 		int customerId = super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId();
-		Booking oldBooking = this.repository.findBookingById(super.getRequest().getData("id", int.class));
+		Booking oldBooking = this.repository.findBookingById(booking.getId());
 
 		String locatorCode = "";
 
@@ -199,14 +197,10 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 		int flightId = super.getRequest().hasData("flight") ? super.getRequest().getData("flight", int.class) : -1;
 		boolean validFlight = flights.stream().anyMatch(f -> f.getId() == flightId);
 
-		if (validFlight || oldBooking == null) {
-			flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()),
-				String.format("%s - %s, %s - %s, %s, %s", f.getOrigin(), f.getDestiny(), f.getScheduledDeparture(), f.getScheduledArrival(), SupportedCurrency.convertToDefault(f.getCost()), f.getTag()), flightId == f.getId()));
-			if (!validFlight)
-				flightChoices.add("0", "----", true);
-		} else
-			flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()),
-				String.format("%s - %s, %s - %s, %s, %s", f.getOrigin(), f.getDestiny(), f.getScheduledDeparture(), f.getScheduledArrival(), SupportedCurrency.convertToDefault(f.getCost()), f.getTag()), oldBooking.getFlight().getId() == f.getId()));
+		flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()),
+			String.format("%s - %s, %s - %s, %s, %s", f.getOrigin(), f.getDestiny(), f.getScheduledDeparture(), f.getScheduledArrival(), SupportedCurrency.convertToDefault(f.getCost()), f.getTag()), flightId == f.getId()));
+		if (!validFlight)
+			flightChoices.add("0", "----", true);
 
 		Collection<Passenger> passengers = this.repository.findPassengersByCustomerId(customerId);
 		passengers.removeAll(this.repository.findPassengersByBookingId(booking.getId()));

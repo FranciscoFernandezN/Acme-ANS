@@ -36,16 +36,17 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 
 		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
 
-		if (status) {
+		if (status && super.getRequest().hasData("id")) {
 			bookingId = super.getRequest().getData("id", int.class);
 			booking = this.repository.findBookingById(bookingId);
 			status = booking != null && super.getRequest().getPrincipal().hasRealm(booking.getCustomer()) && booking.getIsDraftMode();
-		}
+		} else
+			status = false;
 
 		if (status && super.getRequest().hasData("flight")) {
 			int flightId = super.getRequest().getData("flight", int.class);
 			Flight flight = this.repository.findFlightById(flightId);
-			status = flightId == 0 || flight != null && !flight.getIsDraftMode();
+			status = flight != null && !flight.getIsDraftMode();
 		}
 
 		if (status && super.getRequest().hasData("passenger")) {
@@ -53,7 +54,7 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 			Passenger passenger = this.repository.findPassengerById(passengerId);
 			Collection<Passenger> passengersOfCustomer = this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId());
 			boolean yours = passengersOfCustomer.contains(passenger);
-			boolean passengersAreAlready = super.getRequest().hasData("id") && this.repository.findPassengersByBookingId(super.getRequest().getData("id", int.class)).remove(passenger);
+			boolean passengersAreAlready = this.repository.findPassengersByBookingId(super.getRequest().getData("id", int.class)).remove(passenger);
 			status = passengerId == 0 || yours && !passengersAreAlready;
 		}
 
@@ -86,11 +87,7 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void validate(final Booking booking) {
-		Integer flightId;
 		int bookingId = booking.getId();
-
-		flightId = super.getRequest().getData("flight", int.class);
-		Flight flight = this.repository.findFlightById(flightId);
 
 		Booking bookingOfLocatorCode = this.repository.findBookingByLocatorCode(super.getRequest().getData("locatorCode", String.class));
 		super.state(bookingOfLocatorCode == null || bookingOfLocatorCode.getId() == bookingId, "locatorCode", "customer.booking.update.locator-not-unique");
@@ -103,10 +100,7 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 			Collection<Passenger> passengersOfCustomer = this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId());
 			boolean yours = passengersOfCustomer.contains(passenger);
 			super.state(yours, "passenger", "customer.booking.update.passenger-not-yours");
-			boolean passengersAreAlready = this.repository.findPassengersByBookingId(bookingId).remove(passenger);
-			super.state(!passengersAreAlready, "passenger", "customer.booking.update.repeated-passenger");
-		} else
-			super.state(passengerId <= 0, "passenger", "customer.booking.publish.passenger-does-not-exist");
+		}
 
 		super.state(booking.getTravelClass() != null, "travelClass", "customer.booking.update.travel-class-does-not-exist");
 
