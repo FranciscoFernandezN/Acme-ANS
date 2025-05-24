@@ -1,6 +1,7 @@
 
 package acme.features.manager.leg;
 
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ public class ManagerLegListService extends AbstractGuiService<Manager, Leg> {
 
 		managerId = super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId();
 		legs = this.lr.findAllLegsByManagerId(managerId);
+		legs.sort(Comparator.comparing(Leg::getScheduledDeparture));
 
 		super.getBuffer().addData(legs);
 	}
