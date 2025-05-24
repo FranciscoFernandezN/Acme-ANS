@@ -323,8 +323,23 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "054760a3-72cb-475a-8314-a4b35ea89721",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,765347148021300,765347149352400,765347149559100
 "f307c740-8391-4b3b-a60b-e8c3865d6315",GET,/images/banner.png,,,200,image/png,,,765347158073000,765347159475300,765347159660900
 "fcda1609-849a-4714-ac09-3a46a127faed",GET,/images/logo.png,,,200,image/png,,,765347161997900,765347163262800,765347163447000
+"f5bb6b6b-5361-4f94-86ae-e0c8c7ce97c3",GET,/customer/booking/show,,,500,text/html;charset=utf-8,service=160,"Access is not authorised",869894571027900,869894625842700,869895152397900
+"9c3e805f-0dcc-4dd1-8de4-393f474b197b",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,869895183640800,869895186751100,869895187627200
+"ccc9b1be-3aee-4cc2-a2ef-c01e6e92c765",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,869895192780300,869895195452500,869895196214200
+"708b71f2-65ab-48e9-9c5c-1b70ebcd7065",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,869895203175000,869895206391200,869895207300400
+"2bfe09eb-3754-4ca2-b068-b4498729d969",GET,"/libraries/jquery/3.3.1/js/jquery.min.js",,,200,application/javascript,,,869895212151400,869895215147300,869895216305100
+"528716cc-6fce-45e8-9611-c8232fdf6686",GET,"/libraries/popper.js/1.14.4/js/popper.min.js",,,200,application/javascript,,,869895223767400,869895227165400,869895228610200
+"bf677720-3281-48c5-a3de-90ec89f6d621",GET,"/libraries/bootstrap/4.1.3/js/bootstrap.min.js",,,200,application/javascript,,,869895235874100,869895239155700,869895240116700
+"7421c395-3e00-469f-b359-44ff54a3e471",GET,"/libraries/chart.js/2.7.2/js/chart.bundle.min.js",,,200,application/javascript,,,869895244911000,869895248001400,869895249007800
+"520bb349-f946-46e2-b24d-d1f5d6655493",GET,"/libraries/areyousure/1.9.0/js/areyousure.min.js",,,200,application/javascript,,,869895255769900,869895258869800,869895259992200
+"9ec91050-12d4-4c6d-b322-4f54d9f21978",GET,"/libraries/datatables/1.10.18/js/jquery.datatables.min.js",,,200,application/javascript,,,869895264934200,869895268673800,869895269798500
+"1628c5d3-0210-44cb-8d8c-8dc4b57d72f3",GET,"/libraries/datatables/1.10.18/js/datatables.min.js",,,200,application/javascript,,,869895275256100,869895278232600,869895279286800
+"a06c3635-64c1-481d-a716-17fd7c1831cb",GET,"/libraries/acme/css/acme.css",,,200,text/css,,,869895286383300,869895289377100,869895290243600
+"01876463-ad9a-46d5-b862-0beda6f6b653",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,869895295626500,869895298230200,869895299162700
+"ef9a9c7f-7e85-4f0c-926e-00be2575a9b7",GET,/images/banner.png,,,200,image/png,,,869895308895800,869895311393600,869895312173500
+"967c8895-181d-4d6b-817b-52c219130aad",GET,/images/logo.png,,,200,image/png,,,869895317078100,869895320070700,869895321053900
 "49638ec5-a7f0-42a2-8f6d-b42d416b982e",GET,"/authenticated/system/sign-out",,,302,,,,765368854285700,765368862721300,765368863101000
-"572ca62c-3713-4203-88ae-d494db12eaac",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=160,,765368867973800,765368872764600,765369273313600
+"572ca62c-3713-4203-88ae-d494db12eaac",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=158,,765368867973800,765368872764600,765369273313600
 "61099f47-ac61-4cd2-ac9c-574efa463f1b",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,765369298424700,765369300098000,765369300336800
 "0286e2e2-bd29-4339-99cf-16adbda8f8e3",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,765369302714800,765369304398700,765369304882300
 "d244c3fa-7ac0-4d49-ae87-9da44fbdcb4b",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,765369308564400,765369310016000,765369310239300
@@ -339,7 +354,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "cebf53b2-3944-4588-97ef-9fdca43720d0",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,765369352997900,765369354448200,765369354780200
 "8753e59a-34da-482f-af0f-e335f24540e7",GET,/images/banner.png,,,200,image/png,,,765369363791200,765369365142000,765369365354300
 "4e03ffd6-8a8d-4f6f-a285-85058e4b1dcf",GET,/images/logo.png,,,200,image/png,,,765369368003200,765369369328000,765369369539700
-"52ed48de-d1ac-4a26-93be-dd73c72f911d",GET,"/anonymous/system/sign-in",,,200,text/html;charset=utf-8,"password=&remember=false&service=158&username=",,765370964678200,765370968439600,765371365665200
+"52ed48de-d1ac-4a26-93be-dd73c72f911d",GET,"/anonymous/system/sign-in",,,200,text/html;charset=utf-8,"password=&remember=false&service=160&username=",,765370964678200,765370968439600,765371365665200
 "1abbb8bb-3599-4178-ad22-e57d46124458",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,765371385678100,765371387182900,765371387548000
 "2f35a879-7d37-45ee-8b8d-72360cb91244",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,765371390567300,765371392197700,765371392504500
 "f389d4bf-62f8-45d3-b9fd-f692d385f1f7",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,765371395334400,765371396719300,765371396918700
