@@ -25,7 +25,7 @@ public class ManagerLegDeleteService extends AbstractGuiService<Manager, Leg> {
 		int legId;
 		Leg leg;
 
-		legId = super.getRequest().getData("id", int.class);
+		legId = super.getRequest().getData("id", int.class, 0);
 		leg = this.lr.findLegById(legId);
 
 		Boolean status = leg != null && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == leg.getManager().getId() && leg.getIsDraftMode();
@@ -38,7 +38,7 @@ public class ManagerLegDeleteService extends AbstractGuiService<Manager, Leg> {
 		Leg leg;
 		int legId;
 
-		legId = super.getRequest().getData("id", int.class);
+		legId = super.getRequest().getData("id", int.class, 0);
 		leg = this.lr.findLegById(legId);
 
 		super.getBuffer().addData(leg);
