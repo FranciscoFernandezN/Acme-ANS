@@ -34,9 +34,13 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 		int bookingId;
 		Booking booking;
 
-		bookingId = super.getRequest().getData("id", int.class);
-		booking = this.repository.findBookingById(bookingId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class) && booking != null && super.getRequest().getPrincipal().hasRealm(booking.getCustomer()) && booking.getIsDraftMode();
+		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
+
+		if (status) {
+			bookingId = super.getRequest().getData("id", int.class);
+			booking = this.repository.findBookingById(bookingId);
+			status = booking != null && super.getRequest().getPrincipal().hasRealm(booking.getCustomer()) && booking.getIsDraftMode();
+		}
 
 		if (status && super.getRequest().hasData("flight")) {
 			int flightId = super.getRequest().getData("flight", int.class);
@@ -87,12 +91,6 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 
 		flightId = super.getRequest().getData("flight", int.class);
 		Flight flight = this.repository.findFlightById(flightId);
-		if (flight != null)
-			super.state(!flight.getIsDraftMode(), "flight", "customer.booking.update.flight-must-be-published");
-		else {
-			super.state(flightId > 0, "flight", "customer.booking.update.flight-must-be-chosen");
-			super.state(flightId <= 0, "flight", "customer.booking.update.flight-does-not-exist");
-		}
 
 		Booking bookingOfLocatorCode = this.repository.findBookingByLocatorCode(super.getRequest().getData("locatorCode", String.class));
 		super.state(bookingOfLocatorCode == null || bookingOfLocatorCode.getId() == bookingId, "locatorCode", "customer.booking.update.locator-not-unique");
@@ -112,8 +110,6 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 
 		super.state(booking.getTravelClass() != null, "travelClass", "customer.booking.update.travel-class-does-not-exist");
 
-		super.state(flight != null, "flight", "customer.booking.update.flight-does-not-exist");
-
 	}
 
 	@Override
@@ -122,7 +118,7 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 		booking.setPrice(booking.getFlight().getCost());
 		this.repository.save(booking);
 
-		if (super.getRequest().hasData("passenger") && this.repository.findPassengerById(super.getRequest().getData("passenger", int.class)) != null) {
+		if (this.repository.findPassengerById(super.getRequest().getData("passenger", int.class)) != null) {
 			BelongsTo belongsTo = new BelongsTo();
 
 			belongsTo.setBooking(booking);

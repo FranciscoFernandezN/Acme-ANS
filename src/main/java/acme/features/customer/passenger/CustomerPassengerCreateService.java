@@ -86,10 +86,8 @@ public class CustomerPassengerCreateService extends AbstractGuiService<Customer,
 		if (booking != null) {
 			boolean yours = super.getRequest().getPrincipal().hasRealm(booking.getCustomer());
 			super.state(yours, "booking", "customer.passenger.create.booking-not-yours");
-			if (yours)
-				super.state(booking.getIsDraftMode(), "booking", "customer.passenger.create.booking-is-already-published");
-		} else
-			super.state(bookingId <= 0, "booking", "customer.passenger.create.booking-does-not-exist");
+			super.state(booking.getIsDraftMode(), "booking", "customer.passenger.create.booking-is-already-published");
+		}
 	}
 
 	@Override

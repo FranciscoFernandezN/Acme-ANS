@@ -39,8 +39,10 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 		passengerId = super.getRequest().getData("id", int.class);
 		passenger = this.repository.findPassengerById(passengerId);
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class)
-			&& (passenger == null || this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId()).contains(passenger) && passenger.getIsDraftMode());
+		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
+
+		if (status)
+			status = passenger == null || this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId()).contains(passenger) && passenger.getIsDraftMode();
 
 		hasMasterId = super.getRequest().hasData(CustomerPassengerController.MASTER_ID);
 		hasBooking = super.getRequest().hasData("booking");
@@ -108,14 +110,9 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 		if (booking != null) {
 			boolean yours = super.getRequest().getPrincipal().hasRealm(booking.getCustomer());
 			super.state(yours, "booking", "customer.passenger.publish.booking-not-yours");
-			if (yours) {
-				super.state(booking.getIsDraftMode(), "booking", "customer.passenger.publish.booking-is-already-published");
-				if (oldPassenger != null)
-					super.state(!this.repository.findBookingByPassengerId(passenger.getId()).contains(booking), "booking", "customer.passenger.publish.booking-is-repeated");
-			}
-		} else
-			super.state(bookingId <= 0, "booking", "customer.passenger.publish.booking-does-not-exist");
+			super.state(booking.getIsDraftMode(), "booking", "customer.passenger.publish.booking-is-already-published");
 
+		}
 	}
 
 	@Override
@@ -123,7 +120,7 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 		passenger.setIsDraftMode(false);
 		this.repository.save(passenger);
 
-		if (super.getRequest().hasData("booking") && this.repository.findBookingById(super.getRequest().getData("booking", int.class)) != null) {
+		if (this.repository.findBookingById(super.getRequest().getData("booking", int.class)) != null) {
 			BelongsTo belongsTo = new BelongsTo();
 
 			belongsTo.setBooking(this.repository.findBookingById(super.getRequest().getData("booking", int.class)));

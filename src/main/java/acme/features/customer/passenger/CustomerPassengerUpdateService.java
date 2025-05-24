@@ -34,10 +34,14 @@ public class CustomerPassengerUpdateService extends AbstractGuiService<Customer,
 		int bookingId;
 		Booking booking;
 
+		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
+
 		passengerId = super.getRequest().getData("id", int.class);
 		passenger = this.repository.findPassengerById(passengerId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class) && this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId()).contains(passenger) && passenger.getIsDraftMode();
 		hasBooking = super.getRequest().hasData("booking");
+
+		if (status)
+			status = this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId()).contains(passenger) && passenger.getIsDraftMode();
 
 		if (status && hasBooking) {
 			bookingId = super.getRequest().getData("booking", int.class);
@@ -82,12 +86,9 @@ public class CustomerPassengerUpdateService extends AbstractGuiService<Customer,
 		if (booking != null) {
 			boolean yours = super.getRequest().getPrincipal().hasRealm(booking.getCustomer());
 			super.state(yours, "booking", "customer.passenger.update.booking-not-yours");
-			if (yours) {
+			if (yours)
 				super.state(booking.getIsDraftMode(), "booking", "customer.passenger.update.booking-is-already-published");
-				super.state(!this.repository.findBookingByPassengerId(passenger.getId()).contains(booking), "booking", "customer.passenger.update.booking-is-repeated");
-			}
-		} else
-			super.state(bookingId <= 0, "booking", "customer.passenger.update.booking-does-not-exist");
+		}
 
 	}
 
@@ -96,7 +97,7 @@ public class CustomerPassengerUpdateService extends AbstractGuiService<Customer,
 		passenger.setIsDraftMode(true);
 		this.repository.save(passenger);
 
-		if (super.getRequest().hasData("booking") && this.repository.findBookingById(super.getRequest().getData("booking", int.class)) != null) {
+		if (this.repository.findBookingById(super.getRequest().getData("booking", int.class)) != null) {
 			BelongsTo belongsTo = new BelongsTo();
 
 			belongsTo.setBooking(this.repository.findBookingById(super.getRequest().getData("booking", int.class)));
@@ -117,7 +118,7 @@ public class CustomerPassengerUpdateService extends AbstractGuiService<Customer,
 
 		dataset = super.unbindObject(passenger, "fullName", "email", "passportNumber", "dateOfBirth", "specialNeeds", "isDraftMode");
 
-		bookingId = super.getRequest().hasData("booking") ? super.getRequest().getData("booking", int.class) : -1;
+		bookingId = super.getRequest().getData("booking", int.class);
 		bookings.stream().forEach(b -> bookingChoices.add(String.valueOf(b.getId()), String.format("%s - %s", b.getLocatorCode(), b.getFlight().getTag()), bookingId == b.getId()));
 		bookingChoices.add("0", "----", bookingId <= 0);
 		dataset.put("booking", bookingId);
