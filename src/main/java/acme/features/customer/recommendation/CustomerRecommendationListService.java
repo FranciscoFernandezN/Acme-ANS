@@ -43,11 +43,8 @@ public class CustomerRecommendationListService extends AbstractGuiService<Custom
 
 		if (super.getRequest().hasData("city"))
 			recommendation = this.repository.findRecommendationsByCity(super.getRequest().getData("city", String.class));
-		else {
-			Integer customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
-			List<String> cities = this.repository.findBookingsByCustomerId(customerId).stream().map(b -> b.getFlight().getDestinyAirport().getCity()).distinct().toList();
-			recommendation = this.repository.findRecommendationsByCities(cities);
-		}
+		else
+			recommendation = this.repository.findAllRecommendation();
 
 		super.getBuffer().addData(recommendation);
 	}

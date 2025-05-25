@@ -24,7 +24,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(indexes = {
-	@Index(columnList = "city")
+	@Index(columnList = "city"),
+	@Index(columnList = "forecastDate")
 })
 public class Weather extends AbstractEntity {
 

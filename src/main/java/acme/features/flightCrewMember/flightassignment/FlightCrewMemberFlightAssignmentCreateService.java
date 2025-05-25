@@ -54,7 +54,7 @@ public class FlightCrewMemberFlightAssignmentCreateService extends AbstractGuiSe
 		Integer legId = super.getRequest().getData("leg", int.class);
 		Leg leg = this.repository.findLegById(legId);
 
-		super.bindObject(flightAssignment, "duty", "lastUpDate", "currentStatus", "remarks");
+		super.bindObject(flightAssignment, "duty", "currentStatus", "remarks");
 		flightAssignment.setFlightCrewMember(flightCrewMember);
 		flightAssignment.setLeg(leg);
 	}
@@ -72,8 +72,8 @@ public class FlightCrewMemberFlightAssignmentCreateService extends AbstractGuiSe
 			List<Leg> assignedLegs = this.repository.findLegsByFlightCrewMemberId(flightAssignment.getFlightCrewMember().getId());
 
 			// Verificar si hay solapamiento de horarios con otro Leg asignado
-			boolean hasOverlappingLeg = assignedLegs.stream().anyMatch(leg -> flightAssignment.getLeg() != null && !leg.equals(flightAssignment.getLeg()) && leg.getScheduledDeparture().before(flightAssignment.getLeg().getScheduledArrival())
-				&& leg.getScheduledArrival().after(flightAssignment.getLeg().getScheduledDeparture()));
+			boolean hasOverlappingLeg = assignedLegs.stream()
+				.anyMatch(leg -> flightAssignment.getLeg() != null && leg.getScheduledDeparture().before(flightAssignment.getLeg().getScheduledArrival()) && leg.getScheduledArrival().after(flightAssignment.getLeg().getScheduledDeparture()));
 
 			super.state(!hasOverlappingLeg, "flightCrewMember", "flight-crew-member.flight-assignment.error.overlapping-legs");
 		}
@@ -108,6 +108,7 @@ public class FlightCrewMemberFlightAssignmentCreateService extends AbstractGuiSe
 
 	@Override
 	public void perform(final FlightAssignment flightAssignment) {
+		flightAssignment.setLastUpDate(MomentHelper.getCurrentMoment());
 		this.repository.save(flightAssignment);
 	}
 
@@ -137,7 +138,7 @@ public class FlightCrewMemberFlightAssignmentCreateService extends AbstractGuiSe
 		currentStatuses.add("0", "----", selected == null);
 
 		// Agregamos solo los valores que queremos mostrar
-		for (CurrentStatus status : List.of(CurrentStatus.PENDING, CurrentStatus.CONFIRMED)) {
+		for (CurrentStatus status : List.of(CurrentStatus.PENDING)) {
 			String key = status.toString();
 			String label = status.toString(); // Puedes usar algo más amigable si quieres
 			boolean isSelected = status.equals(selected);

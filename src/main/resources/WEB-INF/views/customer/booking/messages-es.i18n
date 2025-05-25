@@ -14,6 +14,7 @@ customer.booking.list.button.create = Crear nueva reserva
 customer.booking.form.label.locatorCode = Localizador
 customer.booking.form.label.purchaseMoment = Fecha de compra
 customer.booking.form.label.flight = Vuelo
+customer.booking.form.label.price = Precio
 customer.booking.form.label.travelClass = Clase
 customer.booking.form.label.isDraftMode = ¿Modo borrador?
 customer.booking.form.label.passportNumber = Pasaporte del pasajero
@@ -26,6 +27,7 @@ customer.booking.form.button.recommendations = Ver recomendaciones del destino
 customer.booking.form.button.publish = Publicar reserva
 customer.booking.form.button.passengers = Ver pasajeros
 
+customer.booking.create.locator-not-unique = El localizador ya existe
 customer.booking.create.flight-does-not-exist = Ese vuelo no existe
 customer.booking.create.flight-must-be-chosen = Escoge un vuelo
 customer.booking.create.flight-must-be-published = Escoge un vuelo publicado
@@ -33,6 +35,7 @@ customer.booking.create.passenger-does-not-exist = Ese pasajero no existe
 customer.booking.create.passenger-not-yours = El pasajero no te pertenece
 customer.booking.create.travel-class-does-not-exist = Escoge una clase
 
+customer.booking.update.locator-not-unique = El localizador ya existe
 customer.booking.update.flight-does-not-exist = Ese vuelo no existe
 customer.booking.update.flight-must-be-chosen = Escoge un vuelo
 customer.booking.update.flight-must-be-published = Escoge un vuelo publicado
@@ -42,6 +45,7 @@ customer.booking.update.travel-class-does-not-exist = Escoge una clase
 customer.booking.update.cant-be-published = No se puede publicar sin los último dígitos de la tarjeta
 customer.booking.update.repeated-passenger = El pasajero ya está en la reserva
 
+customer.booking.publish.locator-not-unique = El localizador ya existe
 customer.booking.publish.flight-does-not-exist = Ese vuelo no existe
 customer.booking.publish.flight-must-be-chosen = Escoge un vuelo
 customer.booking.publish.flight-must-be-published = Escoge un vuelo publicado

@@ -1,7 +1,10 @@
 
 package acme.entities.supportedcurrency;
 
+import static org.mockito.ArgumentMatchers.doubleThat;
+
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -59,53 +62,71 @@ public class SupportedCurrency extends AbstractEntity {
 
 	@Transient
 	public static Set<String> getAllowedCurrencies() {
-		try {
-			String apiKey = "fca_live_LoNLzqN8xfOE524QdmeycQrAkUMvlwcsWGd5nEhw";
-			String url = "https://api.freecurrencyapi.com/v1/currencies?apikey=" + apiKey;
-			RestTemplate api = new RestTemplate();
-			ResponseEntity<AllowedExchangePOJO> response = api.getForEntity(url, AllowedExchangePOJO.class);
-			Map<String, Map<String, String>> data = response.getBody().getData();
-			return data.keySet();
-		} catch (final Throwable oops) {
-			System.out.println(oops);
-			return new HashSet<>();
-		}
+		Set<String> res = new HashSet<>();
+
+		if (SpringHelper.isRunningOn("production")) {
+			try {
+				String apiKey = "fca_live_LoNLzqN8xfOE524QdmeycQrAkUMvlwcsWGd5nEhw";
+				String url = "https://api.freecurrencyapi.com/v1/currencies?apikey=" + apiKey;
+				RestTemplate api = new RestTemplate();
+				ResponseEntity<AllowedExchangePOJO> response = api.getForEntity(url, AllowedExchangePOJO.class);
+				Map<String, Map<String, String>> data = response.getBody().getData();
+				res = data.keySet();
+			} catch (final Throwable oops) {
+				System.out.println(oops);
+			}
+		} else
+			res = Set.of("EUR", "USD", "JPY", "BGN", "CZK", "DKK", "GBP", "HUF", "PLN", "RON", "SEK", "CHF", "ISK", "RUB", "TRY", "AUD", "PHP", "ZAR");
+
+		return res;
 	}
 
 	@Transient
 	public static Money convertToDefault(final Money money) {
-		try {
-			String defaultCurrency = SupportedCurrency.getDefaultCurrency();
-			if (!money.getCurrency().equals(defaultCurrency)) {
-				String apiKey = "fca_live_LoNLzqN8xfOE524QdmeycQrAkUMvlwcsWGd5nEhw";
-				Date now = MomentHelper.getCurrentMoment();
-				@SuppressWarnings("deprecation")
-				String nowFormatted = now.getYear() + 1900 + "-" + String.format("%02d", now.getMonth() + 1) + "-" + String.format("%02d", now.getDate());
-				String url = "https://api.freecurrencyapi.com/v1/historical?apikey=" + apiKey + "&date=" + nowFormatted + "&base_currency=" + defaultCurrency;
-				Map<String, Map<String, Double>> data;
-				if (SupportedCurrency.lastData != null && SupportedCurrency.lastData.get(nowFormatted) != null)
-					data = SupportedCurrency.lastData;
-				else {
-					RestTemplate api = new RestTemplate();
-					ResponseEntity<ExchangePOJO> response = api.getForEntity(url, ExchangePOJO.class);
-					data = response.getBody().getData();
-					SupportedCurrency.lastData = data;
+		Money result = new Money();
+		String defaultCurrency = SupportedCurrency.getDefaultCurrency();
+		result.setCurrency(defaultCurrency);
+		if (!money.getCurrency().equals(defaultCurrency)) {
+			if (SpringHelper.isRunningOn("production")) {
+				try {
+				
+					String apiKey = "fca_live_LoNLzqN8xfOE524QdmeycQrAkUMvlwcsWGd5nEhw";
+					Date now = MomentHelper.getCurrentMoment();
+					@SuppressWarnings("deprecation")
+					String nowFormatted = now.getYear() + 1900 + "-" + String.format("%02d", now.getMonth() + 1) + "-" + String.format("%02d", now.getDate());
+					String url = "https://api.freecurrencyapi.com/v1/historical?apikey=" + apiKey + "&date=" + nowFormatted + "&base_currency=" + defaultCurrency;
+					Map<String, Map<String, Double>> data;
+					if (SupportedCurrency.lastData != null && SupportedCurrency.lastData.get(nowFormatted) != null)
+						data = SupportedCurrency.lastData;
+					else {
+						RestTemplate api = new RestTemplate();
+						ResponseEntity<ExchangePOJO> response = api.getForEntity(url, ExchangePOJO.class);
+						data = response.getBody().getData();
+						SupportedCurrency.lastData = data;
+					}
+	
+					Double newAmount = money.getAmount() / data.values().iterator().next().get(money.getCurrency());
+					result.setAmount(newAmount);
+				} catch (final Throwable oops) {
+					System.out.println(oops);
+					result.setAmount(0.);
 				}
-
-				Double newAmount = money.getAmount() / data.values().iterator().next().get(money.getCurrency());
-				Money result = new Money();
-				result.setAmount(newAmount);
-				result.setCurrency(defaultCurrency);
-				return result;
-			} else
-				return money;
-		} catch (final Throwable oops) {
-			System.out.println(oops);
-			Money result = new Money();
-			result.setAmount(0.);
-			result.setCurrency("EUR");
-			return result;
-		}
+			} else {
+				Map<String, Double> mockedValues = new HashMap<>();
+				if(money.getCurrency().equals("EUR")) {
+					mockedValues.put("GBP", 0.8270029409);
+					mockedValues.put("USD", 1.0352287186);
+					Double newAmount = money.getAmount() / mockedValues.get(money.getCurrency());
+					result.setAmount(newAmount);
+				} else {
+					result.setAmount(0.);
+				}
+				
+			}
+		} else
+			result = money;
+		
+		return result;
 	}
 
 	// Relationships ----------------------------------------------------------

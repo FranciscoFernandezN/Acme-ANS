@@ -31,7 +31,6 @@ public class SupportedCurrencyValidator extends AbstractValidator<ValidSupported
 
 	@Override
 	public boolean isValid(final Money money, final ConstraintValidatorContext context) {
-		assert context != null;
 
 		boolean result;
 
