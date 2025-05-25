@@ -6,5 +6,5 @@ flight-assignment-04,CABIN_ATTENDANT,2024/12/31 11:59,CONFIRMED,Flight 404 – �
 flight-assignment-05,CABIN_ATTENDANT,2021/02/28 09:00,CONFIRMED,⚠️ Reassigned due to fatigue limit; requires rest.,false,flight-crew-member-01,leg-04
 flight-assignment-06,CABIN_ATTENDANT,2023/11/11 11:11,CANCELLED,"✈️ Crew sick leave, 🩺 doctor's note required.",false,flight-crew-member-02,leg-05
 flight-assignment-07,CABIN_ATTENDANT,2001/01/01 01:01,CONFIRMED,Testing all edge chars: {}[]<>/%$#@!&*(),true,flight-crew-member-05,leg-06
-flight-assignment-08,CABIN_ATTENDANT,2024/06/06 06:06,CANCELLED,"Multi-lang: 中文, العربية, русский, español.",false,flight-crew-member-03,leg-07
+flight-assignment-08,CABIN_ATTENDANT,2024/06/06 06:06,CANCELLED,"Multi-lang: 中文, العربية, русский, español.",false,flight-crew-member-04,leg-07
 flight-assignment-09,PILOT,2022/02/02 02:22,PENDING,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vehicula ex eu ultricies cursus. Donec accumsan tristique.",false,flight-crew-member-03,leg-09
