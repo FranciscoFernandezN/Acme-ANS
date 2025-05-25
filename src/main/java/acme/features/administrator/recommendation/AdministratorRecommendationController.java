@@ -17,9 +17,13 @@ import acme.client.controllers.AbstractGuiController;
 import acme.client.controllers.GuiController;
 import acme.client.helpers.Assert;
 import acme.client.helpers.PrincipalHelper;
+import acme.client.helpers.RandomHelper;
+import acme.client.helpers.SpringHelper;
 import acme.components.recommendation.RecommendationPOJO;
 import acme.components.recommendation.ResultsPOJO;
+import acme.entities.recommendations.BusinessStatus;
 import acme.entities.recommendations.Recommendation;
+import acme.entities.weather.Weather;
 
 @GuiController
 public class AdministratorRecommendationController extends AbstractGuiController<Administrator, Recommendation> {
@@ -58,10 +62,17 @@ public class AdministratorRecommendationController extends AbstractGuiController
 	protected ModelAndView doPopulate() {
 
 		List<String> cities = this.repository.findAllCities();
+		
+		List<List<Recommendation>> recommendations;
 
 		List<String> recommendationsNames = this.repository.findAllRecommendationsNames();
 
-		List<List<Recommendation>> recommendations = cities.stream().map(this::findRecommendationOfCity).filter(c -> c != null).toList();
+		if (SpringHelper.isRunningOn("production"))
+			recommendations = cities.stream().map(this::findRecommendationOfCity).filter(c -> c != null).toList();
+		else
+			recommendations = cities.stream().map(this::findRecommendationOfCityMocked).filter(c -> c != null).toList();
+		
+		
 		for (List<Recommendation> lis : recommendations)
 			for (Recommendation rec : lis) {
 				String name = rec.getName();
@@ -94,6 +105,21 @@ public class AdministratorRecommendationController extends AbstractGuiController
 			return null;
 		}
 
+	}
+
+	protected List<Recommendation> findRecommendationOfCityMocked(final String city) {
+		Recommendation rec = new Recommendation();
+		rec.setCity(city);
+		rec.setBusinessStatus(BusinessStatus.values()[RandomHelper.nextInt(0, 2)]);
+		rec.setFormattedAddress("Sample address");
+		rec.setName("Recommendation in " + city);
+		rec.setOpenNow(RandomHelper.nextInt(0, 1) == 0);
+		rec.setPhotoReference("https://st2.depositphotos.com/3047529/9390/i/450/depositphotos_93900498-stock-photo-mcdonalds-logo-on-a-pole.jpg");
+		rec.setRating(RandomHelper.nextDouble(0., 5.));
+		rec.setUserRatingsTotal(RandomHelper.nextInt(0, 999999));
+		List<Recommendation> result = new ArrayList<>();
+		result.add(rec);
+		return result;
 	}
 
 }

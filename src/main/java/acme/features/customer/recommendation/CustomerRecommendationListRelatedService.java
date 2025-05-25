@@ -1,3 +1,4 @@
+
 package acme.features.customer.recommendation;
 
 import java.util.Collection;
@@ -24,15 +25,7 @@ public class CustomerRecommendationListRelatedService extends AbstractGuiService
 
 	@Override
 	public void authorise() {
-		boolean status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
-
-		if (status && super.getRequest().hasData("city")) {
-			String city = super.getRequest().getData("city", String.class);
-			Integer customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
-			List<String> cities = this.repository.findBookingsByCustomerId(customerId).stream().map(b -> b.getFlight().getDestinyAirport().getCity()).distinct().toList();
-			status = cities.contains(city);
-		}
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Customer.class));
 
 	}
 
@@ -40,15 +33,12 @@ public class CustomerRecommendationListRelatedService extends AbstractGuiService
 	public void load() {
 		Collection<Recommendation> recommendation;
 
-		if (super.getRequest().hasData("city"))
-			recommendation = this.repository.findRecommendationsByCity(super.getRequest().getData("city", String.class));
-		else {
-			Integer customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
-			List<String> cities = this.repository.findBookingsByCustomerId(customerId).stream().map(b -> b.getFlight().getDestinyAirport().getCity()).distinct().toList();
-			recommendation = this.repository.findRecommendationsByCities(cities);
-		}
+		Integer customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		List<String> cities = this.repository.findBookingsByCustomerId(customerId).stream().map(b -> b.getFlight().getDestinyAirport().getCity()).distinct().toList();
+		recommendation = this.repository.findRecommendationsByCities(cities);
 
 		super.getBuffer().addData(recommendation);
+
 	}
 
 	@Override

@@ -2,6 +2,7 @@
 package acme.features.customer.recommendation;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,7 +25,15 @@ public class CustomerRecommendationListService extends AbstractGuiService<Custom
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Customer.class));
+		boolean status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
+
+		if (status && super.getRequest().hasData("city")) {
+			String city = super.getRequest().getData("city", String.class);
+			Integer customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
+			List<String> cities = this.repository.findBookingsByCustomerId(customerId).stream().map(b -> b.getFlight().getDestinyAirport().getCity()).distinct().toList();
+			status = cities.contains(city);
+		}
+		super.getResponse().setAuthorised(status);
 
 	}
 
@@ -32,7 +41,10 @@ public class CustomerRecommendationListService extends AbstractGuiService<Custom
 	public void load() {
 		Collection<Recommendation> recommendation;
 
-		recommendation = this.repository.findAllRecommendation();
+		if (super.getRequest().hasData("city"))
+			recommendation = this.repository.findRecommendationsByCity(super.getRequest().getData("city", String.class));
+		else
+			recommendation = this.repository.findAllRecommendation();
 
 		super.getBuffer().addData(recommendation);
 	}
