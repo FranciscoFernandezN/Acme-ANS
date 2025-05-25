@@ -32,14 +32,19 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 		boolean hasBooking;
 		int masterId;
 		int bookingId;
-		int passengerId;
+		int passengerId = -1;
 		Booking booking;
 		Passenger passenger;
 
-		passengerId = super.getRequest().getData("id", int.class);
-		passenger = this.repository.findPassengerById(passengerId);
+		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class) && (passenger == null || this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId()).contains(passenger));
+		boolean hasId = super.getRequest().hasData("id");
+
+		if (status && hasId) {
+			passengerId = super.getRequest().getData("id", int.class);
+			passenger = this.repository.findPassengerById(passengerId);
+			status = passenger == null || this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId()).contains(passenger) && passenger.getIsDraftMode();
+		}
 
 		hasMasterId = super.getRequest().hasData(CustomerPassengerController.MASTER_ID);
 		hasBooking = super.getRequest().hasData("booking");
@@ -50,7 +55,7 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 			status = booking != null && super.getRequest().getPrincipal().hasRealm(booking.getCustomer()) && booking.getIsDraftMode();
 		}
 
-		if (status && hasBooking) {
+		if (status && hasBooking && hasId) {
 			bookingId = super.getRequest().getData("booking", int.class);
 			booking = this.repository.findBookingById(bookingId);
 			status = bookingId == 0 || booking != null && super.getRequest().getPrincipal().hasRealm(booking.getCustomer()) && !this.repository.findBookingByPassengerId(passengerId).contains(booking) && booking.getIsDraftMode();
@@ -66,7 +71,7 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 		Passenger passenger;
 		int id;
 
-		id = super.getRequest().getData("id", int.class);
+		id = super.getRequest().hasData("id") ? super.getRequest().getData("id", int.class) : -1;
 		passenger = this.repository.findPassengerById(id);
 
 		if (passenger == null) {
@@ -86,13 +91,14 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 	public void validate(final Passenger passenger) {
 		Boolean passportAlreadyInUse;
 		Passenger oldPassenger;
+		int customerId = super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId();
 
 		oldPassenger = this.repository.findPassengerById(passenger.getId());
 		if (oldPassenger == null) {
-			passportAlreadyInUse = !this.repository.findAllPassportNumbers().contains(passenger.getPassportNumber());
+			passportAlreadyInUse = !this.repository.findAllPassportNumbersOfCustomer(customerId).contains(passenger.getPassportNumber());
 			super.state(passportAlreadyInUse, "passportNumber", "customer.passenger.create.passport-number-must-be-unique");
 		} else {
-			passportAlreadyInUse = !this.repository.findAllPassportNumbers().contains(passenger.getPassportNumber()) || oldPassenger.getPassportNumber().equals(passenger.getPassportNumber());
+			passportAlreadyInUse = !this.repository.findAllPassportNumbersOfCustomer(customerId).contains(passenger.getPassportNumber()) || oldPassenger.getPassportNumber().equals(passenger.getPassportNumber());
 			super.state(passportAlreadyInUse, "passportNumber", "customer.passenger.update.passport-number-must-be-unique");
 		}
 
@@ -106,14 +112,9 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 		if (booking != null) {
 			boolean yours = super.getRequest().getPrincipal().hasRealm(booking.getCustomer());
 			super.state(yours, "booking", "customer.passenger.publish.booking-not-yours");
-			if (yours) {
-				super.state(booking.getIsDraftMode(), "booking", "customer.passenger.publish.booking-is-already-published");
-				if (oldPassenger != null)
-					super.state(!this.repository.findBookingByPassengerId(passenger.getId()).contains(booking), "booking", "customer.passenger.publish.booking-is-repeated");
-			}
-		} else
-			super.state(bookingId <= 0, "booking", "customer.passenger.publish.booking-does-not-exist");
+			super.state(booking.getIsDraftMode(), "booking", "customer.passenger.publish.booking-is-already-published");
 
+		}
 	}
 
 	@Override
@@ -121,7 +122,7 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 		passenger.setIsDraftMode(false);
 		this.repository.save(passenger);
 
-		if (super.getRequest().hasData("booking") && this.repository.findBookingById(super.getRequest().getData("booking", int.class)) != null) {
+		if (this.repository.findBookingById(super.getRequest().getData("booking", int.class)) != null) {
 			BelongsTo belongsTo = new BelongsTo();
 
 			belongsTo.setBooking(this.repository.findBookingById(super.getRequest().getData("booking", int.class)));
@@ -137,11 +138,6 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 		SelectChoices bookingChoices = new SelectChoices();
 		Collection<Booking> bookings = this.repository.findBookingByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId());
 		Boolean updatedPassenger = bookings.removeAll(this.repository.findBookingByPassengerId(passenger.getId()));
-
-		if (super.getBuffer().getErrors().hasErrors()) {
-			passenger.setIsDraftMode(true);
-			System.out.print(super.getBuffer().getErrors());
-		}
 
 		dataset = super.unbindObject(passenger, "fullName", "email", "passportNumber", "dateOfBirth", "specialNeeds", "isDraftMode");
 

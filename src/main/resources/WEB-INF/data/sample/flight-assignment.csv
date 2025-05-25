@@ -1,4 +1,4 @@
-kkey,duty,last-up-date,current-status,remarks,is-draft-mode,key:flight-crew-member,key:leg
+key,duty,last-up-date,current-status,remarks,is-draft-mode,key:flight-crew-member,key:leg
 flight-assignment-01,PILOT,1999/12/31 23:59,CONFIRMED,Assigned to Flight 🚀101 with notes: ¡Urgente! ✔️,false,flight-crew-member-01,leg-01
 flight-assignment-02,COPILOT,2024/12/31 23:59,CANCELLED,🚫 Overbooked & delayed > 5h; new schedule TBD.,true,flight-crew-member-02,leg-01
 flight-assignment-03,LEAD_ATTENDANT,2000/01/01 00:00,PENDING,\,"line\nbreak & UTF8 ✓""",true,flight-crew-member-03,leg-03

@@ -45,9 +45,9 @@ public class AdministratorWeatherController {
 		List<String> cities = this.repository.findAllCities();
 		List<Weather> weather;
 		if (SpringHelper.isRunningOn("production"))
-			weather = cities.stream().map(c -> this.findWeatherOfCity(c)).filter(c -> c != null).toList();
+			weather = cities.stream().map(this::findWeatherOfCity).filter(c -> c != null).toList();
 		else
-			weather = cities.stream().map(c -> this.findWeatherOfCityMocked(c)).filter(c -> c != null).toList();
+			weather = cities.stream().map(this::findWeatherOfCityMocked).filter(c -> c != null).toList();
 
 		this.repository.saveAll(weather);
 

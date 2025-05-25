@@ -17,7 +17,8 @@ master.menu.any.list-weather = List weather
 
 master.menu.recommendation = Recommendations
 master.menu.administrator.list-recommendation = List recommendations (admin)
-master.menu.customer.list-recommendation = List recommendations
+master.menu.customer.list-recommendation = List all recommendations
+master.menu.customer.list-related-recommendation = List related recommendations
 
 # master.menu.banned-passengers #######################################################
 

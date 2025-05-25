@@ -30,7 +30,19 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class));
+		boolean status;
+		AssistanceAgent agent;
+
+		agent = (AssistanceAgent) super.getRequest().getPrincipal().getRealmOfType(AssistanceAgent.class);
+
+		int legId = super.getRequest().getData("leg", int.class, 0);
+		Leg leg = this.aacr.findLegById(legId);
+		List<Leg> legs = this.aacr.findAllLegsByAirlineId(agent.getAirline().getId());
+
+		status = legId == 0 || leg != null && !leg.getIsDraftMode() || legs.contains(leg);
+
+		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && status);
+
 	}
 
 	@Override
@@ -52,19 +64,11 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 
 	@Override
 	public void bind(final Claim claim) {
-		super.bindObject(claim, "passengerEmail", "description", "claimType", "isPublished", "leg");
+		super.bindObject(claim, "passengerEmail", "description", "claimType", "leg");
 	}
 
 	@Override
 	public void validate(final Claim claim) {
-		int legId;
-		legId = super.getRequest().getData("leg", int.class);
-
-		Leg leg = this.aacr.findLegById(legId);
-		if (claim.getIsPublished() && leg != null && !leg.getIsDraftMode())
-			super.state(true, "isPublished", "assistance-agent.claim.create.leg-not-published");
-		if (claim.getIndicator() == ClaimState.IN_PROGRESS && claim.getIsPublished())
-			super.state(claim.getIndicator() != ClaimState.IN_PROGRESS, "indicator", "assistance-agent.claim.create.cant-be-published");
 	}
 
 	@Override
@@ -92,7 +96,7 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 		typeChoices = SelectChoices.from(ClaimType.class, claim.getClaimType());
 		indicatorChoices = SelectChoices.from(ClaimState.class, claim.getIndicator());
 
-		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "indicator", "claimType", "isPublished", "leg");
+		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "indicator", "claimType", "leg");
 		dataset.put("claimType", typeChoices);
 		dataset.put("indicator", indicatorChoices);
 		dataset.put("leg", legChoices);
