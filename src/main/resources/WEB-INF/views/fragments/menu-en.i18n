@@ -8,10 +8,24 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-# master.menu.reviews #######################################################
+# master.menu.weather #######################################################
 
 master.menu.weather = Weather
 master.menu.any.list-weather = List weather
+
+# master.menu.recommendation #######################################################
+
+master.menu.recommendation = Recommendations
+master.menu.administrator.list-recommendation = List recommendations (admin)
+master.menu.customer.list-recommendation = List recommendations
+
+# master.menu.banned-passengers #######################################################
+
+master.menu.banned-passengers = Banned passengers
+master.menu.administrator.list-banned-passengers = List banned passengers
+master.menu.administrator.list-banned-passengers-last-month = List passengers banned last month
+master.menu.administrator.list-lifted-ban-passengers = List passengers with lifted ban
+master.menu.administrator.create-ban = Ban passenger
 
 # master.menu.reviews #######################################################
 
@@ -48,6 +62,7 @@ master.menu.anonymous.estegn10-favourite-link = 53962653F: Gómez Navarro, Esteb
 # master.menu.administrator ###################################################
 
 master.menu.administrator = Administrator
+master.menu.administrator.dashboard = Dashboard
 master.menu.administrator.list-user-accounts = List user accounts
 master.menu.administrator.list-supported-currencies = List system configuration
 master.menu.administrator.populate-db-initial = Populate DB (initial)
@@ -67,6 +82,7 @@ master.menu.administrator.list-supported-currencies = List system configuration
 master.menu.administrator.create-supported-currencies = Create new supported currency
 master.menu.administrator.list-claims = List of claims
 master.menu.administrator.populate-weather = Populate weather actual (admin)
+master.menu.administrator.populate-recommendation = Populate recommendations actual (admin)
 
 # master.menu.assistance-agent ###################################################
 

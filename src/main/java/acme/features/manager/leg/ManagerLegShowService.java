@@ -35,7 +35,7 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 
 		legId = super.getRequest().getData("id", int.class);
 		leg = this.lr.findLegById(legId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class) && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == leg.getManager().getId();
+		status = leg != null && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == leg.getManager().getId();
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -65,7 +65,7 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 		SelectChoices registrationNumberChoices;
 		SelectChoices flightIdChoices;
 		SelectChoices legStatuses;
-
+		
 		airports = this.lr.findAllAirports();
 		aircrafts = this.lr.findAllAircraftsByAirlineId(manager.getAirlineManaging().getId());
 		if (leg.getIsDraftMode())
@@ -77,7 +77,6 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 		departureIATACodeChoices = SelectChoices.from(airports, "iATACode", leg.getDepartureAirport());
 		registrationNumberChoices = SelectChoices.from(aircrafts, "registrationNumber", leg.getAircraft());
 		flightIdChoices = SelectChoices.from(flights, "id", leg.getFlight());
-
 		legStatuses = SelectChoices.from(LegStatus.class, leg.getStatus());
 
 		dataset = super.unbindObject(leg, "uniqueIdentifier", "scheduledDeparture", "scheduledArrival", "status", "isDraftMode");

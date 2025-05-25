@@ -18,8 +18,8 @@ public interface FlightCrewMemberFlightAssignmentRepository extends AbstractRepo
 	@Query("Select f from FlightCrewMember f")
 	List<FlightCrewMember> findAllFlightCrewMembers();
 
-	@Query("Select l from Leg l")
-	List<Leg> findAllLegs();
+	@Query("Select l from Leg l WHERE l.isDraftMode = false")
+	List<Leg> findPublishedLegs();
 
 	@Query("Select f from FlightCrewMember f where f.id = :flightCrewMemberId")
 	FlightCrewMember findFlightCrewMemberById(int flightCrewMemberId);
@@ -36,9 +36,16 @@ public interface FlightCrewMemberFlightAssignmentRepository extends AbstractRepo
 	@Query("Select fa from FlightAssignment fa where fa.leg.scheduledArrival < :date and fa.isDraftMode = false")
 	List<FlightAssignment> findFlightAssignmentBeforeCurrent(Date date);
 
-	@Query("Select fa from FlightAssignment fa where fa.leg.scheduledArrival > :date")
+	@Query("Select fa from FlightAssignment fa where fa.leg.scheduledArrival >= :date")
 	List<FlightAssignment> findFlightAssignmentAfterCurrent(Date date);
 
 	@Query("Select fa from FlightAssignment fa")
 	List<FlightAssignment> findAllFlightAssignments();
+
+	@Query("SELECT f FROM FlightAssignment f WHERE f.flightCrewMember.id = :crewId AND f.leg.scheduledDeparture < :date")
+	List<FlightAssignment> findFlightAssignmentBeforeCurrentByCrewMember(int crewId, Date date);
+
+	@Query("SELECT f FROM FlightAssignment f WHERE f.flightCrewMember.id = :crewId AND f.leg.scheduledDeparture >= :date")
+	List<FlightAssignment> findFlightAssignmentAfterCurrentByCrewMember(int crewId, Date date);
+
 }

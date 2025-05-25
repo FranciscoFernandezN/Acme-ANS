@@ -2,12 +2,13 @@
 package acme.features.administrator.supportedcurrency;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.principals.Administrator;
-import acme.client.helpers.PropertyHelper;
+import acme.client.helpers.SpringHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.supportedcurrency.SupportedCurrency;
@@ -41,25 +42,31 @@ public class AdministratorSupportedCurrencyUpdateService extends AbstractGuiServ
 
 	@Override
 	public void bind(final SupportedCurrency supportedCurrency) {
-		super.bindObject(supportedCurrency, "currencyName");
+		super.bindObject(supportedCurrency, "currencyName", "isDefaultCurrency");
 	}
 
 	@Override
 	public void validate(final SupportedCurrency supportedCurrency) {
 
-		String defaultCurrency = PropertyHelper.getRequiredProperty("acme.currency.default", String.class);
-
 		List<SupportedCurrency> supportedCurrencies = this.scr.findAllSupportedCurrencies();
 		List<String> currencyNames = supportedCurrencies.stream().filter(sp -> sp.getId() != supportedCurrency.getId()).map(sp -> sp.getCurrencyName()).toList();
 
-		if (supportedCurrency.getCurrencyName() != null) {
-			super.state(!supportedCurrency.getCurrencyName().equals(defaultCurrency), "currencyName", "administrator.supported-currency.create.is-default-currency");
-			super.state(!currencyNames.contains(supportedCurrency.getCurrencyName()), "currencyName", "administrator.supported-currency.create.already-exists-currency");
-		}
+		super.state(!(this.scr.findDefaultSupportedCurrency().getId() == supportedCurrency.getId() && !supportedCurrency.getIsDefaultCurrency()), "isDefaultCurrency", "administrator.supported-currency.update.cant-set-no-default");
+
+		super.state(!currencyNames.contains(supportedCurrency.getCurrencyName()), "currencyName", "administrator.supported-currency.create.already-exists-currency");
+
+		Set<String> allowedCurrencies = this.mockSupportedCurrency();
+
+		super.state(allowedCurrencies.contains(supportedCurrency.getCurrencyName()), "currencyName", "administrator.supported-currency.create.not-valid-currency");
 	}
 
 	@Override
 	public void perform(final SupportedCurrency supportedCurrency) {
+		if (supportedCurrency.getIsDefaultCurrency()) {
+			SupportedCurrency defaultCurrency = this.scr.findDefaultSupportedCurrency();
+			defaultCurrency.setIsDefaultCurrency(false);
+			this.scr.save(defaultCurrency);
+		}
 		this.scr.save(supportedCurrency);
 	}
 
@@ -67,12 +74,22 @@ public class AdministratorSupportedCurrencyUpdateService extends AbstractGuiServ
 	public void unbind(final SupportedCurrency supportedCurrency) {
 		Dataset dataset;
 
-		String defaultCurrency = PropertyHelper.getRequiredProperty("acme.currency.default", String.class);
-
-		dataset = super.unbindObject(supportedCurrency, "currencyName");
-		dataset.put("isDefaultCurrency", supportedCurrency.getCurrencyName() == null ? "N/A" : supportedCurrency.getCurrencyName().equals(defaultCurrency));
+		dataset = super.unbindObject(supportedCurrency, "currencyName", "isDefaultCurrency");
 
 		super.getResponse().addData(dataset);
+	}
+
+	// Ancillary methods ------------------------------------------------------
+
+	protected Set<String> mockSupportedCurrency() {
+		Set<String> res;
+
+		if (SpringHelper.isRunningOn("production"))
+			res = SupportedCurrency.getAllowedCurrencies();
+		else
+			res = Set.of("EUR", "USD", "JPY", "BGN", "CZK", "DKK", "GBP", "HUF", "PLN", "RON", "SEK", "CHF", "ISK", "RUB", "TRY", "AUD", "PHP", "ZAR");
+
+		return res;
 	}
 
 }

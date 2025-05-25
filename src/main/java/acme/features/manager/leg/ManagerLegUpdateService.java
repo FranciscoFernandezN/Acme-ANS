@@ -32,13 +32,29 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void authorise() {
-		boolean status;
 		int legId;
 		Leg leg;
 
-		legId = super.getRequest().getData("id", int.class);
+		legId = super.getRequest().getData("id", int.class, 0);
 		leg = this.lr.findLegById(legId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class) && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == leg.getManager().getId();
+		
+		Boolean status = leg != null && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == leg.getManager().getId() && leg.getIsDraftMode();
+		
+		if(status) {
+			Manager manager = (Manager) super.getRequest().getPrincipal().getRealmOfType(Manager.class);
+			Integer aircraftId = super.getRequest().getData("aircraft", int.class, 0);
+			Integer arrivalId = super.getRequest().getData("arrivalAirport", int.class, 0);
+			Integer departureId = super.getRequest().getData("departureAirport", int.class, 0);
+			Integer flightId = super.getRequest().getData("flight", int.class, 0);
+			List<Integer> airports = this.lr.findAllAirports().stream().map(a -> a.getId()).toList();
+			List<Integer> aircrafts = this.lr.findAllAircraftsByAirlineId(manager.getAirlineManaging().getId()).stream().map(a -> a.getId()).toList();
+			List<Integer> flights = this.lr.findAllFlightsEditableByManagerId(manager.getId()).stream().map(f -> f.getId()).toList();
+			status = 
+				(aircraftId == 0 || aircrafts.contains(aircraftId)) && 
+				(arrivalId == 0 || airports.contains(arrivalId)) && 
+				(departureId == 0 || airports.contains(departureId)) && 
+				(flightId == 0 || flights.contains(flightId));
+		}
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -48,7 +64,7 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 		Leg leg;
 		int legId;
 
-		legId = super.getRequest().getData("id", int.class);
+		legId = super.getRequest().getData("id", int.class, 0);
 		leg = this.lr.findLegById(legId);
 
 		super.getBuffer().addData(leg);
@@ -56,7 +72,7 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void bind(final Leg leg) {
-		super.bindObject(leg, "uniqueIdentifier", "scheduledDeparture", "scheduledArrival", "status", "isDraftMode");
+		super.bindObject(leg, "uniqueIdentifier", "scheduledDeparture", "scheduledArrival", "status");
 
 		Airport departureAirport;
 		int departureAirportId;
@@ -64,10 +80,10 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 		Airport arrivalAirport;
 		int arrivalAirportId;
 
-		departureAirportId = super.getRequest().getData("departureAirport", int.class);
+		departureAirportId = super.getRequest().getData("departureAirport", int.class, 0);
 		departureAirport = this.lr.findAirportById(departureAirportId);
 
-		arrivalAirportId = super.getRequest().getData("arrivalAirport", int.class);
+		arrivalAirportId = super.getRequest().getData("arrivalAirport", int.class, 0);
 		arrivalAirport = this.lr.findAirportById(arrivalAirportId);
 
 		leg.setArrivalAirport(arrivalAirport);
@@ -76,7 +92,7 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 		Aircraft aircraft;
 		int aircraftId;
 
-		aircraftId = super.getRequest().getData("aircraft", int.class);
+		aircraftId = super.getRequest().getData("aircraft", int.class, 0);
 		aircraft = this.lr.findAircraftById(aircraftId);
 
 		leg.setAircraft(aircraft);
@@ -84,7 +100,7 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 		Flight flight;
 		int flightId;
 
-		flightId = super.getRequest().getData("flight", int.class);
+		flightId = super.getRequest().getData("flight", int.class, 0);
 		flight = this.lr.findFlightById(flightId);
 
 		leg.setFlight(flight);
@@ -104,7 +120,7 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 		List<Leg> legs = this.lr.findAllLegs();
 		List<String> legIds = legs.stream().filter(l -> l.getId() != leg.getId()).map(Leg::getUniqueIdentifier).toList();
 
-		if (leg.getUniqueIdentifier() != null)
+		if (!leg.getUniqueIdentifier().equals(""))
 			super.state(!legIds.contains(leg.getUniqueIdentifier()), "uniqueIdentifier", "manager.leg.create.not-unique-identifier");
 
 		if (leg.getScheduledArrival() != null)
@@ -118,26 +134,15 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 			super.state(leg.getDuration() <= 24, "scheduledArrival", "manager.leg.create.too-long-leg");
 		}
 
-		int arrivalAirportId = super.getRequest().getData("arrivalAirport", int.class);
-		int departureAirportId = super.getRequest().getData("departureAirport", int.class);
+		int arrivalAirportId = super.getRequest().getData("arrivalAirport", int.class, 0);
+		int departureAirportId = super.getRequest().getData("departureAirport", int.class, 0);
 
 		if (arrivalAirportId != 0 && departureAirportId != 0)
 			super.state(arrivalAirportId != departureAirportId, "arrivalAirport", "manager.leg.create.not-different-airport");
 
-		
-
-		int aircraftId;
-		Aircraft aircraft;
-		aircraftId = super.getRequest().getData("aircraft", int.class);
-		List<Leg> legsOfAircraft = this.lr.findAllLegsOfAircraftByAircraftId(aircraftId);
-		aircraft = this.lr.findAircraftById(aircraftId);
-		
-		if (aircraftId != 0) {
-			super.state(aircraft.getAirline().getId() == manager.getAirlineManaging().getId(), "aircraft", "manager.leg.create.not-your-aircraft");
-		}
-		
+			
 		int flightId;
-		flightId = super.getRequest().getData("flight", int.class);
+		flightId = super.getRequest().getData("flight", int.class, 0);
 		List<Leg> legsOfFlight = this.lr.findAllLegsByFlightId(flightId);
 		List<Flight> flights;
 		flights = this.lr.findAllFlightsEditableByManagerId(manager.getId());
@@ -145,16 +150,18 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 			super.state(flights.stream().map(f -> f.getId()).anyMatch(f -> f == flightId), "flight", "manager.leg.create.not-your-flight");
 		}
 		
-		
-		Predicate<Leg> legsAreBefore = (final Leg l) -> (leg.getScheduledArrival().before(l.getScheduledDeparture()) && leg.getScheduledDeparture().before(l.getScheduledDeparture()));
-		Predicate<Leg> legsAreAfter = (final Leg l) -> (leg.getScheduledArrival().after(l.getScheduledArrival()) && leg.getScheduledDeparture().after(l.getScheduledArrival()));
-
-		Predicate<Leg> hasNotConcurrentLegsPredicate = legsAreBefore.or(legsAreAfter);
-
-		super.state(legsOfAircraft.stream().filter(l -> l.getId() != leg.getId()).allMatch(hasNotConcurrentLegsPredicate), "aircraft", "manager.leg.create.already-in-use-aircraft");
-
-		super.state(legsOfFlight.stream().filter(l -> l.getId() != leg.getId()).allMatch(hasNotConcurrentLegsPredicate), "flight", "manager.leg.create.already-in-use-flight");
-
+		if(leg.getScheduledArrival() != null && leg.getScheduledDeparture() != null) {
+			int aircraftId = super.getRequest().getData("aircraft", int.class, 0);
+			List<Leg> legsOfAircraft = this.lr.findAllLegsOfAircraftByAircraftId(aircraftId);
+			Predicate<Leg> legsAreBefore = (final Leg l) -> (leg.getScheduledArrival().before(l.getScheduledDeparture()) && leg.getScheduledDeparture().before(l.getScheduledDeparture()));
+			Predicate<Leg> legsAreAfter = (final Leg l) -> (leg.getScheduledArrival().after(l.getScheduledArrival()) && leg.getScheduledDeparture().after(l.getScheduledArrival()));
+	
+			Predicate<Leg> hasNotConcurrentLegsPredicate = legsAreBefore.or(legsAreAfter);
+	
+			super.state(legsOfAircraft.stream().filter(l -> l.getId() != leg.getId()).allMatch(hasNotConcurrentLegsPredicate), "aircraft", "manager.leg.create.already-in-use-aircraft");
+	
+			super.state(legsOfFlight.stream().filter(l -> l.getId() != leg.getId()).allMatch(hasNotConcurrentLegsPredicate), "flight", "manager.leg.create.already-in-use-flight");
+		}
 	}
 
 	@Override
@@ -164,9 +171,6 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void unbind(final Leg leg) {
-
-		if (super.getBuffer().getErrors().hasErrors())
-			leg.setIsDraftMode(true);
 
 		Dataset dataset;
 		List<Airport> airports;

@@ -1,0 +1,21 @@
+administrator.ban.form.title = Ban form
+administrator.ban.list.title = Ban record
+
+administrator.ban.list.label.banIssuedDate = Ban issued date
+administrator.ban.list.label.liftDate = Lift date
+administrator.ban.list.label.reasonForBan = Reason for ban
+
+administrator.ban.form.label.passenger = Banned passenger
+administrator.ban.form.label.nationality = Nationality
+administrator.ban.form.label.banIssuedDate = Ban issued date
+administrator.ban.form.label.liftDate = Lift date
+administrator.ban.form.label.reasonForBan = Reason for ban
+administrator.ban.form.label.confirm = Confirm operation?
+
+administrator.ban.form.button.update = Update ban
+administrator.ban.form.button.create = Create ban
+
+administrator.ban.create.incompatibleDates = Lift date must be after ban issued date
+administrator.ban.create.stillBanned = The passenger is already banned between those dates
+administrator.ban.update.incompatibleDates = Lift date must be after ban issued date
+administrator.ban.update.stillBanned = The passenger is already banned between those dates

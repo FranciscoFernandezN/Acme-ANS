@@ -1,0 +1,19 @@
+administrator.passenger.form.title = Passenger form
+administrator.passenger.list.title = Listing of passengers
+
+administrator.passenger.list.label.fullName = Full name
+administrator.passenger.list.label.email = Email
+administrator.passenger.list.label.passportNumber = Passport Number
+administrator.passenger.list.label.dateOfBirth = Date of birth
+administrator.passenger.list.label.specialNeeds = Special needs
+administrator.passenger.list.label.nationality = Nationality
+
+administrator.passenger.form.label.fullName = Passenger
+administrator.passenger.form.label.email = Passenger email
+administrator.passenger.form.label.passportNumber = Passport Number
+administrator.passenger.form.label.dateOfBirth = Date of birth
+administrator.passenger.form.label.specialNeeds = Special needs
+administrator.passenger.form.label.nationality = Nationality
+
+administrator.passenger.form.button.list-ban = Ban record
+administrator.passenger.list.button.create-ban = Ban passenger

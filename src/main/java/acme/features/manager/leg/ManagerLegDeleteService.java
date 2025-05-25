@@ -22,14 +22,13 @@ public class ManagerLegDeleteService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void authorise() {
-		boolean status;
 		int legId;
 		Leg leg;
 
-		legId = super.getRequest().getData("id", int.class);
+		legId = super.getRequest().getData("id", int.class, 0);
 		leg = this.lr.findLegById(legId);
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class) && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == leg.getManager().getId();
+		Boolean status = leg != null && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == leg.getManager().getId() && leg.getIsDraftMode();
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -39,7 +38,7 @@ public class ManagerLegDeleteService extends AbstractGuiService<Manager, Leg> {
 		Leg leg;
 		int legId;
 
-		legId = super.getRequest().getData("id", int.class);
+		legId = super.getRequest().getData("id", int.class, 0);
 		leg = this.lr.findLegById(legId);
 
 		super.getBuffer().addData(leg);
@@ -47,7 +46,7 @@ public class ManagerLegDeleteService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void bind(final Leg leg) {
-		super.bindObject(leg, "uniqueIdentifier", "scheduledDeparture", "scheduledArrival", "status", "isDraftMode");
+		super.bindObject(leg, "uniqueIdentifier", "scheduledDeparture", "scheduledArrival", "status");
 	}
 
 	@Override

@@ -30,8 +30,8 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 
 		flightId = super.getRequest().getData("id", int.class);
 		flight = this.fr.findFlightById(flightId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class) && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == flight.getManager().getId();
-
+		status = flight != null  && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == flight.getManager().getId() && flight.getIsDraftMode();
+		
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -48,11 +48,12 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void bind(final Flight flight) {
-		super.bindObject(flight, "tag", "needsSelfTransfer", "cost", "description", "isDraftMode");
+		super.bindObject(flight, "tag", "needsSelfTransfer", "cost", "description");
 	}
 
 	@Override
 	public void validate(final Flight flight) {
+		super.state(fr.findAllLegsByFlightId(flight.getId()).isEmpty(), "*", "manager.flight.delete.has-legs");
 		super.state(flight.getIsDraftMode(), "isDraftMode", "manager.flight.delete.is-published");
 	}
 
@@ -73,10 +74,10 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 
 		dataset = super.unbindObject(flight, "id", "tag", "cost", "description", "isDraftMode", "needsSelfTransfer");
 
-		dataset.put("origin", origin == null ? "N/A" : origin);
-		dataset.put("destiny", destiny == null ? "N/A" : destiny);
-		dataset.put("scheduledDeparture", scheduledDeparture == null ? "N/A" : scheduledDeparture);
-		dataset.put("scheduledArrival", scheduledArrival == null ? "N/A" : scheduledArrival);
+		dataset.put("origin", origin);
+		dataset.put("destiny", destiny);
+		dataset.put("scheduledDeparture", scheduledDeparture);
+		dataset.put("scheduledArrival", scheduledArrival);
 		dataset.put("numberOfLayovers", flight.getNumberOfLayovers());
 		super.getResponse().addData(dataset);
 	}

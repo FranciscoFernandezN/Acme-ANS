@@ -10,5 +10,7 @@
 	<acme:input-double code="any.service.form.label.promotionCode" path="promotionCode"/>
 	<acme:input-money code="any.service.form.label.money" path="money"/>
 	<acme:input-textbox code="any.service.form.label.airport" path="airport"/>
-
+	<jstl:if test="${_command == 'show'}">
+		<acme:input-textbox code="any.service.form.label.defaultMoney" path="defaultMoney" readonly="true"/>
+	</jstl:if>
 </acme:form>

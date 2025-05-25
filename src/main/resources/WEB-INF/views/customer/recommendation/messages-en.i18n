@@ -1,0 +1,16 @@
+customer.recommendation.form.title = Recommendation form
+customer.recommendation.list.title = Listing of recommendations
+
+customer.recommendation.form.label.name = Name of the recommendation:
+customer.recommendation.form.label.city = City:
+customer.recommendation.form.label.businessStatus = Business status:
+customer.recommendation.form.label.formattedAddress = Address:
+customer.recommendation.form.label.rating = Rating (0-5):
+customer.recommendation.form.label.userRatingsTotal = User ratings total:
+customer.recommendation.form.label.openNow = Open?
+customer.recommendation.form.label.photoReference = Photo reference:
+
+customer.recommendation.list.label.city = City
+customer.recommendation.list.label.name = Name
+customer.recommendation.list.label.rating = Rating
+customer.recommendation.list.label.openNow = Open?

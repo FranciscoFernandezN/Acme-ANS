@@ -11,6 +11,7 @@ import acme.client.components.principals.Any;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flights.Flight;
+import acme.entities.supportedcurrency.SupportedCurrency;
 
 @GuiService
 public class AnyFlightListService extends AbstractGuiService<Any, Flight> {
@@ -47,7 +48,11 @@ public class AnyFlightListService extends AbstractGuiService<Any, Flight> {
 		Date scheduledDeparture = flight.getScheduledDeparture();
 		Date scheduledArrival = flight.getScheduledArrival();
 
-		dataset = super.unbindObject(flight, "tag", "cost", "needsSelfTransfer");
+		dataset = super.unbindObject(flight, "tag", "cost");
+
+		dataset.put("needsSelfTransfer", flight.getNeedsSelfTransfer() ? "✓" : "x");
+
+		dataset.put("defaultCost", SupportedCurrency.convertToDefault(flight.getCost()));
 
 		dataset.put("origin", origin);
 		dataset.put("destiny", destiny);

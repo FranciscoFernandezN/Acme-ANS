@@ -13,6 +13,7 @@ import acme.realms.Manager;
 @Repository
 public interface ManagerDashboardRepository extends AbstractRepository {
 
+
 	@Query("SELECT m FROM Manager m ORDER BY m.yearsOfExperience DESC")
 	List<Manager> rankingByYearsOfExperience();
 

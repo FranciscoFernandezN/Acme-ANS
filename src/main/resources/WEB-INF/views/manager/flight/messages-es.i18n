@@ -9,6 +9,7 @@ manager.flight.list.label.destiny = Ciudad destino
 manager.flight.list.label.scheduledDeparture = Salida programada
 manager.flight.list.label.scheduledArrival = Llegada programada
 manager.flight.list.label.isDraftMode = ¿Está en modo borrador?
+manager.flight.list.label.defaultCost = Precio (en moneda por defecto)
 
 manager.flight.list.button.create = Create nuevo vuelo
 
@@ -22,11 +23,14 @@ manager.flight.form.label.scheduledDeparture = Salida programada:
 manager.flight.form.label.scheduledArrival = Llegada programada:
 manager.flight.form.label.numberOfLayovers = Número de escalas:
 manager.flight.form.label.isDraftMode = ¿Modo borrador?
+manager.flight.form.label.defaultCost = Precio (en moneda por defecto):
 
 manager.flight.form.button.update = Actualizar este vuelo
+manager.flight.form.button.publish = Publicar este vuelo
 manager.flight.form.button.delete = Borrar este vuelo
 manager.flight.form.button.create = Crear este vuelo
 
 manager.flight.create.cant-be-published = No puedes publicar este vuelo porque sus tramos aún no han sido publicados
 manager.flight.delete.is-published = No puedes borrar un vuelo publicado
+manager.flight.delete.has-legs = No puedes borrar este vuelo porque tiene tramos asociados
 

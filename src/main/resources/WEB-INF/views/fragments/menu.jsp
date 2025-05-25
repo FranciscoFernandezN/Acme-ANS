@@ -43,6 +43,21 @@
 			<acme:menu-suboption access="hasRealm('Administrator')" code="master.menu.administrator.populate-weather" action="/administrator/weather/populate"/>
 		</acme:menu-option>
 		
+		<acme:menu-option code="master.menu.recommendation" access="hasRealm('Administrator') || hasRealm('Customer')">
+			<acme:menu-suboption access="hasRealm('Administrator')" code="master.menu.administrator.list-recommendation" action="/administrator/recommendation/list" />
+			<acme:menu-suboption access="hasRealm('Customer')" code="master.menu.customer.list-recommendation" action="/customer/recommendation/list" />
+			<acme:menu-suboption access="hasRealm('Administrator')" code="master.menu.administrator.populate-recommendation" action="/administrator/recommendation/populate"/>
+		</acme:menu-option>
+
+		<acme:menu-option code="master.menu.banned-passengers" access="hasRealm('Administrator')">
+			<acme:menu-suboption code="master.menu.administrator.list-banned-passengers" action="/administrator/passenger/list-banned-passengers"/>
+			<acme:menu-suboption code="master.menu.administrator.list-banned-passengers-last-month" action="/administrator/passenger/list-banned-passengers-last-month"/>
+			<acme:menu-suboption code="master.menu.administrator.list-lifted-ban-passengers" action="/administrator/passenger/list-lifted-ban-passengers"/>
+			<acme:menu-suboption code="master.menu.administrator.create-ban" action="/administrator/ban/create"/>
+
+
+		</acme:menu-option>
+		
 		<acme:menu-option code="master.menu.airport">
 			<acme:menu-suboption code="master.menu.authenticated.list-airport" action="/any/airport/list" />
 			<acme:menu-suboption access="hasRealm('Administrator')" code="master.menu.administrator.list-airports" action="/administrator/airport/list"/>
@@ -56,6 +71,8 @@
 		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.administrator" access="hasRealm('Administrator')">
+			<acme:menu-suboption code="master.menu.administrator.dashboard" action="/administrator/administrator-dashboard/show"/>
+			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.list-airlines"  action="/administrator/airline/list" />
 			<acme:menu-suboption code="master.menu.administrator.create-airlines"  action="/administrator/airline/create" />
       		<acme:menu-separator/>

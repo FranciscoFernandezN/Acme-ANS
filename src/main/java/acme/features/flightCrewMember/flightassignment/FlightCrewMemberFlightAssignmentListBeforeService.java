@@ -33,10 +33,10 @@ public class FlightCrewMemberFlightAssignmentListBeforeService extends AbstractG
 	@Override
 	public void load() {
 		List<FlightAssignment> flightAssignments;
-		Date date;
-		date = MomentHelper.getCurrentMoment();
+		Date date = MomentHelper.getCurrentMoment();
 
-		flightAssignments = this.repository.findFlightAssignmentBeforeCurrent(date);
+		int crewId = super.getRequest().getPrincipal().getRealmOfType(FlightCrewMember.class).getId();
+		flightAssignments = this.repository.findFlightAssignmentBeforeCurrentByCrewMember(crewId, date);
 
 		super.getBuffer().addData(flightAssignments);
 	}
@@ -48,7 +48,7 @@ public class FlightCrewMemberFlightAssignmentListBeforeService extends AbstractG
 		Boolean isAvailable = this.repository.findFlightCrewMemberById(id).getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
 
 		dataset = super.unbindObject(flightAssignment, "duty", "lastUpDate", "currentStatus", "remarks");
-		dataset.put("isAvailable", isAvailable);
+		dataset.put("isAvailable", isAvailable ? "✓" : "x");
 
 		super.getResponse().addData(dataset);
 	}

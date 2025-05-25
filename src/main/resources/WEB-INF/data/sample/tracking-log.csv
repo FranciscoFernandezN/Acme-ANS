@@ -1,2 +1,8 @@
-key,lastUpdateMoment,step,resolutionPercentage,resolution,isPublished,key:claim,key:agent
-tracking-log-01,2022/03/10 11:00,verificando esta pamplina,100.00,la azafata estaba de malas ese día,true,claim-01,assistance-agent-02
+key,last-update-moment,step,resolution-percentage,resolution,is-published,key:claim,key:agent
+tracking-log-01,2022/03/10 11:00,Verificando esta pamplina,100.00,La azafata estaba de malas ese día,true,claim-01,assistance-agent-02
+tracking-log-02,2022/03/11 12:00,"1, 2 ,3, un pasito palante maría",99.99,"1, 2 ,3, un pasito patrás",false,claim-02,assistance-agent-02
+tracking-log-03,2022/03/12 12:00,miau,0.01,"Up in the clouds, way above the sky I watched you foolishly, imagined I could fly",false,claim-03,assistance-agent-02
+tracking-log-04,2022/03/13 12:00,"Pero que horas son?, que fue lo que pasó?",100.00,"Yo no recuerdo, solo se que amaneció",true,claim-04,assistance-agent-01
+tracking-log-05,2024/12/31 23:59,洛伦·伊普森,100.00,No sé no hablo taka taka,true,claim-05,assistance-agent-01
+tracking-log-06,1900/01/01 00:00,"Lorem ipsum dolor sit amet, consectetur adipiscing",100.00,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",true,claim-06,assistance-agent-01
+tracking-log-07,2025/01/01 00:00,-,0.00,?,false,claim-07,assistance-agent-02

@@ -26,7 +26,22 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class));
+		boolean status;
+		int trackingLogId;
+		TrackingLog trackingLog;
+		List<Claim> claims;
+		AssistanceAgent agent;
+
+		agent = (AssistanceAgent) super.getRequest().getPrincipal().getRealmOfType(AssistanceAgent.class);
+
+		claims = this.aatlr.findAllClaimsByAgentId(agent.getId());
+
+		trackingLogId = super.getRequest().getData("id", int.class);
+		trackingLog = this.aatlr.findTrackingLogById(trackingLogId);
+		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && agent.getId() == trackingLog.getAgent().getId() && !trackingLog.getIsPublished() && trackingLog != null && trackingLog.getClaim() != null
+			&& claims.contains(this.aatlr.findClaimById(super.getRequest().getData("claim", int.class))) && agent.getId() == trackingLog.getClaim().getAgent().getId();
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override

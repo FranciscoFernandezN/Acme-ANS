@@ -2,7 +2,6 @@
 package acme.features.manager.flight;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,7 +9,6 @@ import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flights.Flight;
-import acme.entities.legs.Leg;
 import acme.realms.Manager;
 
 @GuiService
@@ -32,7 +30,7 @@ public class ManagerFlightUpdateService extends AbstractGuiService<Manager, Flig
 
 		flightId = super.getRequest().getData("id", int.class);
 		flight = this.fr.findFlightById(flightId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class) && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == flight.getManager().getId();
+		status = flight != null && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == flight.getManager().getId() && flight.getIsDraftMode();
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -50,13 +48,12 @@ public class ManagerFlightUpdateService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void bind(final Flight flight) {
-		super.bindObject(flight, "tag", "needsSelfTransfer", "cost", "description", "isDraftMode");
+		super.bindObject(flight, "tag", "needsSelfTransfer", "cost", "description");
 	}
 
 	@Override
 	public void validate(final Flight flight) {
-		List<Leg> legs = this.fr.findAllLegsByFlightId(flight.getId());
-		super.state(flight.getIsDraftMode() || !flight.getIsDraftMode() && !legs.isEmpty() && legs.stream().allMatch(l -> !l.getIsDraftMode()), "isDraftMode", "manager.flight.create.cant-be-published");
+
 	}
 
 	@Override
@@ -66,9 +63,6 @@ public class ManagerFlightUpdateService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void unbind(final Flight flight) {
-
-		if (super.getBuffer().getErrors().hasErrors())
-			flight.setIsDraftMode(true);
 
 		Dataset dataset;
 

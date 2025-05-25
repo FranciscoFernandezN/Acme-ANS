@@ -16,12 +16,12 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form>
-	<acme:input-textbox code="authenticated.customer.form.label.identifier" path="identifier" placeholder="authenticated.customer.form.placeholder.identifier" />
-	<acme:input-textbox code="authenticated.customer.form.label.phoneNumber" path="phoneNumber" placeholder="authenticated.customer.form.placeholder.phoneNumber"/>
+	<acme:input-textbox code="authenticated.customer.form.label.identifier" path="identifier" placeholder="ABC123456"/>
+	<acme:input-textbox code="authenticated.customer.form.label.phoneNumber" path="phoneNumber" placeholder="643647352"/>
 	<acme:input-textbox code="authenticated.customer.form.label.physicalAddress" path="physicalAddress"/>
 	<acme:input-textbox code="authenticated.customer.form.label.city" path="city"/>
 	<acme:input-textbox code="authenticated.customer.form.label.country" path="country"/>
-	<acme:input-integer code="authenticated.customer.form.label.earnedPoints" path="earnedPoints" placeholder="authenticated.customer.form.placeholder.earnedPoints"/>	
+	<acme:input-integer code="authenticated.customer.form.label.earnedPoints" path="earnedPoints" placeholder="300"/>	
 	
 	<jstl:if test="${_command == 'create'}">
 		<acme:submit code="authenticated.customer.form.button.create" action="/authenticated/customer/create"/>

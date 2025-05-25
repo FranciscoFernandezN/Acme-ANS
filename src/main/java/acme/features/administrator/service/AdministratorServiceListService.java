@@ -11,6 +11,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airports.Airport;
 import acme.entities.services.Service;
+import acme.entities.supportedcurrency.SupportedCurrency;
 
 @GuiService
 public class AdministratorServiceListService extends AbstractGuiService<Administrator, Service> {
@@ -43,7 +44,7 @@ public class AdministratorServiceListService extends AbstractGuiService<Administ
 		Airport airport = services.getAirport();
 
 		dataset = super.unbindObject(services, "name", "picture", "avgDwellTime", "promotionCode", "money");
-
+		dataset.put("defaultMoney", dataset.get("money") != null ? SupportedCurrency.convertToDefault(services.getMoney()) : "");
 		dataset.put("iATACode", airport.getIATACode());
 
 		super.getResponse().addData(dataset);

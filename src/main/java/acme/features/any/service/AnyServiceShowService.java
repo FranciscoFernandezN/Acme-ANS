@@ -8,6 +8,7 @@ import acme.client.components.principals.Any;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.services.Service;
+import acme.entities.supportedcurrency.SupportedCurrency;
 
 @GuiService
 public class AnyServiceShowService extends AbstractGuiService<Any, Service> {
@@ -42,7 +43,7 @@ public class AnyServiceShowService extends AbstractGuiService<Any, Service> {
 
 		dataset = super.unbindObject(service, "name", "picture", "avgDwellTime", "promotionCode", "money");
 		dataset.put("airport", service.getAirport().getIATACode());
-
+		dataset.put("defaultMoney", dataset.get("money") != null ? SupportedCurrency.convertToDefault(service.getMoney()) : "");
 		super.getResponse().addData(dataset);
 	}
 

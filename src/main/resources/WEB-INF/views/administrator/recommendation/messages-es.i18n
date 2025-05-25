@@ -1,0 +1,16 @@
+administrator.recommendation.form.title = Formulario de recomendación
+administrator.recommendation.list.title = Listado de recomendaciones
+
+administrator.recommendation.form.label.name = Nombre de la recomendación:
+administrator.recommendation.form.label.city = Ciudad:
+administrator.recommendation.form.label.businessStatus = Estado:
+administrator.recommendation.form.label.formattedAddress = Dirección:
+administrator.recommendation.form.label.rating = Valoración (0-5):
+administrator.recommendation.form.label.userRatingsTotal = Número de valoraciones:
+administrator.recommendation.form.label.openNow = ¿Abierto?
+administrator.recommendation.form.label.photoReference = Foto de referencia:
+
+administrator.recommendation.list.label.city = Ciudad
+administrator.recommendation.list.label.name = Nombre
+administrator.recommendation.list.label.rating = Valoración
+administrator.recommendation.list.label.openNow = ¿Abierto?

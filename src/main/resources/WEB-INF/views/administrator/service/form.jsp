@@ -10,7 +10,9 @@
 	<acme:input-textbox code="administrator.service.form.label.promotionCode" path="promotionCode"/>
 	<acme:input-money code="administrator.service.form.label.money" path="money"/>
 	<acme:input-select code="administrator.service.form.label.airport" path="airport" choices="${airportChoices}"/>
-	
+	<jstl:if test="${_command == 'show'}">
+		<acme:input-textbox code="administrator.service.form.label.defaultMoney" path="defaultMoney" readonly="true"/>
+	</jstl:if>
 	<jstl:choose>
 		<jstl:when test="${acme:anyOf(_command, 'show|update|delete')}">
 			<acme:submit code="administrator.service.form.button.update" action="/administrator/service/update"/>

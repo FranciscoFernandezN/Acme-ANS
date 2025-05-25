@@ -1,0 +1,19 @@
+administrator.passenger.form.title = Formulario de pasajeros
+administrator.passenger.list.title = Listado de pasajeros
+
+administrator.passenger.list.label.fullName = Nombre del pasajero
+administrator.passenger.list.label.email = Email
+administrator.passenger.list.label.passportNumber = Número de pasaporte
+administrator.passenger.list.label.dateOfBirth = Fecha de nacimiento
+administrator.passenger.list.label.specialNeeds = Necesidades especiales
+administrator.passenger.list.label.nationality = Nacionalidad
+
+administrator.passenger.form.label.fullName = Nombre del pasajero
+administrator.passenger.form.label.email = Email
+administrator.passenger.form.label.passportNumber = Número de pasaporte
+administrator.passenger.form.label.dateOfBirth = Fecha de nacimiento
+administrator.passenger.form.label.specialNeeds = Necesidades especiales
+administrator.passenger.form.label.nationality = Nacionalidad
+
+administrator.passenger.form.button.list-ban = Ver vetos
+administrator.passenger.list.button.create-ban = Vetar pasajero
