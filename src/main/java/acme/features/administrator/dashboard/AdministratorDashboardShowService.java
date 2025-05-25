@@ -88,7 +88,7 @@ public class AdministratorDashboardShowService extends AbstractGuiService<Admini
 		dashboard.setCountReviewsPostedLast10Weeks(countReviewsLast10Weeks != null ? countReviewsLast10Weeks : 0);
 
 		List<Object[]> reviewsPerWeek = this.repository.countReviewsPerWeekSince(tenWeeksAgo);
-		List<Integer> countsPerWeek = reviewsPerWeek.stream().map(row -> ((Long) row[1]).intValue()).collect(Collectors.toList());
+		List<Integer> countsPerWeek = reviewsPerWeek.stream().map(row -> ((Long) row[1]).intValue()).toList();
 
 		if (countsPerWeek.isEmpty()) {
 			dashboard.setAverageReviewsPostedLast10Weeks(0.0);
