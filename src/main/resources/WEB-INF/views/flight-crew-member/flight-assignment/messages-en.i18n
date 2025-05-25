@@ -24,7 +24,9 @@ flight-crew-member.flight-assignment.list.button.create = Create new flight assi
 
 flight-crew-member.flight-assignment.error.not-available = The flight crew member is not available
 flight-crew-member.flight-assignment.error.already-assigned = The flight crew member has been assigned yet 
-flight-crew-member.flight-assignment.error.already-occurred = The leg has occurred yet  
+flight-crew-member.flight-assignment.error.already-occurred-or-future = The leg has occurred yet  
 flight-crew-member.flight-assignment.error.pilot-limit-exceeded = It has to be at most one pilot   
 flight-crew-member.flight-assignment.error.copilot-limit-exceeded = It has to be at most one copilot 
 flight-crew-member.flight-assignment.error.leg-null = A leg cannot be null  
+flight-crew-member.flight-assignment.error.cannot-publish-pending = The current status can't be pending
+flight-crew-member.flight-assignment.error.overlapping-legs = The legs are simultaneous

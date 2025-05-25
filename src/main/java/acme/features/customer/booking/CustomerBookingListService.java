@@ -47,10 +47,12 @@ public class CustomerBookingListService extends AbstractGuiService<Customer, Boo
 		List<String> passengers = new ArrayList<>();
 		this.repository.findPassengersByBookingId(bookings.getId()).stream().forEach(e -> passengers.add(e.getFullName()));
 
-		dataset = super.unbindObject(bookings, "locatorCode", "purchaseMoment", "travelClass", "price", "isDraftMode");
-		
+		dataset = super.unbindObject(bookings, "locatorCode", "purchaseMoment", "travelClass", "price");
+
+		dataset.put("isDraftMode", bookings.getIsDraftMode() ? "✓" : "x");
+
 		dataset.put("defaultPrice", SupportedCurrency.convertToDefault(bookings.getPrice()));
-		
+
 		dataset.put("passengers", passengers.isEmpty() ? "N/A" : passengers);
 
 		super.getResponse().addData(dataset);

@@ -62,6 +62,7 @@ master.menu.anonymous.estegn10-favourite-link = 53962653F: Gómez Navarro, Esteb
 # master.menu.administrator ###################################################
 
 master.menu.administrator = Administrador
+master.menu.administrator.dashboard = Panel de indicadores
 master.menu.administrator.list-user-accounts = Ver cuentas de usuario
 master.menu.administrator.list-services = Ver servicios (admin)
 master.menu.administrator.create-services = Crear servicios (admin)

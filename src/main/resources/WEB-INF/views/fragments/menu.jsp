@@ -71,6 +71,8 @@
 		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.administrator" access="hasRealm('Administrator')">
+			<acme:menu-suboption code="master.menu.administrator.dashboard" action="/administrator/administrator-dashboard/show"/>
+			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.list-airlines"  action="/administrator/airline/list" />
 			<acme:menu-suboption code="master.menu.administrator.create-airlines"  action="/administrator/airline/create" />
       		<acme:menu-separator/>
