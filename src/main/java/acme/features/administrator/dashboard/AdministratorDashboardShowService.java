@@ -3,6 +3,7 @@ package acme.features.administrator.dashboard;
 
 import java.util.Date;
 import java.util.DoubleSummaryStatistics;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +50,7 @@ public class AdministratorDashboardShowService extends AbstractGuiService<Admini
 
 		// --- Count Airlines by AirlineType (initialize with all enum values)
 		List<Object[]> airlinesCountList = this.repository.countAirlinesByType();
-		Map<AirlineType, Integer> airlinesCountMap = new HashMap<>();
+		Map<AirlineType, Integer> airlinesCountMap = new EnumMap<>(AirlineType.class);
 		for (AirlineType type : AirlineType.values())
 			airlinesCountMap.put(type, 0);
 		for (Object[] row : airlinesCountList) {
