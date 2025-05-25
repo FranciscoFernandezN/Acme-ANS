@@ -1,15 +1,12 @@
 
 package acme.features.manager.leg;
 
-import java.util.Date;
 import java.util.List;
-import java.util.function.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
-import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.aircrafts.Aircraft;
@@ -38,7 +35,7 @@ public class ManagerLegStatusService extends AbstractGuiService<Manager, Leg> {
 
 		legId = super.getRequest().getData("id", int.class);
 		leg = this.lr.findLegById(legId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class) && leg != null  && !leg.getStatus().equals(LegStatus.LANDED) && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == leg.getManager().getId() && !leg.getIsDraftMode();
+		status = leg != null && !leg.getStatus().equals(LegStatus.LANDED) && super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId() == leg.getManager().getId() && !leg.getIsDraftMode();
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -70,9 +67,6 @@ public class ManagerLegStatusService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void unbind(final Leg leg) {
-
-		if (super.getBuffer().getErrors().hasErrors())
-			leg.setIsDraftMode(true);
 
 		Dataset dataset;
 		List<Airport> airports;

@@ -15,9 +15,6 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.Valid;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
@@ -35,9 +32,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(indexes = {
-	@Index(columnList = "flight_id,scheduledDeparture"),
-	@Index(columnList = "aircraft_id,isDraftMode"),
-	@Index(columnList = "status,manager_id")
+	@Index(columnList = "flight_id,scheduledDeparture"), @Index(columnList = "aircraft_id,isDraftMode"), @Index(columnList = "status,manager_id")
 })
 public class Leg extends AbstractEntity {
 

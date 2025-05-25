@@ -3,6 +3,8 @@ package acme.features.flightCrewMember.flightassignment;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -80,50 +82,27 @@ public class FlightCrewMemberFlightAssignmentUpdateService extends AbstractGuiSe
 		Integer legId = super.getRequest().getData("leg", int.class);
 		Leg leg = this.repository.findLegById(legId);
 
-		super.bindObject(flightAssignment, "duty", "lastUpDate", "currentStatus", "remarks");
+		super.bindObject(flightAssignment, "duty", "currentStatus", "remarks");
 		flightAssignment.setFlightCrewMember(flightCrewMember);
 		flightAssignment.setLeg(leg);
 	}
 
 	@Override
 	public void validate(final FlightAssignment flightAssignment) {
-		// Obtener el FlightAssignment original antes de la edición
-		int flightAssignmentId = super.getRequest().getData("id", int.class);
-		FlightAssignment originalFlightAssignment = this.repository.findFlightAssignmentById(flightAssignmentId);
-
-		// Conservar los valores originales si no se han actualizado
-		if (flightAssignment.getFlightCrewMember() == null && originalFlightAssignment != null)
-			flightAssignment.setFlightCrewMember(originalFlightAssignment.getFlightCrewMember());
-
-		if (flightAssignment.getLeg() == null && originalFlightAssignment != null)
-			flightAssignment.setLeg(originalFlightAssignment.getLeg());
-
-		// Validar Duty si se ha cambiado
-		if (flightAssignment.getDuty() != null && !flightAssignment.getDuty().equals(originalFlightAssignment.getDuty())) {
-			if (flightAssignment.getDuty() == Duty.PILOT) {
-				long pilotCount = this.repository.findAllFlightAssignments().stream().filter(fa -> fa.getLeg().equals(flightAssignment.getLeg()) && fa.getDuty() == Duty.PILOT).count();
-				super.state(pilotCount < 1, "duty", "flight-crew-member.flight-assignment.error.pilot-limit-exceeded");
-			}
-
-			if (flightAssignment.getDuty() == Duty.COPILOT) {
-				long copilotCount = this.repository.findAllFlightAssignments().stream().filter(fa -> fa.getLeg().equals(flightAssignment.getLeg()) && fa.getDuty() == Duty.COPILOT).count();
-				super.state(copilotCount < 1, "duty", "flight-crew-member.flight-assignment.error.copilot-limit-exceeded");
-			}
-		}
-
-		// Validaciones restantes
 		if (flightAssignment.getFlightCrewMember() == null)
 			super.state(false, "flightCrewMember", "flight-crew-member.flight-assignment.error.not-available");
 		else {
-			boolean isSameFlightCrewMember = originalFlightAssignment != null && flightAssignment.getFlightCrewMember().equals(originalFlightAssignment.getFlightCrewMember());
-
-			if (!isSameFlightCrewMember && flightAssignment.getFlightCrewMember().getAvailabilityStatus() != AvailabilityStatus.AVAILABLE)
+			if (flightAssignment.getFlightCrewMember().getAvailabilityStatus() != AvailabilityStatus.AVAILABLE)
 				super.state(false, "flightCrewMember", "flight-crew-member.flight-assignment.error.not-available");
 
-			List<Leg> assignedLegs = this.repository.findLegsByFlightCrewMemberId(flightAssignment.getFlightCrewMember().getId());
+			// Obtener las asignaciones del miembro de la tripulación, excluyendo la actual
+			List<FlightAssignment> otherAssignments = this.repository.findAllFlightAssignments().stream().filter(fa -> fa.getFlightCrewMember().getId() == flightAssignment.getFlightCrewMember().getId()) // Mismo miembro
+				.filter(fa -> fa.getId() != flightAssignment.getId()) // Excluir la asignación actual
+				.collect(Collectors.toList());
 
-			boolean hasOverlappingLeg = assignedLegs.stream().anyMatch(leg -> flightAssignment.getLeg() != null && !leg.equals(flightAssignment.getLeg()) && leg.getScheduledDeparture().before(flightAssignment.getLeg().getScheduledArrival())
-				&& leg.getScheduledArrival().after(flightAssignment.getLeg().getScheduledDeparture()));
+			// Comprobar solapamiento de legs
+			boolean hasOverlappingLeg = otherAssignments.stream().map(FlightAssignment::getLeg).filter(Objects::nonNull)
+				.anyMatch(leg -> flightAssignment.getLeg() != null && leg.getScheduledDeparture().before(flightAssignment.getLeg().getScheduledArrival()) && leg.getScheduledArrival().after(flightAssignment.getLeg().getScheduledDeparture()));
 
 			super.state(!hasOverlappingLeg, "flightCrewMember", "flight-crew-member.flight-assignment.error.overlapping-legs");
 		}
@@ -139,6 +118,22 @@ public class FlightCrewMemberFlightAssignmentUpdateService extends AbstractGuiSe
 		} else
 			super.state(false, "leg", "flight-crew-member.flight-assignment.error.leg-null");
 
+		// Validación para piloto y copiloto, excluyendo la propia asignación
+		List<FlightAssignment> allAssignments = this.repository.findAllFlightAssignments().stream().filter(fa -> fa.getId() != flightAssignment.getId()) // ⚠️ comparación por valor int
+			.collect(Collectors.toList());
+
+		if (flightAssignment.getDuty() == Duty.PILOT) {
+			long pilotCount = allAssignments.stream().filter(fa -> fa.getLeg().equals(flightAssignment.getLeg()) && fa.getDuty() == Duty.PILOT).count();
+
+			super.state(pilotCount < 1, "duty", "flight-crew-member.flight-assignment.error.pilot-limit-exceeded");
+		}
+
+		if (flightAssignment.getDuty() == Duty.COPILOT) {
+			long copilotCount = allAssignments.stream().filter(fa -> fa.getLeg().equals(flightAssignment.getLeg()) && fa.getDuty() == Duty.COPILOT).count();
+
+			super.state(copilotCount < 1, "duty", "flight-crew-member.flight-assignment.error.copilot-limit-exceeded");
+		}
+
 		boolean confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
 	}
@@ -146,6 +141,7 @@ public class FlightCrewMemberFlightAssignmentUpdateService extends AbstractGuiSe
 	@Override
 	public void perform(final FlightAssignment flightAssignment) {
 		// Guardar el vuelo asignado
+		flightAssignment.setLastUpDate(MomentHelper.getCurrentMoment());
 		this.repository.save(flightAssignment);
 	}
 
@@ -168,19 +164,7 @@ public class FlightCrewMemberFlightAssignmentUpdateService extends AbstractGuiSe
 		// Crear opciones de selección para Duty, Current Status y FlightCrewMember
 		dutyChoices = SelectChoices.from(Duty.class, flightAssignment.getDuty());
 		SelectChoices currentStatuses = new SelectChoices();
-
-		CurrentStatus selected = flightAssignment.getCurrentStatus();
-
-		// Opción por defecto (como hace la clase internamente)
-		currentStatuses.add("0", "----", selected == null);
-
-		// Agregamos solo los valores que queremos mostrar
-		for (CurrentStatus status : List.of(CurrentStatus.PENDING, CurrentStatus.CONFIRMED)) {
-			String key = status.toString();
-			String label = status.toString(); // Puedes usar algo más amigable si quieres
-			boolean isSelected = status.equals(selected);
-			currentStatuses.add(key, label, isSelected);
-		}
+		currentStatuses = SelectChoices.from(CurrentStatus.class, flightAssignment.getCurrentStatus());
 
 		legChoices = SelectChoices.from(legs, "flightNumber", flightAssignment.getLeg());
 		// Desvincular los datos del FlightAssignment
@@ -192,7 +176,7 @@ public class FlightCrewMemberFlightAssignmentUpdateService extends AbstractGuiSe
 		dataset.put("legs", legChoices);
 		dataset.put("leg", legChoices.getSelected().getKey()); // Validación segura
 		dataset.put("isAvailable", isAvailable);
-		dataset.put("member", flightAssignment.getFlightCrewMember().getEmployeeCode());
+		dataset.put("flightCrewMember", flightAssignment.getFlightCrewMember().getEmployeeCode());
 		// Enviar los datos a la respuesta
 		super.getResponse().addData(dataset);
 	}

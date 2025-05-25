@@ -1,11 +1,13 @@
 
 package acme.features.flightCrewMember.activitylog;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
+import acme.client.components.views.SelectChoices;
 import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
@@ -74,13 +76,24 @@ public class FlightCrewMemberActivityLogDeleteService extends AbstractGuiService
 
 	@Override
 	public void unbind(final ActivityLog activityLog) {
-		Dataset dataset = super.unbindObject(activityLog, "registrationMoment", "typeOfIncident", "description", "severityLevel", "isDraftMode");
+		int memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		Collection<FlightAssignment> assignments = this.repository.findFlightAssignmentsByFlightCrewMember(memberId);
 
-		FlightAssignment assignment = activityLog.getFlightAssignment();
-		if (assignment != null) {
-			String assignmentInfo = String.format("%s - %s - %s - %s", assignment.getLastUpDate(), assignment.getDuty(), assignment.getCurrentStatus(), assignment.getLeg().getFlightNumber());
-			dataset.put("flightAssignment", assignmentInfo);
+		SelectChoices choices = new SelectChoices();
+		choices.add("0", "----", activityLog.getFlightAssignment() == null);
+
+		for (FlightAssignment a : assignments) {
+			String key = String.valueOf(a.getId());
+			String label = String.format("%s - %s - %s - %s", a.getLastUpDate(), a.getDuty(), a.getCurrentStatus(), a.getLeg().getFlightNumber());
+			boolean selected = a.equals(activityLog.getFlightAssignment());
+			choices.add(key, label, selected);
 		}
+
+		Dataset dataset = super.unbindObject(activityLog, "registrationMoment", "typeOfIncident", "description", "severityLevel", "isDraftMode");
+		dataset.put("assignments", choices);
+
+		if (activityLog.getFlightAssignment() != null)
+			dataset.put("flightAssignment", choices.getSelected().getKey());
 
 		super.getResponse().addData(dataset);
 	}
