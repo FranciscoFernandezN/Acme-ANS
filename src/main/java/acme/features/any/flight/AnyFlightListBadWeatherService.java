@@ -12,6 +12,7 @@ import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flights.Flight;
+import acme.entities.supportedcurrency.SupportedCurrency;
 
 @SuppressWarnings("deprecation")
 @GuiService
@@ -45,7 +46,7 @@ public class AnyFlightListBadWeatherService extends AbstractGuiService<Any, Flig
 
 		flights = this.fr.findAllFlightsPosted();
 
-		super.getBuffer().addData(flights.stream().filter(f -> f.getScheduledArrival().after(currentMoment)).filter(f -> f.getFlownWithBadWeather() != null && f.getFlownWithBadWeather()).toList());
+		super.getBuffer().addData(flights.stream().filter(f -> f.getScheduledArrival().after(currentMoment)).filter(f -> f.getFlownWithBadWeather()).toList());
 	}
 
 	@Override
@@ -58,7 +59,11 @@ public class AnyFlightListBadWeatherService extends AbstractGuiService<Any, Flig
 		Date scheduledDeparture = flight.getScheduledDeparture();
 		Date scheduledArrival = flight.getScheduledArrival();
 
-		dataset = super.unbindObject(flight, "tag", "cost", "needsSelfTransfer");
+		dataset = super.unbindObject(flight, "tag", "cost");
+
+		dataset.put("needsSelfTransfer", flight.getNeedsSelfTransfer() ? "✓" : "x");
+		
+		dataset.put("defaultCost", SupportedCurrency.convertToDefault(flight.getCost()));
 
 		dataset.put("origin", origin);
 		dataset.put("destiny", destiny);

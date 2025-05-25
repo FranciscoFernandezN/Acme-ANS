@@ -30,3 +30,4 @@ flight-crew-member.flight-assignment.error.copilot-limit-exceeded = It has to be
 flight-crew-member.flight-assignment.error.leg-null = A leg cannot be null  
 flight-crew-member.flight-assignment.error.cannot-publish-pending = The current status can't be pending
 flight-crew-member.flight-assignment.error.overlapping-legs = The legs are simultaneous
+flight-crew-member.flight-assignment.error.is-published = The flight assignment is published

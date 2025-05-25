@@ -1,0 +1,37 @@
+administrator.passenger.form.title = Formulario de pasajeros
+administrator.passenger.list.title = Listado de pasajeros
+
+administrator.passenger.list.label.fullName = Nombre del pasajero
+administrator.passenger.list.label.email = Email
+administrator.passenger.list.label.passportNumber = Número de pasaporte
+administrator.passenger.list.label.dateOfBirth = Fecha de nacimiento
+administrator.passenger.list.label.specialNeeds = Necesidades especiales
+
+administrator.passenger.form.label.fullName = Nombre del pasajero
+administrator.passenger.form.label.email = Email
+administrator.passenger.form.label.passportNumber = Número de pasaporte
+administrator.passenger.form.label.dateOfBirth = Fecha de nacimiento
+administrator.passenger.form.label.specialNeeds = Necesidades especiales
+
+administrator.ban.form.title = Formulario de veto
+administrator.ban.list.title = Listado de vetos
+
+administrator.ban.list.label.banIssuedDate = Fecha de veto
+administrator.ban.list.label.liftDate = Fecha de liberación
+administrator.ban.list.label.reasonForBan = Motivo del veto
+
+administrator.ban.form.label.passenger = Pasajero vetado
+administrator.ban.form.label.nationality = Nacionalidad
+
+administrator.ban.form.label.banIssuedDate = Fecha de veto
+administrator.ban.form.label.liftDate = Fecha de liberación
+administrator.ban.form.label.reasonForBan = Motivo del veto
+administrator.ban.form.label.confirm = ¿Confirmar operación?
+
+administrator.ban.form.button.update = Actualizar veto
+administrator.ban.form.button.create = Crear veto
+
+administrator.ban.create.incompatibleDates = La fecha de liberación debe ser posterior a la de veto
+administrator.ban.create.stillBanned = El pasajero ya está vetado entre esas fechas
+administrator.ban.update.incompatibleDates = La fecha de liberación debe ser posterior a la de veto
+administrator.ban.update.stillBanned = El pasajero ya está vetado entre esas fechas

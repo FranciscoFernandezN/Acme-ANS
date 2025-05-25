@@ -42,7 +42,7 @@ public class FlightCrewMemberActivityLogCreateService extends AbstractGuiService
 
 	@Override
 	public void bind(final ActivityLog activityLog) {
-		super.bindObject(activityLog, "registrationMoment", "typeOfIncident", "description", "severityLevel", "flightAssignment");
+		super.bindObject(activityLog, "typeOfIncident", "description", "severityLevel", "flightAssignment");
 	}
 
 	@Override
@@ -69,6 +69,7 @@ public class FlightCrewMemberActivityLogCreateService extends AbstractGuiService
 
 	@Override
 	public void perform(final ActivityLog activityLog) {
+		activityLog.setRegistrationMoment(MomentHelper.getCurrentMoment());
 		this.repository.save(activityLog);
 	}
 
