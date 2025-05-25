@@ -3,6 +3,7 @@ package acme.features.administrator.dashboard;
 
 import java.util.Date;
 import java.util.DoubleSummaryStatistics;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +50,7 @@ public class AdministratorDashboardShowService extends AbstractGuiService<Admini
 
 		// --- Count Airlines by AirlineType (initialize with all enum values)
 		List<Object[]> airlinesCountList = this.repository.countAirlinesByType();
-		Map<AirlineType, Integer> airlinesCountMap = new HashMap<>();
+		Map<AirlineType, Integer> airlinesCountMap = new EnumMap<>(AirlineType.class);
 		for (AirlineType type : AirlineType.values())
 			airlinesCountMap.put(type, 0);
 		for (Object[] row : airlinesCountList) {
@@ -88,7 +89,7 @@ public class AdministratorDashboardShowService extends AbstractGuiService<Admini
 		dashboard.setCountReviewsPostedLast10Weeks(countReviewsLast10Weeks != null ? countReviewsLast10Weeks : 0);
 
 		List<Object[]> reviewsPerWeek = this.repository.countReviewsPerWeekSince(tenWeeksAgo);
-		List<Integer> countsPerWeek = reviewsPerWeek.stream().map(row -> ((Long) row[1]).intValue()).collect(Collectors.toList());
+		List<Integer> countsPerWeek = reviewsPerWeek.stream().map(row -> ((Long) row[1]).intValue()).toList();
 
 		if (countsPerWeek.isEmpty()) {
 			dashboard.setAverageReviewsPostedLast10Weeks(0.0);

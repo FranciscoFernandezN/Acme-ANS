@@ -113,7 +113,7 @@ public class SupportedCurrency extends AbstractEntity {
 				}
 			} else {
 				Map<String, Double> mockedValues = new HashMap<>();
-				if(money.getCurrency().equals("EUR")) {
+				if(defaultCurrency.equals("EUR") && (money.getCurrency().equals("GBP") || money.getCurrency().equals("USD"))) {
 					mockedValues.put("GBP", 0.8270029409);
 					mockedValues.put("USD", 1.0352287186);
 					Double newAmount = money.getAmount() / mockedValues.get(money.getCurrency());

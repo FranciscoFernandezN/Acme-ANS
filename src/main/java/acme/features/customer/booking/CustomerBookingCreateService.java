@@ -17,6 +17,7 @@ import acme.entities.bookings.Booking;
 import acme.entities.bookings.TravelClass;
 import acme.entities.flights.Flight;
 import acme.entities.passengers.Passenger;
+import acme.entities.supportedcurrency.SupportedCurrency;
 import acme.realms.Customer;
 
 @GuiService
@@ -92,12 +93,7 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 		int flightId;
 		flightId = super.getRequest().getData("flight", int.class);
 		Flight flight = this.repository.findFlightById(flightId);
-		if (flight != null)
-			super.state(!flight.getIsDraftMode(), "flight", "customer.booking.create.flight-must-be-published");
-		else {
-			super.state(flightId > 0, "flight", "customer.booking.create.flight-must-be-chosen");
-			super.state(flightId <= 0, "flight", "customer.booking.create.flight-does-not-exist");
-		}
+		super.state(flight != null, "flight", "customer.booking.create.flight-must-be-chosen");
 
 		super.state(this.repository.findBookingByLocatorCode(super.getRequest().getData("locatorCode", String.class)) == null, "locatorCode", "customer.booking.create.locator-not-unique");
 
@@ -108,8 +104,7 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 		if (passenger != null) {
 			boolean yours = this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId()).contains(passenger);
 			super.state(yours, "passenger", "customer.booking.create.passenger-not-yours");
-		} else
-			super.state(passengerId <= 0, "passenger", "customer.booking.create.passenger-does-not-exist");
+		}
 
 		super.state(booking.getTravelClass() != null, "travelClass", "customer.booking.create.travel-class-does-not-exist");
 
@@ -121,7 +116,7 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 		booking.setPrice(booking.getFlight().getCost());
 		this.repository.save(booking);
 
-		if (super.getRequest().hasData("passenger") && this.repository.findPassengerById(super.getRequest().getData("passenger", int.class)) != null) {
+		if (this.repository.findPassengerById(super.getRequest().getData("passenger", int.class)) != null) {
 			BelongsTo belongsTo = new BelongsTo();
 
 			belongsTo.setBooking(booking);
@@ -134,11 +129,6 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 	public void unbind(final Booking booking) {
 		Dataset dataset;
 		int customerId = super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId();
-
-		if (super.getBuffer().getErrors().hasErrors()) {
-			booking.setIsDraftMode(true);
-			System.out.print(super.getBuffer().getErrors());
-		}
 
 		String locatorCode = "";
 
@@ -167,7 +157,8 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 
 		SelectChoices flightChoices = new SelectChoices();
 		int flightId = super.getRequest().hasData("flight") ? super.getRequest().getData("flight", int.class) : -1;
-		flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), f.getCost()), flightId == f.getId()));
+		flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()),
+			String.format("%s - %s, %s - %s, %s, %s", f.getOrigin(), f.getDestiny(), f.getScheduledDeparture(), f.getScheduledArrival(), SupportedCurrency.convertToDefault(f.getCost()), f.getTag()), flightId == f.getId()));
 		flightChoices.add("0", "----", flightId <= 0);
 
 		Collection<Passenger> passengers = this.repository.findPassengersByCustomerId(customerId);

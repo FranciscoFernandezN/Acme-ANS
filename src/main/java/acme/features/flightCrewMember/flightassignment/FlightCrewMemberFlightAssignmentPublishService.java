@@ -108,8 +108,8 @@ public class FlightCrewMemberFlightAssignmentPublishService extends AbstractGuiS
 			List<Leg> assignedLegs = this.repository.findLegsByFlightCrewMemberId(flightAssignment.getFlightCrewMember().getId());
 
 			// Verificar si hay solapamiento de horarios con otro Leg asignado
-			boolean hasOverlappingLeg = assignedLegs.stream().anyMatch(leg -> flightAssignment.getLeg() != null && !leg.equals(flightAssignment.getLeg()) && leg.getScheduledDeparture().before(flightAssignment.getLeg().getScheduledArrival())
-				&& leg.getScheduledArrival().after(flightAssignment.getLeg().getScheduledDeparture()));
+			boolean hasOverlappingLeg = assignedLegs.stream()
+				.anyMatch(leg -> flightAssignment.getLeg() != null && leg.getScheduledDeparture().before(flightAssignment.getLeg().getScheduledArrival()) && leg.getScheduledArrival().after(flightAssignment.getLeg().getScheduledDeparture()));
 
 			super.state(!hasOverlappingLeg, "flightCrewMember", "flight-crew-member.flight-assignment.error.overlapping-legs");
 		}

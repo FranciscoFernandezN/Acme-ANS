@@ -23,7 +23,20 @@ public class AdministratorRecommendationShowService extends AbstractGuiService<A
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Administrator.class));
+		Recommendation rec;
+		int recId;
+
+		boolean status = super.getRequest().getPrincipal().hasRealmOfType(Administrator.class);
+
+		if (status && super.getRequest().hasData("id")) {
+			recId = super.getRequest().getData("id", int.class);
+			rec = this.repository.findRecommendationById(recId);
+			status = rec != null;
+		} else
+			status = false;
+
+		super.getResponse().setAuthorised(status);
+
 	}
 
 	@Override
