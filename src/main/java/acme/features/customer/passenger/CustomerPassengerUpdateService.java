@@ -88,8 +88,7 @@ public class CustomerPassengerUpdateService extends AbstractGuiService<Customer,
 		if (booking != null) {
 			boolean yours = super.getRequest().getPrincipal().hasRealm(booking.getCustomer());
 			super.state(yours, "booking", "customer.passenger.update.booking-not-yours");
-			if (yours)
-				super.state(booking.getIsDraftMode(), "booking", "customer.passenger.update.booking-is-already-published");
+			super.state(booking.getIsDraftMode(), "booking", "customer.passenger.update.booking-is-already-published");
 		}
 
 	}
@@ -120,7 +119,7 @@ public class CustomerPassengerUpdateService extends AbstractGuiService<Customer,
 
 		dataset = super.unbindObject(passenger, "fullName", "email", "passportNumber", "dateOfBirth", "specialNeeds", "isDraftMode");
 
-		bookingId = super.getRequest().getData("booking", int.class);
+		bookingId = super.getRequest().hasData("booking") ? super.getRequest().getData("booking", int.class) : -1;
 		bookings.stream().forEach(b -> bookingChoices.add(String.valueOf(b.getId()), String.format("%s - %s", b.getLocatorCode(), b.getFlight().getTag()), bookingId == b.getId()));
 		bookingChoices.add("0", "----", bookingId <= 0);
 		dataset.put("booking", bookingId);

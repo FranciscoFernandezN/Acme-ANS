@@ -56,7 +56,6 @@ public class CustomerPassengerShowService extends AbstractGuiService<Customer, P
 	@Override
 	public void unbind(final Passenger passenger) {
 		Dataset dataset;
-		int bookingId;
 		Collection<Booking> bookings = this.repository.findBookingByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId());
 		bookings.removeAll(this.repository.findBookingByPassengerId(passenger.getId()));
 
@@ -64,10 +63,9 @@ public class CustomerPassengerShowService extends AbstractGuiService<Customer, P
 
 		dataset = super.unbindObject(passenger, "fullName", "email", "passportNumber", "dateOfBirth", "specialNeeds", "isDraftMode");
 
-		bookingId = super.getRequest().hasData("booking") ? super.getRequest().getData("booking", int.class) : -1;
-		bookings.stream().forEach(b -> bookingChoices.add(String.valueOf(b.getId()), String.format("%s - %s", b.getLocatorCode(), b.getFlight().getTag()), bookingId == b.getId()));
-		bookingChoices.add("0", "----", bookingId <= 0);
-		dataset.put("booking", bookingId);
+		bookings.stream().forEach(b -> bookingChoices.add(String.valueOf(b.getId()), String.format("%s - %s", b.getLocatorCode(), b.getFlight().getTag()), false));
+		bookingChoices.add("0", "----", true);
+		dataset.put("booking", -1);
 
 		dataset.put("bookingChoices", bookingChoices);
 		dataset.put("createdInBooking", false);
