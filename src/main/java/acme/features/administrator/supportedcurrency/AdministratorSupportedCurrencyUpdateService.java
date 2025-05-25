@@ -55,7 +55,7 @@ public class AdministratorSupportedCurrencyUpdateService extends AbstractGuiServ
 
 		super.state(!currencyNames.contains(supportedCurrency.getCurrencyName()), "currencyName", "administrator.supported-currency.create.already-exists-currency");
 
-		Set<String> allowedCurrencies = this.mockSupportedCurrency();
+		Set<String> allowedCurrencies = SupportedCurrency.getAllowedCurrencies();
 
 		super.state(allowedCurrencies.contains(supportedCurrency.getCurrencyName()), "currencyName", "administrator.supported-currency.create.not-valid-currency");
 	}
@@ -80,16 +80,5 @@ public class AdministratorSupportedCurrencyUpdateService extends AbstractGuiServ
 	}
 
 	// Ancillary methods ------------------------------------------------------
-
-	protected Set<String> mockSupportedCurrency() {
-		Set<String> res;
-
-		if (SpringHelper.isRunningOn("production"))
-			res = SupportedCurrency.getAllowedCurrencies();
-		else
-			res = Set.of("EUR", "USD", "JPY", "BGN", "CZK", "DKK", "GBP", "HUF", "PLN", "RON", "SEK", "CHF", "ISK", "RUB", "TRY", "AUD", "PHP", "ZAR");
-
-		return res;
-	}
 
 }
