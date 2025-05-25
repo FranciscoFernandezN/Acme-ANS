@@ -9,7 +9,6 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.recommendations.Recommendation;
 import acme.features.customer.recommendation.CustomerRecommendationRepository;
-import acme.realms.Customer;
 
 @GuiService
 public class AdministratorRecommendationShowService extends AbstractGuiService<Administrator, Recommendation> {
@@ -26,7 +25,7 @@ public class AdministratorRecommendationShowService extends AbstractGuiService<A
 	public void authorise() {
 		Recommendation rec;
 		int recId;
-		
+
 		boolean status = super.getRequest().getPrincipal().hasRealmOfType(Administrator.class);
 
 		if (status && super.getRequest().hasData("id")) {
@@ -37,7 +36,7 @@ public class AdministratorRecommendationShowService extends AbstractGuiService<A
 			status = false;
 
 		super.getResponse().setAuthorised(status);
-		
+
 	}
 
 	@Override
