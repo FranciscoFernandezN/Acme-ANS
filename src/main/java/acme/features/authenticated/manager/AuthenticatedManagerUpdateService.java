@@ -47,14 +47,12 @@ public class AuthenticatedManagerUpdateService extends AbstractGuiService<Authen
 
 	@Override
 	public void bind(final Manager object) {
-		assert object != null;
 
 		super.bindObject(object, "identifierNumber", "yearsOfExperience", "birth", "linkPicture");
 	}
 
 	@Override
 	public void validate(final Manager object) {
-		assert object != null;
 
 		List<Manager> managers = this.mr.findAllManagers();
 		List<String> managerIds = managers.stream().filter(m -> m.getId() != object.getId()).map(Manager::getIdentifierNumber).toList();
@@ -65,14 +63,12 @@ public class AuthenticatedManagerUpdateService extends AbstractGuiService<Authen
 
 	@Override
 	public void perform(final Manager object) {
-		assert object != null;
 
 		this.mr.save(object);
 	}
 
 	@Override
 	public void unbind(final Manager object) {
-		assert object != null;
 
 		Dataset dataset;
 
