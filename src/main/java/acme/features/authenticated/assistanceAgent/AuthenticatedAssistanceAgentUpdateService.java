@@ -47,7 +47,6 @@ public class AuthenticatedAssistanceAgentUpdateService extends AbstractGuiServic
 
 	@Override
 	public void bind(final AssistanceAgent object) {
-		assert object != null;
 
 		super.bindObject(object, "employeeCode", "languages", "firstWorkingDate", "biography", "salary", "photoLink");
 
@@ -62,7 +61,6 @@ public class AuthenticatedAssistanceAgentUpdateService extends AbstractGuiServic
 
 	@Override
 	public void validate(final AssistanceAgent object) {
-		assert object != null;
 
 		List<AssistanceAgent> AssistanceAgents = this.aar.findAllAssistanceAgents();
 		List<String> AssistanceAgentIds = AssistanceAgents.stream().filter(m -> m.getId() != object.getId()).map(AssistanceAgent::getEmployeeCode).toList();
@@ -73,14 +71,12 @@ public class AuthenticatedAssistanceAgentUpdateService extends AbstractGuiServic
 
 	@Override
 	public void perform(final AssistanceAgent object) {
-		assert object != null;
 
 		this.aar.save(object);
 	}
 
 	@Override
 	public void unbind(final AssistanceAgent object) {
-		assert object != null;
 
 		Dataset dataset;
 
