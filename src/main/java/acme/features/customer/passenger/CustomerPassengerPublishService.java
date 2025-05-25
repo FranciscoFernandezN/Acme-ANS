@@ -32,17 +32,19 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 		boolean hasBooking;
 		int masterId;
 		int bookingId;
-		int passengerId;
+		int passengerId = -1;
 		Booking booking;
 		Passenger passenger;
 
-		passengerId = super.getRequest().getData("id", int.class);
-		passenger = this.repository.findPassengerById(passengerId);
-
 		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
 
-		if (status)
+		boolean hasId = super.getRequest().hasData("id");
+
+		if (status && hasId) {
+			passengerId = super.getRequest().getData("id", int.class);
+			passenger = this.repository.findPassengerById(passengerId);
 			status = passenger == null || this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId()).contains(passenger) && passenger.getIsDraftMode();
+		}
 
 		hasMasterId = super.getRequest().hasData(CustomerPassengerController.MASTER_ID);
 		hasBooking = super.getRequest().hasData("booking");
@@ -53,7 +55,7 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 			status = booking != null && super.getRequest().getPrincipal().hasRealm(booking.getCustomer()) && booking.getIsDraftMode();
 		}
 
-		if (status && hasBooking) {
+		if (status && hasBooking && hasId) {
 			bookingId = super.getRequest().getData("booking", int.class);
 			booking = this.repository.findBookingById(bookingId);
 			status = bookingId == 0 || booking != null && super.getRequest().getPrincipal().hasRealm(booking.getCustomer()) && !this.repository.findBookingByPassengerId(passengerId).contains(booking) && booking.getIsDraftMode();
@@ -69,7 +71,7 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 		Passenger passenger;
 		int id;
 
-		id = super.getRequest().getData("id", int.class);
+		id = super.getRequest().hasData("id") ? super.getRequest().getData("id", int.class) : -1;
 		passenger = this.repository.findPassengerById(id);
 
 		if (passenger == null) {
