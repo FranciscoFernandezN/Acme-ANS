@@ -2,7 +2,6 @@
 package acme.features.flightCrewMember.activitylog;
 
 import java.util.Collection;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -74,9 +73,6 @@ public class FlightCrewMemberActivityLogUpdateService extends AbstractGuiService
 			return;
 		}
 
-		Date now = MomentHelper.getCurrentMoment();
-		if (leg.getScheduledDeparture().after(now))
-			super.state(false, "leg", "acme.validation.activityLog.leg.notLanded");
 	}
 
 	@Override

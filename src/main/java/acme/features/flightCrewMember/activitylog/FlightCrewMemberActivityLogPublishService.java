@@ -63,7 +63,7 @@ public class FlightCrewMemberActivityLogPublishService extends AbstractGuiServic
 			boolean isDraftMode = activityLog.getFlightAssignment().getIsDraftMode();
 			if (isDraftMode)
 				// Si 'draftMode' es verdadero, agregar un mensaje de error
-				super.state(false, "*", "acme.validation.activity-log.flight-assignment.draftMode");
+				super.state(false, "*", "flight-crew-member.activity-log.flight-assignment.draftMode");
 		}
 
 	}
