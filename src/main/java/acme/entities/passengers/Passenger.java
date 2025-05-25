@@ -15,6 +15,7 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidEmail;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidString;
+import acme.constraints.ValidNonSpamString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,6 +31,7 @@ public class Passenger extends AbstractEntity {
 	// Attributes -------------------------------------------------------------
 
 	@Mandatory
+	@ValidNonSpamString
 	@ValidString
 	@Automapped
 	private String				fullName;
@@ -40,6 +42,7 @@ public class Passenger extends AbstractEntity {
 	private String				email;
 
 	@Mandatory
+	@ValidNonSpamString
 	@ValidString(min = 6, max = 9, pattern = "^[A-Z0-9]{6,9}$")
 	@Column(unique = true)
 	private String				passportNumber;
@@ -50,6 +53,7 @@ public class Passenger extends AbstractEntity {
 	private Date				dateOfBirth;
 
 	@Optional
+	@ValidNonSpamString
 	@ValidString(max = 50)
 	@Automapped
 	private String				specialNeeds;

@@ -18,6 +18,7 @@ import acme.client.components.basis.AbstractRole;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidString;
+import acme.constraints.ValidNonSpamString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,11 +34,13 @@ public class Provider extends AbstractRole {
 	// Attributes -------------------------------------------------------------
 
 	@Mandatory
+	@ValidNonSpamString
 	@ValidString
 	@Automapped
 	private String				company;
 
 	@Mandatory
+	@ValidNonSpamString
 	@ValidString
 	@Automapped
 	private String				sector;

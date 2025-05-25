@@ -19,6 +19,7 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
+import acme.constraints.ValidNonSpamString;
 import acme.constraints.ValidSupportedCurrency;
 import acme.entities.aircrafts.Aircraft;
 import lombok.Getter;
@@ -57,6 +58,7 @@ public class MaintenanceRecord extends AbstractEntity {
 	private Money				estimatedCost;
 
 	@Optional
+	@ValidNonSpamString
 	@ValidString(max = 255)
 	@Automapped
 	private String				notes;

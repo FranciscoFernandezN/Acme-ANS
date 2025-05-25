@@ -62,6 +62,7 @@ public class Flight extends AbstractEntity {
 	private Money				cost;
 
 	@Optional
+	@ValidNonSpamString
 	@ValidString
 	@Automapped
 	private String				description;

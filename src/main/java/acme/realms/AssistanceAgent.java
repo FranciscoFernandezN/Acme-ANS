@@ -19,6 +19,7 @@ import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
 import acme.client.components.validation.ValidUrl;
+import acme.constraints.ValidNonSpamString;
 import acme.constraints.ValidSupportedCurrency;
 import acme.entities.airlines.Airline;
 import lombok.Getter;
@@ -36,11 +37,13 @@ public class AssistanceAgent extends AbstractRole {
 	// Attributes -------------------------------------------------------------
 
 	@Mandatory
+	@ValidNonSpamString
 	@ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$")
 	@Column(unique = true)
 	private String				employeeCode;
 
 	@Mandatory
+	@ValidNonSpamString
 	@ValidString
 	@Automapped
 	private String				languages;
@@ -51,6 +54,7 @@ public class AssistanceAgent extends AbstractRole {
 	private Date				firstWorkingDate;
 
 	@Optional
+	@ValidNonSpamString
 	@ValidString
 	@Automapped
 	private String				biography;

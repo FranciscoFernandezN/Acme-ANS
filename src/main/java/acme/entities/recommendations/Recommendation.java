@@ -13,6 +13,7 @@ import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
 import acme.client.components.validation.ValidUrl;
 import acme.components.recommendation.RecommendationPOJO;
+import acme.constraints.ValidNonSpamString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,11 +33,13 @@ public class Recommendation extends AbstractEntity {
 	// Attributes -------------------------------------------------------------
 
 	@Optional
+	@ValidNonSpamString
 	@ValidString(max = 50)
 	@Column(unique = true)
 	private String				name;
 
 	@Optional
+	@ValidNonSpamString
 	@ValidString(max = 50)
 	@Automapped
 	private String				city;
@@ -46,6 +49,7 @@ public class Recommendation extends AbstractEntity {
 	private BusinessStatus		businessStatus;
 
 	@Optional
+	@ValidNonSpamString
 	@ValidString(max = 50)
 	@Automapped
 	private String				formattedAddress;
