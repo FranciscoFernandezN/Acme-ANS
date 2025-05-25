@@ -39,7 +39,8 @@ public class AntiSpamValidator extends AbstractValidator<ValidNonSpamString, Str
 		} else {
 			condition = !SpamDetector.isSpam(text, new SpamProperties());
 			if(!condition)
-				HibernateHelper.replaceParameter(context, "placeholder", "acmeans.validation.nonspam.message");
+				//No se puede poner un identificador personalizado porque el framework está bug y no deja añadir nuevos identificadores
+				HibernateHelper.replaceParameter(context, "placeholder", "acme.validation.object.message");
 		}
 		
 		return condition;
