@@ -28,16 +28,22 @@ public class CustomerPassengerUpdateService extends AbstractGuiService<Customer,
 	@Override
 	public void authorise() {
 		boolean status;
-		int passengerId;
-		Passenger passenger;
-		boolean hasBooking;
+		int passengerId = 0;
+		Passenger passenger = null;
+		boolean hasBooking = false;
 		int bookingId;
 		Booking booking;
 
-		passengerId = super.getRequest().getData("id", int.class);
-		passenger = this.repository.findPassengerById(passengerId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class) && this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId()).contains(passenger);
-		hasBooking = super.getRequest().hasData("booking");
+		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
+
+		if (status && super.getRequest().hasData("id")) {
+			passengerId = super.getRequest().getData("id", int.class);
+			passenger = this.repository.findPassengerById(passengerId);
+			hasBooking = super.getRequest().hasData("booking");
+		} else
+			status = false;
+
+		status = status && this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId()).contains(passenger) && passenger.getIsDraftMode();
 
 		if (status && hasBooking) {
 			bookingId = super.getRequest().getData("booking", int.class);
@@ -68,9 +74,10 @@ public class CustomerPassengerUpdateService extends AbstractGuiService<Customer,
 	public void validate(final Passenger passenger) {
 		Boolean passportAlreadyInUse;
 		Passenger oldPassenger;
+		int customerId = super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId();
 
 		oldPassenger = this.repository.findPassengerById(passenger.getId());
-		passportAlreadyInUse = !this.repository.findAllPassportNumbers().contains(passenger.getPassportNumber()) || oldPassenger.getPassportNumber().equals(passenger.getPassportNumber());
+		passportAlreadyInUse = !this.repository.findAllPassportNumbersOfCustomer(customerId).contains(passenger.getPassportNumber()) || oldPassenger.getPassportNumber().equals(passenger.getPassportNumber());
 
 		super.state(passportAlreadyInUse, "passportNumber", "customer.passenger.update.passport-number-must-be-unique");
 
@@ -81,12 +88,8 @@ public class CustomerPassengerUpdateService extends AbstractGuiService<Customer,
 		if (booking != null) {
 			boolean yours = super.getRequest().getPrincipal().hasRealm(booking.getCustomer());
 			super.state(yours, "booking", "customer.passenger.update.booking-not-yours");
-			if (yours) {
-				super.state(booking.getIsDraftMode(), "booking", "customer.passenger.update.booking-is-already-published");
-				super.state(!this.repository.findBookingByPassengerId(passenger.getId()).contains(booking), "booking", "customer.passenger.update.booking-is-repeated");
-			}
-		} else
-			super.state(bookingId <= 0, "booking", "customer.passenger.update.booking-does-not-exist");
+			super.state(booking.getIsDraftMode(), "booking", "customer.passenger.update.booking-is-already-published");
+		}
 
 	}
 
@@ -95,7 +98,7 @@ public class CustomerPassengerUpdateService extends AbstractGuiService<Customer,
 		passenger.setIsDraftMode(true);
 		this.repository.save(passenger);
 
-		if (super.getRequest().hasData("booking") && this.repository.findBookingById(super.getRequest().getData("booking", int.class)) != null) {
+		if (this.repository.findBookingById(super.getRequest().getData("booking", int.class)) != null) {
 			BelongsTo belongsTo = new BelongsTo();
 
 			belongsTo.setBooking(this.repository.findBookingById(super.getRequest().getData("booking", int.class)));
@@ -111,11 +114,6 @@ public class CustomerPassengerUpdateService extends AbstractGuiService<Customer,
 		int bookingId;
 		Collection<Booking> bookings = this.repository.findBookingByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId());
 		bookings.removeAll(this.repository.findBookingByPassengerId(passenger.getId()));
-
-		if (super.getBuffer().getErrors().hasErrors()) {
-			passenger.setIsDraftMode(true);
-			System.out.print(super.getBuffer().getErrors());
-		}
 
 		SelectChoices bookingChoices = new SelectChoices();
 

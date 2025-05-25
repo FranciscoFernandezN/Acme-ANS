@@ -16,10 +16,13 @@ public class CustomerRecommendationController extends AbstractGuiController<Cust
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private CustomerRecommendationListService	listService;
+	private CustomerRecommendationListService			listService;
 
 	@Autowired
-	private CustomerRecommendationShowService	showService;
+	private CustomerRecommendationListRelatedService	listRelatedService;
+
+	@Autowired
+	private CustomerRecommendationShowService			showService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -27,6 +30,7 @@ public class CustomerRecommendationController extends AbstractGuiController<Cust
 	@PostConstruct
 	protected void initialise() {
 		super.addBasicCommand("list", this.listService);
+		super.addCustomCommand("list-related", "list", this.listRelatedService);
 		super.addBasicCommand("show", this.showService);
 	}
 }

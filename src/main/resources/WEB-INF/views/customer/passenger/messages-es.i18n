@@ -24,19 +24,19 @@ customer.passenger.form.button.create = Crear nuevo pasajero
 customer.passenger.form.button.update = Actualizar pasajero
 customer.passenger.form.button.publish = Publicar pasajero
 
-customer.passenger.create.passport-number-must-be-unique = Ya existe en el sistema un pasajero con el mismo pasaporte
+customer.passenger.create.passport-number-must-be-unique = Ya has registrado a un pasajero con el mismo pasaporte
 customer.passenger.create.booking-does-not-exist = La reserva no existe
 customer.passenger.create.booking-not-yours = Esa reserva no te pertenece
 customer.passenger.create.booking-is-already-published = No puedes añadir pasajeros a una reserva que ya fue publicada
 customer.passenger.create.booking-must-be-chosen = Escoge una reserva
 
-customer.passenger.update.passport-number-must-be-unique = Ya existe en el sistema un pasajero con el mismo pasaporte
+customer.passenger.update.passport-number-must-be-unique = Ya has registrado a un pasajero con el mismo pasaporte
 customer.passenger.update.booking-does-not-exist = La reserva no existe
 customer.passenger.update.booking-not-yours = Esa reserva no te pertenece
 customer.passenger.update.booking-is-already-published = No puedes añadir pasajeros a una reserva que ya fue publicada
 customer.passenger.update.booking-is-repeated = El pasajero ya se encuentra en dicha reserva
 
-customer.passenger.publish.passport-number-must-be-unique = Ya existe en el sistema un pasajero con el mismo pasaporte
+customer.passenger.publish.passport-number-must-be-unique = Ya has registrado a un pasajero con el mismo pasaporte
 customer.passenger.publish.booking-does-not-exist = La reserva no existe
 customer.passenger.publish.booking-not-yours = Esa reserva no te pertenece
 customer.passenger.publish.booking-is-already-published = No puedes añadir pasajeros a una reserva que ya fue publicada

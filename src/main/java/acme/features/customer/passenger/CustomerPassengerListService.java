@@ -81,7 +81,7 @@ public class CustomerPassengerListService extends AbstractGuiService<Customer, P
 		if (super.getRequest().hasData(CustomerPassengerListService.MASTER_ID)) {
 			bookingId = super.getRequest().getData(CustomerPassengerListService.MASTER_ID, int.class);
 			booking = this.repository.findBookingById(bookingId);
-			showCreate = booking.getIsDraftMode() && super.getRequest().getPrincipal().hasRealm(booking.getCustomer());
+			showCreate = booking.getIsDraftMode();
 
 			super.getResponse().addGlobal("booking", bookingId);
 		}

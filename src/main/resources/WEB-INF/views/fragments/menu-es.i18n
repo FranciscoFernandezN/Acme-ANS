@@ -17,7 +17,8 @@ master.menu.any.list-weather = Ver tiempos
 
 master.menu.recommendation = Recomendaciones
 master.menu.administrator.list-recommendation = Ver recomendaciones (admin)
-master.menu.customer.list-recommendation = Ver recomendaciones
+master.menu.customer.list-related-recommendation = Ver recomendaciones de destinos
+master.menu.customer.list-recommendation = Ver todas las recomendaciones
 
 # master.menu.banned-passengers #######################################################
 
