@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1">
-  <zoom_level>11</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>847</x>
-      <y>33</y>
-      <w>858</w>
-      <h>143</h>
+      <x>712</x>
+      <y>136</y>
+      <w>592</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>bg=green
 &lt;&lt;Entity&gt;&gt;
 Booking
 --
-+ locatorCode: String {Unique, Mandatory, ValidString(min = 6, max = 8, pattern = "^[A-Z0-9]{6,8}$"), Column(unique = true)}
++ locatorCode: String {Mandatory, ValidString(min = 6, max = 8, pattern = "^[A-Z0-9]{6,8}$"), Column(unique = true)}
 + purchaseMoment: Date {Mandatory, ValidMoment(past = true), Temporal(TemporalType.TIMESTAMP)}
-+ travelClass: TravelClass {Mandatory, Valid, Enumerated(EnumType.STRING), Automapped}
-+ price: Money {Mandatory, ValidMoney(min = 0), Automapped}
-+ lastNibble: {Optional, ValidString(min = 4, max = 4, pattern = "\\d{4}"), Automapped}</panel_attributes>
++ travelClass: TravelClass {Mandatory, Enumerated(EnumType.STRING), Automapped}
++ price: Money {Mandatory, ValidMoney(min = 0, max = 1000000), ValidSupportedCurrency, Automapped}
++ lastNibble: String {Optional, ValidString(min = 4, max = 4, pattern = "\\d{4}"), Automapped}
++ isDraftMode: Boolean {Mandatory, Automapped}</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>583</x>
-      <y>220</y>
-      <w>121</w>
-      <h>88</h>
+      <x>976</x>
+      <y>24</y>
+      <w>88</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
 TravelClass
@@ -39,36 +40,36 @@ bg=GRAY</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2123</x>
-      <y>22</y>
-      <w>891</w>
-      <h>165</h>
+      <x>1928</x>
+      <y>128</y>
+      <w>560</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>bg=green
-&lt;&lt;Role&gt;&gt;
+&lt;&lt;Entity&gt;&gt;
 Passenger
 --
-+ fulName: String {Mandatory, ValidString, Automapped}
++ fullName: String {Mandatory, ValidString, Automapped}
 + email: String {Mandatory, ValidEmail, Automapped}
-+ passportNumber: String {Unique, Mandatory, ValidString(min = 6, max = 9, pattern = "^[A-Z0-9]{6,9}$"), Column(unique = true)}
++ passportNumber: String {Mandatory, ValidString(min = 6, max = 9, pattern = "^[A-Z0-9]{6,9}$"), Automapped}
 + dateOfBirth: Date {Mandatory, ValidMoment(past = true), Temporal(TemporalType.DATE)}
-+ nationality: String {Mandatory, ValidString(max = 50), Automapped}
-+ specialNeeds: String {Optional, ValidString(max = 50), Automapped}</panel_attributes>
++ specialNeeds: String {Optional, ValidString(max = 50), Automapped}
++ isDraftMode: Boolean {Mandatory, Automapped}</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>847</x>
-      <y>407</y>
-      <w>858</w>
-      <h>165</h>
+      <x>712</x>
+      <y>408</y>
+      <w>576</w>
+      <h>112</h>
     </coordinates>
-    <panel_attributes>bg=green
+    <panel_attributes>bg=pink
 &lt;&lt;Role&gt;&gt;
 Customer
 --
-+ identifier: String {Unique, Mandatory, ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$"), Column(unique = true)}
++ identifier: String {Mandatory, ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$"), Column(unique = true)}
 + phoneNumber: String {Mandatory, ValidString(min = 6, max = 15, pattern = "^\\+?\\d{6,15}$"), Automapped}
 + physicalAddress: String {Mandatory, ValidString, Automapped}
 + city: String {Mandatory, ValidString(max = 50), Automapped}
@@ -80,67 +81,98 @@ Customer
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>11</y>
-      <w>429</w>
-      <h>220</h>
+      <y>120</y>
+      <w>448</w>
+      <h>224</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Flight
 --
-+tag: String {Mandatory, ValidString(max = 50), Automapped}
-+needsSelfTransfer: Boolean {Mandatory, Automapped}
-+cost: Money {Mandatory, ValidMoney, Automapped}
-+description: String {Optional, ValidString, Automapped}
++ tag: String {Mandatory, ValidString(max = 50), Automapped}
++ needsSelfTransfer: Boolean {Mandatory, Automapped}
++ cost: Money {Mandatory, ValidMoney(min = 0), ValidSupportedCurrency, Automapped}
++ description: String {Optional, ValidString, Automapped}
++ isDraftMode: Boolean {Mandatory, Automapped}
 --
-+getScheduledDeparture(): Date
-+getScheduledArrival(): Date
-+getOrigin(): String
-+getDestiny(): String
-+getNumberOfLayovers(): Integer
-
+/+ getScheduledDeparture(): Date {Mandatory, Valid, Transient}
+/+ getScheduledArrival(): Date {Mandatory, Valid, Transient}
+/+ getOriginAirport(): Airport {Mandatory, Valid, Transient}
+/+ getOrigin(): String {Mandatory, Valid, Transient}
+/+ getDestinyAirport(): Airport {Mandatory, Valid, Transient}
+/+ getDestiny(): String {Mandatory, Valid, Transient}
+/+ getNumberOfLayovers(): Integer {Mandatory, Valid, Transient}
+/+ getAirline(): Airline {Mandatory, Valid, Transient}
+/+ getFlownWithBadWeather(): Boolean {Mandatory, Valid, Transient}
 bg=GREEN</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>418</x>
-      <y>88</y>
-      <w>451</w>
-      <h>55</h>
+      <x>440</x>
+      <y>176</y>
+      <w>288</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;-x
 m1=1
 m2=*
-that have &gt;</panel_attributes>
-    <additional_attributes>10.0;20.0;390.0;20.0</additional_attributes>
+&lt; of a</panel_attributes>
+    <additional_attributes>10.0;20.0;340.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1694</x>
-      <y>88</y>
-      <w>451</w>
-      <h>55</h>
+      <x>1648</x>
+      <y>176</y>
+      <w>296</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;-x
 m1=1
 m2=*
-belongs to &gt;</panel_attributes>
-    <additional_attributes>390.0;20.0;10.0;20.0</additional_attributes>
+&lt; has</panel_attributes>
+    <additional_attributes>350.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1265</x>
-      <y>165</y>
-      <w>121</w>
-      <h>264</h>
+      <x>1016</x>
+      <y>240</y>
+      <w>88</w>
+      <h>184</h>
     </coordinates>
     <panel_attributes>lt=x-&gt;
 m1=*
 m2=1
-is done by &gt;</panel_attributes>
-    <additional_attributes>10.0;220.0;10.0;10.0</additional_attributes>
+is done by v</panel_attributes>
+    <additional_attributes>10.0;210.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1584</x>
+      <y>176</y>
+      <w>72</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>bg=green
+&lt;&lt;Entity&gt;&gt;
+Belongs To</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1296</x>
+      <y>176</y>
+      <w>304</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=x-&gt;
+m1=*
+m2=1
+booked for &gt;</panel_attributes>
+    <additional_attributes>360.0;20.0;10.0;20.0</additional_attributes>
   </element>
 </diagram>
