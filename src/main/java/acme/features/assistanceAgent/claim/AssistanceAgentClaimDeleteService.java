@@ -13,6 +13,7 @@ import acme.entities.claims.Claim;
 import acme.entities.claims.ClaimState;
 import acme.entities.claims.ClaimType;
 import acme.entities.legs.Leg;
+import acme.entities.trackinglogs.TrackingLog;
 import acme.realms.AssistanceAgent;
 
 @GuiService
@@ -65,7 +66,10 @@ public class AssistanceAgentClaimDeleteService extends AbstractGuiService<Assist
 
 	@Override
 	public void validate(final Claim claim) {
-		super.state(!claim.getIsPublished(), "isPublished", "assistance-agent.claim.delete.is-published");
+		int claimId;
+		claimId = super.getRequest().getData("id", int.class);
+		List<TrackingLog> tl = this.aacr.findTrackingLogsByClaimId(claimId);
+		super.state(tl.isEmpty(), "*", "assistance-agent.claim.delete.has-log");
 	}
 
 	@Override

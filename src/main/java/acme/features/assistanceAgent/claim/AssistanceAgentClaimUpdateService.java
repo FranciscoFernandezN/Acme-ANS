@@ -75,11 +75,10 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 
 	@Override
 	public void validate(final Claim claim) {
-		Leg leg = this.aacr.findLegByClaimId(claim.getId());
-		if (claim.getIsPublished() && leg != null && !leg.getIsDraftMode())
-			super.state(true, "isPublished", "assistance-agent.claim.create.leg-not-published");
+		if ((claim.getIndicator() == ClaimState.ACCEPTED || claim.getIndicator() == ClaimState.REJECTED) && !claim.getIsPublished())
+			super.state(false, "isPublished", "assistance-agent.claim.create.should-be-publised");
 		if (claim.getIndicator() == ClaimState.IN_PROGRESS && claim.getIsPublished())
-			super.state(claim.getIndicator() != ClaimState.IN_PROGRESS, "indicator", "assistance-agent.claim.create.cant-be-published");
+			super.state(false, "indicator", "assistance-agent.claim.create.cant-be-published");
 	}
 
 	@Override
