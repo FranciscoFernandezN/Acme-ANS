@@ -50,7 +50,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "4432f558-07de-4e86-9eb8-63ef6bd5a204",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,5429394284800,5429396174900,5429396679600
 "18bd977b-2feb-43c2-9b8c-347e10916584",GET,/images/banner.png,,,200,image/png,,,5429403663900,5429405758200,5429406525800
 "39934324-40d9-4e2d-a131-447cf19bceee",GET,/images/logo.png,,,200,image/png,,,5429410497000,5429412516100,5429413156900
-"0965f1f7-2b17-49d5-af2f-8a85adadb04a",GET,"/administrator/supported-currency/list",,,200,text/html;charset=utf-8,"version%5B1%5D=0&isDefaultCurrency%5B1%5D=false&isDefaultCurrency%5B0%5D=true&id%5B1%5D=33&currencyName%5B1%5D=USD&version%5B2%5D=0&currencyName%5B0%5D=EUR&id%5B0%5D=32&isDefaultCurrency%5B2%5D=false&service=159&version%5B0%5D=0&id%5B2%5D=34&currencyName%5B2%5D=GBP",,5436168329000,5436184933500,5437097547900
+"0965f1f7-2b17-49d5-af2f-8a85adadb04a",GET,"/administrator/supported-currency/list",,,200,text/html;charset=utf-8,"version%5B1%5D=0&isDefaultCurrency%5B1%5D=x&isDefaultCurrency%5B0%5D=✓&id%5B1%5D=33&currencyName%5B1%5D=USD&version%5B2%5D=0&currencyName%5B0%5D=EUR&id%5B0%5D=32&isDefaultCurrency%5B2%5D=x&service=159&version%5B0%5D=0&id%5B2%5D=34&currencyName%5B2%5D=GBP",,5436168329000,5436184933500,5437097547900
 "04e20d4f-3940-438c-a566-ddc55de5a13f",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,5437122852300,5437124612700,5437125114500
 "e58a2d6b-c4ba-4541-aab6-07621cf2ac77",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,5437128199500,5437129881500,5437130322400
 "30140730-9a88-47d4-823f-a32cb2bddd06",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,5437133503200,5437135339300,5437135959300

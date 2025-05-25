@@ -4,10 +4,11 @@ package acme.entities.passengers;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractEntity;
@@ -22,6 +23,9 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Table(indexes = {
+	@Index(columnList = "liftDate,passenger_id")
+})
 public class Ban extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
@@ -52,18 +56,11 @@ public class Ban extends AbstractEntity {
 
 	// Derived attributes -----------------------------------------------------
 
-
-	@Transient
-	public Boolean isStillBanned() {
-		return this.liftDate == null || this.liftDate.after(new Date());
-	}
-
 	// Relationships ----------------------------------------------------------
-
 
 	@Mandatory
 	@Valid
 	@ManyToOne(optional = false)
-	private Passenger passenger;
+	private Passenger			passenger;
 
 }

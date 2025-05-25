@@ -1,0 +1,13 @@
+administrator.administrator-dashboard.form.title = Administrator dashboard
+
+administrator.administrator-dashboard.form.label.totalNumAirportsByOperationalScope = Total number of airports by operational scope:
+administrator.administrator-dashboard.form.label.numAirlinesByType = Number of airlines by type:
+administrator.administrator-dashboard.form.label.ratioAirlinesWithEmailAndPhone = Ratio of airlines with email and phone:
+administrator.administrator-dashboard.form.label.ratioActiveAircrafts = Ratio of active aircrafts:
+administrator.administrator-dashboard.form.label.ratioInactiveAircrafts = Ratio of inactive aircrafts:
+administrator.administrator-dashboard.form.label.ratioReviewsWithScoreHigher5 = Ratio of reviews with score higher than 5:
+administrator.administrator-dashboard.form.label.countReviewsPostedLast10Weeks = Count of reviews posted in the last 10 weeks:
+administrator.administrator-dashboard.form.label.averageReviewsPostedLast10Weeks = Average reviews posted in the last 10 weeks:
+administrator.administrator-dashboard.form.label.minReviewsPostedLast10Weeks = Minimum reviews posted in the last 10 weeks:
+administrator.administrator-dashboard.form.label.maxReviewsPostedLast10Weeks = Maximum reviews posted in the last 10 weeks:
+administrator.administrator-dashboard.form.label.stdDeviationReviewsPostedLast10Weeks = Standard deviation of reviews posted in the last 10 weeks:

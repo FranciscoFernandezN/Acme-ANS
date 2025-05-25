@@ -17,7 +17,16 @@ master.menu.any.list-weather = Ver tiempos
 
 master.menu.recommendation = Recomendaciones
 master.menu.administrator.list-recommendation = Ver recomendaciones (admin)
-master.menu.customer.list-recommendation = Ver recomendaciones
+master.menu.customer.list-related-recommendation = Ver recomendaciones de destinos
+master.menu.customer.list-recommendation = Ver todas las recomendaciones
+
+# master.menu.banned-passengers #######################################################
+
+master.menu.banned-passengers = Pasajeros vetados
+master.menu.administrator.list-banned-passengers = Ver pasajeros vetados
+master.menu.administrator.list-banned-passengers-last-month = Pasajeros vetados el último mes
+master.menu.administrator.list-lifted-ban-passengers = Pasajeros que ya no están vetados
+master.menu.administrator.create-ban = Vetar pasajero
 
 # master.menu.reviews #######################################################
 
@@ -54,6 +63,7 @@ master.menu.anonymous.estegn10-favourite-link = 53962653F: Gómez Navarro, Esteb
 # master.menu.administrator ###################################################
 
 master.menu.administrator = Administrador
+master.menu.administrator.dashboard = Panel de indicadores
 master.menu.administrator.list-user-accounts = Ver cuentas de usuario
 master.menu.administrator.list-services = Ver servicios (admin)
 master.menu.administrator.create-services = Crear servicios (admin)

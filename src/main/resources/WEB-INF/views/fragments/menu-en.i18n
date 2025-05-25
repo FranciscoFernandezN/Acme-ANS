@@ -17,7 +17,16 @@ master.menu.any.list-weather = List weather
 
 master.menu.recommendation = Recommendations
 master.menu.administrator.list-recommendation = List recommendations (admin)
-master.menu.customer.list-recommendation = List recommendations
+master.menu.customer.list-recommendation = List all recommendations
+master.menu.customer.list-related-recommendation = List related recommendations
+
+# master.menu.banned-passengers #######################################################
+
+master.menu.banned-passengers = Banned passengers
+master.menu.administrator.list-banned-passengers = List banned passengers
+master.menu.administrator.list-banned-passengers-last-month = List passengers banned last month
+master.menu.administrator.list-lifted-ban-passengers = List passengers with lifted ban
+master.menu.administrator.create-ban = Ban passenger
 
 # master.menu.reviews #######################################################
 
@@ -54,6 +63,7 @@ master.menu.anonymous.estegn10-favourite-link = 53962653F: Gómez Navarro, Esteb
 # master.menu.administrator ###################################################
 
 master.menu.administrator = Administrator
+master.menu.administrator.dashboard = Dashboard
 master.menu.administrator.list-user-accounts = List user accounts
 master.menu.administrator.list-supported-currencies = List system configuration
 master.menu.administrator.populate-db-initial = Populate DB (initial)

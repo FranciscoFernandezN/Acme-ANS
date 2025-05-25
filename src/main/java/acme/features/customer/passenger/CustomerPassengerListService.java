@@ -65,7 +65,8 @@ public class CustomerPassengerListService extends AbstractGuiService<Customer, P
 		boolean showCreate = true;
 		String specialNeeds = passengers.getSpecialNeeds();
 
-		dataset = super.unbindObject(passengers, "fullName", "email", "passportNumber", "dateOfBirth", "isDraftMode");
+		dataset = super.unbindObject(passengers, "fullName", "email", "passportNumber", "dateOfBirth");
+		dataset.put("isDraftMode", passengers.getIsDraftMode() ? "✓" : "x");
 		dataset.put("specialNeeds", specialNeeds.isBlank() ? "N/A" : specialNeeds);
 		super.getResponse().addData(dataset);
 		super.getResponse().addGlobal("showCreate", showCreate);
@@ -80,7 +81,7 @@ public class CustomerPassengerListService extends AbstractGuiService<Customer, P
 		if (super.getRequest().hasData(CustomerPassengerListService.MASTER_ID)) {
 			bookingId = super.getRequest().getData(CustomerPassengerListService.MASTER_ID, int.class);
 			booking = this.repository.findBookingById(bookingId);
-			showCreate = booking.getIsDraftMode() && super.getRequest().getPrincipal().hasRealm(booking.getCustomer());
+			showCreate = booking.getIsDraftMode();
 
 			super.getResponse().addGlobal("booking", bookingId);
 		}

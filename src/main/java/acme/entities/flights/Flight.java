@@ -71,7 +71,6 @@ public class Flight extends AbstractEntity {
 	// Derived attributes -----------------------------------------------------
 
 
-	//TODO: no me gusta esto de aquí
 	private List<Leg> getSortedLegs() {
 		FlightRepository repository = SpringHelper.getBean(FlightRepository.class);
 		List<Leg> legs = repository.findAllLegsByFlightId(this.getId());
@@ -138,7 +137,7 @@ public class Flight extends AbstractEntity {
 
 	@Transient
 	public Boolean getFlownWithBadWeather() {
-		Boolean result = null;
+		Boolean result = false;
 		List<Leg> legs = this.getSortedLegs();
 		if (!legs.isEmpty()) {
 			result = false;

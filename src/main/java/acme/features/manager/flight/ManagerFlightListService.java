@@ -50,8 +50,11 @@ public class ManagerFlightListService extends AbstractGuiService<Manager, Flight
 		Date scheduledDeparture = flight.getScheduledDeparture();
 		Date scheduledArrival = flight.getScheduledArrival();
 
-		dataset = super.unbindObject(flight, "id", "tag", "cost", "isDraftMode", "needsSelfTransfer");
-		
+		dataset = super.unbindObject(flight, "id", "tag", "cost");
+
+		dataset.put("isDraftMode", flight.getIsDraftMode() ? "✓" : "x");
+		dataset.put("needsSelfTransfer", flight.getNeedsSelfTransfer() ? "✓" : "x");
+
 		dataset.put("defaultCost", SupportedCurrency.convertToDefault(flight.getCost()));
 
 		dataset.put("origin", origin == null ? "N/A" : origin);

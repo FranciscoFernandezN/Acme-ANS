@@ -9,4 +9,9 @@
 	<acme:list-column code="administrator.passenger.list.label.passportNumber" path="passportNumber" width="20%"/>
 	<acme:list-column code="administrator.passenger.list.label.dateOfBirth" path="dateOfBirth" width="20%"/>
 	<acme:list-column code="administrator.passenger.list.label.specialNeeds" path="specialNeeds" width="20%"/>
+	<jstl:if test="${banned}">
+		<acme:list-column code="administrator.passenger.list.label.nationality" path="nationality" width="20%"/>
+	</jstl:if>
 </acme:list>
+
+<acme:button code="administrator.passenger.list.button.create-ban" action="/administrator/ban/create"/>

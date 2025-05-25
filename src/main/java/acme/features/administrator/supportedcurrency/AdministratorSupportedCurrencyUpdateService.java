@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.principals.Administrator;
+import acme.client.helpers.SpringHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.supportedcurrency.SupportedCurrency;
@@ -53,9 +54,9 @@ public class AdministratorSupportedCurrencyUpdateService extends AbstractGuiServ
 		super.state(!(this.scr.findDefaultSupportedCurrency().getId() == supportedCurrency.getId() && !supportedCurrency.getIsDefaultCurrency()), "isDefaultCurrency", "administrator.supported-currency.update.cant-set-no-default");
 
 		super.state(!currencyNames.contains(supportedCurrency.getCurrencyName()), "currencyName", "administrator.supported-currency.create.already-exists-currency");
-		
+
 		Set<String> allowedCurrencies = SupportedCurrency.getAllowedCurrencies();
-		
+
 		super.state(allowedCurrencies.contains(supportedCurrency.getCurrencyName()), "currencyName", "administrator.supported-currency.create.not-valid-currency");
 	}
 
@@ -77,5 +78,7 @@ public class AdministratorSupportedCurrencyUpdateService extends AbstractGuiServ
 
 		super.getResponse().addData(dataset);
 	}
+
+	// Ancillary methods ------------------------------------------------------
 
 }

@@ -10,7 +10,7 @@
 	<acme:input-select code="assistance-agent.claim.form.label.claimType" path="claimType" choices="${claimType}"/>
 	<acme:input-select code="assistance-agent.claim.form.label.indicator" path="indicator" choices="${indicator}" readonly="${_command == 'create'}"/>
 	<acme:input-select code="assistance-agent.claim.form.label.leg" path="leg" choices="${leg}"/>
-	<acme:input-checkbox code="assistance-agent.claim.form.label.isPublished" path="isPublished"/>
+	<acme:input-checkbox code="assistance-agent.claim.form.label.isPublished" path="isPublished" readonly="${_command == 'create'}"/>
 
 	
 	<jstl:choose>
