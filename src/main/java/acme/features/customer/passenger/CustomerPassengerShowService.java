@@ -30,9 +30,14 @@ public class CustomerPassengerShowService extends AbstractGuiService<Customer, P
 		int passengerId;
 		Passenger passenger;
 
-		passengerId = super.getRequest().getData("id", int.class);
-		passenger = this.repository.findPassengerById(passengerId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class) && this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId()).contains(passenger);
+		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
+
+		if (status && super.getRequest().hasData("id")) {
+			passengerId = super.getRequest().getData("id", int.class);
+			passenger = this.repository.findPassengerById(passengerId);
+			status = this.repository.findPassengersByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId()).contains(passenger);
+		} else
+			status = false;
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -51,21 +56,16 @@ public class CustomerPassengerShowService extends AbstractGuiService<Customer, P
 	@Override
 	public void unbind(final Passenger passenger) {
 		Dataset dataset;
-		int bookingId;
 		Collection<Booking> bookings = this.repository.findBookingByCustomerId(super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId());
 		bookings.removeAll(this.repository.findBookingByPassengerId(passenger.getId()));
-
-		if (super.getBuffer().getErrors().hasErrors())
-			System.out.print(super.getBuffer().getErrors());
 
 		SelectChoices bookingChoices = new SelectChoices();
 
 		dataset = super.unbindObject(passenger, "fullName", "email", "passportNumber", "dateOfBirth", "specialNeeds", "isDraftMode");
 
-		bookingId = super.getRequest().hasData("booking") ? super.getRequest().getData("booking", int.class) : -1;
-		bookings.stream().forEach(b -> bookingChoices.add(String.valueOf(b.getId()), String.format("%s - %s", b.getLocatorCode(), b.getFlight().getTag()), bookingId == b.getId()));
-		bookingChoices.add("0", "----", bookingId <= 0);
-		dataset.put("booking", bookingId);
+		bookings.stream().forEach(b -> bookingChoices.add(String.valueOf(b.getId()), String.format("%s - %s", b.getLocatorCode(), b.getFlight().getTag()), false));
+		bookingChoices.add("0", "----", true);
+		dataset.put("booking", -1);
 
 		dataset.put("bookingChoices", bookingChoices);
 		dataset.put("createdInBooking", false);
