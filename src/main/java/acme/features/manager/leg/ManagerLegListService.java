@@ -1,7 +1,6 @@
 
 package acme.features.manager.leg;
 
-import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +28,11 @@ public class ManagerLegListService extends AbstractGuiService<Manager, Leg> {
 		int flightId;
 		Flight flight;
 		boolean status;
-		
-		
+
 		status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class);
-		if(status) {
+		if (status) {
 			flightId = super.getRequest().getData("masterId", int.class, 0);
-			if(flightId != 0) {
+			if (flightId != 0) {
 				flight = this.lr.findFlightById(flightId);
 				Manager manager = (Manager) super.getRequest().getPrincipal().getRealmOfType(Manager.class);
 				status = flight != null && flight.getManager().getId() == manager.getId();
@@ -51,9 +49,9 @@ public class ManagerLegListService extends AbstractGuiService<Manager, Leg> {
 
 		managerId = super.getRequest().getPrincipal().getRealmOfType(Manager.class).getId();
 		flightId = super.getRequest().getData("masterId", int.class, 0);
-		if(flightId == 0)
+		if (flightId == 0)
 			legs = this.lr.findAllLegsByManagerId(managerId);
-		else 
+		else
 			legs = this.lr.findAllLegsByFlightId(flightId);
 
 		super.getBuffer().addData(legs);
