@@ -36,8 +36,6 @@ public class FlightCrewMemberFlightAssignmentPublishService extends AbstractGuiS
 
 		// Verificar si el principal es de tipo FlightCrewMember
 		if (super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class)) {
-			int id = super.getRequest().getPrincipal().getRealmOfType(FlightCrewMember.class).getId();
-			FlightCrewMember flightCrewMember = this.repository.findFlightCrewMemberById(id);
 
 			int flightAssignmentId = super.getRequest().getData("id", int.class);
 			FlightAssignment flightAssignment = this.repository.findFlightAssignmentById(flightAssignmentId);

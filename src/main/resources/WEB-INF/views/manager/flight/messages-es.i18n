@@ -24,6 +24,7 @@ manager.flight.form.label.scheduledArrival = Llegada programada:
 manager.flight.form.label.numberOfLayovers = Número de escalas:
 manager.flight.form.label.isDraftMode = ¿Modo borrador?
 manager.flight.form.label.defaultCost = Precio (en moneda por defecto):
+manager.flight.form.button.legs = Mostrar tramos
 
 manager.flight.form.button.update = Actualizar este vuelo
 manager.flight.form.button.publish = Publicar este vuelo

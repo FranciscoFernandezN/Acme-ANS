@@ -1,8 +1,6 @@
 
 package acme.entities.supportedcurrency;
 
-import static org.mockito.ArgumentMatchers.doubleThat;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -64,7 +62,7 @@ public class SupportedCurrency extends AbstractEntity {
 	public static Set<String> getAllowedCurrencies() {
 		Set<String> res = new HashSet<>();
 
-		if (SpringHelper.isRunningOn("production")) {
+		if (SpringHelper.isRunningOn("production"))
 			try {
 				String apiKey = "fca_live_LoNLzqN8xfOE524QdmeycQrAkUMvlwcsWGd5nEhw";
 				String url = "https://api.freecurrencyapi.com/v1/currencies?apikey=" + apiKey;
@@ -75,7 +73,7 @@ public class SupportedCurrency extends AbstractEntity {
 			} catch (final Throwable oops) {
 				System.out.println(oops);
 			}
-		} else
+		else
 			res = Set.of("EUR", "USD", "JPY", "BGN", "CZK", "DKK", "GBP", "HUF", "PLN", "RON", "SEK", "CHF", "ISK", "RUB", "TRY", "AUD", "PHP", "ZAR");
 
 		return res;
@@ -87,9 +85,9 @@ public class SupportedCurrency extends AbstractEntity {
 		String defaultCurrency = SupportedCurrency.getDefaultCurrency();
 		result.setCurrency(defaultCurrency);
 		if (!money.getCurrency().equals(defaultCurrency)) {
-			if (SpringHelper.isRunningOn("production")) {
+			if (SpringHelper.isRunningOn("production"))
 				try {
-				
+
 					String apiKey = "fca_live_LoNLzqN8xfOE524QdmeycQrAkUMvlwcsWGd5nEhw";
 					Date now = MomentHelper.getCurrentMoment();
 					@SuppressWarnings("deprecation")
@@ -104,28 +102,27 @@ public class SupportedCurrency extends AbstractEntity {
 						data = response.getBody().getData();
 						SupportedCurrency.lastData = data;
 					}
-	
+
 					Double newAmount = money.getAmount() / data.values().iterator().next().get(money.getCurrency());
 					result.setAmount(newAmount);
 				} catch (final Throwable oops) {
 					System.out.println(oops);
 					result.setAmount(0.);
 				}
-			} else {
+			else {
 				Map<String, Double> mockedValues = new HashMap<>();
-				if(defaultCurrency.equals("EUR") && (money.getCurrency().equals("GBP") || money.getCurrency().equals("USD"))) {
+				if (defaultCurrency.equals("EUR") && (money.getCurrency().equals("GBP") || money.getCurrency().equals("USD"))) {
 					mockedValues.put("GBP", 0.8270029409);
 					mockedValues.put("USD", 1.0352287186);
 					Double newAmount = money.getAmount() / mockedValues.get(money.getCurrency());
 					result.setAmount(newAmount);
-				} else {
+				} else
 					result.setAmount(0.);
-				}
-				
+
 			}
 		} else
 			result = money;
-		
+
 		return result;
 	}
 
