@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>84</x>
-      <y>354</y>
+      <x>102</x>
+      <y>426</y>
       <w>486</w>
       <h>96</h>
     </coordinates>
@@ -13,19 +13,19 @@
 &lt;&lt;Role&gt;&gt;
 FlightCrewMember
 --
-+ employeeCode: String {Unique,Mandatory,ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$"),Column(unique=true}
++ employeeCode: String {Mandatory,ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$"),Column(unique=true}
 + phoneNumber: String {Mandatory,ValidString(min = 6, max = 15, pattern = "^\\+?\\d{6,15}$"),Automapped}
 + languageSkills: String {Mandatory,ValidString(max=255),Automapped}
 + availabilityStatus: AvailabilityStatus {Mandatory,Enumerated(EnumType.STRING),Automapped}
-+ salary: Money {Mandatory, Automapped, ValidMoney(min=0)}
++ salary: Money {Mandatory, Automapped, ValidSupportedCurrency,ValidMoney(min=0,max=10000)}
 + yearsOfExperience: Integer {Optional, ValidNumber(min=0,max=70),Automapped}</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>42</x>
-      <y>126</y>
+      <x>72</x>
+      <y>198</y>
       <w>486</w>
       <h>78</h>
     </coordinates>
@@ -33,37 +33,41 @@ FlightCrewMember
 &lt;&lt;Entity&gt;&gt;
 FlightAssignment
 --
-+ duty: Duty {Mandatory,Valid,Enumerated(EnumType.STRING),Automapped}
++ duty: Duty {Mandatory,Enumerated(EnumType.STRING),Automapped}
 + lastUpDate: Date {Mandatory,ValidMoment(past=true),Temporal(TemporalType.TIMESTAMP)}
-+ currentStatus: CurrentStatus {Mandatory,Valid,Enumerated(EnumType.STRING),Automapped}
-+ remarks: String {Optional,ValidString(max=255),Automapped}</panel_attributes>
++ currentStatus: CurrentStatus {Mandatory,Enumerated(EnumType.STRING),Automapped}
++ remarks: String {Optional,ValidString(max=255),Automapped}
++ isDraftMode: Boolean {Mandatory,Automapped}</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>792</x>
+      <x>810</x>
       <y>6</y>
       <w>486</w>
-      <h>90</h>
+      <h>114</h>
     </coordinates>
     <panel_attributes>bg=green
 &lt;&lt;Entity&gt;&gt;
 Leg
 --
-+ uniqueIdentifier: Integer {Unique,ValidString(min = 4, max = 4, pattern = "\\d{4}"),Mandatory,Column(unique = true)}
++ uniqueIdentifier: Integer {Mandatory,ValidString(min = 4, max = 4, pattern = "\\d{4}"),Column(unique = true)}
 + scheduledDeparture: Date {	Mandatory,ValidMoment,Temporal(TemporalType.TIMESTAMP)}
 + scheduledArrive: Date {	Mandatory,ValidMoment,Temporal(TemporalType.TIMESTAMP)}
 + duration: Double {Mandatory,ValidNumber(min = 0, max = 24, fraction = 2),Automapped}
-+ status: LegStatus {Mandatory,Valid,Enumerated(EnumType.STRING),Automapped}
-/flightNumber: String {Transient}</panel_attributes>
++ status: LegStatus {Mandatory,Enumerated(EnumType.STRING),Automapped}
++ isDraftMode: Boolean {Mandatory,Automapped}
+/+getFlightNumber: String {Transient}
+/+getDuration: Double {Transient}
+/+getAirline: Airline {Transient}</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>738</x>
-      <y>612</y>
+      <x>756</x>
+      <y>630</y>
       <w>438</w>
       <h>96</h>
     </coordinates>
@@ -71,9 +75,9 @@ Leg
 Airline
 --
 + name: String {Mandatory, ValidString(max = 50), Automapped}
-+ iATACode: String {Unique, Mandatory, ValidString(min = 3, max = 3, pattern = "[A-Z]{2}"), Column(unique = true)}
++ iATACode: String {Mandatory, ValidString(min = 3, max = 3, pattern = "[A-Z]{2}"), Column(unique = true)}
 + website: String {Mandatory, ValidUrl, Automapped}
-+ type: AirlineType {Mandatory, Valid, Enumerated(EnumType.STRING), Automapped}
++ airlineType: AirlineType {Mandatory, Enumerated(EnumType.STRING), Automapped}
 + foundationMoment: Date {Mandatory, ValidMoment(past = true), Temporal(TemporalType.DATE)}
 + email: String {Optional, ValidEmail, Automapped}
 + contactNumber: String {Optional, ValidString(pattern = "^\\+?\\d{6,15}$"), Automapped}
@@ -83,8 +87,8 @@ bg=GREEN</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>534</x>
-      <y>198</y>
+      <x>564</x>
+      <y>336</y>
       <w>486</w>
       <h>78</h>
     </coordinates>
@@ -95,98 +99,85 @@ ActivityLog
 + registrationMoment: Date {Mandatory,ValidMoment(past=true),Temporal(TIMESTAMP)
 + typeOfIncident: String {Mandatory,ValidString(max=50),Automapped}
 + description: String {Mandatory,ValidString(max=50),Automapped}
-+ securityLevel: Integer {Mandatory,ValidString(max=255),Automapped}</panel_attributes>
++ securityLevel: Integer {Mandatory,ValidNumber(min=0,max=10),Automapped}
++ isDraftMode: Boolean {Mandatory,Automapped}</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>276</x>
-      <y>198</y>
-      <w>72</w>
+      <x>306</x>
+      <y>270</y>
+      <w>66</w>
       <h>168</h>
     </coordinates>
     <panel_attributes>lt=&lt;-x
 m1=1
 m2=*
 belongs to &gt;</panel_attributes>
-    <additional_attributes>30.0;260.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;260.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>444</x>
-      <y>90</y>
-      <w>576</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-x
-m1=1
-m2=*
-belongs to &gt;</panel_attributes>
-    <additional_attributes>940.0;10.0;10.0;60.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>480</x>
-      <y>444</y>
-      <w>420</w>
-      <h>180</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-x
-m1=1
-m2=*
-belongs to &gt;</panel_attributes>
-    <additional_attributes>680.0;280.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1056</x>
-      <y>90</y>
-      <w>84</w>
-      <h>546</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-x
-m1=1
-m2=*
-belongs to &gt;</panel_attributes>
-    <additional_attributes>10.0;890.0;70.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>468</x>
-      <y>270</y>
-      <w>282</w>
+      <x>474</x>
+      <y>114</y>
+      <w>552</w>
       <h>96</h>
     </coordinates>
     <panel_attributes>lt=&lt;-x
 m1=1
 m2=*
 belongs to &gt;</panel_attributes>
-    <additional_attributes>10.0;140.0;450.0;10.0</additional_attributes>
+    <additional_attributes>890.0;10.0;890.0;40.0;10.0;40.0;10.0;140.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>900</x>
-      <y>90</y>
-      <w>156</w>
+      <x>324</x>
+      <y>516</y>
+      <w>660</w>
       <h>126</h>
     </coordinates>
     <panel_attributes>lt=&lt;-x
 m1=1
 m2=*
 belongs to &gt;</panel_attributes>
-    <additional_attributes>240.0;10.0;10.0;190.0</additional_attributes>
+    <additional_attributes>1070.0;190.0;1070.0;90.0;10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1110</x>
+      <y>114</y>
+      <w>66</w>
+      <h>528</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-x
+m1=1
+m2=*
+belongs to &gt;</panel_attributes>
+    <additional_attributes>20.0;860.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>456</x>
+      <y>270</y>
+      <w>372</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-x
+m1=1
+m2=*
+belongs to &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;600.0;50.0;600.0;110.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>210</x>
-      <y>480</y>
+      <x>186</x>
+      <y>600</y>
       <w>66</w>
       <h>60</h>
     </coordinates>
@@ -202,8 +193,8 @@ bg=GRAY</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>252</x>
-      <y>54</y>
+      <x>270</x>
+      <y>78</y>
       <w>66</w>
       <h>60</h>
     </coordinates>
@@ -219,8 +210,8 @@ bg=GRAY</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>690</x>
-      <y>12</y>
+      <x>708</x>
+      <y>36</y>
       <w>66</w>
       <h>66</h>
     </coordinates>
