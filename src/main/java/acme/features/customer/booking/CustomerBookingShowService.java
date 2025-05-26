@@ -13,6 +13,7 @@ import acme.entities.bookings.Booking;
 import acme.entities.bookings.TravelClass;
 import acme.entities.flights.Flight;
 import acme.entities.passengers.Passenger;
+import acme.entities.supportedcurrency.SupportedCurrency;
 import acme.realms.Customer;
 
 @GuiService
@@ -32,9 +33,14 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 		int bookingId;
 		Booking booking;
 
-		bookingId = super.getRequest().getData("id", int.class);
-		booking = this.repository.findBookingById(bookingId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class) && super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId() == booking.getCustomer().getId();
+		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
+
+		if (status && super.getRequest().hasData("id")) {
+			bookingId = super.getRequest().getData("id", int.class);
+			booking = this.repository.findBookingById(bookingId);
+			status = booking != null && super.getRequest().getPrincipal().hasRealm(booking.getCustomer());
+		} else
+			status = false;
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -55,36 +61,28 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 		Dataset dataset;
 		int customerId = super.getRequest().getPrincipal().getRealmOfType(Customer.class).getId();
 
-		if (super.getBuffer().getErrors().hasErrors()) {
-			booking.setIsDraftMode(true);
-			System.out.print(super.getBuffer().getErrors());
-		}
-
 		SelectChoices travelClasses;
 		Collection<Flight> flights = this.repository.findAllFlightsForBooking();
 
 		travelClasses = SelectChoices.from(TravelClass.class, booking.getTravelClass());
 
 		SelectChoices flightChoices = new SelectChoices();
-		int flightId = super.getRequest().hasData("flight") ? super.getRequest().getData("flight", int.class) : -1;
 
-		if (flights.stream().anyMatch(f -> f.getId() == flightId))
-			flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), f.getCost()), flightId == f.getId()));
-		else
-			flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()), String.format("%s - %s - %s", f.getOrigin(), f.getDestiny(), f.getCost()), booking.getFlight().getId() == f.getId()));
+		flights.stream().forEach(f -> flightChoices.add(String.valueOf(f.getId()),
+			String.format("%s - %s, %s - %s, %s, %s", f.getOrigin(), f.getDestiny(), f.getScheduledDeparture(), f.getScheduledArrival(), SupportedCurrency.convertToDefault(f.getCost()), f.getTag()), booking.getFlight().getId() == f.getId()));
 
 		Collection<Passenger> passengers = this.repository.findPassengersByCustomerId(customerId);
 		passengers.removeAll(this.repository.findPassengersByBookingId(booking.getId()));
 		SelectChoices passengerChoices = new SelectChoices();
-		int passengerId = super.getRequest().hasData("passenger") ? super.getRequest().getData("passenger", int.class) : -1;
-		passengers.stream().distinct().forEach(p -> passengerChoices.add(String.valueOf((Integer) p.getId()), String.format("%s - %s", p.getPassportNumber(), p.getFullName()), passengerId == p.getId()));
-		passengerChoices.add("0", "----", passengerId <= 0);
+		passengers.stream().distinct().forEach(p -> passengerChoices.add(String.valueOf((Integer) p.getId()), String.format("%s - %s", p.getPassportNumber(), p.getFullName()), false));
+		passengerChoices.add("0", "----", true);
 
-		dataset = super.unbindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "lastNibble", "isDraftMode");
+		dataset = super.unbindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "lastNibble", "isDraftMode", "price");
+		dataset.put("defaultCost", SupportedCurrency.convertToDefault(booking.getPrice()));
 		dataset.put("travelClasses", travelClasses);
 		dataset.put("flightChoices", flightChoices);
 		dataset.put("city", booking.getFlight().getDestinyAirport().getCity());
-		dataset.put("passenger", passengerId);
+		dataset.put("passenger", -1);
 		dataset.put("passengerChoices", passengerChoices);
 		dataset.put("updatedBooking", true);
 

@@ -2,7 +2,6 @@
 package acme.features.flightCrewMember.activitylog;
 
 import java.util.Collection;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -42,7 +41,7 @@ public class FlightCrewMemberActivityLogCreateService extends AbstractGuiService
 
 	@Override
 	public void bind(final ActivityLog activityLog) {
-		super.bindObject(activityLog, "registrationMoment", "typeOfIncident", "description", "severityLevel", "flightAssignment");
+		super.bindObject(activityLog, "typeOfIncident", "description", "severityLevel", "flightAssignment");
 	}
 
 	@Override
@@ -62,13 +61,11 @@ public class FlightCrewMemberActivityLogCreateService extends AbstractGuiService
 			return;
 		}
 
-		Date now = MomentHelper.getCurrentMoment();
-		if (leg.getScheduledDeparture().after(now))
-			super.state(false, "leg", "acme.validation.activityLog.leg.notLanded");
 	}
 
 	@Override
 	public void perform(final ActivityLog activityLog) {
+		activityLog.setRegistrationMoment(MomentHelper.getCurrentMoment());
 		this.repository.save(activityLog);
 	}
 

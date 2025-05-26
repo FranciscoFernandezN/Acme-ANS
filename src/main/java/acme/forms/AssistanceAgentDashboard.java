@@ -25,12 +25,6 @@ public class AssistanceAgentDashboard extends AbstractForm {
 	Double						maxLogsOfClaims;
 	Double						stdDeviationLogsOfClaims;
 	Long						numberOfClaimsLastMonth;
-	/*
-	 * Double averageClaimsAssistedLastMonth;
-	 * Integer minClaimsAssistedLastMonth;
-	 * Integer maxClaimsAssistedLastMonth;
-	 * Double stdDeviationClaimsAssistedLastMonth;
-	 */
 
 	// Derived attributes -----------------------------------------------------
 

@@ -30,3 +30,4 @@ flight-crew-member.flight-assignment.error.copilot-limit-exceeded = Debe haber a
 flight-crew-member.flight-assignment.error.leg-null = Un tramo no puede ser nulo  
 flight-crew-member.flight-assignment.error.cannot-publish-pending = El estado actual no puede ser pendiente.
 flight-crew-member.flight-assignment.error.overlapping-legs = Los tramos son simultáneos
+flight-crew-member.flight-assignment.error.is-published = La asignación de vuelo está publicada

@@ -20,7 +20,8 @@ flight-crew-member.activity-log.list.label.description = Descripción
 flight-crew-member.activity-log.list.label.severityLevel = Nivel de gravedad
 flight-crew-member.activity-log.list.label.confirmation = ¿Confirma esta operación?
 
-flight-crew-member.activity-log.list.button.create = Crear nuevo registro de actividad
+flight-crew-member.activity-log.list.button.create = Crear
 
 flight-crew-member.activity-log.error.invalid-flight-crew-member = El miembro de la tripulación de vuelo es nulo
 flight-crew-member.activity-log.error.invalid-leg = El trayecto es nulo
+flight-crew-member.activity-log.flight-assignment.draftMode = La asignación de vuelo no ha sido publicada

@@ -21,7 +21,8 @@ flight-crew-member.activity-log.list.label.description = Description
 flight-crew-member.activity-log.list.label.severityLevel = Severity level 
 flight-crew-member.activity-log.list.label.confirmation = Do you confirm this operation?  
 
-flight-crew-member.activity-log.list.button.create = Create new aircraft  
+flight-crew-member.activity-log.list.button.create = Create  
 
 flight-crew-member.activity-log.error.invalid-flight-crew-member = The flight crew member is null  
 flight-crew-member.activity-log.error.invalid-flight-crew-member = The leg is null  
+flight-crew-member.activity-log.flight-assignment.draftMode = The flight assignment hasn't been published

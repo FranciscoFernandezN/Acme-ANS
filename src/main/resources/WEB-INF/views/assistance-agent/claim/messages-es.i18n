@@ -23,6 +23,6 @@ assistance-agent.claim.list.label.isPublished = ¿Esta publicado?
 
 assistance-agent.claim.list.button.create = Crear una reclamación
 
-assistance-agent.claim.create.leg-not-published = Esta reclamación no se puede publicar porque su tramo de vuelo no está publicado
+assistance-agent.claim.create.should-be-publised = Esta reclamación debe publicarse una vez aceptada o rechazada
 assistance-agent.claim.create.cant-be-published = Esta reclamación no se puede publicar porque se encuentra en progreso
-assistance-agent.claim.delete.is-published = Esta reclamación no se puede borrar porque ya ha sido publicada
+assistance-agent.claim.delete.has-log = Esta reclamación no se puede borrar porque tiene un registro asociado

@@ -44,7 +44,7 @@ public class AssistanceAgentClaimCompleteListService extends AbstractGuiService<
 
 		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "claimType", "indicator", "leg");
 
-		dataset.put("isPublished", claim.getIsPublished() ? "✓" : "x");
+		dataset.put("isPublished", "✓");
 
 		dataset.put("leg", claim.getLeg().getUniqueIdentifier());
 		super.getResponse().addData(dataset);

@@ -29,17 +29,20 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 		boolean status;
 		int trackingLogId;
 		TrackingLog trackingLog;
-		List<Claim> claims;
 		AssistanceAgent agent;
 
 		agent = (AssistanceAgent) super.getRequest().getPrincipal().getRealmOfType(AssistanceAgent.class);
 
-		claims = this.aatlr.findAllClaimsByAgentId(agent.getId());
-
 		trackingLogId = super.getRequest().getData("id", int.class);
 		trackingLog = this.aatlr.findTrackingLogById(trackingLogId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && agent.getId() == trackingLog.getAgent().getId() && !trackingLog.getIsPublished() && trackingLog != null && trackingLog.getClaim() != null
-			&& claims.contains(this.aatlr.findClaimById(super.getRequest().getData("claim", int.class))) && agent.getId() == trackingLog.getClaim().getAgent().getId();
+
+		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && agent.getId() == trackingLog.getAgent().getId() && !trackingLog.getIsPublished() && trackingLog != null;
+		if (status && super.getRequest().hasData("claim")) {
+			List<Claim> claims = this.aatlr.findAllClaimsByAgentId(agent.getId());
+			int claimId = super.getRequest().getData("claim", int.class);
+			Claim claim = this.aatlr.findClaimById(claimId);
+			status = claimId == 0 || claim != null && claims.contains(claim);
+		}
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -70,8 +73,14 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 
 	@Override
 	public void validate(final TrackingLog trackingLog) {
-		Claim claim = this.aatlr.findClaimByTrackingLogId(trackingLog.getId());
-		super.state(!trackingLog.getIsPublished() || trackingLog.getIsPublished() && claim != null && claim.getIsPublished(), "isPublished", "assistance-agent.tracking-log.create.cant-be-published");
+		int claimId;
+		Claim claim;
+		claimId = super.getRequest().getData("claim", int.class);
+		claim = this.aatlr.findClaimById(claimId);
+
+		if (trackingLog.getIsPublished() && claim != null)
+			super.state(claim.getIsPublished(), "*", "assistance-agent.tracking-log.create.cant-be-published");
+
 	}
 
 	@Override

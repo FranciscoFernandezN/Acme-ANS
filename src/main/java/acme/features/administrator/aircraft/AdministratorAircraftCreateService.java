@@ -86,7 +86,8 @@ public class AdministratorAircraftCreateService extends AbstractGuiService<Admin
 	@Override
 	public void unbind(final Aircraft aircraft) {
 		Dataset dataset;
-		SelectChoices statusChoices, airlineChoices;
+		SelectChoices statusChoices;
+		SelectChoices airlineChoices;
 
 		statusChoices = SelectChoices.from(AircraftStatus.class, aircraft.getStatus());
 
