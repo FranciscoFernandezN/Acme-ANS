@@ -30,4 +30,7 @@
 			<acme:submit code="manager.flight.form.button.create" action="/manager/flight/create"/>
 		</jstl:when>		
 	</jstl:choose>
+	
+	<acme:button code="manager.flight.form.button.legs" action="/manager/leg/list?masterId=${id}"/>
+	
 </acme:form>
