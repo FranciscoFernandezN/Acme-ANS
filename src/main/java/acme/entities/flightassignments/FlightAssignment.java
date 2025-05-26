@@ -19,6 +19,7 @@ import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidString;
+import acme.constraints.ValidNonSpamString;
 import acme.entities.legs.Leg;
 import acme.realms.FlightCrewMember;
 import lombok.Getter;
@@ -54,6 +55,7 @@ public class FlightAssignment extends AbstractEntity {
 	private CurrentStatus		currentStatus;
 
 	@Optional
+	@ValidNonSpamString
 	@ValidString(max = 255)
 	@Automapped
 	private String				remarks;

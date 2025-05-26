@@ -18,6 +18,7 @@ import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidScore;
 import acme.client.components.validation.ValidString;
+import acme.constraints.ValidNonSpamString;
 import acme.entities.claims.Claim;
 import acme.entities.claims.ClaimState;
 import acme.realms.AssistanceAgent;
@@ -44,6 +45,7 @@ public class TrackingLog extends AbstractEntity {
 	private Date				lastUpdateMoment;
 
 	@Mandatory
+	@ValidNonSpamString
 	@ValidString(max = 50)
 	@Automapped
 	private String				step;
@@ -54,6 +56,7 @@ public class TrackingLog extends AbstractEntity {
 	private Double				resolutionPercentage;
 
 	@Mandatory
+	@ValidNonSpamString
 	@ValidString
 	@Automapped
 	private String				resolution;

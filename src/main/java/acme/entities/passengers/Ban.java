@@ -17,6 +17,7 @@ import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidString;
+import acme.constraints.ValidNonSpamString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,11 +36,13 @@ public class Ban extends AbstractEntity {
 	// Attributes -------------------------------------------------------------
 
 	@Mandatory
+	@ValidNonSpamString
 	@ValidString(max = 50)
 	@Automapped
 	private String				nationality;
 
 	@Mandatory
+	@ValidNonSpamString
 	@ValidString
 	@Automapped
 	private String				reasonForBan;

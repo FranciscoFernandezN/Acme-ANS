@@ -17,6 +17,7 @@ import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
 import acme.components.weather.WeatherPOJO;
+import acme.constraints.ValidNonSpamString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -66,6 +67,7 @@ public class Weather extends AbstractEntity {
 	private Double				wind;
 
 	@Optional
+	@ValidNonSpamString
 	@ValidString
 	@Automapped
 	private String				city;

@@ -20,6 +20,7 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
 import acme.client.helpers.SpringHelper;
+import acme.constraints.ValidNonSpamString;
 import acme.constraints.ValidSupportedCurrency;
 import acme.entities.airlines.Airline;
 import acme.entities.airports.Airport;
@@ -45,6 +46,7 @@ public class Flight extends AbstractEntity {
 	// Attributes -------------------------------------------------------------
 
 	@Mandatory
+	@ValidNonSpamString
 	@ValidString(max = 50)
 	@Automapped
 	private String				tag;
@@ -60,6 +62,7 @@ public class Flight extends AbstractEntity {
 	private Money				cost;
 
 	@Optional
+	@ValidNonSpamString
 	@ValidString
 	@Automapped
 	private String				description;

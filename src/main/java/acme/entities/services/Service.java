@@ -16,6 +16,7 @@ import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
 import acme.client.components.validation.ValidUrl;
+import acme.constraints.ValidNonSpamString;
 import acme.constraints.ValidSupportedCurrency;
 import acme.entities.airports.Airport;
 import lombok.Getter;
@@ -36,6 +37,7 @@ public class Service extends AbstractEntity {
 	// Attributes -------------------------------------------------------------
 
 	@Mandatory
+	@ValidNonSpamString
 	@ValidString(max = 50)
 	@Automapped
 	private String				name;
@@ -51,6 +53,7 @@ public class Service extends AbstractEntity {
 	private Double				avgDwellTime;
 
 	@Optional
+	@ValidNonSpamString
 	@ValidString(min = 7, max = 7, pattern = "^[A-Z]{4}-[0-9]{2}$")
 	@Automapped
 	private String				promotionCode;

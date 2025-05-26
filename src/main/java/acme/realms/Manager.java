@@ -18,6 +18,7 @@ import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
 import acme.client.components.validation.ValidUrl;
+import acme.constraints.ValidNonSpamString;
 import acme.entities.airlines.Airline;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,6 +35,7 @@ public class Manager extends AbstractRole {
 	// Attributes -------------------------------------------------------------
 
 	@ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$")
+	@ValidNonSpamString
 	@Mandatory
 	@Column(unique = true)
 	private String				identifierNumber;

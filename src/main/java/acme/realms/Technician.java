@@ -10,6 +10,7 @@ import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
+import acme.constraints.ValidNonSpamString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,16 +26,19 @@ public class Technician extends AbstractRole {
 	// Attributes -------------------------------------------------------------
 
 	@Mandatory
+	@ValidNonSpamString
 	@ValidString(pattern = "^[A-Z]{2,3}\\d{6}$")
 	@Column(unique = true)
 	private String				licenseNumber;
 
 	@Mandatory
+	@ValidNonSpamString
 	@ValidString(pattern = "^\\+?\\d{6,15}$")
 	@Automapped
 	private String				phoneNumber;
 
 	@Mandatory
+	@ValidNonSpamString
 	@ValidString(max = 50)
 	@Automapped
 	private String				specialisation;
@@ -49,6 +53,7 @@ public class Technician extends AbstractRole {
 	private Integer				yearsOfExperience;
 
 	@Optional
+	@ValidNonSpamString
 	@ValidString
 	@Automapped
 	private String				certifications;

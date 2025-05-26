@@ -16,6 +16,7 @@ import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
+import acme.constraints.ValidNonSpamString;
 import acme.entities.airlines.Airline;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,12 +36,14 @@ public class Aircraft extends AbstractEntity {
 	// Attributes -------------------------------------------------------------
 
 	@Mandatory
+	@ValidNonSpamString
 	@ValidString(max = 50)
 	@Automapped
 	private String				model;
 
 	@Column(unique = true)
 	@Mandatory
+	@ValidNonSpamString
 	@ValidString(max = 50)
 	private String				registrationNumber;
 
@@ -60,6 +63,7 @@ public class Aircraft extends AbstractEntity {
 	private AircraftStatus		status;
 
 	@Optional
+	@ValidNonSpamString
 	@ValidString(max = 255)
 	@Automapped
 	private String				details;

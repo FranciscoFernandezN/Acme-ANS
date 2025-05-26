@@ -19,6 +19,7 @@ import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidEmail;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidString;
+import acme.constraints.ValidNonSpamString;
 import acme.entities.legs.Leg;
 import acme.realms.AssistanceAgent;
 import lombok.Getter;
@@ -49,6 +50,7 @@ public class Claim extends AbstractEntity {
 	private String				passengerEmail;
 
 	@Mandatory
+	@ValidNonSpamString
 	@ValidString
 	@Automapped
 	private String				description;

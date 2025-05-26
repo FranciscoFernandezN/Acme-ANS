@@ -12,6 +12,7 @@ import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
+import acme.constraints.ValidNonSpamString;
 import acme.entities.maintenancerecords.MaintenanceRecord;
 import acme.realms.Technician;
 import lombok.Getter;
@@ -34,6 +35,7 @@ public class Task extends AbstractEntity {
 	private TaskType			type;
 
 	@Mandatory
+	@ValidNonSpamString
 	@ValidString(max = 255)
 	@Automapped
 	private String				description;
