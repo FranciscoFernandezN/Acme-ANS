@@ -25,3 +25,4 @@ flight-crew-member.activity-log.list.button.create = Create
 
 flight-crew-member.activity-log.error.invalid-flight-crew-member = The flight crew member is null  
 flight-crew-member.activity-log.error.invalid-flight-crew-member = The leg is null  
+flight-crew-member.activity-log.flight-assignment.draftMode = The flight assignment hasn't been published
