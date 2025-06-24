@@ -15,3 +15,4 @@
 25.3.0	This is the third version of Acme Ans.
 25.4.0	This is the fourth version of Acme Ans.
 25.5.0	This is the fifth version of Acme Ans.
+25.6.0	This is the sixth version of Acme Ans.
