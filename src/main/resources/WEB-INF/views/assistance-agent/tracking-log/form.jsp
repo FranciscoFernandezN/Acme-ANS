@@ -8,8 +8,9 @@
 	<acme:input-textbox code="assistance-agent.tracking-log.form.label.step" path="step"/>
 	<acme:input-textbox code="assistance-agent.tracking-log.form.label.resolutionPercentage" path="resolutionPercentage"/>
 	<acme:input-textarea code="assistance-agent.tracking-log.form.label.resolution" path="resolution"/>
+	<acme:input-select code="assistance-agent.tracking-log.form.label.indicator" path="indicator" choices="${indicator}" readonly="${_command == 'create'}"/>
 	<acme:input-select code="assistance-agent.tracking-log.form.label.claim" path="claim" choices="${claim}"/>
-	<acme:input-checkbox code="assistance-agent.tracking-log.form.label.isPublished" path="isPublished"/>
+	<acme:input-checkbox code="assistance-agent.tracking-log.form.label.isPublished" path="isPublished" readonly="${_command == 'create'}"/>
 
 
 	<jstl:choose>

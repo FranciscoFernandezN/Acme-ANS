@@ -12,6 +12,7 @@ import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claims.Claim;
+import acme.entities.trackinglogs.LogState;
 import acme.entities.trackinglogs.TrackingLog;
 import acme.realms.AssistanceAgent;
 
@@ -43,6 +44,7 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 		Date lastUpdateMoment;
 		lastUpdateMoment = MomentHelper.getCurrentMoment();
 		trackingLog.setLastUpdateMoment(lastUpdateMoment);
+		trackingLog.setIndicator(LogState.IN_PROGRESS);
 
 		super.getBuffer().addData(trackingLog);
 	}
@@ -74,6 +76,7 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 		Dataset dataset;
 		List<Claim> claims;
 		SelectChoices claimChoices;
+		SelectChoices indicatorChoices;
 		AssistanceAgent agent;
 
 		agent = (AssistanceAgent) super.getRequest().getPrincipal().getRealmOfType(AssistanceAgent.class);
@@ -81,8 +84,10 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 		claims = this.aatlr.findAllClaimsByAgentId(agent.getId());
 
 		claimChoices = SelectChoices.from(claims, "passengerEmail", trackingLog.getClaim());
+		indicatorChoices = SelectChoices.from(LogState.class, trackingLog.getIndicator());
 
-		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "step", "resolutionPercentage", "resolution", "claim", "isPublished");
+		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "step", "resolutionPercentage", "resolution", "indicator", "claim", "isPublished");
+		dataset.put("indicator", indicatorChoices);
 		dataset.put("claim", claimChoices);
 
 		super.getResponse().addData(dataset);

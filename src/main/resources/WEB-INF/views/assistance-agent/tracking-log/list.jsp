@@ -8,6 +8,7 @@
 	<acme:list-column code="assistance-agent.tracking-log.list.label.step" path="step" width="10%"/>
 	<acme:list-column code="assistance-agent.tracking-log.list.label.resolutionPercentage" path="resolutionPercentage" width="10%"/>
 	<acme:list-column code="assistance-agent.tracking-log.list.label.resolution" path="resolution" width="10%"/>
+	<acme:list-column code="assistance-agent.tracking-log.list.label.indicator" path="indicator" width="10%"/>
 	<acme:list-column code="assistance-agent.tracking-log.list.label.claim" path="claim" width="10%"/>
 	<acme:list-column code="assistance-agent.tracking-log.list.label.isPublished" path="isPublished" width="10%"/>
 </acme:list>

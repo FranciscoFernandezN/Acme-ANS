@@ -10,6 +10,7 @@ import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claims.Claim;
+import acme.entities.trackinglogs.LogState;
 import acme.entities.trackinglogs.TrackingLog;
 import acme.realms.AssistanceAgent;
 
@@ -60,7 +61,7 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 
 	@Override
 	public void bind(final TrackingLog trackingLog) {
-		super.bindObject(trackingLog, "step", "resolutionPercentage", "resolution", "claim", "isPublished");
+		super.bindObject(trackingLog, "step", "resolutionPercentage", "resolution", "indicator", "claim", "isPublished");
 
 		Claim claim;
 		int claimId;
@@ -95,6 +96,7 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 
 		Dataset dataset;
 		List<Claim> claims;
+		SelectChoices indicatorChoices;
 		SelectChoices claimChoices;
 		AssistanceAgent agent;
 
@@ -103,8 +105,10 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 		claims = this.aatlr.findAllClaimsByAgentId(agent.getId());
 
 		claimChoices = SelectChoices.from(claims, "passengerEmail", trackingLog.getClaim());
+		indicatorChoices = SelectChoices.from(LogState.class, trackingLog.getIndicator());
 
 		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "step", "resolutionPercentage", "resolution", "claim", "isPublished");
+		dataset.put("indicator", indicatorChoices);
 		dataset.put("claim", claimChoices);
 
 		super.getResponse().addData(dataset);

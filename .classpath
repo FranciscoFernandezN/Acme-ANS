@@ -66,5 +66,6 @@
 			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" path="/SpamDetector-1"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

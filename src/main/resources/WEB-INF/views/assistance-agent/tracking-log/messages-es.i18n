@@ -5,6 +5,7 @@ assistance-agent.tracking-log.form.label.lastUpdateMoment = Momento de última a
 assistance-agent.tracking-log.form.label.step = Paso del trámite:
 assistance-agent.tracking-log.form.label.resolutionPercentage = Porcentaje de resolución:
 assistance-agent.tracking-log.form.label.resolution = Resolución:
+assistance-agent.tracking-log.form.label.indicator = Estado del registro:
 assistance-agent.tracking-log.form.label.claim = Reclamación referenciada:
 assistance-agent.tracking-log.form.label.isPublished = ¿Está publicado?
 
@@ -16,6 +17,7 @@ assistance-agent.tracking-log.list.label.lastUpdateMoment = Momento de última a
 assistance-agent.tracking-log.list.label.step = Paso del trámite
 assistance-agent.tracking-log.list.label.resolutionPercentage = Porcentaje de resolución
 assistance-agent.tracking-log.list.label.resolution = Resolución
+assistance-agent.tracking-log.list.label.indicator = Estado del registro
 assistance-agent.tracking-log.list.label.claim = Reclamación referenciada
 assistance-agent.tracking-log.list.label.isPublished = ¿Está publicado?
 
