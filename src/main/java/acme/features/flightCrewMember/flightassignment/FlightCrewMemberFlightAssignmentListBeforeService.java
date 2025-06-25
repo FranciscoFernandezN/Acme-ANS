@@ -38,17 +38,18 @@ public class FlightCrewMemberFlightAssignmentListBeforeService extends AbstractG
 		int crewId = super.getRequest().getPrincipal().getRealmOfType(FlightCrewMember.class).getId();
 		flightAssignments = this.repository.findFlightAssignmentBeforeCurrentByCrewMember(crewId, date);
 
+		int id = super.getRequest().getPrincipal().getRealmOfType(FlightCrewMember.class).getId();
+		Boolean isAvailable = this.repository.findFlightCrewMemberById(id).getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
+
+		super.getResponse().addGlobal("isAvailable", isAvailable);
 		super.getBuffer().addData(flightAssignments);
 	}
 
 	@Override
 	public void unbind(final FlightAssignment flightAssignment) {
 		Dataset dataset;
-		int id = super.getRequest().getPrincipal().getRealmOfType(FlightCrewMember.class).getId();
-		Boolean isAvailable = this.repository.findFlightCrewMemberById(id).getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
 
 		dataset = super.unbindObject(flightAssignment, "duty", "lastUpDate", "currentStatus", "remarks");
-		dataset.put("isAvailable", isAvailable ? "✓" : "x");
 
 		super.getResponse().addData(dataset);
 	}
