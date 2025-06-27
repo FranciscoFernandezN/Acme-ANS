@@ -6,7 +6,7 @@
 <acme:form>
 	<acme:input-textbox code="assistance-agent.tracking-log.form.label.lastUpdateMoment" path="lastUpdateMoment" readonly="true"/>
 	<acme:input-textbox code="assistance-agent.tracking-log.form.label.step" path="step"/>
-	<acme:input-textbox code="assistance-agent.tracking-log.form.label.resolutionPercentage" path="resolutionPercentage"/>
+	<acme:input-textbox code="assistance-agent.tracking-log.form.label.resolutionPercentage" path="resolutionPercentage" readonly="${_command == 'create'}"/>
 	<acme:input-textarea code="assistance-agent.tracking-log.form.label.resolution" path="resolution"/>
 	<acme:input-select code="assistance-agent.tracking-log.form.label.indicator" path="indicator" choices="${indicator}" readonly="${_command == 'create'}"/>
 	<acme:input-select code="assistance-agent.tracking-log.form.label.claim" path="claim" choices="${claim}"/>

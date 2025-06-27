@@ -76,11 +76,28 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 	public void validate(final TrackingLog trackingLog) {
 		int claimId;
 		Claim claim;
+		TrackingLog trackLog;
+		int trackingLogId;
 		claimId = super.getRequest().getData("claim", int.class);
 		claim = this.aatlr.findClaimById(claimId);
+		trackingLogId = super.getRequest().getData("id", int.class);
+		trackLog = this.aatlr.findTrackingLogById(trackingLogId);
 
 		if (trackingLog.getIsPublished() && claim != null)
 			super.state(claim.getIsPublished(), "*", "assistance-agent.tracking-log.create.cant-be-published");
+
+		if ((trackingLog.getIndicator() == LogState.ACCEPTED || trackingLog.getIndicator() == LogState.REJECTED) && trackingLog.getResolutionPercentage() != 100.00)
+			super.state(false, "resolutionPercentage", "assistance-agent.tracking-log.create.percentage");
+		if (trackingLog.getIndicator() == LogState.IN_PROGRESS && trackingLog.getResolutionPercentage() == 100.00)
+			super.state(false, "indicator", "assistance-agent.tracking-log.create.resolved");
+
+		if (trackLog.getResolutionPercentage() > trackingLog.getResolutionPercentage())
+			super.state(false, "resolutionPercentage", "assistance-agent.tracking-log.create.incremental");
+
+		if ((trackingLog.getIndicator() == LogState.ACCEPTED || trackingLog.getIndicator() == LogState.REJECTED || trackingLog.getResolutionPercentage() == 100.00) && !trackingLog.getIsPublished())
+			super.state(false, "isPublished", "assistance-agent.tracking-log.create.should-be-publised");
+		if ((trackingLog.getIndicator() == LogState.IN_PROGRESS || trackingLog.getResolutionPercentage() != 100.00) && trackingLog.getIsPublished())
+			super.state(false, "isPublished", "assistance-agent.tracking-log.create.in-progress");
 
 	}
 

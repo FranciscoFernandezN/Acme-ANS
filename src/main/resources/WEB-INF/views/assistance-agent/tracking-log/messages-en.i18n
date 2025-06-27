@@ -25,3 +25,9 @@ assistance-agent.tracking-log.list.button.create = Create a Tracking-log
 
 assistance-agent.tracking-log.create.cant-be-published = This tracking-log can't be published because his claim isn't published 
 assistance-agent.tracking-log.delete.is-published = This tracking-log can't be deleted because it's already published
+assistance-agent.tracking-log.create.percentage = Percentage must be 100 to accept or reject this log
+assistance-agent.tracking-log.create.resolved = The log must be accepted o rejected if it is resolved
+assistance-agent.tracking-log.create.incremental = Percentage must be incremental
+assistance-agent.tracking-log.create.log-limit = You can only create 2 tracking-logs per claim
+assistance-agent.tracking-log.create.should-be-publised = This log must be public when accepted o rejected
+assistance-agent.tracking-log.create.in-progress = This log can't be published because it is in progress
