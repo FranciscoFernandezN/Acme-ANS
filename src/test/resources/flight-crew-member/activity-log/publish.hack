@@ -1,6 +1,6 @@
 request-id,request-method,request-path,request-query,request-payload,response-status,response-content-type,response-payload,response-oops,pre-handle-timestamp,post-handle-timestamp,"after-completion-timestamp"
 "51da3277-306e-4ab7-ab33-f3af22dd6a00",GET,/,"debug=true&locale=en",,302,,,,467349979034500,467350073843400,467350079849700
-"d415ba5e-10b7-4d92-a128-b25011e79d42",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=159,,467350128968700,467350144446000,467358300837300
+"d415ba5e-10b7-4d92-a128-b25011e79d42",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=167,,467350128968700,467350144446000,467358300837300
 "34bb7267-45e2-4900-b4b2-e71180246342",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,467358561674900,467358577518200,467358580087000
 "aef490ec-faf1-41eb-86f8-c08472bd5991",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,467358606171400,467358612708800,467358615029100
 "f832aec6-6f79-4bb5-869c-872da2db59b5",GET,"/libraries/jquery/3.3.1/js/jquery.min.js",,,200,application/javascript,,,467358628909800,467358633822200,467358635584000
@@ -18,7 +18,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "24f95965-7208-4f72-a381-eae8511e2fb6",GET,"/libraries/fontawesome/5.2.0/webfonts/fa-solid-900.woff2",,,200,application/font-woff2,,,467359031915300,467359037697700,467359038991700
 "0c6ea0e7-d325-45cc-8b05-de68337c0f05",GET,"/libraries/fontawesome/5.2.0/webfonts/fa-brands-400.woff2",,,200,application/font-woff2,,,467359047981900,467359052520200,467359054105800
 "1112ca49-6018-4337-880e-1f03f7cb5edf",GET,/images/favicon.ico,,,200,image/x-icon,,,467359158537200,467359252949300,467359255026400
-"9fd8070e-6e3c-494a-9d20-09ef002f6044",GET,"/anonymous/system/sign-in",,,200,text/html;charset=utf-8,"password=&remember=false&service=158&username=",,467360200138100,467360213275300,467364514832700
+"9fd8070e-6e3c-494a-9d20-09ef002f6044",GET,"/anonymous/system/sign-in",,,200,text/html;charset=utf-8,"password=&remember=false&service=166&username=",,467360200138100,467360213275300,467364514832700
 "c59633dd-4c57-4de9-9ea3-b20725f67b67",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,467364571676100,467364576713400,467364577573100
 "9444c3c5-dca6-4692-ae83-ade6c541160f",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,467364586830200,467364591424600,467364592476400
 "67c3335f-a0d2-4cba-bf52-ea6e97300740",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,467364600745900,467364611392200,467364612902600
@@ -35,7 +35,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "d00eefb9-8f9b-4acb-977a-32c66df7f161",GET,/images/logo.png,,,200,image/png,,,467364869358700,467364873959500,467364875282900
 "5b16e8e1-46f2-460e-a8c2-be502609a5fe",POST,"/anonymous/system/sign-in",,"id=&version=&username=member1&password=member1&remember=false",302,,,,467377332704400,467377459991000,467377461505400
 "0bbdb596-b0ba-40e8-8785-26f07beaf823",GET,/,,,302,,,,467377473741200,467377479425000,467377480597300
-"81d7e28d-398c-426b-91e5-08f12aef7f92",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=159,,467377490896400,467377495707800,467377821379600
+"81d7e28d-398c-426b-91e5-08f12aef7f92",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=167,,467377490896400,467377495707800,467377821379600
 "471ce811-06d2-4bd2-a21c-f184b14fffe0",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,467377914679600,467377920249600,467377921418800
 "caa9fd5e-2297-49df-8e3e-bd64d7439685",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,467377936682800,467377945466600,467377947472100
 "2fed7f6f-c3ff-42f5-a2c9-dd57bb5e067b",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,467377955973300,467377966932100,467377969476300
@@ -50,7 +50,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "0fe38d95-2b12-4e06-9983-eef31cf3e9b0",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,467378158353000,467378162887000,467378164578400
 "6fdbadbc-66e7-446f-98b4-9dc0dda1ef6b",GET,/images/banner.png,,,200,image/png,,,467378175944700,467378180745100,467378181805900
 "e03b1eec-c91e-4d4f-be4b-0b23a817b5d0",GET,/images/logo.png,,,200,image/png,,,467378189291600,467378193573400,467378194508600
-"f86446aa-e8a5-45ae-a36a-3c2d1e9a1c66",GET,"/flight-crew-member/activity-log/list",,,200,text/html;charset=utf-8,"typeOfIncident%5B0%5D=Mechanical+Failure&severityLevel%5B0%5D=7&id%5B0%5D=98&registrationMoment%5B0%5D=2017%2F08%2F07+18%3A15&flightNumber%5B0%5D=FRX1001&description%5B0%5D=Engine+malfunction+detected+during+routine+check.&service=159&version%5B0%5D=0&isDraftMode%5B0%5D=%E2%9C%93",,467381453421500,467381496974100,467382723589800
+"f86446aa-e8a5-45ae-a36a-3c2d1e9a1c66",GET,"/flight-crew-member/activity-log/list",,,200,text/html;charset=utf-8,"typeOfIncident%5B0%5D=Mechanical+Failure&severityLevel%5B0%5D=7&id%5B0%5D=98&registrationMoment%5B0%5D=2017%2F08%2F07+18%3A15&flightNumber%5B0%5D=FRX1001&description%5B0%5D=Engine+malfunction+detected+during+routine+check.&service=167&version%5B0%5D=0&isDraftMode%5B0%5D=%E2%9C%93",,467381453421500,467381496974100,467382723589800
 "a188a862-5d21-4743-a9e5-449e05ed0f01",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,467382923043500,467382928203100,467382928874800
 "66c29588-74bc-4921-af76-cff013ebf460",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,467382938851000,467382944864300,467382946729100
 "98ec3894-f5e6-4a21-bf8b-850836e098d9",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,467382956028100,467382961339800,467382962689800
@@ -66,8 +66,8 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "d5d98b45-9722-43f1-b78d-78f61fa1df7b",GET,/images/banner.png,,,200,image/png,,,467383115228500,467383120420300,467383121328900
 "1c6908ac-0ec5-4077-8f39-76756aa6d604",GET,/images/logo.png,,,200,image/png,,,467383125890100,467383129697000,467383130368200
 "dfc8d87a-3bec-423f-bca4-d6bb676e1c75",GET,"/libraries/datatables/1.10.18/config/i18n-en.json",,,200,application/json,"sProcessing=Processing...&sSearch=Search:&sLengthMenu=Show%20_MENU_%20items&sInfo=Showing%20data%20_START_%20-%20_END_%20out%20of%20_TOTAL_%20data&sInfoEmpty=No%20items%20found&sInfoFiltered=(filtered%20from%20_MAX_%20data)&sInfoPostFix=&sLoadingRecords=Loading...&sZeroRecords=No%20data&sEmptyTable=No%20data&oPaginate.sFirst=First&oPaginate.sPrevious=Previous&oPaginate.sNext=Next&oPaginate.sLast=Last",,467383160565000,467383172128900,467383239661100
-"b1ef1c1f-66f6-4e45-b848-65808de0649d",GET,"/flight-crew-member/activity-log/show",id=98,,200,text/html;charset=utf-8,"assignments=%5B%7B%22key%22%3A%220%22%2C%22label%22%3A%22----%22%2C%22selected%22%3Afalse%2C%22sealed%22%3Atrue%7D%2C%7B%22key%22%3A%2289%22%2C%22label%22%3A%221900-01-01+00%3A00%3A00.0+-+PILOT+-+CONFIRMED+-+FRX1001%22%2C%22selected%22%3Atrue%2C%22sealed%22%3Atrue%7D%2C%7B%22key%22%3A%2293%22%2C%22label%22%3A%222021-02-28+09%3A00%3A00.0+-+CABIN_ATTENDANT+-+CONFIRMED+-+FRX1004%22%2C%22selected%22%3Afalse%2C%22sealed%22%3Atrue%7D%5D&registrationMoment=2017%2F08%2F07+18%3A15&id=98&version=0&description=Engine+malfunction+detected+during+routine+check.&isDraftMode=true&severityLevel=7&flightAssignment=89&service=159&typeOfIncident=Mechanical+Failure",,467384300815000,467384358440800,467388413360700
-"4bcf804d-dd6d-4638-92f7-9fd3de8d2436",GET,"/flight-crew-member/activity-log/show",id=98,,200,text/html;charset=utf-8,"assignments=%5B%7B%22key%22%3A%220%22%2C%22label%22%3A%22----%22%2C%22selected%22%3Afalse%2C%22sealed%22%3Atrue%7D%2C%7B%22key%22%3A%2289%22%2C%22label%22%3A%221900-01-01+00%3A00%3A00.0+-+PILOT+-+CONFIRMED+-+FRX1001%22%2C%22selected%22%3Atrue%2C%22sealed%22%3Atrue%7D%2C%7B%22key%22%3A%2293%22%2C%22label%22%3A%222021-02-28+09%3A00%3A00.0+-+CABIN_ATTENDANT+-+CONFIRMED+-+FRX1004%22%2C%22selected%22%3Afalse%2C%22sealed%22%3Atrue%7D%5D&registrationMoment=2017%2F08%2F07+18%3A15&id=98&version=0&description=Engine+malfunction+detected+during+routine+check.&isDraftMode=true&severityLevel=7&flightAssignment=89&service=158&typeOfIncident=Mechanical+Failure",,467388500077600,467388526559000,467389138535900
+"b1ef1c1f-66f6-4e45-b848-65808de0649d",GET,"/flight-crew-member/activity-log/show",id=98,,200,text/html;charset=utf-8,"assignments=%5B%7B%22key%22%3A%220%22%2C%22label%22%3A%22----%22%2C%22selected%22%3Afalse%2C%22sealed%22%3Atrue%7D%2C%7B%22key%22%3A%2289%22%2C%22label%22%3A%221900-01-01+00%3A00%3A00.0+-+PILOT+-+CONFIRMED+-+FRX1001%22%2C%22selected%22%3Atrue%2C%22sealed%22%3Atrue%7D%2C%7B%22key%22%3A%2293%22%2C%22label%22%3A%222021-02-28+09%3A00%3A00.0+-+CABIN_ATTENDANT+-+CONFIRMED+-+FRX1004%22%2C%22selected%22%3Afalse%2C%22sealed%22%3Atrue%7D%5D&registrationMoment=2017%2F08%2F07+18%3A15&id=98&version=0&description=Engine+malfunction+detected+during+routine+check.&isDraftMode=true&severityLevel=7&flightAssignment=89&service=167&typeOfIncident=Mechanical+Failure",,467384300815000,467384358440800,467388413360700
+"4bcf804d-dd6d-4638-92f7-9fd3de8d2436",GET,"/flight-crew-member/activity-log/show",id=98,,200,text/html;charset=utf-8,"assignments=%5B%7B%22key%22%3A%220%22%2C%22label%22%3A%22----%22%2C%22selected%22%3Afalse%2C%22sealed%22%3Atrue%7D%2C%7B%22key%22%3A%2289%22%2C%22label%22%3A%221900-01-01+00%3A00%3A00.0+-+PILOT+-+CONFIRMED+-+FRX1001%22%2C%22selected%22%3Atrue%2C%22sealed%22%3Atrue%7D%2C%7B%22key%22%3A%2293%22%2C%22label%22%3A%222021-02-28+09%3A00%3A00.0+-+CABIN_ATTENDANT+-+CONFIRMED+-+FRX1004%22%2C%22selected%22%3Afalse%2C%22sealed%22%3Atrue%7D%5D&registrationMoment=2017%2F08%2F07+18%3A15&id=98&version=0&description=Engine+malfunction+detected+during+routine+check.&isDraftMode=true&severityLevel=7&flightAssignment=89&service=166&typeOfIncident=Mechanical+Failure",,467388500077600,467388526559000,467389138535900
 "37748b89-2805-441c-b351-56862d87fea7",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,467389325207800,467389329520300,467389330272300
 "767f5b58-28fb-4b3e-9444-5e8dbf1efa6f",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,467389333871500,467389338040700,467389338744900
 "479294fa-ed96-4099-9b88-21e76e5afc5e",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,467389345557500,467389349326700,467389350013900
@@ -82,7 +82,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "ed8e8e89-86a0-4e33-9a66-23027f269508",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,467389565930300,467389587211300,467389589374000
 "4ff72e4a-6d75-418d-bb88-29e0dd0078c5",GET,/images/banner.png,,,200,image/png,,,467389631265100,467389664290300,467389668397800
 "e2b256a1-ec27-4745-b358-959cb1c1d1f1",GET,/images/logo.png,,,200,image/png,,,467389692219900,467389701044900,467389704459300
-"25f9f92a-2abd-445f-b54b-62f81e3998a3",GET,"/flight-crew-member/activity-log/publish",id=99,,500,text/html;charset=utf-8,service=159,"Access is not authorised",467397130917200,467397220481600,467398426948000
+"25f9f92a-2abd-445f-b54b-62f81e3998a3",GET,"/flight-crew-member/activity-log/publish",id=99,,500,text/html;charset=utf-8,service=167,"Access is not authorised",467397130917200,467397220481600,467398426948000
 "ba15f1d0-0b52-4f13-bbeb-a7ef6ad5a0cf",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,467398511631400,467398521137500,467398522596700
 "baad0409-5b05-4392-8b67-4fa99426c719",GET,"/libraries/chart.js/2.7.2/js/chart.bundle.min.js",,,200,application/javascript,,,467398534414500,467398566657500,467398570423900
 "8a976a4f-3adb-42bf-bb01-15582cf898af",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,467398602636000,467398611451100,467398612940400
@@ -97,7 +97,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "53de98e8-5be8-40e8-804a-a3a2a28ccf7a",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,467398723795600,467398728289400,467398729000400
 "f09f7db0-a3df-4d41-9abb-2e0447ea29cd",GET,/images/banner.png,,,200,image/png,,,467398741303800,467398746413400,467398747178300
 "edc7e2d3-e18d-4f5d-af3e-2b591d0c7aee",GET,/images/logo.png,,,200,image/png,,,467398752788500,467398756580200,467398757149900
-"70a8a397-c093-4bd9-8212-cc072808a1b2",GET,"/flight-crew-member/activity-log/publish",id=97,,500,text/html;charset=utf-8,service=158,"Access is not authorised",467401239801200,467401319755200,467403585333600
+"70a8a397-c093-4bd9-8212-cc072808a1b2",GET,"/flight-crew-member/activity-log/publish",id=97,,500,text/html;charset=utf-8,service=166,"Access is not authorised",467401239801200,467401319755200,467403585333600
 "04e58b8a-e059-468b-b869-1105a53b4fd4",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,467403677239300,467403690717900,467403691974900
 "69866f09-06f9-464d-98f8-044caa448dde",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,467403702278800,467403709325700,467403710480200
 "1acefbf0-887c-423f-a7a2-1dd05427f8ca",GET,"/libraries/areyousure/1.9.0/js/areyousure.min.js",,,200,application/javascript,,,467403721926600,467403745820700,467403747033300
@@ -113,7 +113,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "5e039b9b-8259-460e-8426-02c277c5c1b8",GET,/images/banner.png,,,200,image/png,,,467403941104200,467403944722900,467403945475800
 "a00975b7-c9cf-43fd-8107-2d6a4c794d7f",GET,/images/logo.png,,,200,image/png,,,467403950200300,467403955797600,467403956818800
 "8c4e2a4e-fa93-47ea-8ef0-aa797f8f2544",GET,"/authenticated/system/sign-out",,,302,,,,467405045435600,467405057362200,467405058064800
-"367a1a4d-56e0-4e84-9f06-90b143ee0ead",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=160,,467405068531600,467405086891100,467406635785100
+"367a1a4d-56e0-4e84-9f06-90b143ee0ead",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=168,,467405068531600,467405086891100,467406635785100
 "fde2469c-b0bb-489e-aebd-1046feeee376",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,467406688200000,467406691921000,467406692482500
 "0718ca65-56e7-42c4-8e5a-a98771c56f21",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,467406696012900,467406699541700,467406700145900
 "d46cb89c-7a66-4f6e-b416-a60ce1337a09",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,467406707399400,467406711580300,467406712255700
@@ -128,7 +128,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "296286f0-f1ae-44a3-bcf6-2fdb17735ed5",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,467406814281300,467406818061700,467406818831000
 "547f8cac-3092-4487-ae8f-6cb49cc6ea48",GET,/images/banner.png,,,200,image/png,,,467406829133400,467406833348800,467406834210800
 "b550e433-cad7-4e63-953b-cf1def41b66a",GET,/images/logo.png,,,200,image/png,,,467406839810700,467406843080400,467406843552800
-"8025c849-fc4f-4a21-ad2d-cbbe82dd8630",GET,"/anonymous/system/sign-in",,,200,text/html;charset=utf-8,"password=&remember=false&service=158&username=",,467407966095500,467407975816400,467409515240900
+"8025c849-fc4f-4a21-ad2d-cbbe82dd8630",GET,"/anonymous/system/sign-in",,,200,text/html;charset=utf-8,"password=&remember=false&service=166&username=",,467407966095500,467407975816400,467409515240900
 "a8aa1268-afd4-442a-947f-865ffa9d6606",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,467409585307400,467409595364500,467409596063600
 "d930b228-6ed5-42a4-817d-9f2e921edadb",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,467409602468100,467409608873400,467409610277900
 "9dbd0796-a245-4b03-87b4-4e27f9c13d0f",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,467409630047700,467409654318200,467409657551100
@@ -145,7 +145,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "2846168f-e7d9-40f3-8bc8-a5995e018c74",GET,/images/logo.png,,,200,image/png,,,467409819507400,467409823404700,467409823973900
 "c3d4a52e-157b-48e4-bb95-d9fbfbb4ad12",POST,"/anonymous/system/sign-in",,"id=&version=&username=administrator1&password=administrator1&remember=false",302,,,,467419915089500,467419929146700,467419930214000
 "841b96ea-ef38-4f05-aa3a-4ca775caf98e",GET,/,,,302,,,,467419940978300,467419947402200,467419948630400
-"084b7ef8-1bf6-4dd3-a6bc-5e40a4772e1c",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=159,,467419955082400,467419960674500,467421749922000
+"084b7ef8-1bf6-4dd3-a6bc-5e40a4772e1c",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=167,,467419955082400,467419960674500,467421749922000
 "59ceb146-a5cf-4bd1-b540-b967b197f53e",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,467421804053400,467421812172400,467421812755600
 "630e055f-10b6-4b2d-939b-25736ceaad18",GET,"/libraries/chart.js/2.7.2/js/chart.bundle.min.js",,,200,application/javascript,,,467421820676100,467421828038100,467421828925600
 "26ac3fc5-b7e6-48d8-be43-d2a036ef11cb",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,467421836921400,467421840835600,467421841402300

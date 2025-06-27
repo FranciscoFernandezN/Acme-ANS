@@ -1,6 +1,6 @@
 request-id,request-method,request-path,request-query,request-payload,response-status,response-content-type,response-payload,response-oops,pre-handle-timestamp,post-handle-timestamp,"after-completion-timestamp"
 "31b0bd0a-9e04-4d30-949e-6ba085e9c1ea",GET,/,"debug=true&locale=en",,302,,,,95561250624300,95561332735800,95561338476200
-"71841f47-1037-4f46-9b67-a65b527a4903",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=159,,95561368586100,95561381749100,95565528298800
+"71841f47-1037-4f46-9b67-a65b527a4903",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=167,,95561368586100,95561381749100,95565528298800
 "5d2f8222-9123-49a5-b001-ea868af9cf51",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,95565677342900,95565685080100,95565686471500
 "02b6d504-0ec0-4cd4-be29-9fbb063115ec",GET,"/libraries/chart.js/2.7.2/js/chart.bundle.min.js",,,200,application/javascript,,,95565693798300,95565696781500,95565697789800
 "0f4e5ba0-9e0f-4f89-b0f6-8869a967e4fa",GET,"/libraries/areyousure/1.9.0/js/areyousure.min.js",,,200,application/javascript,,,95565704347600,95565706827300,95565707840800
@@ -18,7 +18,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "2551d8df-e733-4c83-bfb2-d41b61247d2a",GET,"/libraries/fontawesome/5.2.0/webfonts/fa-solid-900.woff2",,,200,application/font-woff2,,,95565818920900,95565821978100,95565822916300
 "5bdbb828-8681-41b3-8c73-9cbf0367507a",GET,"/libraries/fontawesome/5.2.0/webfonts/fa-brands-400.woff2",,,200,application/font-woff2,,,95565830357200,95565833850000,95565835063600
 "3b686984-efc3-4e42-8b47-9284c0a274a3",GET,/images/favicon.ico,,,200,image/x-icon,,,95565856527700,95565877148300,95565878213200
-"471df26c-e6f9-48cb-87c1-fb9c797975e5",GET,"/anonymous/system/sign-in",,,200,text/html;charset=utf-8,"password=&remember=false&service=158&username=",,95569574582700,95569581727400,95571166792600
+"471df26c-e6f9-48cb-87c1-fb9c797975e5",GET,"/anonymous/system/sign-in",,,200,text/html;charset=utf-8,"password=&remember=false&service=166&username=",,95569574582700,95569581727400,95571166792600
 "3b6ee272-313b-4d88-adc2-660653de6017",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,95571196842600,95571198977000,95571199665800
 "3b83db3c-01aa-4043-b2a5-a52c50adfe58",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,95571203454900,95571205356800,95571206096400
 "1ea3536b-a0d2-497e-82b9-28d2ffb8741e",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,95571209903900,95571211640100,95571212241500
@@ -35,7 +35,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "3d8490bd-f7d0-49ab-b053-4fb89a7f1fe5",GET,/images/logo.png,,,200,image/png,,,95571288935600,95571291908400,95571293045600
 "5f23a7f9-d3ae-4755-b799-8898ad8573fe",POST,"/anonymous/system/sign-in",,"id=&version=&username=administrator1&password=administrator1&remember=false",302,,,,95579078487700,95579092754900,95579093594800
 "fa8afdb1-8db0-4953-9276-406e66a512d1",GET,/,,,302,,,,95579098714200,95579102538700,95579103728700
-"804e6515-1f18-48bf-b6d7-ea074ceb728a",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=159,,95579107359900,95579111266000,95579624649400
+"804e6515-1f18-48bf-b6d7-ea074ceb728a",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=167,,95579107359900,95579111266000,95579624649400
 "7bac660f-c278-420b-be08-8b9f0205b9f9",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,95579647866000,95579649620500,95579650103200
 "6b40bdf0-896c-4e49-91f1-292da5137d3c",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,95579653417600,95579655238600,95579655785300
 "f79277ea-6d6c-4b2e-8d95-c2ae2c92e68b",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,95579659420700,95579661183600,95579661734600
@@ -50,7 +50,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "97405812-aa8e-4b62-8675-218db3aa847d",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,95579714566800,95579716450900,95579716944600
 "8edb00f5-1696-429e-aab1-bd34518ba534",GET,/images/banner.png,,,200,image/png,,,95579724454400,95579726687600,95579727636400
 "2ec4d835-fa1f-4c55-8f9f-d9d4e7b7e68d",GET,/images/logo.png,,,200,image/png,,,95579731759100,95579733608000,95579734061000
-"7093082b-988d-44cc-bfe3-f78f5a1f63f7",GET,"/administrator/supported-currency/create",,,200,text/html;charset=utf-8,"id=0&version=0&service=159",,95586677090000,95586692344600,95587237779200
+"7093082b-988d-44cc-bfe3-f78f5a1f63f7",GET,"/administrator/supported-currency/create",,,200,text/html;charset=utf-8,"id=0&version=0&service=167",,95586677090000,95586692344600,95587237779200
 "4812af27-3f39-4096-beb5-eaad021ca1b8",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,95587260630600,95587262382300,95587263087600
 "8d55d9a0-a6bf-46f0-8405-d72e85d84c8d",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,95587266663000,95587268399300,95587268992000
 "1455d592-7937-4fe7-85cf-002fa3c399e7",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,95587272427600,95587274093800,95587274574600
@@ -65,7 +65,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "1dc57f5f-7e47-47af-bfee-8aaad35e540a",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,95587323303200,95587325372800,95587326285800
 "a804536c-f8df-4ea8-bdab-7567aa2b50e9",GET,/images/banner.png,,,200,image/png,,,95587340386700,95587343008600,95587344068100
 "f45a6afb-ec80-48c4-866b-fd69320ff770",GET,/images/logo.png,,,200,image/png,,,95587348704600,95587351649100,95587352637300
-"f78f9ab8-4531-494a-bf03-f0a8bc6defa8",POST,"/administrator/supported-currency/create",,"id=0&version=0&currencyName=USD&isDefaultCurrency=false",200,text/html;charset=utf-8,"id=0&currencyName%24error=This+currency+already+exists.&version=0&isDefaultCurrency=false&currencyName=USD&service=159",,95601347701300,95601376139400,95601788226100
+"f78f9ab8-4531-494a-bf03-f0a8bc6defa8",POST,"/administrator/supported-currency/create",,"id=0&version=0&currencyName=USD&isDefaultCurrency=false",200,text/html;charset=utf-8,"id=0&currencyName%24error=This+currency+already+exists.&version=0&isDefaultCurrency=false&currencyName=USD&service=167",,95601347701300,95601376139400,95601788226100
 "f7dae73d-4c50-443c-89ed-429eb3b6b727",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,95601812799500,95601814573900,95601815029300
 "628fdb2b-4c1d-49d8-ac41-63f4baa1ee92",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,95601817661400,95601819348500,95601819754900
 "e6cdde19-c18e-421f-8212-27d92396d256",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,95601822458400,95601823904300,95601824288400
@@ -80,7 +80,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "ad3898a4-7557-4552-bead-198cb2968722",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,95601874559600,95601876369300,95601876963000
 "6da487c2-f45e-41bc-8c82-1ef379cf136a",GET,/images/banner.png,,,200,image/png,,,95601883837100,95601885988100,95601886634200
 "399fb019-6cd5-4c06-a1b6-6ad1bc3b4425",GET,/images/logo.png,,,200,image/png,,,95601890399200,95601892747100,95601893532200
-"625dad58-c9c3-4b7c-b50e-e2fc4fe1e73a",POST,"/administrator/supported-currency/create",,"id=0&version=0&currencyName=JPY&isDefaultCurrency=false",200,text/html;charset=utf-8,service=158,,95615018327600,95615035982200,95615462285300
+"625dad58-c9c3-4b7c-b50e-e2fc4fe1e73a",POST,"/administrator/supported-currency/create",,"id=0&version=0&currencyName=JPY&isDefaultCurrency=false",200,text/html;charset=utf-8,service=166,,95615018327600,95615035982200,95615462285300
 "40d48728-3d2d-46c8-a14a-f4f16ded34e3",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,95615486766700,95615489023700,95615489472400
 "bd2df574-e7d7-477d-9230-73cfc8b13aa1",GET,"/libraries/chart.js/2.7.2/js/chart.bundle.min.js",,,200,application/javascript,,,95615492097100,95615493713400,95615494144700
 "e56f3522-e5b7-4772-a0d4-ece42a0cc62e",GET,"/libraries/areyousure/1.9.0/js/areyousure.min.js",,,200,application/javascript,,,95615497243500,95615499133200,95615499761000
@@ -95,7 +95,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "6bd154b7-0697-4bdf-8bd2-877f1d9b6c88",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,95615545132000,95615546703200,95615547274000
 "20eacfe9-3af8-4c8e-ba0d-7f0754829fb6",GET,/images/banner.png,,,200,image/png,,,95615556046200,95615558153300,95615558782000
 "ab9c47d8-f184-4850-b2e0-6477f313224e",GET,/,,,302,,,,95615572262200,95615576409600,95615577326500
-"60139a2c-3a32-4a45-9ec1-245d1b06a1e8",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=158,,95615581286100,95615585311300,95615923469300
+"60139a2c-3a32-4a45-9ec1-245d1b06a1e8",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=166,,95615581286100,95615585311300,95615923469300
 "1c3692ea-8be4-40c0-8da4-0d8379dc86e2",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,95615942043000,95615943691000,95615944162600
 "7265a543-3fe5-46a1-9150-08907e2a0562",GET,"/libraries/chart.js/2.7.2/js/chart.bundle.min.js",,,200,application/javascript,,,95615946515600,95615947981400,95615948316500
 "d12f2604-0e4d-4397-9a50-3696b96ee240",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,95615951435400,95615952937300,95615953228500
@@ -110,7 +110,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "aebdbf77-fe28-49cc-a422-d4998c3ad0a2",GET,"/libraries/acme/css/acme.css",,,200,text/css,,,95615992946200,95615994565600,95615994934900
 "c6172830-37e9-4baa-adf0-4ab8b7e0258f",GET,/images/banner.png,,,200,image/png,,,95615997953900,95616000336400,95616001000100
 "df919099-82fd-4424-97c3-ae3375a09a0a",GET,/images/logo.png,,,200,image/png,,,95616005994900,95616009054000,95616009797800
-"78861aaa-d4ba-4bd6-b983-56d7431d8c45",GET,"/administrator/supported-currency/create",,,200,text/html;charset=utf-8,"id=0&version=0&service=160",,95619069618900,95619074300100,95619355347600
+"78861aaa-d4ba-4bd6-b983-56d7431d8c45",GET,"/administrator/supported-currency/create",,,200,text/html;charset=utf-8,"id=0&version=0&service=168",,95619069618900,95619074300100,95619355347600
 "d75a3011-faaa-40ef-b089-974dfd646b80",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,95619380618600,95619382462900,95619383141000
 "058a656b-9e9a-450f-b5e0-27db6b334a39",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,95619386265400,95619387960100,95619388455200
 "5377ecd5-5b1a-48bf-898a-15aa5e59b0a0",GET,"/libraries/areyousure/1.9.0/js/areyousure.min.js",,,200,application/javascript,,,95619391384500,95619392911300,95619393263300
@@ -125,7 +125,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "8c68e5d6-ea58-4f34-9a6e-75ec4452aa72",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,95619438933600,95619441867200,95619442374200
 "8f1b410a-0aa1-4e02-9d5d-7ae92a528dac",GET,/images/banner.png,,,200,image/png,,,95619451546100,95619453647900,95619454256500
 "e026c26e-14b0-4846-822c-15e7837f157c",GET,/images/logo.png,,,200,image/png,,,95619458168700,95619459963200,95619460441400
-"3d6afdd8-0237-4cd9-9c6a-cf768ecc1a46",POST,"/administrator/supported-currency/create",,"id=0&version=0&currencyName=AUD&isDefaultCurrency=true",200,text/html;charset=utf-8,service=158,,95624339482400,95624361712900,95624718559700
+"3d6afdd8-0237-4cd9-9c6a-cf768ecc1a46",POST,"/administrator/supported-currency/create",,"id=0&version=0&currencyName=AUD&isDefaultCurrency=true",200,text/html;charset=utf-8,service=166,,95624339482400,95624361712900,95624718559700
 "49a55d04-21e0-4814-a6eb-23dc89f7797b",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,95624739515600,95624741230200,95624741875700
 "6170c47d-c42b-44ad-a7f1-7ae6e93a2af3",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,95624746520700,95624748667800,95624749297300
 "cccab417-ec31-4379-8368-4cc8003a40a5",GET,"/libraries/areyousure/1.9.0/js/areyousure.min.js",,,200,application/javascript,,,95624752247800,95624753872200,95624754247400
@@ -140,7 +140,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "5784dd97-78ea-46ca-a10a-ad72e0d5d094",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,95624801344800,95624802812100,95624803159300
 "a78ff83f-01fb-4c53-9936-2cd42a468d16",GET,/images/banner.png,,,200,image/png,,,95624813197400,95624815285200,95624815896200
 "7d611a5d-dd3d-4a22-b8d0-88e4c2bf06e4",GET,/,,,302,,,,95624819079400,95624824011000,95624824930300
-"7b62a5a5-ea6e-402f-b55e-e37071cdb48c",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=159,,95624828610500,95624832507600,95625154132200
+"7b62a5a5-ea6e-402f-b55e-e37071cdb48c",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=167,,95624828610500,95624832507600,95625154132200
 "97e129bd-48cd-447e-8dc4-87182dd20cd8",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,95625178896300,95625180958500,95625181374300
 "fe5ca5fc-967f-4974-8157-854dc8128a41",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,95625183941600,95625185653800,95625186134700
 "fa4f7ee0-f58a-45f3-adf2-2cad19189758",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,95625189262000,95625190820700,95625191401100
@@ -155,7 +155,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "24646e09-5781-460f-ae80-66b2240682b2",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,95625244458200,95625246367900,95625246942600
 "e9bc10a3-0ad0-4f57-9352-4b7b4d7f92c8",GET,/images/banner.png,,,200,image/png,,,95625250371900,95625252614600,95625253224000
 "7986d32a-16a0-4c50-b0bd-cffb9594744e",GET,/images/logo.png,,,200,image/png,,,95625258397000,95625260688000,95625261322000
-"a8cced1d-e300-4068-866a-afbde28d1afe",GET,"/administrator/supported-currency/create",,,200,text/html;charset=utf-8,"id=0&version=0&service=160",,95659289440400,95659296797000,95659616141200
+"a8cced1d-e300-4068-866a-afbde28d1afe",GET,"/administrator/supported-currency/create",,,200,text/html;charset=utf-8,"id=0&version=0&service=168",,95659289440400,95659296797000,95659616141200
 "8a9290e5-3b00-43ba-ae54-39269f664da7",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,95659640870200,95659642323300,95659642759200
 "9d1fa0b1-3a24-4fd7-a275-1f4053a746cc",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,95659645604600,95659647402100,95659647898800
 "b96d068c-8493-4fcc-bde5-e6a1b349984c",GET,"/libraries/areyousure/1.9.0/js/areyousure.min.js",,,200,application/javascript,,,95659650710100,95659652499800,95659652980600
@@ -170,7 +170,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "bb4d2800-640a-43ba-988d-3ade1ca7c645",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,95659693844300,95659695260700,95659695634500
 "bd5e6c24-4248-47a8-b8fd-54fbb0d2e69d",GET,/images/banner.png,,,200,image/png,,,95659704137300,95659705907100,95659706404700
 "ca0cf498-7629-49d6-b8e9-2b7bbf77e1aa",GET,/images/logo.png,,,200,image/png,,,95659711779200,95659713504300,95659713933700
-"22d25899-7c68-4552-8ff7-d4d9fd31ad30",POST,"/administrator/supported-currency/create",,"id=0&version=0&currencyName=AAA&isDefaultCurrency=false",200,text/html;charset=utf-8,"id=0&currencyName%24error=This+is+not+a+valid+currency.&version=0&isDefaultCurrency=false&currencyName=AAA&service=159",,95663075526500,95663093473600,95663311775600
+"22d25899-7c68-4552-8ff7-d4d9fd31ad30",POST,"/administrator/supported-currency/create",,"id=0&version=0&currencyName=AAA&isDefaultCurrency=false",200,text/html;charset=utf-8,"id=0&currencyName%24error=This+is+not+a+valid+currency.&version=0&isDefaultCurrency=false&currencyName=AAA&service=167",,95663075526500,95663093473600,95663311775600
 "83297ca8-8a48-4551-ae5e-0941bb78e9d0",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,95663331082000,95663332638600,95663333106000
 "1aa0407e-53ff-43d7-99a0-0c2625d4f2ab",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,95663335350900,95663336645700,95663336864200
 "eb763969-4e75-4a6d-b9e8-618146ca3eb4",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,95663339244800,95663340764600,95663341219600

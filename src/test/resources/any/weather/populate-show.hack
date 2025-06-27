@@ -1,6 +1,6 @@
 request-id,request-method,request-path,request-query,request-payload,response-status,response-content-type,response-payload,response-oops,pre-handle-timestamp,post-handle-timestamp,"after-completion-timestamp"
 "e0ff70fe-0352-43a4-b9ad-1e05146c6b56",GET,/,"debug=true&locale=en",,302,,,,278559699933899,278559795336800,278559801925599
-"f1637651-f577-4d38-9a1e-1857605d72ee",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=159,,278559833919500,278559848002100,278565417057100
+"f1637651-f577-4d38-9a1e-1857605d72ee",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=167,,278559833919500,278559848002100,278565417057100
 "e83b8228-cc89-4efc-8f5a-96c85aa270de",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,278565613051800,278565622944000,278565624798299
 "9a6a7fa6-2554-46d9-ad50-999dbd22e39d",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,278565637536400,278565641203099,278565642657100
 "378c9c2d-2ee6-4c29-86b3-75641e91c5cf",GET,"/libraries/areyousure/1.9.0/js/areyousure.min.js",,,200,application/javascript,,,278565653015300,278565656245100,278565657629999
@@ -15,7 +15,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "fcd6a51a-67f2-4514-aac9-a8eca05ad652",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,278565765061100,278565767638700,278565768538100
 "2304035c-0576-41d5-a0bf-5e0e2ce57634",GET,/images/banner.png,,,200,image/png,,,278565790470900,278565793747800,278565794940800
 "97483612-6e8a-41b4-a612-009603145ad0",GET,/images/logo.png,,,200,image/png,,,278565803241600,278565807937100,278565809034299
-"e0b2ba8f-fdb1-49ef-b752-e766ae3ac12a",GET,/any/weather/list,,,200,text/html;charset=utf-8,"temperature%5B2%5D=18.00&version%5B1%5D=0&status%5B0%5D=GOOD_WEATHER&forecastDate%5B0%5D=2024%2F02%2F02+00%3A00&id%5B1%5D=173&version%5B2%5D=0&city%5B0%5D=London&forecastDate%5B1%5D=2024%2F02%2F02+00%3A00&status%5B1%5D=BAD_WEATHER&id%5B0%5D=171&temperature%5B0%5D=22.00&city%5B1%5D=Los+Angeles&forecastDate%5B2%5D=2022%2F02%2F02+00%3A00&status%5B2%5D=BAD_WEATHER&temperature%5B1%5D=10.00&city%5B2%5D=London&service=158&version%5B0%5D=0&id%5B2%5D=172",,278568536694800,278568565173299,278570221565800
+"e0b2ba8f-fdb1-49ef-b752-e766ae3ac12a",GET,/any/weather/list,,,200,text/html;charset=utf-8,"temperature%5B2%5D=18.00&version%5B1%5D=0&status%5B0%5D=GOOD_WEATHER&forecastDate%5B0%5D=2024%2F02%2F02+00%3A00&id%5B1%5D=173&version%5B2%5D=0&city%5B0%5D=London&forecastDate%5B1%5D=2024%2F02%2F02+00%3A00&status%5B1%5D=BAD_WEATHER&id%5B0%5D=171&temperature%5B0%5D=22.00&city%5B1%5D=Los+Angeles&forecastDate%5B2%5D=2022%2F02%2F02+00%3A00&status%5B2%5D=BAD_WEATHER&temperature%5B1%5D=10.00&city%5B2%5D=London&service=166&version%5B0%5D=0&id%5B2%5D=172",,278568536694800,278568565173299,278570221565800
 "ed5f54ac-21d4-486a-b129-32018e630a51",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,278570319471800,278570322509700,278570323692900
 "a78a4d4e-4b69-42e1-a183-88d5e2610d84",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,278570329714700,278570332367300,278570333884100
 "ed6343d5-070b-40f1-b5cf-3d00e2173091",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,278570340130400,278570342618400,278570343470600
@@ -31,7 +31,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "41d15a68-8f03-4c9b-a1d6-c2148f4bb271",GET,/images/banner.png,,,200,image/png,,,278570450983000,278570453885500,278570455151700
 "8ffc795d-c018-4301-9942-7b00bf017982",GET,/images/logo.png,,,200,image/png,,,278570461795700,278570464155200,278570465419800
 "5e3e876a-e1be-405c-b03f-b26aebee4121",GET,"/libraries/datatables/1.10.18/config/i18n-en.json",,,200,application/json,"sProcessing=Processing...&sSearch=Search:&sLengthMenu=Show%20_MENU_%20items&sInfo=Showing%20data%20_START_%20-%20_END_%20out%20of%20_TOTAL_%20data&sInfoEmpty=No%20items%20found&sInfoFiltered=(filtered%20from%20_MAX_%20data)&sInfoPostFix=&sLoadingRecords=Loading...&sZeroRecords=No%20data&sEmptyTable=No%20data&oPaginate.sFirst=First&oPaginate.sPrevious=Previous&oPaginate.sNext=Next&oPaginate.sLast=Last",,278570479628400,278570482950299,278570510873300
-"62989337-2a82-4559-b5a2-800f5c897e1b",GET,/any/weather/show,id=171,,200,text/html;charset=utf-8,"id=171&visibility=5000&version=0&wind=12.00&status=GOOD_WEATHER&city=London&snowPerHour=0.00&temperature=22.00&rainPerHour=0.00&service=158&forecastDate=2024%2F02%2F02+00%3A00",,278572016283600,278572033467300,278573881723399
+"62989337-2a82-4559-b5a2-800f5c897e1b",GET,/any/weather/show,id=171,,200,text/html;charset=utf-8,"id=171&visibility=5000&version=0&wind=12.00&status=GOOD_WEATHER&city=London&snowPerHour=0.00&temperature=22.00&rainPerHour=0.00&service=166&forecastDate=2024%2F02%2F02+00%3A00",,278572016283600,278572033467300,278573881723399
 "2cecd101-49ff-4f36-9eff-12504b1f9a58",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,278573955013800,278573957861099,278573959053699
 "7cc029a9-de0b-4a72-94f9-9fe138704943",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,278573963375500,278573965825200,278573966553099
 "01069554-c466-4a28-a2ea-9df020691b6b",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,278573971182000,278573973810900,278573974646500
@@ -46,7 +46,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "547eef2c-598a-497c-9d7f-68b74d02301b",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,278574047698700,278574050217300,278574051121499
 "33b8c6b5-ba0e-4aa4-8723-b10b5e7d2f07",GET,/images/banner.png,,,200,image/png,,,278574060117900,278574063105600,278574064173900
 "5ce11e48-799c-4b64-b4e9-5b3396230374",GET,/images/logo.png,,,200,image/png,,,278574071269300,278574073956699,278574074871400
-"f4cf9f4f-10ca-4536-b835-3f7ac2c96789",GET,/any/weather/show,id=1,,500,text/html;charset=utf-8,service=159,"Access is not authorised",278576880007400,278576914342799,278577684780800
+"f4cf9f4f-10ca-4536-b835-3f7ac2c96789",GET,/any/weather/show,id=1,,500,text/html;charset=utf-8,service=167,"Access is not authorised",278576880007400,278576914342799,278577684780800
 "034c42a4-966f-473a-b015-b16f4b3d05e2",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,278577715887899,278577719058300,278577720028900
 "6ce527f5-e8ff-48bd-bb21-598821a7b8e0",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,278577725194100,278577727376200,278577728076200
 "d3a40bdd-5b27-4e7e-9723-810562768135",GET,"/libraries/areyousure/1.9.0/js/areyousure.min.js",,,200,application/javascript,,,278577732650300,278577735108300,278577735928400
@@ -62,7 +62,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "588c8e8e-bf5f-4834-8afd-b7a52a07c60b",GET,/images/banner.png,,,200,image/png,,,278577830974400,278577834040100,278577835183900
 "6ae74478-4b89-4600-994a-deed4a2851c6",GET,/images/logo.png,,,200,image/png,,,278577842798899,278577846604800,278577848959600
 "fc28ec1e-a3c0-4f1c-ad2b-5e44f4c5096b",GET,/,,,302,,,,278579872861800,278579877389499,278579878315700
-"db5f312d-ff60-4581-aa57-ab6a28a9eb04",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=159,,278579885620900,278579890474100,278580377567800
+"db5f312d-ff60-4581-aa57-ab6a28a9eb04",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=167,,278579885620900,278579890474100,278580377567800
 "1bcdf28e-b3dd-4d0b-afb1-42e6254a5b89",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,278580406059400,278580408530300,278580409386700
 "0dcbbccd-bcac-4d64-9841-d7280070dbd1",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,278580413867200,278580416045500,278580416792700
 "fc2b2b7c-0ac4-4582-9465-8a6d658acb28",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,278580421156400,278580423532700,278580424471499
@@ -93,7 +93,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "ce9a9bbe-75d4-495c-9b30-5b21581760e6",GET,/images/banner.png,,,200,image/png,,,278591028755199,278591031034900,278591031678200
 "c4969115-1927-4668-bf58-7a447088c744",GET,/images/logo.png,,,200,image/png,,,278591036553300,278591038458200,278591039086400
 "556213a5-cf2d-4652-98ef-a950cf596947",GET,/,,,302,,,,278598360358799,278598368371000,278598369539099
-"1fc6d6ea-1db3-46b8-bd9c-cd422841d332",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=158,,278598374922100,278598379405700,278598796833799
+"1fc6d6ea-1db3-46b8-bd9c-cd422841d332",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=166,,278598374922100,278598379405700,278598796833799
 "a3065487-fe55-4595-b56b-ab0ec2b36772",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,278598824422699,278598827444500,278598828413700
 "b5139890-83cf-4d3f-b4df-9afb15ba379a",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,278598833596199,278598836864400,278598838110700
 "442dc6d9-ec35-4097-b224-70d7d7dd9a89",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,278598843641300,278598846387100,278598847321600
@@ -108,7 +108,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "98691641-5b47-4e79-93e3-289139349382",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,278598911196300,278598913384200,278598914160300
 "7d4997df-7579-4ba6-8ae2-4aa9d69b19a2",GET,/images/banner.png,,,200,image/png,,,278598923610000,278598926880300,278598927967800
 "0de00545-4874-43bc-b687-812804a82779",GET,/images/logo.png,,,200,image/png,,,278598933510900,278598935377000,278598936008000
-"d2bcd61c-2e9a-49dd-9ab4-df908b79ca37",GET,"/anonymous/system/sign-in",,,200,text/html;charset=utf-8,"password=&remember=false&service=160&username=",,278606997070200,278607008266600,278608178017499
+"d2bcd61c-2e9a-49dd-9ab4-df908b79ca37",GET,"/anonymous/system/sign-in",,,200,text/html;charset=utf-8,"password=&remember=false&service=168&username=",,278606997070200,278607008266600,278608178017499
 "2ac55dfd-c987-4f92-aa2d-e205f83b76b7",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,278608216791900,278608219201600,278608219990400
 "b602d79c-09d3-44b9-ba31-f12f122d4a23",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,278608224725299,278608226934299,278608227595700
 "59408717-a746-4baf-acce-7dac4a7f787d",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,278608231571900,278608233679900,278608234325799
@@ -125,7 +125,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "d72e85ad-a8eb-4180-9c48-d2c09c8bef73",GET,/images/logo.png,,,200,image/png,,,278608322503799,278608325018599,278608326122800
 "1703ee8f-39f1-4c0d-8717-f4f94490da9b",POST,"/anonymous/system/sign-in",,"id=&version=&username=administrator&password=administrator&remember=false",302,,,,278614672553199,278614713582100,278614714306499
 "aa366af1-0d4e-4972-93b6-00e451f9797f",GET,/,,,302,,,,278614720775200,278614726280000,278614727126099
-"6e5c5671-0298-4af2-b7e9-dd0e4640693c",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=159,,278614732482700,278614737982000,278615319471400
+"6e5c5671-0298-4af2-b7e9-dd0e4640693c",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=167,,278614732482700,278614737982000,278615319471400
 "94c440e6-b2dc-4311-a1a3-b5c3a3611f0b",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,278615350361000,278615352593600,278615353337300
 "8d2a495f-2902-4796-9778-036a53f8cdb8",GET,"/libraries/chart.js/2.7.2/js/chart.bundle.min.js",,,200,application/javascript,,,278615358251700,278615362803400,278615363827800
 "9696e201-cf0e-49e9-9760-9d5c3ecebe59",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,278615369431899,278615371469900,278615372066200

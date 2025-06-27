@@ -1,2 +1,10 @@
 key,registration-moment,type-of-incident,description,severity-level,is-draft-mode,key:flight-assignment
-activity-log-01,2017/08/07 18:15,Mechanical Failure,Engine malfunction detected during routine check.,7,true,flight-assignment-01
+activity-log-01,2017/08/07 18:15,Mechanical Failure,Engine malfunction detected during routine check.,0,true,flight-assignment-01
+activity-log-02,1900/01/01 00:00,Technical Failure,Technical malfunction detected during routine check.,5,false,flight-assignment-02
+activity-log-03,2025/01/01 00:00,Mechanical Failure,Engine malfunction detected during routine check.,4,false,flight-assignment-03
+activity-log-04,2014/09/02 12:21,Technical Failure,Technical malfunction detected during routine check.,10,true,flight-assignment-04
+activity-log-05,2001/11/11 19:15,Technical Failure,Technical malfunction detected during routine check.,4,true,flight-assignment-05
+activity-log-06,2009/08/05 15:30,Mechanical Failure,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",3,false,flight-assignment-06
+activity-log-07,2023/06/06 21:15,Mechanical Failure,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",7,true,flight-assignment-07
+activity-log-08,2003/07/04 21:00,Technical Failure,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",7,true,flight-assignment-08
+activity-log-09,2012/03/01 14:25,Mechanical Failure,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",8,false,flight-assignment-09

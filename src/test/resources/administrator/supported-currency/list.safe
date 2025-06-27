@@ -1,6 +1,6 @@
 request-id,request-method,request-path,request-query,request-payload,response-status,response-content-type,response-payload,response-oops,pre-handle-timestamp,post-handle-timestamp,"after-completion-timestamp"
 "5c014d85-73a6-4dee-a2f6-80d1c62e1915",GET,/,"debug=true&locale=en",,302,,,,5404124084400,5404194642000,5404199426400
-"a4623cdd-82df-4649-9225-7ee0d0766841",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=159,,5404223829900,5404234005600,5408924749400
+"a4623cdd-82df-4649-9225-7ee0d0766841",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=167,,5404223829900,5404234005600,5408924749400
 "4f8d3d2f-efaf-4032-aa2a-10585cb55cab",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,5409072024700,5409089125500,5409090501500
 "9b8a6c5d-024e-4b70-8cf0-1a7bed456c02",GET,"/libraries/chart.js/2.7.2/js/chart.bundle.min.js",,,200,application/javascript,,,5409096776400,5409151786600,5409153088900
 "eb9f9ca7-0433-4819-8cc3-cd237bc3d2d0",GET,"/libraries/areyousure/1.9.0/js/areyousure.min.js",,,200,application/javascript,,,5409159943000,5409180333300,5409181707900
@@ -18,7 +18,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "9523e5fa-0f95-4b51-87a9-cf44f4232f93",GET,/images/favicon.ico,,,200,image/x-icon,,,5409516244300,5409535523300,5409536548300
 "e87f6796-dbfd-4346-8d5e-e1874be8dde0",GET,"/libraries/fontawesome/5.2.0/webfonts/fa-solid-900.woff2",,,200,application/font-woff2,,,5409542368700,5409552200000,5409553172500
 "bc0a2f67-07ab-4fb5-8a4b-ffc86a4d1a06",GET,"/libraries/fontawesome/5.2.0/webfonts/fa-brands-400.woff2",,,200,application/font-woff2,,,5409558611200,5409568999600,5409570138500
-"bf79b8eb-5409-41e7-9b84-7f38a5dcd047",GET,"/anonymous/system/sign-in",,,200,text/html;charset=utf-8,"password=&remember=false&service=158&username=",,5415316871100,5415326766300,5417002637700
+"bf79b8eb-5409-41e7-9b84-7f38a5dcd047",GET,"/anonymous/system/sign-in",,,200,text/html;charset=utf-8,"password=&remember=false&service=166&username=",,5415316871100,5415326766300,5417002637700
 "29b49d9b-e092-4d4f-a38f-541d60795096",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,5417036167700,5417038609900,5417039413300
 "d1663485-b18e-4c4a-aad8-00fe7b88bc83",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,5417043649300,5417045868600,5417046746900
 "1b0df118-2ded-498d-8d68-1249c125e7db",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,5417051023300,5417052862900,5417053615400
@@ -35,7 +35,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "285e7325-f84e-4790-ae31-72e778378892",GET,/images/logo.png,,,200,image/png,,,5417142457000,5417145126400,5417146376000
 "650c3f02-3fe1-44f3-b895-e8121ee26a72",POST,"/anonymous/system/sign-in",,"id=&version=&username=administrator1&password=administrator1&remember=false",302,,,,5428702501700,5428732471200,5428733351600
 "79f0bdf6-1109-45ee-857f-80e5fcb62cad",GET,/,,,302,,,,5428738577600,5428742464500,5428743381500
-"7a69df83-ec18-4c32-9a0c-471d792f46f4",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=159,,5428747920400,5428751735500,5429303414200
+"7a69df83-ec18-4c32-9a0c-471d792f46f4",GET,/any/system/welcome,,,200,text/html;charset=utf-8,service=167,,5428747920400,5428751735500,5429303414200
 "9ecf371b-8eba-4ff7-9a72-9b222fbd6f9f",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,5429327728300,5429329654900,5429330326000
 "313a5553-1350-4e66-a3d8-c05d1e2fc4bb",GET,"/libraries/chart.js/2.7.2/js/chart.bundle.min.js",,,200,application/javascript,,,5429333428700,5429335265700,5429335950900
 "5089c05c-9995-43c9-9f8e-3f0758d9ef7f",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,5429339819400,5429341734500,5429342434400
@@ -50,7 +50,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "4432f558-07de-4e86-9eb8-63ef6bd5a204",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,5429394284800,5429396174900,5429396679600
 "18bd977b-2feb-43c2-9b8c-347e10916584",GET,/images/banner.png,,,200,image/png,,,5429403663900,5429405758200,5429406525800
 "39934324-40d9-4e2d-a131-447cf19bceee",GET,/images/logo.png,,,200,image/png,,,5429410497000,5429412516100,5429413156900
-"0965f1f7-2b17-49d5-af2f-8a85adadb04a",GET,"/administrator/supported-currency/list",,,200,text/html;charset=utf-8,"version%5B1%5D=0&isDefaultCurrency%5B1%5D=x&isDefaultCurrency%5B0%5D=✓&id%5B1%5D=33&currencyName%5B1%5D=USD&version%5B2%5D=0&currencyName%5B0%5D=EUR&id%5B0%5D=32&isDefaultCurrency%5B2%5D=x&service=159&version%5B0%5D=0&id%5B2%5D=34&currencyName%5B2%5D=GBP",,5436168329000,5436184933500,5437097547900
+"0965f1f7-2b17-49d5-af2f-8a85adadb04a",GET,"/administrator/supported-currency/list",,,200,text/html;charset=utf-8,"version%5B1%5D=0&isDefaultCurrency%5B1%5D=x&isDefaultCurrency%5B0%5D=✓&id%5B1%5D=33&currencyName%5B1%5D=USD&version%5B2%5D=0&currencyName%5B0%5D=EUR&id%5B0%5D=32&isDefaultCurrency%5B2%5D=x&service=167&version%5B0%5D=0&id%5B2%5D=34&currencyName%5B2%5D=GBP",,5436168329000,5436184933500,5437097547900
 "04e20d4f-3940-438c-a566-ddc55de5a13f",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,5437122852300,5437124612700,5437125114500
 "e58a2d6b-c4ba-4541-aab6-07621cf2ac77",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,5437128199500,5437129881500,5437130322400
 "30140730-9a88-47d4-823f-a32cb2bddd06",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,5437133503200,5437135339300,5437135959300
