@@ -61,9 +61,6 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 		claimId = super.getRequest().getData("claim", int.class);
 		List<TrackingLog> tlList = this.aatlr.findAllTrackingLogsByClaimId(claimId);
 
-		Claim claim = this.aatlr.findClaimById(claimId);
-		super.state(!trackingLog.getIsPublished() || trackingLog.getIsPublished() && claim != null && claim.getIsPublished(), "isPublished", "assistance-agent.tracking-log.create.cant-be-published");
-
 		if (tlList.size() == 2)
 			super.state(false, "*", "assistance-agent.tracking-log.create.log-limit");
 	}

@@ -82,6 +82,7 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 		claim = this.aatlr.findClaimById(claimId);
 		trackingLogId = super.getRequest().getData("id", int.class);
 		trackLog = this.aatlr.findTrackingLogById(trackingLogId);
+		List<TrackingLog> tlList = this.aatlr.findAllTrackingLogsByClaimId(claimId);
 
 		if (trackingLog.getIsPublished() && claim != null)
 			super.state(claim.getIsPublished(), "*", "assistance-agent.tracking-log.create.cant-be-published");
@@ -97,7 +98,10 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 		if ((trackingLog.getIndicator() == LogState.ACCEPTED || trackingLog.getIndicator() == LogState.REJECTED || trackingLog.getResolutionPercentage() == 100.00) && !trackingLog.getIsPublished())
 			super.state(false, "isPublished", "assistance-agent.tracking-log.create.should-be-publised");
 		if ((trackingLog.getIndicator() == LogState.IN_PROGRESS || trackingLog.getResolutionPercentage() != 100.00) && trackingLog.getIsPublished())
-			super.state(false, "isPublished", "assistance-agent.tracking-log.create.in-progress");
+			super.state(false, "*", "assistance-agent.tracking-log.create.in-progress");
+
+		if (tlList.size() == 2)
+			super.state(false, "*", "assistance-agent.tracking-log.create.log-limit");
 
 	}
 
