@@ -2,18 +2,15 @@
 package acme.features.flightCrewMember.activitylog;
 
 import java.util.Collection;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
-import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.activitylogs.ActivityLog;
 import acme.entities.flightassignments.FlightAssignment;
-import acme.entities.legs.Leg;
 import acme.realms.FlightCrewMember;
 
 @GuiService
@@ -27,26 +24,7 @@ public class FlightCrewMemberActivityLogDeleteService extends AbstractGuiService
 	// AbstractGuiService interface -------------------------------------------
 	@Override
 	public void authorise() {
-		int activityLogId = super.getRequest().getData("id", int.class);
-		ActivityLog activityLog = this.repository.findActivityLogById(activityLogId);
-
-		boolean authorised = false;
-
-		if (activityLog != null && activityLog.getFlightAssignment() != null) {
-			FlightAssignment assignment = activityLog.getFlightAssignment();
-			int userId = super.getRequest().getPrincipal().getActiveRealm().getId();
-
-			boolean isOwner = assignment.getFlightCrewMember().getId() == userId;
-			boolean isDraft = Boolean.TRUE.equals(activityLog.getIsDraftMode());
-
-			Leg leg = assignment.getLeg();
-			Date now = MomentHelper.getCurrentMoment();
-			boolean legHasOccurred = leg != null && leg.getScheduledDeparture() != null && leg.getScheduledDeparture().before(now);
-
-			authorised = isOwner && isDraft && legHasOccurred;
-		}
-
-		super.getResponse().setAuthorised(authorised);
+		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class));
 	}
 
 	@Override
@@ -60,7 +38,7 @@ public class FlightCrewMemberActivityLogDeleteService extends AbstractGuiService
 	@Override
 	public void bind(final ActivityLog activityLog) {
 		// No hay que modificar relaciones en un delete. Solo bind de campos relevantes si los hubiera.
-		super.bindObject(activityLog, "registrationMoment", "typeOfIncident", "description", "severityLevel");
+		super.bindObject(activityLog, "typeOfIncident", "description", "severityLevel");
 	}
 
 	@Override

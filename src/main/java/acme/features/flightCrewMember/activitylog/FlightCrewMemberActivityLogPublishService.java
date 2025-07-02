@@ -49,7 +49,7 @@ public class FlightCrewMemberActivityLogPublishService extends AbstractGuiServic
 
 	@Override
 	public void bind(final ActivityLog activityLog) {
-		super.bindObject(activityLog, "registrationMoment", "typeOfIncident", "description", "severityLevel", "flightAssignment");
+		super.bindObject(activityLog, "typeOfIncident", "description", "severityLevel", "flightAssignment");
 
 	}
 

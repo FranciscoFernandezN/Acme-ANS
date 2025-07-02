@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import acme.client.repositories.AbstractRepository;
+import acme.entities.activitylogs.ActivityLog;
 import acme.entities.flightassignments.FlightAssignment;
 import acme.entities.legs.Leg;
 import acme.realms.FlightCrewMember;
@@ -42,10 +43,13 @@ public interface FlightCrewMemberFlightAssignmentRepository extends AbstractRepo
 	@Query("Select fa from FlightAssignment fa")
 	List<FlightAssignment> findAllFlightAssignments();
 
-	@Query("SELECT f FROM FlightAssignment f WHERE f.flightCrewMember.id = :crewId AND f.leg.scheduledDeparture < :date")
-	List<FlightAssignment> findFlightAssignmentBeforeCurrentByCrewMember(int crewId, Date date);
+	@Query("SELECT f FROM FlightAssignment f WHERE f.flightCrewMember.id = :flightCrewMemberId AND f.leg.scheduledDeparture < :date")
+	List<FlightAssignment> findFlightAssignmentBeforeCurrentByCrewMember(int flightCrewMemberId, Date date);
 
-	@Query("SELECT f FROM FlightAssignment f WHERE f.flightCrewMember.id = :crewId AND f.leg.scheduledDeparture >= :date")
-	List<FlightAssignment> findFlightAssignmentAfterCurrentByCrewMember(int crewId, Date date);
+	@Query("SELECT f FROM FlightAssignment f WHERE f.flightCrewMember.id = :flightCrewMemberId AND f.leg.scheduledDeparture >= :date")
+	List<FlightAssignment> findFlightAssignmentAfterCurrentByCrewMember(int flightCrewMemberId, Date date);
+
+	@Query("SELECT a FROM ActivityLog a WHERE a.flightAssignment.id = :flightAssignmentId")
+	List<ActivityLog> findActivityLogsByAssignmentId(int flightAssignmentId);
 
 }

@@ -1,6 +1,7 @@
 
 package acme.features.flightCrewMember.flightassignment;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import acme.client.components.views.SelectChoices;
 import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
+import acme.entities.activitylogs.ActivityLog;
 import acme.entities.flightassignments.CurrentStatus;
 import acme.entities.flightassignments.Duty;
 import acme.entities.flightassignments.FlightAssignment;
@@ -52,17 +54,22 @@ public class FlightCrewMemberFlightAssignmentDeleteService extends AbstractGuiSe
 
 	@Override
 	public void bind(final FlightAssignment flightAssignment) {
-		super.bindObject(flightAssignment, "duty", "lastUpDate", "currentStatus", "remarks");
+		super.bindObject(flightAssignment, "duty", "currentStatus", "remarks");
 	}
 
 	@Override
-	public void validate(final FlightAssignment assignment) {
+	public void validate(final FlightAssignment flightAssignment) {
 		boolean confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
+
 	}
 
 	@Override
 	public void perform(final FlightAssignment flightAssignment) {
+		Collection<ActivityLog> activityLogs;
+
+		activityLogs = this.repository.findActivityLogsByAssignmentId(flightAssignment.getId());
+		this.repository.deleteAll(activityLogs);
 		this.repository.delete(flightAssignment);
 	}
 

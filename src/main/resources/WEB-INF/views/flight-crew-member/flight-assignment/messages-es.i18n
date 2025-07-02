@@ -29,5 +29,6 @@ flight-crew-member.flight-assignment.error.pilot-limit-exceeded = Debe haber al 
 flight-crew-member.flight-assignment.error.copilot-limit-exceeded = Debe haber al menos un copiloto
 flight-crew-member.flight-assignment.error.leg-null = Un tramo no puede ser nulo  
 flight-crew-member.flight-assignment.error.cannot-publish-pending = El estado actual no puede ser pendiente.
+flight-crew-member.flight-assignment.error.cannot-delete-cancelled = El estado actual no puede ser cancelado.
 flight-crew-member.flight-assignment.error.overlapping-legs = Los tramos son simultáneos
 flight-crew-member.flight-assignment.error.is-published = La asignación de vuelo está publicada

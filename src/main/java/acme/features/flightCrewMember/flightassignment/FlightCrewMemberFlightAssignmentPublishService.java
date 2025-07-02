@@ -64,11 +64,11 @@ public class FlightCrewMemberFlightAssignmentPublishService extends AbstractGuiS
 
 	@Override
 	public void load() {
-		FlightAssignment flightAssignment;
+		int flightAssignmentId = super.getRequest().getData("id", int.class);
+		FlightAssignment flightAssignment = this.repository.findFlightAssignmentById(flightAssignmentId);
 
-		flightAssignment = new FlightAssignment();
-
-		super.getBuffer().addData(flightAssignment);
+		if (flightAssignment != null)
+			super.getBuffer().addData(flightAssignment);
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class FlightCrewMemberFlightAssignmentPublishService extends AbstractGuiS
 		Integer legId = super.getRequest().getData("leg", int.class);
 		Leg leg = this.repository.findLegById(legId);
 
-		super.bindObject(flightAssignment, "duty", "lastUpDate", "currentStatus", "remarks");
+		super.bindObject(flightAssignment, "duty", "currentStatus", "remarks");
 		flightAssignment.setFlightCrewMember(flightCrewMember);
 		flightAssignment.setLeg(leg);
 	}
@@ -105,9 +105,13 @@ public class FlightCrewMemberFlightAssignmentPublishService extends AbstractGuiS
 			// Obtener los Legs donde el tripulante ya está asignado
 			List<Leg> assignedLegs = this.repository.findLegsByFlightCrewMemberId(flightAssignment.getFlightCrewMember().getId());
 
-			// Verificar si hay solapamiento de horarios con otro Leg asignado
-			boolean hasOverlappingLeg = assignedLegs.stream()
-				.anyMatch(leg -> flightAssignment.getLeg() != null && leg.getScheduledDeparture().before(flightAssignment.getLeg().getScheduledArrival()) && leg.getScheduledArrival().after(flightAssignment.getLeg().getScheduledDeparture()));
+			boolean hasOverlappingLeg = assignedLegs.stream().filter(leg -> {
+				// Excluir el leg actual solo si es una edición y no ha cambiado
+				if (originalFlightAssignment != null && originalFlightAssignment.getLeg() != null && flightAssignment.getLeg() != null && originalFlightAssignment.getLeg().equals(leg))
+					return !flightAssignment.getLeg().equals(leg); // solo validar si es diferente
+				else
+					return true;
+			}).anyMatch(leg -> flightAssignment.getLeg() != null && leg.getScheduledDeparture().before(flightAssignment.getLeg().getScheduledArrival()) && leg.getScheduledArrival().after(flightAssignment.getLeg().getScheduledDeparture()));
 
 			super.state(!hasOverlappingLeg, "flightCrewMember", "flight-crew-member.flight-assignment.error.overlapping-legs");
 		}
@@ -139,6 +143,9 @@ public class FlightCrewMemberFlightAssignmentPublishService extends AbstractGuiS
 
 		if (flightAssignment.getCurrentStatus() == CurrentStatus.PENDING)
 			super.state(false, "currentStatus", "flight-crew-member.flight-assignment.error.cannot-publish-pending");
+
+		if (flightAssignment.getCurrentStatus() == CurrentStatus.CANCELLED)
+			super.state(false, "currentStatus", "flight-crew-member.flight-assignment.error.cannot-delete-cancelled");
 
 		boolean confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
