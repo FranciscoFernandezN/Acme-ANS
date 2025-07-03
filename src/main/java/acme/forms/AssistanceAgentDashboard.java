@@ -1,8 +1,6 @@
 
 package acme.forms;
 
-import java.time.Month;
-
 import acme.client.components.basis.AbstractForm;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +17,7 @@ public class AssistanceAgentDashboard extends AbstractForm {
 
 	Double						ratioOfClaimsResolved;
 	Double						ratioOfClaimsRejected;
-	Month						monthHigherNumClaims;
+	String						monthHigherNumClaims;
 	Double						averageLogsOfClaims;
 	Double						minLogsOfClaims;
 	Double						maxLogsOfClaims;

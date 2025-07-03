@@ -45,42 +45,59 @@ public class AssistanceAgentDashboardShowService extends AbstractGuiService<Assi
 		dashboard.setRatioOfClaimsResolved(this.aad.ratioOfClaimsResolved(AssistanceAgent.getId()));
 		dashboard.setRatioOfClaimsRejected(this.aad.ratioOfClaimsRejected(AssistanceAgent.getId()));
 
+		dashboard.setRatioOfClaimsResolved(dashboard.getRatioOfClaimsResolved() == null ? 0 : dashboard.getRatioOfClaimsResolved());
+		dashboard.setRatioOfClaimsRejected(dashboard.getRatioOfClaimsRejected() == null ? 0 : dashboard.getRatioOfClaimsRejected());
+
 		List<Claim> allClaimsOfAssistanceAgent = this.aad.findAllClaimsByAgentId(AssistanceAgent.getId());
 
 		List<Date> allRegistrationMoments = this.aad.findAllRegistrationMomentsByAgentId(AssistanceAgent.getId());
-		List<Integer> monthsAppeareance = new ArrayList<>();
 
-		for (int i = 1; i < 13; i++)
-			monthsAppeareance.add(0);
-
-		for (Date d : allRegistrationMoments)
-			monthsAppeareance.set(d.getMonth(), monthsAppeareance.get(d.getMonth()) + 1);
-
-		Integer maxClaimsMonth = Collections.max(monthsAppeareance);
-
-		DoubleSummaryStatistics logsStatistics = allClaimsOfAssistanceAgent.stream().mapToDouble(c -> this.aad.logsOfClaim(c.getId()).size()).summaryStatistics();
+		Integer maxClaimsMonth;
 		Double logsAverage;
 		Double logsMin;
 		Double logsMax;
+		double logsStandardDeviation = 0.0;
+		Long numberOfClaimsLastMonth;
 
-		logsAverage = logsStatistics.getAverage();
-		logsMin = logsStatistics.getMin();
-		logsMax = logsStatistics.getMax();
+		if (!allClaimsOfAssistanceAgent.isEmpty()) {
 
-		Double logsStandardDeviation = 0.0;
-		for (Claim c : allClaimsOfAssistanceAgent)
-			logsStandardDeviation += Math.pow(this.aad.logsOfClaim(c.getId()).size() - logsAverage, 2);
+			DoubleSummaryStatistics logsStatistics = allClaimsOfAssistanceAgent.stream().mapToDouble(c -> this.aad.logsOfClaim(c.getId()).size()).summaryStatistics();
+			List<Integer> monthsAppeareance = new ArrayList<>();
 
-		logsStandardDeviation = Math.sqrt(logsStandardDeviation / allClaimsOfAssistanceAgent.size());
+			for (int i = 1; i < 13; i++)
+				monthsAppeareance.add(0);
 
-		Long numberOfClaimsLastMonth = allClaimsOfAssistanceAgent.stream().filter(c -> c.getRegistrationMoment().getMonth() == MomentHelper.getBaseMoment().getMonth() - 1).count();
+			for (Date d : allRegistrationMoments)
+				monthsAppeareance.set(d.getMonth(), monthsAppeareance.get(d.getMonth()) + 1);
 
-		dashboard.setMonthHigherNumClaims(Month.of(monthsAppeareance.indexOf(maxClaimsMonth) + 1));
-		dashboard.setAverageLogsOfClaims(logsAverage);
-		dashboard.setMinLogsOfClaims(logsMin);
-		dashboard.setMaxLogsOfClaims(logsMax);
-		dashboard.setStdDeviationLogsOfClaims(logsStandardDeviation);
-		dashboard.setNumberOfClaimsLastMonth(numberOfClaimsLastMonth);
+			maxClaimsMonth = Collections.max(monthsAppeareance);
+
+			logsAverage = logsStatistics.getAverage();
+			logsMin = logsStatistics.getMin();
+			logsMax = logsStatistics.getMax();
+
+			for (Claim c : allClaimsOfAssistanceAgent)
+				logsStandardDeviation += Math.pow(this.aad.logsOfClaim(c.getId()).size() - logsAverage, 2);
+
+			logsStandardDeviation = Math.sqrt(logsStandardDeviation / allClaimsOfAssistanceAgent.size());
+
+			numberOfClaimsLastMonth = allClaimsOfAssistanceAgent.stream().filter(c -> c.getRegistrationMoment().getMonth() == MomentHelper.getBaseMoment().getMonth() - 1).count();
+
+			dashboard.setMonthHigherNumClaims(Month.of(monthsAppeareance.indexOf(maxClaimsMonth) + 1).toString());
+			dashboard.setAverageLogsOfClaims(logsAverage);
+			dashboard.setMinLogsOfClaims(logsMin);
+			dashboard.setMaxLogsOfClaims(logsMax);
+			dashboard.setStdDeviationLogsOfClaims(logsStandardDeviation);
+			dashboard.setNumberOfClaimsLastMonth(numberOfClaimsLastMonth);
+
+		} else {
+			dashboard.setMonthHigherNumClaims("N/A");
+			dashboard.setAverageLogsOfClaims(0.0);
+			dashboard.setMinLogsOfClaims(0.0);
+			dashboard.setMaxLogsOfClaims(0.0);
+			dashboard.setStdDeviationLogsOfClaims(0.0);
+			dashboard.setNumberOfClaimsLastMonth(0L);
+		}
 
 		super.getBuffer().addData(dashboard);
 
