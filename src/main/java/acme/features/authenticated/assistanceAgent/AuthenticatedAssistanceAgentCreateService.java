@@ -31,6 +31,12 @@ public class AuthenticatedAssistanceAgentCreateService extends AbstractGuiServic
 		boolean status;
 
 		status = !super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class);
+		if (status && super.getRequest().hasData("airlineIATACodes")) {
+			List<Airline> airlines = this.aar.findAllAirlines();
+			int airlineId = super.getRequest().getData("airlineIATACodes", int.class);
+			Airline airline = this.aar.findAirlineById(airlineId);
+			status = airlineId == 0 || airline != null && airlines.contains(airline);
+		}
 
 		super.getResponse().setAuthorised(status);
 	}
