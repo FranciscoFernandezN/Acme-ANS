@@ -28,6 +28,6 @@ assistance-agent.tracking-log.delete.is-published = Este registro no se puede bo
 assistance-agent.tracking-log.create.percentage = El porcentaje debe ser 100 para poder aceptar o rechazar este registro
 assistance-agent.tracking-log.create.resolved = El regsitro debe ser aceptado o rechazado si se encuentra resuelto
 assistance-agent.tracking-log.create.incremental = El porcentaje debe ser incremental
-assistance-agent.tracking-log.create.log-limit = Solo puedes crear 2 registros por reclamación
+assistance-agent.tracking-log.create.log-limit = Solo puede haber 2 registros completados y publicados por reclamación
 assistance-agent.tracking-log.create.should-be-publised = Este registro debe ser publico una vez aceptado o rechazado
 assistance-agent.tracking-log.create.in-progress = Este registro no se puede publicar ya que se encuentra en progreso

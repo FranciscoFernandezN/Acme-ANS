@@ -64,17 +64,11 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 
 	@Override
 	public void bind(final TrackingLog trackingLog) {
-		super.bindObject(trackingLog, "step", "resolution", "claim", "isPublished");
+		super.bindObject(trackingLog, "step", "resolution", "claim");
 	}
 
 	@Override
 	public void validate(final TrackingLog trackingLog) {
-		int claimId;
-		claimId = super.getRequest().getData("claim", int.class);
-		List<TrackingLog> tlList = this.aatlr.findAllTrackingLogsByClaimId(claimId);
-
-		if (tlList.size() == 2)
-			super.state(false, "*", "assistance-agent.tracking-log.create.log-limit");
 	}
 
 	@Override
@@ -84,8 +78,6 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 
 	@Override
 	public void unbind(final TrackingLog trackingLog) {
-		if (super.getBuffer().getErrors().hasErrors())
-			trackingLog.setIsPublished(false);
 
 		Dataset dataset;
 		List<Claim> claims;

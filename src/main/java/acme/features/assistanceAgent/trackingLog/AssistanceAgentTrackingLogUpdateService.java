@@ -100,7 +100,7 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 		if ((trackingLog.getIndicator() == LogState.IN_PROGRESS || trackingLog.getResolutionPercentage() != 100.00) && trackingLog.getIsPublished())
 			super.state(false, "*", "assistance-agent.tracking-log.create.in-progress");
 
-		if (tlList.size() == 2 && !tlList.stream().map(t -> t.getId()).toList().contains(trackingLogId))
+		if (tlList.stream().filter(t -> t.getResolutionPercentage() == 100.0).count() == 2 && trackingLog.getResolutionPercentage() == 100.00)
 			super.state(false, "*", "assistance-agent.tracking-log.create.log-limit");
 
 	}
