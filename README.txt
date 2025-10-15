@@ -30,4 +30,4 @@ Enlace al testeo del requisito 14 grupal de la aplicación: https://uses0-my.sha
 Enlace al testeo de los requisitos 8 y 9 del estudiante 1: https://uses0-my.sharepoint.com/:v:/g/personal/frafernog_alum_us_es/EUWZUIA6EP1InfllD0AegmcByu8Ra-yzejZCy_jIaeJIgA
 Enlace al testeo de los requisitos 8 y 9 de la estudiante 2: https://uses0-my.sharepoint.com/:v:/g/personal/beagutara_alum_us_es/EYSVLim7Fu9Apd8cDrcHtYUBJYDs41NWwDY-d4-0V5Bguw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=H1u5So
 
-Enlace a rama de la segunda convocatoria Manu: https://github.com/FranciscoFernandezN/Acme-ANS/tree/Segunda-convo-Manu
+Enlace a rama de la tercera convocatoria Manu: https://github.com/FranciscoFernandezN/Acme-ANS/tree/Tercera-convo-Manu
